@@ -63,45 +63,15 @@ public class Game
 		}
 	}
 	private static void setClass()
-	{
-		int tempint = -1;
-		
+	{		
 		System.out.println("What class do you want to be?");
 		System.out.println("1- Anti-Mage: A balanced fighter who specializes against spellcasters."
 						+"\n2- Warrior: A melee fighter who has high physical defense and attack."
 						+"\n3- Assassin: A glass cannon whose attack is very high, but at the expense of poor health."
 						+"\n4- Wizard: A mage who has both damaging and utility spells.");
-		try
-		{
-		do
-		{
-			while(!s.hasNextInt())
-			{
-				System.out.println("Not a valid input. Please choose correctly.");
-				s.next();
-			}
-			tempint = s.nextInt();
-			if(tempint < 1 || tempint > 4)
-				System.out.println("Not a valid number. Please input correctly.");
-		}while(tempint < 1 || tempint > 4);
-		}
-		catch(Exception e)
-		{
-			System.out.println("Exception caught!");
-			setClass();
-			return;
-		}
-		switch(tempint)
-		{
-			case 1: player_class = 1;
-					break;
-			case 2: player_class = 2;
-					break;
-			case 3: player_class = 3;
-					break;
-			case 4: player_class = 4;
-					break;	
-		}
+		
+		player_class = getNumberFrom(1, 4); 
+		
 		switch(player_class)
 		{
 			case 1: player = new AntiMage(temp_name);
@@ -308,14 +278,64 @@ public class Game
 	}
 	private static void takePlayerTurn()
 	{
+		int choice, target;
 		System.out.println("What would you like to do?");
+		System.out.println("1: Attack"
+					   + "\n2: Abilities"
+					   + "\n3: Use an Item"
+					   + "\n4: Hunker Down");
+		choice = getNumberFrom(1, 4);
 		
+		switch(choice)
+		{
+			case 1: 
+			{
+				System.out.println("What would you like to attack?");
+				for(int i = 0; i < monsters.size(); i++)
+				{
+					System.out.println((i + 1) + ": " + monsters.get(i).getName()
+							+"(" + monsters.get(i).getHP() + "/" + monsters.get(i).getMaxHP() + ")");
+				}
+				target = getNumberFrom(1, monsters.size());
+				player.attack(monsters.get(target));
+			}
+			case 2:
+			{
+				//TODO
+			}
+			case 3:
+			{
+				//TODO
+			}
+			case 4:
+			{
+				//TODO
+			}
+		}
 	}
 	
 	private static void takeMonsterTurn(Monster m)
 	{
 		// TODO Auto-generated method stub
 		
+	}
+	
+	private static int getNumberFrom(int start, int end)
+	{
+		int tempint = -1;
+		do
+		{
+			while(!s.hasNextInt())
+			{
+				System.out.println("Not a valid input. Please choose correctly.");
+				s.next();
+			}
+			tempint = s.nextInt();
+			if(tempint < start || tempint > end)
+				System.out.println("Not a valid number. Please input correctly.");
+		}while(tempint < start || tempint > end);
+		
+		return tempint;
 	}
 
 	

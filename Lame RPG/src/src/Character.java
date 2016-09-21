@@ -1,8 +1,8 @@
 package src;
 import java.util.Random;
 
-class Character {
-	
+class Character 
+{	
 	private Random r = new Random();
 	protected final String name;
 	protected int HP, maxHP;
@@ -36,9 +36,17 @@ class Character {
 	{
 		return HP;
 	}
+	public int getMaxHP()
+	{
+		return maxHP;
+	}
 	public int getMana()
 	{
 		return mana;
+	}
+	public int getMaxMana()
+	{
+		return maxMana;
 	}
 	public int getLevel()
 	{
@@ -48,13 +56,33 @@ class Character {
 	{
 		return damage;
 	}
+	public int getMaxDamage()
+	{
+		return maxDamage;
+	}
 	public int getAttack()
 	{
 		return attack;
 	}
+	public int getMaxAttack()
+	{
+		return maxAttack;
+	}
 	public int getDefense()
 	{
 		return defense;
+	}
+	public int getMaxDefense()
+	{
+		return maxDefense;
+	}
+	public int getMagicDefense()
+	{
+		return magicDefense;
+	}
+	public int getMaxMagicDefense()
+	{
+		return maxMagicDefense;
 	}
 	public String getName()
 	{
@@ -78,7 +106,7 @@ class Character {
 	}
 	public void attack(Character c)
 	{
-		int temp, temp2;
+		int temp, temp2, damage_done;
 		temp = 70 + r.nextInt(attack + 1);
 		if(temp >= 100)
 		{
@@ -86,14 +114,20 @@ class Character {
 			temp2 = r.nextInt(currentDefense + 1);
 			if(attack > temp2)
 			{
-				damage(c, damage - temp2);
+				damage_done = damage - temp2;
+				damage(c, damage_done);
 			}
 			else
-				damage(c, 1);
+			{
+				damage_done = 1;
+				damage(c, damage_done);
+			}
+			
+			System.out.println(this.getName() + " attacked " + c.getName() + "and dealt " + damage_done + " damage!!");
 		}
 		else
 		{
-			//what happens if the attack misses - TO DO
+			//what happens if the attack misses - TODO
 		}
 	}
 	
