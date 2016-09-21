@@ -15,7 +15,8 @@ public class Game
 	static int current_column = 0;
 	static Random rand = new Random();
 	static ArrayList<Integer> options = new ArrayList<Integer>();
-
+	static ArrayList<Monster> monsters = new ArrayList<Monster>();
+	static boolean game_over = false;
 	
 	public static void main(String[] args)
 	{
@@ -26,11 +27,15 @@ public class Game
 		setName();
 		setClass();
 		makeDungeon();
-		while(player.isAlive())
+		while(!game_over)
 		{
-			chooseRoom();
+			if(player.isAlive())
+				chooseRoom();
+			if(player.isAlive())
+				battle();
 		}
 	}
+	
 	private static void setName()
 	{
 		try
@@ -75,13 +80,10 @@ public class Game
 				System.out.println("Not a valid input. Please choose correctly.");
 				s.next();
 			}
-			if(!(tempint >= 1 && tempint <= 4))
-			{
-				System.out.println("Not a valid number. Please input correctly.");
-				s.next();
-			}
 			tempint = s.nextInt();
-		}while(!(tempint >= 1 && tempint <= 4));
+			if(tempint < 1 || tempint > 4)
+				System.out.println("Not a valid number. Please input correctly.");
+		}while(tempint < 1 || tempint > 4);
 		}
 		catch(Exception e)
 		{
@@ -127,7 +129,7 @@ public class Game
 		int choice = -1;
 		
 		System.out.println("Which direction would you like to go?");
-		
+		showRoomChoices();
 		do
 		{
 			while(!s.hasNextInt())
@@ -137,8 +139,23 @@ public class Game
 				s.next();
 			}
 			tempint = s.nextInt();
+			if(!options.contains(tempint))
+			{
+				System.out.println("You can't go that way!");
+				showRoomChoices();
+			}
 		}while(!options.contains(tempint));
 		choice = tempint;
+		
+		if(choice == 1)
+			current_column += 1;
+		else if(choice == 2)
+			current_row += 1;
+		else if(choice == 3)
+			current_column -= 1;
+		else if(choice == 4)
+			current_row -= 1;
+			
 			/*switch(tempint)
 			{
 				case 1: 
@@ -171,15 +188,7 @@ public class Game
 				System.out.println("You cannot go in that direction.");
 				chooseRoom();
 			}*/
-		if(choice == 1)
-			current_column += 1;
-		else if(choice == 2)
-			current_row += 1;
-		else if(choice == 3)
-			current_column -= 1;
-		else if(choice == 4)
-			current_row -= 1;
-			
+		
 	}
 		
 		/*if(current_row == 0 && current_column == 0)
@@ -271,13 +280,43 @@ public class Game
 			}
 		}
 		if(options.contains(1))
-			System.out.println("1:\tGo right.");
+			System.out.println("1: Go right.");
 		if(options.contains(2))
-			System.out.println("2:\tGo down.");
+			System.out.println("2: Go down.");
 		if(options.contains(3))
-			System.out.println("3:\tGo left.");
+			System.out.println("3: Go left.");
 		if(options.contains(4))
-			System.out.println("4:\tGo up.");
+			System.out.println("4: Go up.");
 		//finish removing options for each possibility		
 	}
+	private static void battle()
+	{
+		boolean battle_over = false;
+		for(int i = 0; i < map[current_row][current_column]; i++)
+		{
+			monsters.add(new Monster((rand.nextInt(201) + 100), (rand.nextInt(71) + 40), (rand.nextInt(31) + 5), 
+									 (rand.nextInt(31) + 5), (rand.nextInt(21) + 5), 1, rand.nextInt(26), "Monster " + i));
+			System.out.println("What de heck! It's a(n) " + monsters.get(i).name + "!!");
+		}
+		while(player.isAlive() || battle_over)
+		{
+			takePlayerTurn();
+			if(!battle_over)
+				for(Monster m: monsters)
+					takeMonsterTurn(m);
+		}
+	}
+	private static void takePlayerTurn()
+	{
+		System.out.println("What would you like to do?");
+		
+	}
+	
+	private static void takeMonsterTurn(Monster m)
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
+	
 }

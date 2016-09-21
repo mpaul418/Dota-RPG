@@ -10,7 +10,7 @@ public class AntiMage extends Player
 		mana = 60;
 		damage = 30;
 		attack = 30;
-		defense = 10;
+		defense = 15;
 		character_class = 1;
 		magicDefense = 50;		
 	}
