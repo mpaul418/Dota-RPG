@@ -175,7 +175,7 @@ public class Game
 			}
 			
 		}
-		else//todo
+		else
 		{
 			if(current_row == 0)
 			{
@@ -317,7 +317,6 @@ public class Game
 	private static void takeMonsterTurn(Monster m)
 	{
 		// TODO Auto-generated method stub
-		
 	}
 	
 	private static int getNumberFrom(int start, int end)
