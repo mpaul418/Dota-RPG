@@ -107,7 +107,7 @@ class Character
 	public void attack(Character c)
 	{
 		int temp, temp2, damage_done;
-		temp = 70 + r.nextInt(attack + 1);
+		temp = 90 + r.nextInt(attack + 1);
 		if(temp >= 100)
 		{
 			int currentDefense = r.nextInt(c.getDefense() + 1);
@@ -123,13 +123,17 @@ class Character
 				damage(c, damage_done);
 			}
 			
-			System.out.println(this.getName() + " attacked " + c.getName() + "and dealt " + damage_done + " damage!!");
+			System.out.println(this.getName() + " attacked " + c.getName() + " and dealt " + damage_done + " damage!!");
 		}
 		else
 		{
-			//what happens if the attack misses - TODO
+			System.out.println(this.getName() + "'s attack missed!");
 		}
 	}
-	
-	
+	public void hunkerDown()
+	{
+		int amount = r.nextInt(31) + 30;
+		this.defense += amount;
+		System.out.println(this.getName() + " hunkered down, increasing its defense by " + amount + "!!");
+	}
 }

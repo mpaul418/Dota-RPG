@@ -264,21 +264,29 @@ public class Game
 		boolean battle_over = false;
 		for(int i = 0; i < map[current_row][current_column]; i++)
 		{
-			monsters.add(new Monster((rand.nextInt(201) + 100), (rand.nextInt(71) + 40), (rand.nextInt(31) + 5), 
-									 (rand.nextInt(31) + 5), (rand.nextInt(21) + 5), 1, rand.nextInt(26), "Monster " + i));
+			monsters.add(new Monster((rand.nextInt(player.getMaxHP() + 1) + 50), (rand.nextInt(71) + 40), (rand.nextInt(31) + 5), 
+									 (rand.nextInt(36) + 5), (rand.nextInt(21) + 5), 1, rand.nextInt(26), "Monster " + (i+1)));
 			System.out.println("What de heck! It's a(n) " + monsters.get(i).name + "!!");
 		}
 		while(player.isAlive() || battle_over)
 		{
+			refreshDebuffs();
 			takePlayerTurn();
 			if(!battle_over)
 				for(Monster m: monsters)
 					takeMonsterTurn(m);
 		}
 	}
+	private static void refreshDebuffs()
+	{
+		// TODO Add a Debuff/Buff class to contain all buffs with durations, effects, etc.
+		player.defense = player.getMaxDefense(); // FIXME placeholder until buff class		
+	}
+
 	private static void takePlayerTurn()
 	{
 		int choice, target;
+		displayHPandMana();
 		System.out.println("What would you like to do?");
 		System.out.println("1: Attack"
 					   + "\n2: Abilities"
@@ -296,27 +304,44 @@ public class Game
 					System.out.println((i + 1) + ": " + monsters.get(i).getName()
 							+"(" + monsters.get(i).getHP() + "/" + monsters.get(i).getMaxHP() + ")");
 				}
-				target = getNumberFrom(1, monsters.size());
+				target = getNumberFrom(1, monsters.size()) - 1;
 				player.attack(monsters.get(target));
+				break;
 			}
 			case 2:
 			{
-				//TODO
+				//TODO- select what spell/ability to cast, then target it if possible
+				break;
 			}
 			case 3:
 			{
-				//TODO
+				//TODO- select what item to use, the target it if possible
+				break;
 			}
 			case 4:
 			{
-				//TODO
+				player.hunkerDown();
+				break;
 			}
 		}
 	}
 	
+	private static void displayHPandMana()
+	{
+		System.out.println(player.getName() + "'s HP: " + player.getHP() + "/" + player.getMaxHP()
+		+  "   Mana: " + player.getMana() + "/" + player.getMaxMana());
+		for(Monster m : monsters)
+			System.out.println(m.getName() + "'s HP: " + m.getHP() + "/" + m.getMaxHP()
+			+  "   Mana: " + m.getMana() + "/" + m.getMaxMana());
+	}
+
 	private static void takeMonsterTurn(Monster m)
 	{
-		// TODO Auto-generated method stub
+		int temp = rand.nextInt(100) + 1;
+		if(temp >= 30)
+			m.attack(player);
+		else
+			m.hunkerDown();
 	}
 	
 	private static int getNumberFrom(int start, int end)
