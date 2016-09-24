@@ -13,6 +13,7 @@ class Character
 	protected int defense, maxDefense;
 	protected int magicDefense, maxMagicDefense;
 	protected int[] stats;
+	protected boolean alive;
 	//0- str; 1- dex; 2- int; 3-spd; 4-luck;??????
 	
 	public Character(int initHP, int initMana, int initDmg, int initAtk, int initDef, int initMagDef, String initName)
@@ -91,9 +92,10 @@ class Character
 	public boolean isAlive()
 	{
 		if(getHP() > 0)
-			return true;
+			alive = true;
 		else
-			return false;
+			alive = false;
+		return alive;
 	}
 	
 	public void damage(Character c, int incoming_damage)
@@ -123,17 +125,17 @@ class Character
 				damage(c, damage_done);
 			}
 			
-			System.out.println(this.getName() + " attacked " + c.getName() + " and dealt " + damage_done + " damage!!");
+			System.out.println(this.getName() + " attacked " + c.getName() + " and dealt " + damage_done + " damage!!\n");
 		}
 		else
 		{
-			System.out.println(this.getName() + "'s attack missed!");
+			System.out.println(this.getName() + "'s attack missed!\n");
 		}
 	}
 	public void hunkerDown()
 	{
 		int amount = r.nextInt(31) + 30;
 		this.defense += amount;
-		System.out.println(this.getName() + " hunkered down, increasing its defense by " + amount + "!!");
+		System.out.println(this.getName() + " hunkered down, increasing its defense by " + amount + "!!\n");
 	}
 }

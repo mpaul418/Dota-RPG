@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class Game 
 {
-	static String temp_name = null;
+	static String temp_name = "";
 	static int player_class;
 	static Scanner s = new Scanner(System.in);	
 	static Player player;
@@ -20,10 +20,6 @@ public class Game
 	
 	public static void main(String[] args)
 	{
-		options.add(1);
-		options.add(2);
-		options.add(3);
-		options.add(4);
 		setName();
 		setClass();
 		makeDungeon();
@@ -38,29 +34,32 @@ public class Game
 	
 	private static void setName()
 	{
-		try
-		{
-			System.out.println("What is your name?");
-			if(s.hasNextLine())
-			{	
-				temp_name = s.nextLine();
-				if(temp_name.length() == 0)
-				{
-					System.out.println("Not a name.");
-					setName();
-				}
-			}
-			else
+		boolean name_confirmed = false;
+		int name_repick = -1;
+		//FIXME
+		/*
+		 * do
 			{
-				System.out.println("Error.");
-				setName();
-			}
-		}
-		catch(Exception e)
-		{
-			System.out.println("Error. Please input correctly.");
-			setName();
-		}
+				System.out.println("What is your name?");
+				do
+				{
+					do
+					{
+						if(!s.hasNextLine())
+						{
+							System.out.println("Not a valid input. Please input correctly.");
+						temp_name = s.nextLine();
+					}
+				}while(temp_name.length() == 0);
+				*/
+				System.out.println("Your name is " + temp_name + ". Is that okay?");
+				System.out.println("1: Finalize name."
+							+ "   \n2: Re-enter name.");
+				name_repick = getNumberFrom(1,2);
+				if(name_repick == 1)
+					name_confirmed = true;
+			//}while(!name_confirmed);
+		 
 	}
 	private static void setClass()
 	{		
@@ -124,101 +123,15 @@ public class Game
 		else if(choice == 3)
 			current_column -= 1;
 		else if(choice == 4)
-			current_row -= 1;
-			
-			/*switch(tempint)
-			{
-				case 1: 
-				{
-					if(options.contains(2))
-						choice = 2;
-					break;
-				}
-				case 2: 
-				{
-					if(options.contains(2))
-						choice = 2;
-					break;
-				}
-				case 3: 
-				{
-					if(options.contains(3))
-						choice = 3;
-					break;
-				}
-				case 4: 
-				{
-					if(options.contains(4))
-						choice = 4;
-					break;
-				}
-			}
-			if(choice == -1)
-			{
-				System.out.println("You cannot go in that direction.");
-				chooseRoom();
-			}*/
-		
+			current_row -= 1;		
 	}
-		
-		/*if(current_row == 0 && current_column == 0)
-		{
-			//options.add(1);
-			//options.add(2);
-			System.out.println("1:\tGo right."
-							+  "2:\tGo down.");
-			choice = s.nextInt();
-			while(!s.hasNextInt() || choice < 1 || choice > 2)
-			{
-				System.out.println("Input a correct option.");
-				choice = s.nextInt();
-			}
-			
-		}
-		else
-		{
-			if(current_row == 0)
-			{
-				//options.add(1);
-				//options.add(2);
-				//options.add(4);
-				System.out.println("1:\tGo right."
-								+  "2:\tGo down."
-								+  "3:\tGo left");
-				choice = s.nextInt();
-				while(!s.hasNextInt() || choice < 1 || choice > 3)
-				{
-					System.out.println("Input a correct option.");
-					choice = s.nextInt();
-				}
-				
-			}
-			else
-			{
-				if(current_column == 0)
-				{
-					//options.add(1);
-					//options.add(2);
-					System.out.println("1:\tGo right."
-									+  "2:\tGo down."
-									+  "4:\tGo");
-					choice = s.nextInt();
-					while(!s.hasNextInt() || choice < 1 || choice >2)
-					{
-						System.out.println("Input a correct option.");
-						choice = s.nextInt();
-					}
-					
-				}
-				else
-				{
-					//if location is not on a wall
-				}
-			}
-		}*/
-	
 	private static void showRoomChoices()
 	{
+		options = new ArrayList<Integer>();
+		options.add(1);
+		options.add(2);
+		options.add(3);
+		options.add(4);
 		if(current_row == 0)
 		{
 			for(int i = 0; i < options.size(); i++)
@@ -261,6 +174,7 @@ public class Game
 	}
 	private static void battle()
 	{
+		int enemies_dead = 0;
 		boolean battle_over = false;
 		for(int i = 0; i < map[current_row][current_column]; i++)
 		{
@@ -268,14 +182,25 @@ public class Game
 									 (rand.nextInt(36) + 5), (rand.nextInt(21) + 5), 1, rand.nextInt(26), "Monster " + (i+1)));
 			System.out.println("What de heck! It's a(n) " + monsters.get(i).name + "!!");
 		}
-		while(player.isAlive() || battle_over)
+		do
 		{
 			refreshDebuffs();
-			takePlayerTurn();
+			if(player.isAlive())
+				takePlayerTurn();
+			for(Monster m: monsters)
+			{
+				if(!m.isAlive())
+					enemies_dead++;
+			}
+			if(!player.isAlive() || (enemies_dead == monsters.size()))
+				battle_over = true;
 			if(!battle_over)
 				for(Monster m: monsters)
-					takeMonsterTurn(m);
-		}
+				{
+					if(m.isAlive())
+						takeMonsterTurn(m);
+				}
+		}while(!battle_over);
 	}
 	private static void refreshDebuffs()
 	{
@@ -298,7 +223,7 @@ public class Game
 		{
 			case 1: 
 			{
-				System.out.println("What would you like to attack?");
+				System.out.println("\nWhat would you like to attack?");
 				for(int i = 0; i < monsters.size(); i++)
 				{
 					System.out.println((i + 1) + ": " + monsters.get(i).getName()
@@ -333,6 +258,7 @@ public class Game
 		for(Monster m : monsters)
 			System.out.println(m.getName() + "'s HP: " + m.getHP() + "/" + m.getMaxHP()
 			+  "   Mana: " + m.getMana() + "/" + m.getMaxMana());
+		System.out.println();
 	}
 
 	private static void takeMonsterTurn(Monster m)
@@ -347,20 +273,31 @@ public class Game
 	private static int getNumberFrom(int start, int end)
 	{
 		int tempint = -1;
+		int greater, lesser;
+		if(start > end)
+		{
+			greater = start;
+			lesser = end;
+		}
+		else if(end > start)
+		{
+			greater = end;
+			lesser = start;
+		}
+		else
+			return start;
 		do
 		{
 			while(!s.hasNextInt())
 			{
 				System.out.println("Not a valid input. Please choose correctly.");
-				s.next();
+				s.nextInt();
 			}
 			tempint = s.nextInt();
-			if(tempint < start || tempint > end)
+			if(tempint < lesser || tempint > greater)
 				System.out.println("Not a valid number. Please input correctly.");
-		}while(tempint < start || tempint > end);
+		}while(tempint < lesser || tempint > greater);
 		
 		return tempint;
-	}
-
-	
+	}	
 }
