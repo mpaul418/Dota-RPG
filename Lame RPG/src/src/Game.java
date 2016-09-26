@@ -3,12 +3,15 @@ package src;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class Game 
 {
 	static String temp_name = "";
 	static int player_class;
-	static Scanner s = new Scanner(System.in);	
+	//FIXMEstatic Scanner s = new Scanner(System.in);	
 	static Player player;
 	static int map[][] = new int[5][5];
 	static int current_row = 0;
@@ -17,6 +20,7 @@ public class Game
 	static ArrayList<Integer> options = new ArrayList<Integer>();
 	static ArrayList<Monster> monsters = new ArrayList<Monster>();
 	static boolean game_over = false;
+	static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 	
 	public static void main(String[] args)
 	{
@@ -34,32 +38,39 @@ public class Game
 	
 	private static void setName()
 	{
+		String temp_name = "Player";
+		boolean length_okay;
 		boolean name_confirmed = false;
 		int name_repick = -1;
-		//FIXME
-		/*
-		 * do
+		do
+		{
+			do
 			{
-				System.out.println("What is your name?");
-				do
+				length_okay = false;
+				try
 				{
-					do
-					{
-						if(!s.hasNextLine())
-						{
-							System.out.println("Not a valid input. Please input correctly.");
-						temp_name = s.nextLine();
-					}
-				}while(temp_name.length() == 0);
-				*/
-				System.out.println("Your name is " + temp_name + ". Is that okay?");
-				System.out.println("1: Finalize name."
-							+ "   \n2: Re-enter name.");
-				name_repick = getNumberFrom(1,2);
-				if(name_repick == 1)
-					name_confirmed = true;
-			//}while(!name_confirmed);
-		 
+				System.out.println("What is your name?");
+				temp_name = br.readLine();				
+				if(temp_name.replaceAll("\\s", "").length() == 0)
+					System.out.println("Length of zero. Please input correctly.");
+				else
+					length_okay = true;
+				}
+				catch(IOException e)
+				{
+					System.out.println("Exception caught!");
+					length_okay = false;
+				}
+			}while(!length_okay);
+			System.out.println("\nYour name is " + temp_name + ". Is that okay?");
+			System.out.println("1: Finalize name."
+						+ "   \n2: Re-enter name.");
+			name_repick = getNumberFrom(1,2);
+			if(name_repick == 1)
+				name_confirmed = true;
+		}while(!name_confirmed);
+		
+		player.name = temp_name;
 	}
 	private static void setClass()
 	{		
@@ -98,16 +109,10 @@ public class Game
 		int choice = -1;
 		
 		System.out.println("Which direction would you like to go?");
-		showRoomChoices();
 		do
 		{
-			while(!s.hasNextInt())
-			{
-				System.out.println("Not a valid choice. Please input correctly.");
-				showRoomChoices();
-				s.next();
-			}
-			tempint = s.nextInt();
+			showRoomChoices();
+			tempint = Integer.parseInt(br.readLine());
 			if(!options.contains(tempint))
 			{
 				System.out.println("You can't go that way!");
@@ -288,12 +293,7 @@ public class Game
 			return start;
 		do
 		{
-			while(!s.hasNextInt())
-			{
-				System.out.println("Not a valid input. Please choose correctly.");
-				s.nextInt();
-			}
-			tempint = s.nextInt();
+			tempint = Integer.parseInt(br.readLine());
 			if(tempint < lesser || tempint > greater)
 				System.out.println("Not a valid number. Please input correctly.");
 		}while(tempint < lesser || tempint > greater);

@@ -4,7 +4,7 @@ import java.util.Random;
 class Character 
 {	
 	private Random r = new Random();
-	protected final String name;
+	protected String name;
 	protected int HP, maxHP;
 	protected int mana, maxMana;
 	protected int level;
