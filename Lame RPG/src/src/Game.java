@@ -2,7 +2,7 @@ package src;
 
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.Scanner;
+//import java.util.Scanner;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -24,8 +24,8 @@ public class Game
 	
 	public static void main(String[] args)
 	{
-		setName();
 		setClass();
+		setName();
 		makeDungeon();
 		while(!game_over)
 		{
@@ -36,6 +36,24 @@ public class Game
 		}
 	}
 	
+	private static void setClass()
+	{		
+		System.out.println("What class do you want to be?");
+		System.out.println("1- Anti-Mage: A balanced fighter who specializes against spellcasters."
+						+"\n2- Warrior: A melee fighter who has high physical defense and attack."
+						+"\n3- Assassin: A glass cannon whose attack is very high, but at the expense of poor health."
+						+"\n4- Wizard: A mage who has both damaging and utility spells.");
+		
+		player_class = getNumberFrom(1, 4); 
+		
+		switch(player_class)
+		{
+			case 1: player = new AntiMage(temp_name);
+			case 2: player = new Warrior(temp_name);
+			case 3: player = new Assassin(temp_name);
+			case 4: player = new Wizard(temp_name);
+		}
+	}
 	private static void setName()
 	{
 		String temp_name = "Player";
@@ -70,25 +88,7 @@ public class Game
 				name_confirmed = true;
 		}while(!name_confirmed);
 		
-		player.name = temp_name;
-	}
-	private static void setClass()
-	{		
-		System.out.println("What class do you want to be?");
-		System.out.println("1- Anti-Mage: A balanced fighter who specializes against spellcasters."
-						+"\n2- Warrior: A melee fighter who has high physical defense and attack."
-						+"\n3- Assassin: A glass cannon whose attack is very high, but at the expense of poor health."
-						+"\n4- Wizard: A mage who has both damaging and utility spells.");
-		
-		player_class = getNumberFrom(1, 4); 
-		
-		switch(player_class)
-		{
-			case 1: player = new AntiMage(temp_name);
-			case 2: player = new Warrior(temp_name);
-			case 3: player = new Assassin(temp_name);
-			case 4: player = new Wizard(temp_name);
-		}
+		player.setName(temp_name);
 	}
 	private static void makeDungeon()
 	{
@@ -105,6 +105,7 @@ public class Game
 	}
 	private static void chooseRoom()
 	{
+		boolean working = true;
 		int tempint = -1;
 		int choice = -1;
 		
@@ -112,7 +113,21 @@ public class Game
 		do
 		{
 			showRoomChoices();
-			tempint = Integer.parseInt(br.readLine());
+			do
+			{
+				if(!working)
+					showRoomChoices();
+				working = true;
+				try
+				{
+					tempint = Integer.parseInt(br.readLine());
+				}
+				catch(IOException e)
+				{
+					working = false;
+					System.out.println("Exeception caught! Please input correctly.");
+				}
+			}while(!working);
 			if(!options.contains(tempint))
 			{
 				System.out.println("You can't go that way!");
@@ -179,8 +194,6 @@ public class Game
 	}
 	private static void battle()
 	{
-		int enemies_dead = 0;
-		boolean battle_over = false;
 		for(int i = 0; i < map[current_row][current_column]; i++)
 		{
 			monsters.add(new Monster((rand.nextInt(player.getMaxHP() + 1) + 50), (rand.nextInt(71) + 40), (rand.nextInt(31) + 5), 
@@ -190,23 +203,39 @@ public class Game
 		do
 		{
 			refreshDebuffs();
-			if(player.isAlive())
+			if(battleOver())
 				takePlayerTurn();
-			for(Monster m: monsters)
-			{
-				if(!m.isAlive())
-					enemies_dead++;
-			}
-			if(!player.isAlive() || (enemies_dead == monsters.size()))
-				battle_over = true;
-			if(!battle_over)
+			if(!battleOver())
 				for(Monster m: monsters)
 				{
 					if(m.isAlive())
 						takeMonsterTurn(m);
 				}
-		}while(!battle_over);
+		}while(!battleOver());
 	}
+	private static boolean battleOver()
+	{
+		if(!player.isAlive() || allMonstersDead())
+			return true;
+		else
+			return false;
+	}
+
+	private static boolean allMonstersDead()
+	{
+		//TODO
+		int enemies_dead = 0;
+		for(Monster m: monsters)
+		{
+			if(!m.isAlive())
+				enemies_dead++;
+		}
+		if(enemies_dead == monsters.size())
+			return true;
+		else
+			return false;
+	}
+
 	private static void refreshDebuffs()
 	{
 		// TODO Add a Debuff/Buff class to contain all buffs with durations, effects, etc.
@@ -277,6 +306,7 @@ public class Game
 	
 	private static int getNumberFrom(int start, int end)
 	{
+		boolean working = true;
 		int tempint = -1;
 		int greater, lesser;
 		if(start > end)
@@ -293,10 +323,23 @@ public class Game
 			return start;
 		do
 		{
-			tempint = Integer.parseInt(br.readLine());
-			if(tempint < lesser || tempint > greater)
-				System.out.println("Not a valid number. Please input correctly.");
-		}while(tempint < lesser || tempint > greater);
+			working = true;
+			
+			try
+			{
+				do
+				{
+					tempint = Integer.parseInt(br.readLine());
+					if(tempint < lesser || tempint > greater)
+						System.out.println("Not a valid number. Please input correctly.");
+				}while(tempint < lesser || tempint > greater);
+			}
+			catch(IOException e)
+			{
+				working = false;
+				System.out.println("Exception caught! Please input correctly.");
+			}
+		}while(!working);
 		
 		return tempint;
 	}	

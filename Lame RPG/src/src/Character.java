@@ -89,6 +89,10 @@ class Character
 	{
 		return name;
 	}
+	public void setName(String s)
+	{
+		name = s;
+	}
 	public boolean isAlive()
 	{
 		if(getHP() > 0)
