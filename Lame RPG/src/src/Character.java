@@ -14,6 +14,7 @@ class Character
 	protected int magicDefense, maxMagicDefense;
 	protected int[] stats;
 	protected boolean alive;
+
 	//0- str; 1- dex; 2- int; 3-spd; 4-luck;??????
 	
 	public Character(int initHP, int initMana, int initDmg, int initAtk, int initDef, int initMagDef, String initName)

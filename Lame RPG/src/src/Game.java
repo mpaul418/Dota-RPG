@@ -2,7 +2,6 @@ package src;
 
 import java.util.ArrayList;
 import java.util.Random;
-//import java.util.Scanner;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -11,7 +10,6 @@ public class Game
 {
 	static String temp_name = "";
 	static int player_class;
-	//FIXMEstatic Scanner s = new Scanner(System.in);	
 	static Player player;
 	static int map[][] = new int[5][5];
 	static int current_row = 0;
