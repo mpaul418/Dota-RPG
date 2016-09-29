@@ -16,7 +16,7 @@ public class Game
 	static int current_column = 0;
 	static Random rand = new Random();
 	static ArrayList<Integer> options = new ArrayList<Integer>();
-	static ArrayList<Monster> monsters = new ArrayList<Monster>();
+	public static ArrayList<Monster> monsters = new ArrayList<Monster>();
 	static boolean game_over = false;
 	static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 	
@@ -302,7 +302,7 @@ public class Game
 			m.hunkerDown();
 	}
 	
-	private static int getNumberFrom(int start, int end)
+	static int getNumberFrom(int start, int end)
 	{
 		boolean working = true;
 		int tempint = -1;

@@ -1,7 +1,7 @@
 package src;
 import java.util.Random;
 
-class Character 
+public class Character 
 {	
 	private Random r = new Random();
 	protected String name;
@@ -93,6 +93,72 @@ class Character
 	public void setName(String s)
 	{
 		name = s;
+	}
+	public void changeMana(int amount)
+	{
+		mana += amount;
+		if(mana > maxMana)
+			mana = maxMana;
+	}
+	public void changeMaxMana(int amount)
+	{
+		maxMana += amount;
+		mana += amount;
+	}
+	public void changeHP(int amount)
+	{
+		HP += amount;
+		if(HP > maxHP)
+			HP = maxHP;
+	}
+	public void changeMaxHP(int amount)
+	{
+		maxHP += amount;
+		HP += amount;
+	}
+	public void changeDamage(int amount)
+	{
+		damage += amount;
+		if(damage > maxDamage)
+			damage = maxDamage;
+	}
+	public void changeMaxDamage(int amount)
+	{
+		maxDamage += amount;
+		damage += amount;
+	}
+	public void changeDefense(int amount)
+	{
+		defense += amount;
+		if(defense > maxDefense)
+			defense = maxDefense;
+	}
+	public void changeMaxDefense(int amount)
+	{
+		maxDefense += amount;
+		defense += amount;
+	}
+	public void changeMagicDefense(int amount)
+	{
+		magicDefense += amount;
+		if(magicDefense > maxMagicDefense)
+			magicDefense = maxMagicDefense;
+	}
+	public void changeMaxMagicDefense(int amount)
+	{
+		maxMagicDefense += amount;
+		magicDefense += amount;
+	}
+	public void changeAttack(int amount)
+	{
+		attack += amount;
+		if(attack > maxAttack)
+			attack = maxAttack;
+	}
+	public void changeMaxAttack(int amount)
+	{
+		maxAttack += amount;
+		attack += amount;
 	}
 	public boolean isAlive()
 	{

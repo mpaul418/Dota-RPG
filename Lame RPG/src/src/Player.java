@@ -20,5 +20,9 @@ public class Player extends Character
 	{
 		return character_class;
 	}
+	public void levelUp()
+	{
+		//TODO
+	}
 
 }
