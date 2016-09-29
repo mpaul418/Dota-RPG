@@ -15,6 +15,7 @@ public class Blink extends Spell
 			m.changeDefense(40);
 			System.out.println(m.getName() + "'s defense was reduced by 40!");
 		}
+		CHARACTER.changeMana(MANA_COST);
 		System.out.println();
 		// TODO Auto-generated method stub
 	}

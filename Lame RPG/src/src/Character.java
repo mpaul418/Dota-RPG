@@ -183,6 +183,9 @@ public class Character
 		temp = 90 + r.nextInt(attack + 1);
 		if(temp >= 100)
 		{
+			//FIXME damage dealt can be zero???? test
+			//FIXME
+			//FIXME
 			int currentDefense = r.nextInt(c.getDefense() + 1);
 			temp2 = r.nextInt(currentDefense + 1);
 			if(attack > temp2)

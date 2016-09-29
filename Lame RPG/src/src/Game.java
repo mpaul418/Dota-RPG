@@ -6,7 +6,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class Game 
+public class Game
 {
 	static String temp_name = "";
 	static int player_class;
@@ -33,7 +33,6 @@ public class Game
 				battle();
 		}
 	}
-	
 	private static void setClass()
 	{		
 		System.out.println("What class do you want to be?");
@@ -195,13 +194,13 @@ public class Game
 		for(int i = 0; i < map[current_row][current_column]; i++)
 		{
 			monsters.add(new Monster((rand.nextInt(player.getMaxHP() + 1) + 50), (rand.nextInt(71) + 40), (rand.nextInt(31) + 5), 
-									 (rand.nextInt(36) + 5), (rand.nextInt(21) + 5), 1, rand.nextInt(26), "Monster " + (i+1)));
+									 (rand.nextInt(61) + 5), (rand.nextInt(21) + 5), 1, rand.nextInt(26), "Monster " + (i+1)));
 			System.out.println("What de heck! It's a(n) " + monsters.get(i).name + "!!");
 		}
 		do
 		{
 			refreshDebuffs();
-			if(battleOver())
+			if(!battleOver())
 				takePlayerTurn();
 			if(!battleOver())
 				for(Monster m: monsters)
@@ -221,7 +220,6 @@ public class Game
 
 	private static boolean allMonstersDead()
 	{
-		//TODO
 		int enemies_dead = 0;
 		for(Monster m: monsters)
 		{
@@ -318,7 +316,10 @@ public class Game
 			lesser = start;
 		}
 		else
-			return start;
+		{
+			greater = start;
+			lesser = start;
+		}
 		do
 		{
 			working = true;

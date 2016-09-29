@@ -2,35 +2,35 @@ package src;
 
 public abstract class Spell
 {
-	final String name;
-	final String description;
-	final int mana_cost;
-	final int level_requirement;
+	final String NAME;
+	final String DESCRIPTION;
+	final int MANA_COST;
+	final int LEVEL_REQUIREMENT;
 	final Character CHARACTER;
-	final boolean targeted;
+	final boolean TARGETED;
 	int cooldown;
 
 	public Spell(String tempname, String dsc, int manacost, int level_rq, int cd, Character c, boolean t)
 	{
-		name = tempname;
-		description = dsc;
-		mana_cost = manacost;
-		level_requirement = level_rq;
+		NAME = tempname;
+		DESCRIPTION = dsc;
+		MANA_COST = manacost;
+		LEVEL_REQUIREMENT = level_rq;
 		cooldown = cd;
 		CHARACTER = c;
-		targeted = t;
+		TARGETED = t;
 	}
 	public boolean isTargeted()
 	{
-		return targeted;
+		return TARGETED;
 	}
 	public int getManaCost()
 	{
-		return mana_cost;
+		return MANA_COST;
 	}
-	public int getLvlReq()
+	public int getLevelRequirement()
 	{
-		return level_requirement;
+		return LEVEL_REQUIREMENT;
 	}
 	public abstract void cast();
 	public abstract void cast(Character target);
