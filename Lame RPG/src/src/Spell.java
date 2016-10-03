@@ -32,6 +32,14 @@ public abstract class Spell
 	{
 		return LEVEL_REQUIREMENT;
 	}
+	public boolean isCastable()
+	{
+		//TODO placeholder- need to show in takePlayerTurn() if a spell is correct level but not enough mana
+		if(CHARACTER.getLevel() >= LEVEL_REQUIREMENT && CHARACTER.getMana() >= MANA_COST)
+			return true;
+		else
+			return false;
+	}
 	public abstract void cast();
 	public abstract void cast(Character target);
 	//TODO

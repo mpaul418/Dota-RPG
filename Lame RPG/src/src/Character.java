@@ -179,7 +179,7 @@ public class Character
 	}
 	public void attack(Character c)
 	{
-		int temp, temp2, damage_done;
+		int temp, damage_done;
 		temp = 90 + r.nextInt(attack + 1);
 		if(temp >= 100)
 		{
@@ -187,29 +187,30 @@ public class Character
 			//FIXME
 			//FIXME
 			int currentDefense = r.nextInt(c.getDefense() + 1);
-			temp2 = r.nextInt(currentDefense + 1);
-			if(attack > temp2)
+			if(damage > currentDefense)
 			{
-				damage_done = damage - temp2;
+				damage_done = damage - currentDefense;
 				damage(c, damage_done);
+				System.out.println(this.getName() + " attacked " + c.getName() + " and dealt " + damage_done + " damage!!"
+							     + " (Defense roll: " + currentDefense + "/" + c.getMaxDefense() + ")\n");
 			}
 			else
 			{
 				damage_done = 1;
 				damage(c, damage_done);
+				System.out.println(this.getName() + " grazed " + c.getName() + " and dealt " + damage_done + " damage.\n"
+								 + " (Defense roll: " + currentDefense + "/" + c.getMaxDefense() + ")\n");
 			}
-			
-			System.out.println(this.getName() + " attacked " + c.getName() + " and dealt " + damage_done + " damage!!\n");
 		}
 		else
 		{
-			System.out.println(this.getName() + "'s attack missed!\n");
+			System.out.println(this.getName() + "'s attack missed! (Attack roll: " + temp + "\n");
 		}
 	}
 	public void hunkerDown()
 	{
 		int amount = r.nextInt(31) + 30;
 		this.defense += amount;
-		System.out.println(this.getName() + " hunkered down, increasing its defense by " + amount + "!!\n");
+		System.out.println(this.getName() + " hunkered down, increasing its defense by " + amount + " for one turn!!\n");
 	}
 }

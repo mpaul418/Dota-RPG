@@ -186,8 +186,7 @@ public class Game
 		if(options.contains(3))
 			System.out.println("3: Go left.");
 		if(options.contains(4))
-			System.out.println("4: Go up.");
-		//finish removing options for each possibility		
+			System.out.println("4: Go up.");		
 	}
 	private static void battle()
 	{
@@ -265,7 +264,27 @@ public class Game
 			}
 			case 2:
 			{
-				//TODO- select what spell/ability to cast, then target it if possible
+				int choice2, spells;
+				spells = 0;
+				for(Spell s : player.spellbook)
+				{
+					System.out.println("0: Go back.");
+					if(s.isCastable())
+					{
+						spells++;
+						System.out.println(spells + ": " + s.NAME + "- " + s.DESCRIPTION);
+					}
+				}
+				choice2 = getNumberFrom(0, spells);
+				if(choice2 > 0)
+				{
+					if(player.spellbook.get(choice).isTargeted())
+					{
+						//TODO show monsters/targets and input choice to cast on
+					}
+					else
+						player.spellbook.get(choice).cast();
+				}
 				break;
 			}
 			case 3:
