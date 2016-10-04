@@ -27,8 +27,10 @@ public class Player extends Character
 	{
 		//TODO need a check after battle. also, add exp system
 	}
-	public void cast(int spell_choice)
+	/*public void cast(int spell_choice)
 	{
+		//TODO
+		//FIXME
 		if(spellbook.get(spell_choice).isTargeted())
 		{
 			int target = -1;
@@ -46,6 +48,7 @@ public class Player extends Character
 		}
 		else
 			spellbook.get(spell_choice).cast();
-	}
+			
+	}*/
 
 }

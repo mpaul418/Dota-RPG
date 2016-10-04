@@ -204,7 +204,7 @@ public class Character
 		}
 		else
 		{
-			System.out.println(this.getName() + "'s attack missed! (Attack roll: " + temp + "\n");
+			System.out.println(this.getName() + "'s attack missed! (Attack roll: " + temp + ")\n");
 		}
 	}
 	public void hunkerDown()

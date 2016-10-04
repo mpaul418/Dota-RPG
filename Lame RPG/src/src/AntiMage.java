@@ -2,7 +2,7 @@ package src;
 
 public class AntiMage extends Player
 {
-	Blink blink = new Blink(this);
+	Spell blink = new Blink(this);
 	
 	public AntiMage(String initName)
 	{

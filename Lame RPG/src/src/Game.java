@@ -45,10 +45,23 @@ public class Game
 		
 		switch(player_class)
 		{
-			case 1: player = new AntiMage(temp_name);
-			case 2: player = new Warrior(temp_name);
-			case 3: player = new Assassin(temp_name);
-			case 4: player = new Wizard(temp_name);
+			case 1: 
+			{
+				player = new AntiMage(temp_name);
+				break;
+			}
+			case 2:
+			{
+				player = new Warrior(temp_name);
+			}
+			case 3:
+			{
+				player = new Assassin(temp_name);
+			}
+			case 4: 
+			{
+				player = new Wizard(temp_name);
+			}
 		}
 	}
 	private static void setName()
@@ -234,7 +247,28 @@ public class Game
 	private static void refreshDebuffs()
 	{
 		// TODO Add a Debuff/Buff class to contain all buffs with durations, effects, etc.
-		player.defense = player.getMaxDefense(); // FIXME placeholder until buff class		
+		// FIXME placeholder until buff class	
+		if(player.getDefense() < player.getMaxDefense())
+				player.changeDefense(10);
+		else if(player.getDefense() > player.getMaxDefense())
+		{
+			if((player.getDefense() - 10) < player.getMaxDefense())
+				player.changeDefense(-(player.getMaxDefense() - player.getDefense()));
+			else
+				player.changeDefense(-10);
+		}
+		for(Monster m : monsters)
+		{
+			if(m.getDefense() < m.getMaxDefense())
+				m.changeDefense(10);
+			else if(m.getDefense() > m.getMaxDefense())
+			{
+				if((m.getDefense() - 10) < m.getMaxDefense())
+					m.changeDefense(-(m.getMaxDefense() - m.getDefense()));
+				else
+					m.changeDefense(-10);
+			}
+		}
 	}
 
 	private static void takePlayerTurn()
@@ -264,26 +298,53 @@ public class Game
 			}
 			case 2:
 			{
-				int choice2, spells;
+				int choice2, spells, choice_index, temp_spells;
 				spells = 0;
+				temp_spells = 0;
+				choice_index = -1;
+				
+				System.out.println("Which spell would you like to cast?");
+				System.out.println("0: Go back.");
 				for(Spell s : player.spellbook)
 				{
-					System.out.println("0: Go back.");
 					if(s.isCastable())
 					{
 						spells++;
 						System.out.println(spells + ": " + s.NAME + "- " + s.DESCRIPTION);
 					}
 				}
+				
 				choice2 = getNumberFrom(0, spells);
-				if(choice2 > 0)
+				
+				for(int i = 0; i < player.spellbook.size(); i++)
 				{
-					if(player.spellbook.get(choice).isTargeted())
+					if(player.spellbook.get(i).isCastable())
 					{
-						//TODO show monsters/targets and input choice to cast on
+						temp_spells++;
+						if(temp_spells == choice2)
+						{
+							choice_index = i;
+							i = player.spellbook.size();
+						}
+					}
+				}
+				
+				if(choice_index >= 0)
+				{
+					if(player.spellbook.get(choice_index).isTargeted())
+					{
+						System.out.println("Cast " + player.spellbook.get(choice_index).NAME + " on what?");
+						for(int i = 0; i < monsters.size(); i++)
+						{
+							System.out.println((i + 1) + ": " + monsters.get(i).getName()
+									+"(" + monsters.get(i).getHP() + "/" + monsters.get(i).getMaxHP() + ")");
+						}
+						target = getNumberFrom(1, monsters.size()) - 1;
+						player.spellbook.get(choice_index).cast(monsters.get(target));
+						//TODO show monsters/targets and input choice to cast on + go back ability
 					}
 					else
-						player.spellbook.get(choice).cast();
+						player.spellbook.get(choice_index).cast();
 				}
 				break;
 			}
