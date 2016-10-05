@@ -10,6 +10,7 @@ public class Player extends Character
 	 * 3- Assassin
 	 * 4- Wizard
 	*/
+	//TODO add spellbook to Character instead to allow monsters to cast spells?
 	ArrayList<Spell> spellbook = new ArrayList<Spell>();
 	protected int character_class;
 	protected int gold;
@@ -26,6 +27,19 @@ public class Player extends Character
 	public void levelUp()
 	{
 		//TODO need a check after battle. also, add exp system
+	}
+	public boolean allSpellsUncastable()
+	{
+		int uncastable_spells = 0;
+		for(Spell s : spellbook)
+		{
+			if(!s.isCastable())
+				uncastable_spells++;
+		}
+		if(uncastable_spells == spellbook.size())
+			return true;
+		else
+			return false;
 	}
 	/*public void cast(int spell_choice)
 	{

@@ -206,12 +206,12 @@ public class Game
 		for(int i = 0; i < map[current_row][current_column]; i++)
 		{
 			monsters.add(new Monster((rand.nextInt(player.getMaxHP() + 1) + 50), (rand.nextInt(71) + 40), (rand.nextInt(31) + 5), 
-									 (rand.nextInt(61) + 5), (rand.nextInt(21) + 5), 1, rand.nextInt(26), "Monster " + (i+1)));
+									 (rand.nextInt(101) + 10), (rand.nextInt(21) + 5), 1, rand.nextInt(26), "Monster " + (i+1)));
 			System.out.println("What de heck! It's a(n) " + monsters.get(i).name + "!!");
 		}
 		do
 		{
-			refreshDebuffs();
+			refreshDebuffsAndReduceCooldowns();
 			if(!battleOver())
 				takePlayerTurn();
 			if(!battleOver())
@@ -244,10 +244,12 @@ public class Game
 			return false;
 	}
 
-	private static void refreshDebuffs()
+	private static void refreshDebuffsAndReduceCooldowns()
 	{
 		// TODO Add a Debuff/Buff class to contain all buffs with durations, effects, etc.
-		// FIXME placeholder until buff class	
+		// FIXME placeholder until buff class
+		
+		// Reduce the effects of defense buffs/debuffs each turn until equal to max defense
 		if(player.getDefense() < player.getMaxDefense())
 				player.changeDefense(10);
 		else if(player.getDefense() > player.getMaxDefense())
@@ -269,12 +271,23 @@ public class Game
 					m.changeDefense(-10);
 			}
 		}
+		
+		// Reduce each spell's cooldown that is on cooldown
+		for(Spell s : player.spellbook)
+			if(s.getCurrentCooldown() > 0)
+				s.changeCurrentCooldown(-1);
 	}
 
 	private static void takePlayerTurn()
 	{
 		int choice, target;
+		boolean turn_taken;
+		do
+		{
+		turn_taken = false;
+		
 		displayHPandMana();
+		
 		System.out.println("What would you like to do?");
 		System.out.println("1: Attack"
 					   + "\n2: Abilities"
@@ -294,6 +307,7 @@ public class Game
 				}
 				target = getNumberFrom(1, monsters.size()) - 1;
 				player.attack(monsters.get(target));
+				turn_taken = true;
 				break;
 			}
 			case 2:
@@ -303,49 +317,57 @@ public class Game
 				temp_spells = 0;
 				choice_index = -1;
 				
-				System.out.println("Which spell would you like to cast?");
-				System.out.println("0: Go back.");
-				for(Spell s : player.spellbook)
+				if(!player.allSpellsUncastable())
 				{
-					if(s.isCastable())
+					System.out.println("Which spell would you like to cast?");
+					System.out.println("0: Go back.");
+					for(Spell s : player.spellbook)
 					{
-						spells++;
-						System.out.println(spells + ": " + s.NAME + "- " + s.DESCRIPTION);
-					}
-				}
-				
-				choice2 = getNumberFrom(0, spells);
-				
-				for(int i = 0; i < player.spellbook.size(); i++)
-				{
-					if(player.spellbook.get(i).isCastable())
-					{
-						temp_spells++;
-						if(temp_spells == choice2)
+						if(s.isCastable())
 						{
-							choice_index = i;
-							i = player.spellbook.size();
+							spells++;
+							System.out.println(spells + ": " + s.NAME + "- " + s.DESCRIPTION);
 						}
 					}
-				}
 				
-				if(choice_index >= 0)
-				{
-					if(player.spellbook.get(choice_index).isTargeted())
+					choice2 = getNumberFrom(0, spells);
+				
+					for(int i = 0; i < player.spellbook.size(); i++)
 					{
-						System.out.println("Cast " + player.spellbook.get(choice_index).NAME + " on what?");
-						for(int i = 0; i < monsters.size(); i++)
+						if(player.spellbook.get(i).isCastable())
 						{
-							System.out.println((i + 1) + ": " + monsters.get(i).getName()
-									+"(" + monsters.get(i).getHP() + "/" + monsters.get(i).getMaxHP() + ")");
+							temp_spells++;
+							if(temp_spells == choice2)
+							{
+								choice_index = i;
+								i = player.spellbook.size();
+							}
 						}
-						target = getNumberFrom(1, monsters.size()) - 1;
-						player.spellbook.get(choice_index).cast(monsters.get(target));
-						//TODO show monsters/targets and input choice to cast on + go back ability
+					}
+				
+					if(choice_index >= 0)
+					{
+						if(player.spellbook.get(choice_index).isTargeted())
+						{
+							System.out.println("Cast " + player.spellbook.get(choice_index).NAME + " on what?");
+							for(int i = 0; i < monsters.size(); i++)
+							{
+								System.out.println((i + 1) + ": " + monsters.get(i).getName()
+										+"(" + monsters.get(i).getHP() + "/" + monsters.get(i).getMaxHP() + ")");
+							}
+							target = getNumberFrom(1, monsters.size()) - 1;
+							player.spellbook.get(choice_index).cast(monsters.get(target));
+							//TODO show monsters/targets and input choice to cast on + go back ability
+						}
+						else
+							player.spellbook.get(choice_index).cast();
+						turn_taken = true;
 					}
 					else
-						player.spellbook.get(choice_index).cast();
+						turn_taken = false;
 				}
+				else
+					System.out.println("You can't cast any spells!\n");
 				break;
 			}
 			case 3:
@@ -359,6 +381,7 @@ public class Game
 				break;
 			}
 		}
+		}while(!turn_taken);
 	}
 	
 	private static void displayHPandMana()

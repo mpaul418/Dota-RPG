@@ -3,6 +3,9 @@ package src;
 public class AntiMage extends Player
 {
 	Spell blink = new Blink(this);
+	Spell mana_void = new ManaVoid(this);
+	
+	//TODO add a passive ability class, as well as Mana Break passive
 	
 	public AntiMage(String initName)
 	{

@@ -8,17 +8,20 @@ public abstract class Spell
 	final int LEVEL_REQUIREMENT;
 	final Character CHARACTER;
 	final boolean TARGETED;
-	int cooldown;
+	int max_cooldown;
+	int current_cooldown = 0;
 
-	public Spell(String tempname, String dsc, int manacost, int level_rq, int cd, Character c, boolean t)
+	//FIXME is Character parameter required? dont think so, double check this
+	
+	public Spell(String tempname, String dsc, int manacost, int level_rq, int cd, Character c, boolean targetable)
 	{
 		NAME = tempname;
 		DESCRIPTION = dsc;
 		MANA_COST = manacost;
 		LEVEL_REQUIREMENT = level_rq;
-		cooldown = cd;
+		max_cooldown = cd;
 		CHARACTER = c;
-		TARGETED = t;
+		TARGETED = targetable;
 	}
 	public boolean isTargeted()
 	{
@@ -32,10 +35,18 @@ public abstract class Spell
 	{
 		return LEVEL_REQUIREMENT;
 	}
+	public int getCurrentCooldown()
+	{
+		return current_cooldown;
+	}
+	public void changeCurrentCooldown(int i)
+	{
+		current_cooldown += i;
+	}
 	public boolean isCastable()
 	{
 		//TODO placeholder- need to show in takePlayerTurn() if a spell is correct level but not enough mana
-		if(CHARACTER.getLevel() >= LEVEL_REQUIREMENT && CHARACTER.getMana() >= MANA_COST)
+		if(CHARACTER.getLevel() >= LEVEL_REQUIREMENT && CHARACTER.getMana() >= MANA_COST && current_cooldown == 0)
 			return true;
 		else
 			return false;
