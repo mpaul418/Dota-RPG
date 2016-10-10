@@ -10,8 +10,6 @@ public abstract class Spell
 	final boolean TARGETED;
 	int max_cooldown;
 	int current_cooldown = 0;
-
-	//FIXME is Character parameter required? dont think so, double check this
 	
 	public Spell(String tempname, String dsc, int manacost, int level_rq, int cd, Character c, boolean targetable)
 	{

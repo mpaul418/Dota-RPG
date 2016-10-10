@@ -12,7 +12,7 @@ public class Assassin extends Player
 		attack = 80;
 		defense = 10;
 		character_class = 3;
-		magicDefense = 5;		
+		magicDefense = .15;		
 	}
 
 }

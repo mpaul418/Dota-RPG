@@ -11,13 +11,14 @@ public class Character
 	protected int damage, maxDamage;
 	protected int attack, maxAttack;
 	protected int defense, maxDefense;
-	protected int magicDefense, maxMagicDefense;
+	protected double magicDefense, maxMagicDefense;
 	protected int[] stats;
 	protected boolean alive;
+	protected int damage_dealt = 0;
 
 	//0- str; 1- dex; 2- int; 3-spd; 4-luck;??????
 	
-	public Character(int initHP, int initMana, int initDmg, int initAtk, int initDef, int initMagDef, String initName)
+	public Character(int initHP, int initMana, int initDmg, int initAtk, int initDef, double initMagDef, String initName)
 	{
 		maxHP = initHP;
 		HP = initHP;
@@ -78,15 +79,19 @@ public class Character
 	{
 		return maxDefense;
 	}
-	public int getMagicDefense()
+	public double getMagicDefense()
 	{
 		return magicDefense;
 	}
-	public int getMaxMagicDefense()
+	public double getMaxMagicDefense()
 	{
 		return maxMagicDefense;
 	}
 	public String getName()
+	{
+		return name;
+	}
+	public String toString()
 	{
 		return name;
 	}
@@ -168,10 +173,11 @@ public class Character
 			alive = false;
 		return alive;
 	}
-	
+	//TODO replace method with system for magic/phys damage that calculates it in the method instead of before calling method
 	public void damage(Character c, int incoming_damage)
 	{
 		c.HP -= incoming_damage;
+		damage_dealt += incoming_damage;
 	}
 	public void heal(Character c, int heal)
 	{

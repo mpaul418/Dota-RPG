@@ -206,7 +206,7 @@ public class Game
 		for(int i = 0; i < map[current_row][current_column]; i++)
 		{
 			monsters.add(new Monster((rand.nextInt(player.getMaxHP() + 1) + 50), (rand.nextInt(71) + 40), (rand.nextInt(31) + 5), 
-									 (rand.nextInt(101) + 10), (rand.nextInt(21) + 5), 1, rand.nextInt(26), "Monster " + (i+1)));
+									 (rand.nextInt(101) + 10), (rand.nextInt(21) + 5), 1, (double) (rand.nextInt(26)) / 100.0, "Monster " + (i+1)));
 			System.out.println("What de heck! It's a(n) " + monsters.get(i).name + "!!");
 		}
 		do
@@ -334,7 +334,7 @@ public class Game
 				
 					for(int i = 0; i < player.spellbook.size(); i++)
 					{
-						if(player.spellbook.get(i).isCastable())
+				 		if(player.spellbook.get(i).isCastable())
 						{
 							temp_spells++;
 							if(temp_spells == choice2)

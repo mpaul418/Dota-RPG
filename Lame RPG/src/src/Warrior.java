@@ -12,7 +12,7 @@ public class Warrior extends Player
 		attack = 75;
 		defense = 25;
 		character_class = 2;
-		magicDefense = 10;		
+		magicDefense = .10;		
 	}
 
 }

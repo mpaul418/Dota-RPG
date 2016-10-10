@@ -16,7 +16,7 @@ public class AntiMage extends Player
 		attack = 75;
 		defense = 15;
 		character_class = 1;
-		magicDefense = 50;	
+		magicDefense = .50;	
 		spellbook.add(blink);
 	}
 }

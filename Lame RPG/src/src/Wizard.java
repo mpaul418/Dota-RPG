@@ -11,7 +11,7 @@ public class Wizard extends Player
 		attack = 65;
 		defense = 20;
 		character_class = 4;
-		magicDefense = 25;		
+		magicDefense = .25;		
 	}
 
 }
