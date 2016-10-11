@@ -1,8 +1,10 @@
 package src;
-public class Wizard extends Player
+public class Invoker extends Player
 {
+	Spell sun_strike = new SunStrike(this);
+	Spell emp = new EMP(this);
 
-	public Wizard(String initName)
+	public Invoker(String initName)
 	{
 		super(95, 120, 10, 65, 20, 4, 25, initName);
 		HP = 95;

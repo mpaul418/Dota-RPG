@@ -13,10 +13,7 @@ public class ManaVoid extends Spell
 	@Override
 	public void cast()
 	{
-		System.out.println("You need a target for this spell! "
-						+ "\nSpell Name: " + this.NAME 
-						+ "\nSpell Owner: " + this.CHARACTER + ".");
-		//THIS SPELL SHOULD ONLY BE CAST WITH A TARGET
+		this.incorrectCastWithoutTarget();
 	}
 
 	@Override
@@ -24,13 +21,10 @@ public class ManaVoid extends Spell
 	{
 		// TODO Auto-generated method stub
 		int mana_missing = target.getMaxMana() - target.getMana();
-		int damage_done;
-		System.out.println(this.CHARACTER + " cast Mana Void on " + target + ".");
+		this.castWithTargetMessage(target);
 		for(Monster m : Game.monsters)
 		{
-			damage_done = (int)(Math.round(target.getMagicDefense() * mana_missing));
-			this.CHARACTER.damage(m, damage_done);
-			System.out.println(this.CHARACTER + "dealt " + damage_done + " damage to " + m + ".");
+			CHARACTER.dealMagicDamage(mana_missing, m);
 		}
 	}
 

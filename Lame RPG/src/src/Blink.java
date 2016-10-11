@@ -10,6 +10,7 @@ public class Blink extends Spell
 	@Override
 	public void cast()
 	{
+		this.castWithoutTargetMessage();
 		for(Monster m : Game.monsters)
 		{
 			m.changeDefense(40);
@@ -23,9 +24,7 @@ public class Blink extends Spell
 	@Override
 	public void cast(Character target)
 	{
-		System.out.println("This spell should not have a target!");
-		//THIS SPELL SHOULD NOT HAVE A TARGET
-		cast();	
+		this.incorrectCastWithTarget();
 	}
 
 }

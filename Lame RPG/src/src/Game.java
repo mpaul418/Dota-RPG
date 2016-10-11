@@ -39,7 +39,7 @@ public class Game
 		System.out.println("1- Anti-Mage: A balanced fighter who specializes against spellcasters."
 						+"\n2- Warrior: A melee fighter who has high physical defense and attack."
 						+"\n3- Assassin: A glass cannon whose attack is very high, but at the expense of poor health."
-						+"\n4- Wizard: A mage who has both damaging and utility spells.");
+						+"\n4- Invoker: A mage who has both damaging and utility spells.");
 		
 		player_class = getNumberFrom(1, 4); 
 		
@@ -60,7 +60,7 @@ public class Game
 			}
 			case 4: 
 			{
-				player = new Wizard(temp_name);
+				player = new Invoker(temp_name);
 			}
 		}
 	}

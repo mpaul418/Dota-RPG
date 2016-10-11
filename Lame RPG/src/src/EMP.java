@@ -1,9 +1,9 @@
 package src;
 
-public class Fireball extends Spell
+public class EMP extends Spell
 {
 
-	public Fireball(String tempname, String dsc, int manacost, int level_rq, int cd, Character c, boolean targetable)
+	public EMP(String tempname, String dsc, int manacost, int level_rq, int cd, Character c, boolean targetable)
 	{
 		super(tempname, dsc, manacost, level_rq, cd, c, targetable);
 		// TODO Auto-generated constructor stub

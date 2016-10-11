@@ -210,6 +210,12 @@ public class Character
 			System.out.println(this.getName() + "'s attack missed! (Attack roll: " + temp + ")\n");
 		}
 	}
+	public void dealMagicDamage(int incoming_damage, Character c)
+	{
+		int damage_done = (int)(Math.round(c.getMagicDefense() * incoming_damage));
+		this.damage(c, damage_done);
+		System.out.println(this + "dealt " + damage_done + " magic damage to " + c + ".");
+	}
 	public void hunkerDown()
 	{
 		int amount = r.nextInt(31) + 30;

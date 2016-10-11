@@ -41,6 +41,10 @@ public abstract class Spell
 	{
 		current_cooldown += i;
 	}
+	public String toString()
+	{
+		return NAME;
+	}
 	public boolean isCastable()
 	{
 		//TODO placeholder- need to show in takePlayerTurn() if a spell is correct level but not enough mana
@@ -48,6 +52,27 @@ public abstract class Spell
 			return true;
 		else
 			return false;
+	}
+	public void incorrectCastWithTarget()
+	{
+		System.out.println("You need a target for this spell! "
+				+ "\nSpell Name: " + this.NAME 
+				+ "\nSpell Owner: " + this.CHARACTER + ".");
+		//THIS SPELL SHOULD HAVE A TARGET
+	}
+	public void incorrectCastWithoutTarget()
+	{
+		System.out.println("This spell should not have a target!");
+		//THIS SPELL SHOULD NOT HAVE A TARGET
+		cast();	
+	}
+	public void castWithTargetMessage(Character c)
+	{
+		System.out.println(this.CHARACTER + " cast " + this + " on " + c + ".");
+	}
+	public void castWithoutTargetMessage()
+	{
+		System.out.println(this.CHARACTER + " cast " + this + ".");
 	}
 	public abstract void cast();
 	public abstract void cast(Character target);
