@@ -251,13 +251,13 @@ public class Game
 		
 		// Reduce the effects of defense buffs/debuffs each turn until equal to max defense
 		if(player.getDefense() < player.getMaxDefense())
-				player.changeDefense(10);
+				player.changeDefense(15);
 		else if(player.getDefense() > player.getMaxDefense())
 		{
 			if((player.getDefense() - 10) < player.getMaxDefense())
 				player.changeDefense(-(player.getMaxDefense() - player.getDefense()));
 			else
-				player.changeDefense(-10);
+				player.changeDefense(-15);
 		}
 		for(Monster m : monsters)
 		{
@@ -265,10 +265,10 @@ public class Game
 				m.changeDefense(10);
 			else if(m.getDefense() > m.getMaxDefense())
 			{
-				if((m.getDefense() - 10) < m.getMaxDefense())
+				if((m.getDefense() - 15) < m.getMaxDefense())
 					m.changeDefense(-(m.getMaxDefense() - m.getDefense()));
 				else
-					m.changeDefense(-10);
+					m.changeDefense(-15);
 			}
 		}
 		
@@ -316,7 +316,7 @@ public class Game
 				spells = 0;
 				temp_spells = 0;
 				choice_index = -1;
-				
+				//TODO rework this interface - instead, display all spells with cooldowns, & if spell on cd is selected, repeat this choice
 				if(!player.allSpellsUncastable())
 				{
 					System.out.println("Which spell would you like to cast?");

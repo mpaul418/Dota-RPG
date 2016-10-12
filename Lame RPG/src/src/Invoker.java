@@ -3,6 +3,7 @@ public class Invoker extends Player
 {
 	Spell sun_strike = new SunStrike(this);
 	Spell emp = new EMP(this);
+	Spell ghost_walk = new GhostWalk(this);
 
 	public Invoker(String initName)
 	{
@@ -14,6 +15,9 @@ public class Invoker extends Player
 		defense = 20;
 		character_class = 4;
 		magicDefense = .25;		
+		spellbook.add(sun_strike);
+		spellbook.add(emp);
+		spellbook.add(ghost_walk);
 	}
 
 }

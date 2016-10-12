@@ -53,14 +53,14 @@ public abstract class Spell
 		else
 			return false;
 	}
-	public void incorrectCastWithTarget()
+	public void incorrectCastWithoutTarget()
 	{
 		System.out.println("You need a target for this spell! "
 				+ "\nSpell Name: " + this.NAME 
 				+ "\nSpell Owner: " + this.CHARACTER + ".");
 		//THIS SPELL SHOULD HAVE A TARGET
 	}
-	public void incorrectCastWithoutTarget()
+	public void incorrectCastWithTarget()
 	{
 		System.out.println("This spell should not have a target!");
 		//THIS SPELL SHOULD NOT HAVE A TARGET

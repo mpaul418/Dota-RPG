@@ -216,10 +216,11 @@ public class Character
 		this.damage(c, damage_done);
 		System.out.println(this + "dealt " + damage_done + " magic damage to " + c + ".");
 	}
+	//TODO make hunker down less effective the more times you use it in a battle
 	public void hunkerDown()
 	{
 		int amount = r.nextInt(31) + 30;
-		this.defense += amount;
-		System.out.println(this.getName() + " hunkered down, increasing its defense by " + amount + " for one turn!!\n");
+		this.changeDefense(amount);
+		System.out.println(this.getName() + " hunkered down, increasing its defense by " + amount + "!!\n");
 	}
 }
