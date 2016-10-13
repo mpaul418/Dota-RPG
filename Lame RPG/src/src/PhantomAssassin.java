@@ -1,9 +1,9 @@
 package src;
 
-public class Assassin extends Player
+public class PhantomAssassin extends Player
 {
 
-	public Assassin(String initName)
+	public PhantomAssassin(String initName)
 	{
 		super(100, 75, 45, 80, 10, 3, 5, initName);
 		HP = 100;

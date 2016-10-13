@@ -9,7 +9,7 @@ import java.io.InputStreamReader;
 public class Game
 {
 	static String temp_name = "";
-	static int player_class;
+	static int player_hero;
 	static Player player;
 	static int map[][] = new int[5][5];
 	static int current_row = 0;
@@ -22,7 +22,7 @@ public class Game
 	
 	public static void main(String[] args)
 	{
-		setClass();
+		setHero();
 		setName();
 		makeDungeon();
 		while(!game_over)
@@ -33,17 +33,17 @@ public class Game
 				battle();
 		}
 	}
-	private static void setClass()
+	private static void setHero()
 	{		
-		System.out.println("What class do you want to be?");
-		System.out.println("1- Anti-Mage: A balanced fighter who specializes against spellcasters."
-						+"\n2- Warrior: A melee fighter who has high physical defense and attack."
-						+"\n3- Assassin: A glass cannon whose attack is very high, but at the expense of poor health."
+		System.out.println("What hero do you want to be?");
+		System.out.println("1- Anti-Mage: A balanced melee fighter who specializes against spellcasters."
+						+"\n2- Sven: A melee fighter who has high physical defense and attack."
+						+"\n3- Phantom Assassin: A glass cannon whose attack is very high, but at the expense of poor health."
 						+"\n4- Invoker: A mage who has both damaging and utility spells.");
 		
-		player_class = getNumberFrom(1, 4); 
+		player_hero = getNumberFrom(1, 4); 
 		
-		switch(player_class)
+		switch(player_hero)
 		{
 			case 1: 
 			{
@@ -52,11 +52,11 @@ public class Game
 			}
 			case 2:
 			{
-				player = new Warrior(temp_name);
+				player = new Sven(temp_name);
 			}
 			case 3:
 			{
-				player = new Assassin(temp_name);
+				player = new PhantomAssassin(temp_name);
 			}
 			case 4: 
 			{
