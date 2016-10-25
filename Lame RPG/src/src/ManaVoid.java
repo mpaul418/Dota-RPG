@@ -20,7 +20,7 @@ public class ManaVoid extends Spell
 	public void cast(Character target)
 	{
 		// TODO Auto-generated method stub
-		int mana_missing = target.getMaxMana() - target.getMana();
+		int mana_missing = target.getDefaultMana() - target.getMana();
 		this.castWithTargetMessage(target);
 		for(Monster m : Game.monsters)
 		{

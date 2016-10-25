@@ -42,7 +42,7 @@ public class Game
 						+"\n4- Invoker: A mage who has both damaging and utility spells.");
 		
 		player_hero = getNumberFrom(1, 4); 
-		
+		//TODO add levels for each skill/ability
 		switch(player_hero)
 		{
 			case 1: 
@@ -205,7 +205,7 @@ public class Game
 	{
 		for(int i = 0; i < map[current_row][current_column]; i++)
 		{
-			monsters.add(new Monster((rand.nextInt(player.getMaxHP() + 1) + 50), (rand.nextInt(71) + 40), (rand.nextInt(31) + 5), 
+			monsters.add(new Monster((rand.nextInt(player.getDefaultHP() + 1) + 50), (rand.nextInt(71) + 40), (rand.nextInt(31) + 5), 
 									 (rand.nextInt(101) + 10), (rand.nextInt(21) + 5), 1, (double) (rand.nextInt(26)) / 100.0, "Monster " + (i+1)));
 			System.out.println("What de heck! It's a(n) " + monsters.get(i).name + "!!");
 		}
@@ -250,23 +250,23 @@ public class Game
 		// FIXME placeholder until buff class
 		
 		// Reduce the effects of defense buffs/debuffs each turn until equal to max defense
-		if(player.getDefense() < player.getMaxDefense())
+		if(player.getDefense() < player.getDefaultDefense())
 				player.changeDefense(15);
-		else if(player.getDefense() > player.getMaxDefense())
+		else if(player.getDefense() > player.getDefaultDefense())
 		{
-			if((player.getDefense() - 10) < player.getMaxDefense())
-				player.changeDefense(-(player.getMaxDefense() - player.getDefense()));
+			if((player.getDefense() - 10) < player.getDefaultDefense())
+				player.changeDefense(-(player.getDefaultDefense() - player.getDefense()));
 			else
 				player.changeDefense(-15);
 		}
 		for(Monster m : monsters)
 		{
-			if(m.getDefense() < m.getMaxDefense())
+			if(m.getDefense() < m.getDefaultDefense())
 				m.changeDefense(10);
-			else if(m.getDefense() > m.getMaxDefense())
+			else if(m.getDefense() > m.getDefaultDefense())
 			{
-				if((m.getDefense() - 15) < m.getMaxDefense())
-					m.changeDefense(-(m.getMaxDefense() - m.getDefense()));
+				if((m.getDefense() - 15) < m.getDefaultDefense())
+					m.changeDefense(-(m.getDefaultDefense() - m.getDefense()));
 				else
 					m.changeDefense(-15);
 			}
@@ -303,7 +303,7 @@ public class Game
 				for(int i = 0; i < monsters.size(); i++)
 				{
 					System.out.println((i + 1) + ": " + monsters.get(i).getName()
-							+"(" + monsters.get(i).getHP() + "/" + monsters.get(i).getMaxHP() + ")");
+							+"(" + monsters.get(i).getHP() + "/" + monsters.get(i).getDefaultHP() + ")");
 				}
 				target = getNumberFrom(1, monsters.size()) - 1;
 				player.attack(monsters.get(target));
@@ -353,7 +353,7 @@ public class Game
 							for(int i = 0; i < monsters.size(); i++)
 							{
 								System.out.println((i + 1) + ": " + monsters.get(i).getName()
-										+"(" + monsters.get(i).getHP() + "/" + monsters.get(i).getMaxHP() + ")");
+										+"(" + monsters.get(i).getHP() + "/" + monsters.get(i).getDefaultHP() + ")");
 							}
 							target = getNumberFrom(1, monsters.size()) - 1;
 							player.spellbook.get(choice_index).cast(monsters.get(target));
@@ -386,11 +386,11 @@ public class Game
 	
 	private static void displayHPandMana()
 	{
-		System.out.println(player.getName() + "'s HP: " + player.getHP() + "/" + player.getMaxHP()
-		+  "   Mana: " + player.getMana() + "/" + player.getMaxMana());
+		System.out.println(player.getName() + "'s HP: " + player.getHP() + "/" + player.getDefaultHP()
+		+  "   Mana: " + player.getMana() + "/" + player.getDefaultMana());
 		for(Monster m : monsters)
-			System.out.println(m.getName() + "'s HP: " + m.getHP() + "/" + m.getMaxHP()
-			+  "   Mana: " + m.getMana() + "/" + m.getMaxMana());
+			System.out.println(m.getName() + "'s HP: " + m.getHP() + "/" + m.getDefaultHP()
+			+  "   Mana: " + m.getMana() + "/" + m.getDefaultMana());
 		System.out.println();
 	}
 

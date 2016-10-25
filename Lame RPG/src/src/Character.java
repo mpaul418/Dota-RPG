@@ -1,37 +1,39 @@
 package src;
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Character 
 {	
 	private Random r = new Random();
 	protected String name;
-	protected int HP, maxHP;
-	protected int mana, maxMana;
+	protected int HP, defaultHP;
+	protected int mana, defaultMana;
 	protected int level;
-	protected int damage, maxDamage;
-	protected int attack, maxAttack;
-	protected int defense, maxDefense;
-	protected double magicDefense, maxMagicDefense;
-	protected int[] stats;
+	protected int damage, defaultDamage;
+	protected int attack, defaultAttack;
+	protected int defense, defaultDefense;
+	protected double magicDefense, defaultMagicDefense;
+	//protected int[] stats;
 	protected boolean alive;
 	protected int damage_dealt = 0;
+	protected ArrayList<Buff> buffs = new ArrayList<Buff>();
 
 	//0- str; 1- dex; 2- int; 3-spd; 4-luck;??????
 	
 	public Character(int initHP, int initMana, int initDmg, int initAtk, int initDef, double initMagDef, String initName)
 	{
-		maxHP = initHP;
-		HP = initHP;
-		maxMana = initMana;
-		mana = initMana;
+		defaultHP = initHP;
+		HP = initHP; //buff-1
+		defaultMana = initMana;
+		mana = initMana;//buff-2
 		level = 1;
-		maxDamage = initDmg;
-		damage = initDmg;
-		maxAttack = initAtk;
+		defaultDamage = initDmg;//buff-3
+		damage = initDmg;//buff-4
+		defaultAttack = initAtk;
 		attack = initAtk;
-		maxDefense = initDef;	
+		defaultDefense = initDef;	
 		defense = initDef;
-		maxMagicDefense = initMagDef;
+		defaultMagicDefense = initMagDef;
 		magicDefense = initMagDef;
 		name = initName;
 	}
@@ -39,17 +41,17 @@ public class Character
 	{
 		return HP;
 	}
-	public int getMaxHP()
+	public int getDefaultHP()
 	{
-		return maxHP;
+		return defaultHP;
 	}
 	public int getMana()
 	{
 		return mana;
 	}
-	public int getMaxMana()
+	public int getDefaultMana()
 	{
-		return maxMana;
+		return defaultMana;
 	}
 	public int getLevel()
 	{
@@ -59,33 +61,33 @@ public class Character
 	{
 		return damage;
 	}
-	public int getMaxDamage()
+	public int getDefaultDamage()
 	{
-		return maxDamage;
+		return defaultDamage;
 	}
 	public int getAttack()
 	{
 		return attack;
 	}
-	public int getMaxAttack()
+	public int getDefaultAttack()
 	{
-		return maxAttack;
+		return defaultAttack;
 	}
 	public int getDefense()
 	{
 		return defense;
 	}
-	public int getMaxDefense()
+	public int getDefaultDefense()
 	{
-		return maxDefense;
+		return defaultDefense;
 	}
 	public double getMagicDefense()
 	{
 		return magicDefense;
 	}
-	public double getMaxMagicDefense()
+	public double getDefaultMagicDefense()
 	{
-		return maxMagicDefense;
+		return defaultMagicDefense;
 	}
 	public String getName()
 	{
@@ -102,67 +104,67 @@ public class Character
 	public void changeMana(int amount)
 	{
 		mana += amount;
-		if(mana > maxMana)
-			mana = maxMana;
+		if(mana > defaultMana)
+			mana = defaultMana;
 	}
-	public void changeMaxMana(int amount)
+	public void changeDefaultMana(int amount)
 	{
-		maxMana += amount;
+		defaultMana += amount;
 		mana += amount;
 	}
 	public void changeHP(int amount)
 	{
 		HP += amount;
-		if(HP > maxHP)
-			HP = maxHP;
+		if(HP > defaultHP)
+			HP = defaultHP;
 	}
-	public void changeMaxHP(int amount)
+	public void changeDefaultHP(int amount)
 	{
-		maxHP += amount;
+		defaultHP += amount;
 		HP += amount;
 	}
 	public void changeDamage(int amount)
 	{
 		damage += amount;
-		if(damage > maxDamage)
-			damage = maxDamage;
+		if(damage > defaultDamage)
+			damage = defaultDamage;
 	}
-	public void changeMaxDamage(int amount)
+	public void changeDefaultDamage(int amount)
 	{
-		maxDamage += amount;
+		defaultDamage += amount;
 		damage += amount;
 	}
 	public void changeDefense(int amount)
 	{
 		defense += amount;
-		if(defense > maxDefense)
-			defense = maxDefense;
+		if(defense > defaultDefense)
+			defense = defaultDefense;
 	}
-	public void changeMaxDefense(int amount)
+	public void changeDefaultDefense(int amount)
 	{
-		maxDefense += amount;
+		defaultDefense += amount;
 		defense += amount;
 	}
 	public void changeMagicDefense(int amount)
 	{
 		magicDefense += amount;
-		if(magicDefense > maxMagicDefense)
-			magicDefense = maxMagicDefense;
+		if(magicDefense > defaultMagicDefense)
+			magicDefense = defaultMagicDefense;
 	}
-	public void changeMaxMagicDefense(int amount)
+	public void changeDefaultMagicDefense(int amount)
 	{
-		maxMagicDefense += amount;
+		defaultMagicDefense += amount;
 		magicDefense += amount;
 	}
 	public void changeAttack(int amount)
 	{
 		attack += amount;
-		if(attack > maxAttack)
-			attack = maxAttack;
+		if(attack > defaultAttack)
+			attack = defaultAttack;
 	}
-	public void changeMaxAttack(int amount)
+	public void changeDefaultAttack(int amount)
 	{
-		maxAttack += amount;
+		defaultAttack += amount;
 		attack += amount;
 	}
 	public boolean isAlive()
@@ -195,14 +197,14 @@ public class Character
 				damage_done = damage - currentDefense;
 				damage(c, damage_done);
 				System.out.println(this.getName() + " attacked " + c.getName() + " and dealt " + damage_done + " damage!!"
-							     + " (Defense roll: " + currentDefense + "/" + c.getMaxDefense() + ")\n");
+							     + " (Defense roll: " + currentDefense + "/" + c.getDefaultDefense() + ")\n");
 			}
 			else
 			{
 				damage_done = 1;
 				damage(c, damage_done);
 				System.out.println(this.getName() + " grazed " + c.getName() + " and dealt " + damage_done + " damage.\n"
-								 + " (Defense roll: " + currentDefense + "/" + c.getMaxDefense() + ")\n");
+								 + " (Defense roll: " + currentDefense + "/" + c.getDefaultDefense() + ")\n");
 			}
 		}
 		else

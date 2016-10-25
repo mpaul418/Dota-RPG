@@ -1,11 +1,38 @@
 package src;
 
-public class Buff
+public abstract class Buff
 {
-
-	public Buff()
+	String name, desc;
+	final Character CHARACTER;
+	int duration;
+	
+	public Buff(String n, String dsc, Character c, int d)
 	{
-		// TODO Auto-generated constructor stub
+		name = n;
+		desc = dsc;
+		CHARACTER = c;
+		duration = d;
 	}
-//TODO add stun buff class, ability modifier class after creating methods/variables
+
+	public void decreaseDuration()
+	{
+		if(duration >= 1)
+			duration--;
+		else
+			this.removeThis();			
+	}
+	
+	private void removeThis()
+	{
+		CHARACTER.buffs.remove(this);		
+	}
+	
+	public String toString()
+	{
+		return name + "-" + desc + " Lasting " + duration + " more turns.";
+	}
+
+	public abstract void applyAttackEffect(Character t);
+	
+	public abstract void applyEffectOnTurnStart();
 }
