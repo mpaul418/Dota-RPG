@@ -18,13 +18,14 @@ public abstract class Buff
 	{
 		if(duration >= 1)
 			duration--;
-		else
-			this.removeThis();			
+		else if(duration == 0)
+			this.deletThis();		//when buffs are infinite (duration == -1), they are never deleted
 	}
 	
-	private void removeThis()
+	public void deletThis()
 	{
-		CHARACTER.buffs.remove(this);		
+		CHARACTER.buffs.remove(this);
+		System.out.println(CHARACTER + "'s " + name + " buff wore off.");
 	}
 	
 	public String toString()
@@ -32,7 +33,7 @@ public abstract class Buff
 		return name + "-" + desc + " Lasting " + duration + " more turns.";
 	}
 
-	public abstract void applyAttackEffect(Character t);
-	
-	public abstract void applyEffectOnTurnStart();
+	public abstract void applyAttackEffect(Character c);// ex. Coup de Grace
+	public abstract void applyAttackedEffect(Character c);// ex. Blur
+	public abstract void applyEffectOnTurnStart();// ex. stuns(Storm Hammer)
 }

@@ -2,12 +2,56 @@ package src;
 
 public class StatBuff extends Buff
 {
-	public StatBuff(String n, String dsc, Character c, int d)
+	int stat, modifier_amount;
+	
+	public StatBuff(String n, String dsc, Character c, int d, int s, int a)
 	{
 		super(n, dsc, c, d); 
-		// TODO Auto-generated constructor stub
+		stat = s;
+		switch(stat)
+		{
+			case 1:
+			{
+				CHARACTER.changeDamage(modifier_amount);
+			}
+			case 2:
+			{
+				CHARACTER.changeAttack(modifier_amount);
+			}
+			case 3:
+			{
+				CHARACTER.changeDefense(modifier_amount);
+			}
+			case 4:
+			{
+				CHARACTER.changeMagicDefense(modifier_amount);
+			}
+		}
 	}
-//TODO find a way to pass the variable 
+	@Override
+	public void deletThis()
+	{
+		switch(stat)
+		{
+			case 1:
+			{
+				CHARACTER.changeDamage(-modifier_amount);
+			}
+			case 2:
+			{
+				CHARACTER.changeAttack(-modifier_amount);
+			}
+			case 3:
+			{
+				CHARACTER.changeDefense(-modifier_amount);
+			}
+			case 4:
+			{
+				CHARACTER.changeMagicDefense(-modifier_amount);
+			}
+		}
+		super.deletThis();
+	}
 	@Override
 	public void applyAttackEffect(Character t)
 	{
@@ -18,7 +62,11 @@ public class StatBuff extends Buff
 	public void applyEffectOnTurnStart()
 	{
 		//no effect on turn start
-
+	}
+	@Override
+	public void applyAttackedEffect(Character c)
+	{
+		//no effect when attacked
 	}
 
 }

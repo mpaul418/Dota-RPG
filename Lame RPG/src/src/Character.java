@@ -23,18 +23,18 @@ public class Character
 	public Character(int initHP, int initMana, int initDmg, int initAtk, int initDef, double initMagDef, String initName)
 	{
 		defaultHP = initHP;
-		HP = initHP; //buff-1
+		HP = initHP; 
 		defaultMana = initMana;
-		mana = initMana;//buff-2
+		mana = initMana;
 		level = 1;
-		defaultDamage = initDmg;//buff-3
-		damage = initDmg;//buff-4
+		defaultDamage = initDmg;
+		damage = initDmg;//buff- 1
 		defaultAttack = initAtk;
-		attack = initAtk;
+		attack = initAtk;//buff- 2
 		defaultDefense = initDef;	
-		defense = initDef;
+		defense = initDef;//buff- 3
 		defaultMagicDefense = initMagDef;
-		magicDefense = initMagDef;
+		magicDefense = initMagDef;//buff- 4
 		name = initName;
 	}
 	public int getHP()
