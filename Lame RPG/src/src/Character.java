@@ -13,6 +13,8 @@ public class Character
 	protected int attack, defaultAttack;
 	protected int defense, defaultDefense;
 	protected double magicDefense, defaultMagicDefense;
+	protected int critChance, defaultCritChance;
+	protected double critModifier, defaultCritModifier;
 	//protected int[] stats;
 	protected boolean alive;
 	protected int damage_dealt = 0;
@@ -35,6 +37,10 @@ public class Character
 		defense = initDef;//buff- 3
 		defaultMagicDefense = initMagDef;
 		magicDefense = initMagDef;//buff- 4
+		defaultCritChance = 5;
+		critChance = 5; //buff- 5
+		defaultCritModifier = 2.00;
+		critModifier = 2.00;
 		name = initName;
 	}
 	public int getHP()
@@ -88,6 +94,22 @@ public class Character
 	public double getDefaultMagicDefense()
 	{
 		return defaultMagicDefense;
+	}
+	public int getCritChance()
+	{
+		return critChance;
+	}
+	public int getDefaultCritChance()
+	{
+		return defaultCritChance;
+	}
+	public double getCritModifier()
+	{
+		return critModifier;
+	}
+	public double getDefaultCritModifier()
+	{
+		return defaultCritModifier;
 	}
 	public String getName()
 	{
@@ -167,6 +189,24 @@ public class Character
 		defaultAttack += amount;
 		attack += amount;
 	}
+	public void changeCritChance(int amount)
+	{
+		critChance += amount;
+	}
+	public void changeDefaultCritChance(int amount)
+	{
+		defaultCritChance += amount;
+		critChance += amount;
+	}
+	public void changeCritModifier(double amount)
+	{
+		critModifier += amount;
+	}
+	public void changeDefaultCritModifier(double amount)
+	{
+		defaultCritModifier += amount;
+		critModifier += amount;
+	}
 	public boolean isAlive()
 	{
 		if(getHP() > 0)
@@ -187,10 +227,19 @@ public class Character
 	}
 	public void attack(Character c)
 	{
-		int temp, damage_done;
+		int temp, damage_done, crit_roll;
+		boolean critical_hit;
+		
 		temp = 90 + r.nextInt(attack + 1);
 		if(temp >= 100)
 		{
+			crit_roll = r.nextInt(100) + 1;
+			if(critChance <= crit_roll)
+				critical_hit = true;
+			else
+				critical_hit = false;
+			//TODO implement crits into damage when rolled and check this algorithm
+				
 			int currentDefense = r.nextInt(c.getDefense() + 1);
 			if(damage > currentDefense)
 			{

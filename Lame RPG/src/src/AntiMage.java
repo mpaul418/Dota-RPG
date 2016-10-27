@@ -2,7 +2,9 @@ package src;
 
 public class AntiMage extends Player
 {
+	Spell mana_break = new ManaBreak(this);
 	Spell blink = new Blink(this);
+	Spell spell_shield = new SpellShield(this);
 	Spell mana_void = new ManaVoid(this);
 	
 	//TODO add a passive ability class, as well as Mana Break passive
@@ -18,5 +20,6 @@ public class AntiMage extends Player
 		character_class = 1;
 		magicDefense = .50;	
 		spellbook.add(blink);
+		possible_spells.add(mana_void);
 	}
 }

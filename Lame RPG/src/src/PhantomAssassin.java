@@ -2,7 +2,7 @@ package src;
 
 public class PhantomAssassin extends Player
 {
-
+	Spell 
 	public PhantomAssassin(String initName)
 	{
 		super(100, 75, 45, 80, 10, 3, 5, initName);

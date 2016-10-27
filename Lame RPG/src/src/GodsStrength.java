@@ -13,7 +13,7 @@ public class GodsStrength extends Spell
 	{
 		this.castWithoutTargetMessage();
 		this.CHARACTER.buffs.add(new StatBuff(this.NAME, "Dealing extra damage.",
-				this.CHARACTER, 3, 1, this.CHARACTER.getDamage()));
+				this.CHARACTER, 3, 1, this.CHARACTER.getDefaultDamage()));
 	}
 
 	@Override
