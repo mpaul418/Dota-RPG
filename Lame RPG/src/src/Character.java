@@ -15,12 +15,10 @@ public class Character
 	protected double magicDefense, defaultMagicDefense;
 	protected int critChance, defaultCritChance;
 	protected double critModifier, defaultCritModifier;
-	//protected int[] stats;
+	protected int dodgeChance, defaultDodgeChance; 
 	protected boolean alive;
 	protected int damage_dealt = 0;
 	protected ArrayList<Buff> buffs = new ArrayList<Buff>();
-
-	//0- str; 1- dex; 2- int; 3-spd; 4-luck;??????
 	
 	public Character(int initHP, int initMana, int initDmg, int initAtk, int initDef, double initMagDef, String initName)
 	{
@@ -40,7 +38,9 @@ public class Character
 		defaultCritChance = 5;
 		critChance = 5; //buff- 5
 		defaultCritModifier = 2.00;
-		critModifier = 2.00;
+		critModifier = 2.00; //buff- 6
+		defaultDodgeChance = 0;
+		dodgeChance = 0;
 		name = initName;
 	}
 	public int getHP()
@@ -238,14 +238,19 @@ public class Character
 				critical_hit = true;
 			else
 				critical_hit = false;
-			//TODO implement crits into damage when rolled and check this algorithm
 				
 			int currentDefense = r.nextInt(c.getDefense() + 1);
 			if(damage > currentDefense)
 			{
-				damage_done = damage - currentDefense;
+				if(critical_hit)
+				{
+					damage_done = (int)Math.round(critChance * damage) - currentDefense;
+					System.out.print("Critical hit!! ");
+				}
+				else
+					damage_done = damage - currentDefense;
 				damage(c, damage_done);
-				System.out.println(this.getName() + " attacked " + c.getName() + " and dealt " + damage_done + " damage!!"
+				System.out.println(this.getName() + " attacked " + c.getName() + " and dealt " + damage_done + " damage."
 							     + " (Defense roll: " + currentDefense + "/" + c.getDefaultDefense() + ")\n");
 			}
 			else

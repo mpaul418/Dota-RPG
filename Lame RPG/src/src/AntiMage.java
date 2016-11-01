@@ -11,7 +11,7 @@ public class AntiMage extends Player
 	
 	public AntiMage(String initName)
 	{
-		super(150, 60, 30, 75, 10, 1, 50, initName);
+		super(150, 60, 30, 75, 10, 1, 50, 0, initName);
 		HP = 150;
 		mana = 60;
 		damage = 30;

@@ -26,6 +26,11 @@ public class StatBuff extends Buff
 			{
 				CHARACTER.changeMagicDefense(modifier_amount);
 			}
+			case 5:
+			{
+				CHARACTER.changeCritChance(modifier_amount);
+			}
+			//TODO finish adding stats to modify
 		}
 	}
 	@Override

@@ -8,7 +8,7 @@ public class Sven extends Player
 	
 	public Sven(String initName)
 	{
-		super(200, 50, 25, 75, 15, 2, 10, initName);
+		super(200, 50, 25, 75, 15, 2, 10, 0, initName);
 		HP = 200;
 		mana = 50;
 		damage = 25;

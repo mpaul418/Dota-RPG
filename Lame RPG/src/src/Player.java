@@ -15,7 +15,7 @@ public class Player extends Character
 	ArrayList<Spell> possible_spells = new ArrayList<Spell>();
 	protected int character_class;
 	protected int gold;
-	public Player(int initHP, int initMana, int initDmg, int initAtk, int initDef, int playerClass, int initMagDef, String initName) 
+	public Player(int initHP, int initMana, int initDmg, int initAtk, int initDef, int playerClass, int initMagDef, int initDodge, String initName) 
 	{
 		super(initHP, initMana, initDmg, initAtk, initDef, initMagDef, initName);
 		character_class = playerClass;

@@ -2,10 +2,11 @@ package src;
 
 public class PhantomAssassin extends Player
 {
-	Spell 
+	Spell stifling_dagger = new StiflingDagger(this);
+	
 	public PhantomAssassin(String initName)
 	{
-		super(100, 75, 45, 80, 10, 3, 5, initName);
+		super(100, 75, 45, 80, 10, 3, 5, 50, initName);
 		HP = 75;
 		mana = 75;
 		damage = 45;
