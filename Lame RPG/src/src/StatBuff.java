@@ -2,33 +2,63 @@ package src;
 
 public class StatBuff extends Buff
 {
-	int stat, modifier_amount;
+	int stat, int_modifier;
+	double modifier_amount;
 	
 	public StatBuff(String n, String dsc, Character c, int d, int s, int a)
 	{
 		super(n, dsc, c, d); 
 		stat = s;
+		modifier_amount = a;
+		int_modifier = (int)modifier_amount;
 		switch(stat)
 		{
 			case 1:
 			{
-				CHARACTER.changeDamage(modifier_amount);
+				CHARACTER.changeDamage(int_modifier);
+				break;
 			}
 			case 2:
 			{
-				CHARACTER.changeAttack(modifier_amount);
+				CHARACTER.changeAttack(int_modifier);
+				break;
 			}
 			case 3:
 			{
-				CHARACTER.changeDefense(modifier_amount);
+				CHARACTER.changeDefense(int_modifier);
+				break;
 			}
 			case 4:
 			{
-				CHARACTER.changeMagicDefense(modifier_amount);
+				CHARACTER.changeMagicDefense(int_modifier);
+				break;
 			}
 			case 5:
 			{
-				CHARACTER.changeCritChance(modifier_amount);
+				CHARACTER.changeCritChance(int_modifier);
+				break;
+			}
+			case 6:
+			{
+				CHARACTER.changeDefaultCritModifier(modifier_amount);
+				CHARACTER.changeCritModifier(modifier_amount);
+				break;
+			}
+			case 7:
+			{
+				CHARACTER.changeCritModifier(modifier_amount);
+				break;
+			}
+			case 8:
+			{
+				CHARACTER.changeDefaultDodgeChance(int_modifier);		
+				CHARACTER.changeDodgeChance(int_modifier);
+				break;
+			}
+			case 9:
+			{
+				CHARACTER.changeDodgeChance(int_modifier);
+				break;
 			}
 			//TODO finish adding stats to modify
 		}
@@ -36,26 +66,56 @@ public class StatBuff extends Buff
 	@Override
 	public void deletThis()
 	{
-		switch(stat)
+		if(CHARACTER.buffs.contains(this))
 		{
-			case 1:
+			switch(stat)
 			{
-				CHARACTER.changeDamage(-modifier_amount);
+				case 1:
+				{
+					CHARACTER.changeDamage(-int_modifier);
+				}
+				case 2:
+				{
+					CHARACTER.changeAttack(-int_modifier);
+				}
+				case 3:
+				{
+					CHARACTER.changeDefense(-int_modifier);
+				}
+				case 4:
+				{
+					CHARACTER.changeMagicDefense(-int_modifier);
+				}
+				case 5:
+				{
+					CHARACTER.changeCritChance(-int_modifier);
+					break;
+				}
+				case 6:
+				{
+					CHARACTER.changeDefaultCritModifier(-modifier_amount);
+					CHARACTER.changeCritModifier(-modifier_amount);
+					break;
+				}
+				case 7:
+				{
+					CHARACTER.changeCritModifier(-modifier_amount);
+					break;
+				}
+				case 8:
+				{
+					CHARACTER.changeDefaultDodgeChance(-int_modifier);		
+					CHARACTER.changeDodgeChance(-int_modifier);
+					break;
+				}
+				case 9:
+				{
+					CHARACTER.changeDodgeChance(-int_modifier);
+					break;
+				}
 			}
-			case 2:
-			{
-				CHARACTER.changeAttack(-modifier_amount);
-			}
-			case 3:
-			{
-				CHARACTER.changeDefense(-modifier_amount);
-			}
-			case 4:
-			{
-				CHARACTER.changeMagicDefense(-modifier_amount);
-			}
-		}
-		super.deletThis();
+		}	
+		super.deletThis();	
 	}
 	@Override
 	public void applyAttackEffect(Character t)

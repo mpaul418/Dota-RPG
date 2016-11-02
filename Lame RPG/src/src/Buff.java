@@ -19,7 +19,7 @@ public abstract class Buff
 		if(duration >= 1)
 			duration--;
 		else if(duration == 0)
-			this.deletThis();		//when buffs are infinite (duration == -1), they are never deleted
+			this.deletThis();		//when buffs are infinite (duration == -1), they are never deleted or altered
 	}
 	
 	public void deletThis()

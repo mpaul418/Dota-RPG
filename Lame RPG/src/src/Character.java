@@ -27,7 +27,8 @@ public class Character
 		defaultMana = initMana;
 		mana = initMana;
 		level = 1;
-		defaultDamage = initDmg;
+		defaultDamage = initDmg;//note- if more default stats 
+		//should be able to be changed, add numbers for all + change in buff class
 		damage = initDmg;//buff- 1
 		defaultAttack = initAtk;
 		attack = initAtk;//buff- 2
@@ -37,10 +38,10 @@ public class Character
 		magicDefense = initMagDef;//buff- 4
 		defaultCritChance = 5;
 		critChance = 5; //buff- 5
-		defaultCritModifier = 2.00;
-		critModifier = 2.00; //buff- 6
-		defaultDodgeChance = 0;
-		dodgeChance = 0;
+		defaultCritModifier = 2.00;//buff- 6
+		critModifier = 2.00; //buff- 7
+		defaultDodgeChance = 0;//buff- 8
+		dodgeChance = 0;//buff- 9
 		name = initName;
 	}
 	public int getHP()
@@ -110,6 +111,14 @@ public class Character
 	public double getDefaultCritModifier()
 	{
 		return defaultCritModifier;
+	}
+	public int getDodgeChance()
+	{
+		return dodgeChance;
+	}
+	public int getDefaultDodgeChance()
+	{
+		return defaultDodgeChance;
 	}
 	public String getName()
 	{
@@ -207,6 +216,15 @@ public class Character
 		defaultCritModifier += amount;
 		critModifier += amount;
 	}
+	public void changeDodgeChance(int amount)
+	{
+		dodgeChance += amount;
+	}
+	public void changeDefaultDodgeChance(int amount)
+	{
+		defaultDodgeChance += amount;
+		dodgeChance += amount;
+	}
 	public boolean isAlive()
 	{
 		if(getHP() > 0)
@@ -214,6 +232,17 @@ public class Character
 		else
 			alive = false;
 		return alive;
+	}
+	public boolean isStunned()
+	{
+		for(Buff b : this.buffs)
+		{
+			if(b instanceof StunBuff)
+			{
+				return false;
+			}
+		}
+		return true;
 	}
 	//TODO replace method with system for magic/phys damage that calculates it in the method instead of before calling method
 	public void damage(Character c, int incoming_damage)

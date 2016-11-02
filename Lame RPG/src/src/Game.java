@@ -281,107 +281,110 @@ public class Game
 	private static void takePlayerTurn()
 	{
 		int choice, target;
-		boolean turn_taken;
-		do
+		boolean turn_taken = player.isStunned();
+		if(turn_taken)
+			System.out.println(player + " is stunned.");
+		
+		while(!turn_taken)
 		{
-		turn_taken = false;
-		
-		displayHPandMana();
-		
-		System.out.println("What would you like to do?");
-		System.out.println("1: Attack"
-					   + "\n2: Abilities"
-					   + "\n3: Use an Item"
-					   + "\n4: Hunker Down");
-		choice = getNumberFrom(1, 4);
-		
-		switch(choice)
-		{
-			case 1: 
+			turn_taken = false;
+			
+			displayHPandMana();
+			
+			System.out.println("What would you like to do?");
+			System.out.println("1: Attack"
+						   + "\n2: Abilities"
+						   + "\n3: Use an Item"
+						   + "\n4: Hunker Down");
+			choice = getNumberFrom(1, 4);
+			
+			switch(choice)
 			{
-				System.out.println("\nWhat would you like to attack?");
-				for(int i = 0; i < monsters.size(); i++)
+				case 1: 
 				{
-					System.out.println((i + 1) + ": " + monsters.get(i).getName()
-							+"(" + monsters.get(i).getHP() + "/" + monsters.get(i).getDefaultHP() + ")");
+					System.out.println("\nWhat would you like to attack?");
+					for(int i = 0; i < monsters.size(); i++)
+					{
+						System.out.println((i + 1) + ": " + monsters.get(i).getName()
+								+"(" + monsters.get(i).getHP() + "/" + monsters.get(i).getDefaultHP() + ")");
+					}
+					target = getNumberFrom(1, monsters.size()) - 1;
+					player.attack(monsters.get(target));
+					turn_taken = true;
+					break;
 				}
-				target = getNumberFrom(1, monsters.size()) - 1;
-				player.attack(monsters.get(target));
-				turn_taken = true;
-				break;
-			}
-			case 2:
-			{
-				int choice2, spells, choice_index, temp_spells;
-				spells = 0;
-				temp_spells = 0;
-				choice_index = -1;
-				//TODO rework this interface - instead, display all spells with cooldowns, & if spell on cd is selected, repeat this choice
-				if(!player.allSpellsUncastable())
+				case 2:
 				{
-					System.out.println("Which spell would you like to cast?");
-					System.out.println("0: Go back.");
-					for(Spell s : player.spellbook)
+					int choice2, spells, choice_index, temp_spells;
+					spells = 0;
+					temp_spells = 0;
+					choice_index = -1;
+					//TODO rework this interface - instead, display all spells with cooldowns, & if spell on cd is selected, repeat this choice
+					if(!player.allSpellsUncastable())
 					{
-						if(s.isCastable())
+						System.out.println("Which spell would you like to cast?");
+						System.out.println("0: Go back.");
+						for(Spell s : player.spellbook)
 						{
-							spells++;
-							System.out.println(spells + ": " + s.NAME + "- " + s.DESCRIPTION);
-						}
-					}
-				
-					choice2 = getNumberFrom(0, spells);
-				
-					for(int i = 0; i < player.spellbook.size(); i++)
-					{
-				 		if(player.spellbook.get(i).isCastable())
-						{
-							temp_spells++;
-							if(temp_spells == choice2)
+							if(s.isCastable())
 							{
-								choice_index = i;
-								i = player.spellbook.size();
+								spells++;
+								System.out.println(spells + ": " + s.NAME + "- " + s.DESCRIPTION);
 							}
 						}
-					}
-				
-					if(choice_index >= 0)
-					{
-						if(player.spellbook.get(choice_index).isTargeted())
+					
+						choice2 = getNumberFrom(0, spells);
+					
+						for(int i = 0; i < player.spellbook.size(); i++)
 						{
-							System.out.println("Cast " + player.spellbook.get(choice_index).NAME + " on what?");
-							for(int i = 0; i < monsters.size(); i++)
+					 		if(player.spellbook.get(i).isCastable())
 							{
-								System.out.println((i + 1) + ": " + monsters.get(i).getName()
-										+"(" + monsters.get(i).getHP() + "/" + monsters.get(i).getDefaultHP() + ")");
+								temp_spells++;
+								if(temp_spells == choice2)
+								{
+									choice_index = i;
+									i = player.spellbook.size();
+								}
 							}
-							target = getNumberFrom(1, monsters.size()) - 1;
-							player.spellbook.get(choice_index).cast(monsters.get(target));
-							//TODO show monsters/targets and input choice to cast on + go back ability
+						}
+					
+						if(choice_index >= 0)
+						{
+							if(player.spellbook.get(choice_index).isTargeted())
+							{
+								System.out.println("Cast " + player.spellbook.get(choice_index).NAME + " on what?");
+								for(int i = 0; i < monsters.size(); i++)
+								{
+									System.out.println((i + 1) + ": " + monsters.get(i).getName()
+											+"(" + monsters.get(i).getHP() + "/" + monsters.get(i).getDefaultHP() + ")");
+								}
+								target = getNumberFrom(1, monsters.size()) - 1;
+								player.spellbook.get(choice_index).cast(monsters.get(target));
+								//TODO show monsters/targets and input choice to cast on + go back ability
+							}
+							else
+								player.spellbook.get(choice_index).cast();
+							turn_taken = true;
 						}
 						else
-							player.spellbook.get(choice_index).cast();
-						turn_taken = true;
+							turn_taken = false;
 					}
 					else
-						turn_taken = false;
+						System.out.println("You can't cast any spells!\n");
+					break;
 				}
-				else
-					System.out.println("You can't cast any spells!\n");
-				break;
-			}
-			case 3:
-			{
-				//TODO- select what item to use, the target it if possible
-				break;
-			}
-			case 4:
-			{
-				player.hunkerDown();
-				break;
+				case 3:
+				{
+					//TODO- select what item to use, the target it if possible
+					break;
+				}
+				case 4:
+				{
+					player.hunkerDown();
+					break;
+				}
 			}
 		}
-		}while(!turn_taken);
 	}
 	
 	private static void displayHPandMana()
@@ -396,11 +399,16 @@ public class Game
 
 	private static void takeMonsterTurn(Monster m)
 	{
-		int temp = rand.nextInt(100) + 1;
-		if(temp >= 30)
-			m.attack(player);
+		if(!m.isStunned())
+		{
+			int temp = rand.nextInt(100) + 1;
+			if(temp >= 30)
+				m.attack(player);
+			else
+				m.hunkerDown();
+		}
 		else
-			m.hunkerDown();
+			System.out.println(m + " is stunned.");
 	}
 	
 	static int getNumberFrom(int start, int end)
