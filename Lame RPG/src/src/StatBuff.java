@@ -63,6 +63,7 @@ public class StatBuff extends Buff
 			//TODO finish adding stats to modify
 		}
 	}
+	
 	@Override
 	public void deletThis()
 	{

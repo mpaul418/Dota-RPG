@@ -239,10 +239,10 @@ public class Character
 		{
 			if(b instanceof StunBuff)
 			{
-				return false;
+				return true;
 			}
 		}
-		return true;
+		return false;
 	}
 	//TODO replace method with system for magic/phys damage that calculates it in the method instead of before calling method
 	public void damage(Character c, int incoming_damage)

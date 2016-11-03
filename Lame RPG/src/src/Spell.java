@@ -74,6 +74,12 @@ public abstract class Spell
 	{
 		System.out.println(this.CHARACTER + " cast " + this + ".");
 	}
+	public void addToSpellbook(Player p)
+	{
+		p.spellbook.add(this);
+		p.unlearned_spells.remove(this);
+		System.out.println(p + " just learned " + this + ".");
+	}
 	public abstract void cast();
 	public abstract void cast(Character target);
 	//TODO

@@ -305,7 +305,7 @@ public class Game
 					System.out.println("\nWhat would you like to attack?");
 					for(int i = 0; i < monsters.size(); i++)
 					{
-						System.out.println((i + 1) + ": " + monsters.get(i).getName()
+						System.out.println((i + 1) + ": " + monsters.get(i)
 								+"(" + monsters.get(i).getHP() + "/" + monsters.get(i).getDefaultHP() + ")");
 					}
 					target = getNumberFrom(1, monsters.size()) - 1;
@@ -355,7 +355,7 @@ public class Game
 								System.out.println("Cast " + player.spellbook.get(choice_index).NAME + " on what?");
 								for(int i = 0; i < monsters.size(); i++)
 								{
-									System.out.println((i + 1) + ": " + monsters.get(i).getName()
+									System.out.println((i + 1) + ": " + monsters.get(i)
 											+"(" + monsters.get(i).getHP() + "/" + monsters.get(i).getDefaultHP() + ")");
 								}
 								target = getNumberFrom(1, monsters.size()) - 1;
@@ -389,10 +389,10 @@ public class Game
 	
 	private static void displayHPandMana()
 	{
-		System.out.println(player.getName() + "'s HP: " + player.getHP() + "/" + player.getDefaultHP()
+		System.out.println(player + "'s HP: " + player.getHP() + "/" + player.getDefaultHP()
 		+  "   Mana: " + player.getMana() + "/" + player.getDefaultMana());
 		for(Monster m : monsters)
-			System.out.println(m.getName() + "'s HP: " + m.getHP() + "/" + m.getDefaultHP()
+			System.out.println(m + "'s HP: " + m.getHP() + "/" + m.getDefaultHP()
 			+  "   Mana: " + m.getMana() + "/" + m.getDefaultMana());
 		System.out.println();
 	}

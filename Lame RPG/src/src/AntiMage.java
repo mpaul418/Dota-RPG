@@ -11,15 +11,17 @@ public class AntiMage extends Player
 	
 	public AntiMage(String initName)
 	{
-		super(150, 60, 30, 75, 10, 1, 50, 0, initName);
+		super(150, 60, 30, 75, 10, 1, 50, 0, initName);//FIXME reduce magic resist once spell shield buff is complete
 		HP = 150;
 		mana = 60;
 		damage = 30;
 		attack = 75;
 		defense = 15;
 		character_class = 1;
-		magicDefense = .50;	
-		spellbook.add(blink);
-		possible_spells.add(mana_void);
+		magicDefense = .50;
+		mana_break.addToSpellbook(this);//TODO
+		blink.addToSpellbook(this);;
+		spell_shield.addToSpellbook(this);;
+		unlearned_spells.add(mana_void);
 	}
 }

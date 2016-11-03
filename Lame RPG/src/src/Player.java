@@ -12,7 +12,7 @@ public class Player extends Character
 	*/
 	//TODO add spellbook to Character instead to allow monsters to cast spells?
 	ArrayList<Spell> spellbook = new ArrayList<Spell>();
-	ArrayList<Spell> possible_spells = new ArrayList<Spell>();
+	ArrayList<Spell> unlearned_spells = new ArrayList<Spell>();
 	protected int character_class;
 	protected int gold;
 	public Player(int initHP, int initMana, int initDmg, int initAtk, int initDef, int playerClass, int initMagDef, int initDodge, String initName) 
@@ -40,12 +40,12 @@ public class Player extends Character
 		defaultDamage = (int)Math.round(1.25 * defaultDamage);
 		damage = defaultDamage;
 		
-		for(Spell s : possible_spells)
+		for(Spell s : unlearned_spells)
 		{
 			if(this.level >= s.getLevelRequirement())
 			{
 				spellbook.add(s);
-				possible_spells.remove(s);
+				unlearned_spells.remove(s);
 				System.out.println(this + " just learned " + s + ".");
 			}
 		}

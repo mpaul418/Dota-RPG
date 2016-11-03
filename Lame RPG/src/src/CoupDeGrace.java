@@ -1,13 +1,13 @@
 package src;
 
-public class CoupDeGrace extends Spell
+public class CoupDeGrace extends PassiveSpell
 {
 
 	public CoupDeGrace(Character c)
 	{
 		//TODO
-		super(tempname, dsc, manacost, level_rq, cd, c, targetable);
-		// TODO Auto-generated constructor stub
+		super("Coup de Grâce", "Gain a 15% chance to land a critical hit, dealing 275% damage.", 0, 6, -1, c);
+		
 	}
 
 	@Override
