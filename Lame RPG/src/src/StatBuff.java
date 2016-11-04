@@ -5,7 +5,7 @@ public class StatBuff extends Buff
 	int stat, int_modifier;
 	double modifier_amount;
 	
-	public StatBuff(String n, String dsc, Character c, int d, int s, int a)
+	public StatBuff(String n, String dsc, Character c, int d, int s, double a)
 	{
 		super(n, dsc, c, d); 
 		stat = s;
@@ -40,27 +40,32 @@ public class StatBuff extends Buff
 			}
 			case 6:
 			{
-				CHARACTER.changeDefaultCritModifier(modifier_amount);
-				CHARACTER.changeCritModifier(modifier_amount);
+				CHARACTER.changeDefaultCritChance(int_modifier);
+				CHARACTER.changeCritChance(int_modifier);
 				break;
 			}
 			case 7:
 			{
+				CHARACTER.changeDefaultCritModifier(modifier_amount);
 				CHARACTER.changeCritModifier(modifier_amount);
 				break;
 			}
 			case 8:
 			{
-				CHARACTER.changeDefaultDodgeChance(int_modifier);		
-				CHARACTER.changeDodgeChance(int_modifier);
+				CHARACTER.changeCritModifier(modifier_amount);
 				break;
 			}
 			case 9:
 			{
+				CHARACTER.changeDefaultDodgeChance(int_modifier);		
 				CHARACTER.changeDodgeChance(int_modifier);
 				break;
 			}
-			//TODO finish adding stats to modify
+			case 10:
+			{
+				CHARACTER.changeDodgeChance(int_modifier);
+				break;
+			}
 		}
 	}
 	
@@ -74,18 +79,22 @@ public class StatBuff extends Buff
 				case 1:
 				{
 					CHARACTER.changeDamage(-int_modifier);
+					break;
 				}
 				case 2:
 				{
 					CHARACTER.changeAttack(-int_modifier);
+					break;
 				}
 				case 3:
 				{
 					CHARACTER.changeDefense(-int_modifier);
+					break;
 				}
 				case 4:
 				{
 					CHARACTER.changeMagicDefense(-int_modifier);
+					break;
 				}
 				case 5:
 				{
@@ -94,22 +103,28 @@ public class StatBuff extends Buff
 				}
 				case 6:
 				{
-					CHARACTER.changeDefaultCritModifier(-modifier_amount);
-					CHARACTER.changeCritModifier(-modifier_amount);
+					CHARACTER.changeDefaultCritChance(-int_modifier);
+					CHARACTER.changeCritChance(-int_modifier);
 					break;
 				}
 				case 7:
 				{
+					CHARACTER.changeDefaultCritModifier(-modifier_amount);
 					CHARACTER.changeCritModifier(-modifier_amount);
 					break;
 				}
 				case 8:
 				{
+					CHARACTER.changeCritModifier(-modifier_amount);
+					break;
+				}
+				case 9:
+				{
 					CHARACTER.changeDefaultDodgeChance(-int_modifier);		
 					CHARACTER.changeDodgeChance(-int_modifier);
 					break;
 				}
-				case 9:
+				case 10:
 				{
 					CHARACTER.changeDodgeChance(-int_modifier);
 					break;

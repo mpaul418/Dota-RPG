@@ -1,27 +1,31 @@
 package src;
 
-public class Blur extends Spell
+public class Blur extends PassiveSpell
 {
 
 	public Blur(Character c)
 	{
-		//TODO
-		super(tempname, dsc, manacost, level_rq, cd, c, targetable);
-		// TODO Auto-generated constructor stub
+		super("Blur", "Passively gain a 50% chance to evade physical attacks.", 0, 1, -1, c);
 	}
 
 	@Override
 	public void cast()
 	{
-		// TODO Auto-generated method stub
-
+		// not castable
 	}
 
 	@Override
 	public void cast(Character target)
 	{
-		// TODO Auto-generated method stub
-
+		// not castable
+	}
+	
+	@Override
+	public void addToSpellbook(Player p)
+	{
+		super.addToSpellbook(p);
+		this.CHARACTER.buffs.add(new StatBuff(this.NAME, this.NAME + " evasion bonus.",
+				this.CHARACTER, -1, 8, 50));
 	}
 
 }

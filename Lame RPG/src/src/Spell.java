@@ -20,6 +20,9 @@ public abstract class Spell
 		max_cooldown = cd;
 		CHARACTER = c;
 		TARGETED = targetable;
+		
+		if(CHARACTER.getLevel() >= LEVEL_REQUIREMENT)
+			this.addToSpellbook((Player) CHARACTER);
 	}
 	public boolean isTargeted()
 	{
