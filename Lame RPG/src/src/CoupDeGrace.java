@@ -26,9 +26,9 @@ public class CoupDeGrace extends PassiveSpell
 	{
 		super.addToSpellbook(p);
 		this.CHARACTER.buffs.add(new StatBuff(this.NAME, this.NAME + " crit chance bonus.",
-				this.CHARACTER, -1, 6, 15));
+				this.CHARACTER, -1, 7, 15));
 		this.CHARACTER.buffs.add(new StatBuff(this.NAME, this.NAME + " crit damage bonus.",
-				this.CHARACTER, -1, 7, 0.75));
+				this.CHARACTER, -1, 8, 0.75));
 	}
 
 }

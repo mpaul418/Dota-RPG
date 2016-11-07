@@ -33,7 +33,7 @@ public abstract class Buff
 		return name + "-" + desc + " Lasting " + duration + " more turns.";
 	}
 
-	public abstract void applyAttackEffect(Character c);// ex. Coup de Grace
+	public abstract void applyAttackEffect(Character c);// ex. Mana Break
 	public abstract void applyAttackedEffect(Character c);// ex. Blur
 	public abstract void applyEffectOnTurnStart();// ex. stuns(Storm Hammer)
 }

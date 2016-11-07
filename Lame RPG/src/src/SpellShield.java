@@ -1,27 +1,31 @@
 package src;
 
-public class SpellShield extends Spell
+public class SpellShield extends PassiveSpell
 {
 
 	public SpellShield(Character c)
 	{
-		//TODO
-		super(tempname, dsc, manacost, level_rq, cd, c, targetable);
-		// TODO Auto-generated constructor stub
+		super("Spell Shield", "Passively gain a 66% magic resist.", 0, 1, -1, c);
 	}
 
 	@Override
 	public void cast()
 	{
-		// TODO Auto-generated method stub
-
+		// not castable
 	}
 
 	@Override
 	public void cast(Character target)
 	{
-		// TODO Auto-generated method stub
-
+		// not castable
+	}
+	
+	@Override
+	public void addToSpellbook(Player p)
+	{
+		super.addToSpellbook(p);
+		this.CHARACTER.buffs.add(new StatBuff(this.NAME, this.NAME + " magic resist.",
+				this.CHARACTER, -1, 5, 66));
 	}
 
 }

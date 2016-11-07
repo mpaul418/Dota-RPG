@@ -4,7 +4,7 @@ public class StormHammer extends Spell
 
 	public StormHammer(Character c)
 	{
-		super("Storm Hammer", "unleash a magical gauntlet that deals magic damage and stuns all enemy units.", 20, 1, 5, c, true);
+		super("Storm Hammer", "unleash a magical gauntlet that deals magic damage and stuns all enemy units for 2 turns.", 20, 1, 5, c, true);
 	}
 
 	@Override
@@ -17,7 +17,11 @@ public class StormHammer extends Spell
 	public void cast(Character target)
 	{
 		this.castWithTargetMessage(target);
-		//TODO add buff class- then apply 1 turn stun + damage to all enemies
+		for(Monster m : Game.monsters)
+		{
+			CHARACTER.dealMagicDamage(25, m);
+			m.buffs.add(new StunBuff(this.NAME, "Storm Hammer Stun", m, 2));
+		}
 	}
 
 }

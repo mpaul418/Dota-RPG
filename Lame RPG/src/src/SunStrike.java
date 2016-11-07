@@ -4,7 +4,7 @@ public class SunStrike extends Spell
 {
 	public SunStrike(Character c)
 	{
-		super("Fireball", "Launch a ball of fire at an enemy, dealing large magical damage.", 25, 1, 3, c, true);
+		super("Sun Strike", "Call down a solar flare on an enemy, dealing large magical damage.", 25, 1, 3, c, true);
 	}
 
 	@Override

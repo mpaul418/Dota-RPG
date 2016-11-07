@@ -25,7 +25,7 @@ public class Blur extends PassiveSpell
 	{
 		super.addToSpellbook(p);
 		this.CHARACTER.buffs.add(new StatBuff(this.NAME, this.NAME + " evasion bonus.",
-				this.CHARACTER, -1, 8, 50));
+				this.CHARACTER, -1, 9, 50));
 	}
 
 }

@@ -35,33 +35,39 @@ public class StatBuff extends Buff
 			}
 			case 5:
 			{
-				CHARACTER.changeCritChance(int_modifier);
+				CHARACTER.changeDefaultMagicDefense(int_modifier);
+				CHARACTER.changeMagicDefense(int_modifier);
 				break;
 			}
 			case 6:
 			{
-				CHARACTER.changeDefaultCritChance(int_modifier);
 				CHARACTER.changeCritChance(int_modifier);
 				break;
 			}
 			case 7:
 			{
-				CHARACTER.changeDefaultCritModifier(modifier_amount);
-				CHARACTER.changeCritModifier(modifier_amount);
+				CHARACTER.changeDefaultCritChance(int_modifier);
+				CHARACTER.changeCritChance(int_modifier);
 				break;
 			}
 			case 8:
 			{
+				CHARACTER.changeDefaultCritModifier(modifier_amount);
 				CHARACTER.changeCritModifier(modifier_amount);
 				break;
 			}
 			case 9:
 			{
+				CHARACTER.changeCritModifier(modifier_amount);
+				break;
+			}
+			case 10:
+			{
 				CHARACTER.changeDefaultDodgeChance(int_modifier);		
 				CHARACTER.changeDodgeChance(int_modifier);
 				break;
 			}
-			case 10:
+			case 11:
 			{
 				CHARACTER.changeDodgeChance(int_modifier);
 				break;
@@ -98,33 +104,39 @@ public class StatBuff extends Buff
 				}
 				case 5:
 				{
-					CHARACTER.changeCritChance(-int_modifier);
+					CHARACTER.changeDefaultMagicDefense(-int_modifier);
+					CHARACTER.changeMagicDefense(-int_modifier);
 					break;
 				}
 				case 6:
 				{
-					CHARACTER.changeDefaultCritChance(-int_modifier);
 					CHARACTER.changeCritChance(-int_modifier);
 					break;
 				}
 				case 7:
 				{
-					CHARACTER.changeDefaultCritModifier(-modifier_amount);
-					CHARACTER.changeCritModifier(-modifier_amount);
+					CHARACTER.changeDefaultCritChance(-int_modifier);
+					CHARACTER.changeCritChance(-int_modifier);
 					break;
 				}
 				case 8:
 				{
+					CHARACTER.changeDefaultCritModifier(-modifier_amount);
 					CHARACTER.changeCritModifier(-modifier_amount);
 					break;
 				}
 				case 9:
 				{
+					CHARACTER.changeCritModifier(-modifier_amount);
+					break;
+				}
+				case 10:
+				{
 					CHARACTER.changeDefaultDodgeChance(-int_modifier);		
 					CHARACTER.changeDodgeChance(-int_modifier);
 					break;
 				}
-				case 10:
+				case 11:
 				{
 					CHARACTER.changeDodgeChance(-int_modifier);
 					break;
