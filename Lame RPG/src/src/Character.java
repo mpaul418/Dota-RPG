@@ -278,6 +278,12 @@ public class Character
 				}
 				else
 					damage_done = damage - currentDefense;
+				
+				for(Buff b : buffs)
+				{
+					if(b instanceof AttackBuff)
+						b.ap
+				}
 				damage(c, damage_done);
 				System.out.println(this.getName() + " attacked " + c.getName() + " and dealt " + damage_done + " damage."
 							     + " (Defense roll: " + currentDefense + "/" + c.getDefaultDefense() + ")\n");

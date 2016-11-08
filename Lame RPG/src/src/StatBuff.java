@@ -146,7 +146,7 @@ public class StatBuff extends Buff
 		super.deletThis();	
 	}
 	@Override
-	public void applyAttackEffect(Character t)
+	public void applyAttackEffect(Character target, int mana_burn, double burn_multiplier, int crit_chance, double crit_modifier)
 	{
 		//does not have an attack effect
 	}

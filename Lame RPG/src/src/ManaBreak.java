@@ -25,7 +25,7 @@ public class ManaBreak extends PassiveSpell
 	@Override
 	public void addToSpellbook(Player p)
 	{
-		//super.addToSpellbook(p);
+		super.addToSpellbook(p);
 		//this.CHARACTER.buffs.add(new StatBuff(this.NAME, this.NAME + " magic resist.",
 		//		this.CHARACTER, -1, 5, 66));
 	}
