@@ -256,49 +256,78 @@ public class Character
 	}
 	public void attack(Character c)
 	{
-		int temp, damage_done, crit_roll;
-		boolean critical_hit;
+		int temp, damage_done, crit_roll, crit_buff_index;
+		boolean critical_hit, attack_evaded;
+		attack_evaded = critical_hit = false;
 		
 		temp = 90 + r.nextInt(attack + 1);
-		if(temp >= 100)
+		if(temp >= 100) // checks if attack hits
 		{
-			crit_roll = r.nextInt(100) + 1;
-			if(critChance <= crit_roll)
-				critical_hit = true;
-			else
-				critical_hit = false;
-				
-			int currentDefense = r.nextInt(c.getDefense() + 1);
-			if(damage > currentDefense)
+			for(Buff b : c.buffs)
 			{
-				if(critical_hit)
+				if(b instanceof AttackedBuff && !attack_evaded)
 				{
-					damage_done = (int)Math.round(critChance * damage) - currentDefense;
-					System.out.print("Critical hit!! ");
+					attack_evaded = ((AttackedBuff) b).attackEvaded();
+					if(attack_evaded)
+						break;
+				}
+			}
+			if(!attack_evaded)
+			{
+				int currentDefense = r.nextInt(c.getDefense() + 1);
+				
+				for(int i = 0; i < buffs.size(); i++	)
+				{
+					if(buffs.get(i) instanceof AttackBuff && !attack_evaded)
+					{
+						critical_hit = ((AttackBuff) buffs.get(i)).criticalHit();
+						if(critical_hit)
+						{
+							crit_buff_index = i;
+							break;
+						}//TODO
+					}
+				}
+				crit_roll = r.nextInt(100) + 1;
+				if(critChance <= crit_roll)
+					critical_hit = true;
+				else
+					critical_hit = false;
+					
+				
+				if(damage > currentDefense)
+				{
+					if(critical_hit)
+					{
+						damage_done = (int)Math.round(critChance * damage) - currentDefense;
+						System.out.print("Critical hit!! ");
+					}
+					else
+						damage_done = damage - currentDefense;
+					
+					for(Buff b : buffs)
+					{
+						if(b instanceof AttackBuff)
+							b.ap
+					}
+					damage(c, damage_done);
+					System.out.println(this.getName() + " attacked " + c.getName() + " and dealt " + damage_done + " damage."
+								     + " (Defense roll: " + currentDefense + "/" + c.getDefaultDefense() + ")\n");
 				}
 				else
-					damage_done = damage - currentDefense;
-				
-				for(Buff b : buffs)
 				{
-					if(b instanceof AttackBuff)
-						b.ap
+					damage_done = 1;
+					damage(c, damage_done);
+					System.out.println(this.getName() + " grazed " + c.getName() + " and dealt " + damage_done + " damage.\n"
+									 + " (Defense roll: " + currentDefense + "/" + c.getDefaultDefense() + ")\n");
 				}
-				damage(c, damage_done);
-				System.out.println(this.getName() + " attacked " + c.getName() + " and dealt " + damage_done + " damage."
-							     + " (Defense roll: " + currentDefense + "/" + c.getDefaultDefense() + ")\n");
 			}
 			else
-			{
-				damage_done = 1;
-				damage(c, damage_done);
-				System.out.println(this.getName() + " grazed " + c.getName() + " and dealt " + damage_done + " damage.\n"
-								 + " (Defense roll: " + currentDefense + "/" + c.getDefaultDefense() + ")\n");
-			}
+				System.out.println(this + "'s attack was evaded!");
 		}
 		else
 		{
-			System.out.println(this.getName() + "'s attack missed! (Attack roll: " + temp + ")\n");
+			System.out.println(this + "'s attack missed! (Attack roll: " + temp + ")\n");
 		}
 	}
 	public void dealMagicDamage(int incoming_damage, Character c)

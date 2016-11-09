@@ -1,18 +1,23 @@
 package src;
 
+import java.util.Random;
+
 public class AttackedBuff extends Buff
 {
-
-	public AttackedBuff(String n, String dsc, Character c, int d)
+	int dodge_chance;
+	Random r = new Random();
+	
+	public AttackedBuff(String n, String dsc, Character c, int d, int dodge_c)
 	{
 		super(n, dsc, c, d);
+		dodge_chance = dodge_c;
 		// TODO Auto-generated constructor stub
 	}
 
 	@Override
-	public void applyAttackEffect(Character target, int mana_burn, double burn_multiplier, int crit_chance, double crit_modifier)
+	public void applyAttackEffect(Character target)
 	{
-		checkForEvasion();
+		//checkForEvasion();
 
 	}
 
@@ -34,6 +39,15 @@ public class AttackedBuff extends Buff
 	{
 		// TODO Auto-generated method stub
 
+	}
+	
+	public boolean attackEvaded()
+	{
+		int temp = r.nextInt(100) + 1;
+		if(dodge_chance >= temp)
+			return true;
+		else
+			return false;
 	}
 
 }

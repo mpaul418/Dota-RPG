@@ -44,4 +44,10 @@ public class AttackBuff extends Buff
 
 	}
 
+	public boolean criticalHit()
+	{
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }
