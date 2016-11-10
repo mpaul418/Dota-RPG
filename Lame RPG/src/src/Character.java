@@ -256,12 +256,13 @@ public class Character
 	}
 	public void attack(Character c)
 	{
-		int temp, damage_done, crit_roll, crit_buff_index;
+		int temp, damage_done;
+		int crit_buff_index = -1;
 		boolean critical_hit, attack_evaded;
 		attack_evaded = critical_hit = false;
 		
-		temp = 90 + r.nextInt(attack + 1);
-		if(temp >= 100) // checks if attack hits
+		temp = r.nextInt(attack + 1);
+		if(temp >= 10) // checks if attack hits
 		{
 			for(Buff b : c.buffs)
 			{
@@ -276,7 +277,8 @@ public class Character
 			{
 				int currentDefense = r.nextInt(c.getDefense() + 1);
 				
-				for(int i = 0; i < buffs.size(); i++	)
+				for(int i = 0; i < buffs.size(); i++) //checks for a crit with every attack buff, 
+					//can probably be optimized for only attack buffs that CAN crit
 				{
 					if(buffs.get(i) instanceof AttackBuff && !attack_evaded)
 					{
@@ -285,33 +287,22 @@ public class Character
 						{
 							crit_buff_index = i;
 							break;
-						}//TODO
+						}
 					}
 				}
-				crit_roll = r.nextInt(100) + 1;
-				if(critChance <= crit_roll)
-					critical_hit = true;
-				else
-					critical_hit = false;
-					
 				
-				if(damage > currentDefense)
+				if(damage > currentDefense || critical_hit)
 				{
 					if(critical_hit)
 					{
-						damage_done = (int)Math.round(critChance * damage) - currentDefense;
+						damage_done = (int)Math.round(((AttackBuff) buffs.get(crit_buff_index)).crit_modifier * damage) - currentDefense;
 						System.out.print("Critical hit!! ");
 					}
 					else
 						damage_done = damage - currentDefense;
 					
-					for(Buff b : buffs)
-					{
-						if(b instanceof AttackBuff)
-							b.ap
-					}
 					damage(c, damage_done);
-					System.out.println(this.getName() + " attacked " + c.getName() + " and dealt " + damage_done + " damage."
+					System.out.println(this + " attacked " + c + " and dealt " + damage_done + " damage."
 								     + " (Defense roll: " + currentDefense + "/" + c.getDefaultDefense() + ")\n");
 				}
 				else
@@ -320,6 +311,16 @@ public class Character
 					damage(c, damage_done);
 					System.out.println(this.getName() + " grazed " + c.getName() + " and dealt " + damage_done + " damage.\n"
 									 + " (Defense roll: " + currentDefense + "/" + c.getDefaultDefense() + ")\n");
+				}
+				
+				for(Buff b : buffs)
+				{
+					if(b instanceof AttackBuff)
+					{
+						((AttackBuff) b).applyManaBurn(c);
+						//((AttackBuff) b).applyStunEffect(c);
+						//this is where any post-attack triggers are checked
+					}
 				}
 			}
 			else

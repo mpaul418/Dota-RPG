@@ -14,33 +14,6 @@ public class AttackedBuff extends Buff
 		// TODO Auto-generated constructor stub
 	}
 
-	@Override
-	public void applyAttackEffect(Character target)
-	{
-		//checkForEvasion();
-
-	}
-
-	private void checkForEvasion()
-	{
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void applyAttackedEffect(Character c)
-	{
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void applyEffectOnTurnStart()
-	{
-		// TODO Auto-generated method stub
-
-	}
-	
 	public boolean attackEvaded()
 	{
 		int temp = r.nextInt(100) + 1;

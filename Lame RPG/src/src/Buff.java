@@ -30,10 +30,10 @@ public abstract class Buff
 	
 	public String toString()
 	{
-		return name + "-" + desc + " Lasting " + duration + " more turns.";
+		return name + "-" + desc + "(Lasting " + duration + " more turns.)";
 	}
 
-	public abstract void applyAttackEffect(Character target, boolean already_critted);// ex. Mana Break
-	public abstract void applyAttackedEffect(Character c);// ex. Blur
-	public abstract void applyEffectOnTurnStart();// ex. stuns(Storm Hammer)
+	//public abstract void applyAttackEffect(Character target, boolean already_critted);// ex. Mana Break
+	//public abstract void applyAttackedEffect(Character c);// ex. Blur
+	//public abstract void applyEffectOnTurnStart();// ex. stuns(Storm Hammer)
 }

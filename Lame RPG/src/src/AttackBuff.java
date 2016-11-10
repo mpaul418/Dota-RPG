@@ -1,9 +1,12 @@
 package src;
 
+import java.util.Random;
+
 public class AttackBuff extends Buff
 {
 	int mana_burn, crit_chance;
 	double mana_burn_multiplier, crit_modifier;
+	Random r = new Random();
 	
 	public AttackBuff(String n, String dsc, Character c, int d, int manaburn, double burnmultiplier, int critchance, double critmodifier)
 	{
@@ -15,7 +18,7 @@ public class AttackBuff extends Buff
 		crit_modifier = critmodifier;
 	}
 
-	@Override
+	/*@Override
 	public void applyAttackEffect(Character target, boolean already_critted)
 	{
 		int crit_roll;
@@ -28,26 +31,46 @@ public class AttackBuff extends Buff
 				critical_hit = false;
 		}
 		
-	}
-
-	@Override
-	public void applyAttackedEffect(Character c)
-	{
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void applyEffectOnTurnStart()
-	{
-		// TODO Auto-generated method stub
-
-	}
+	}*/
 
 	public boolean criticalHit()
 	{
-		// TODO Auto-generated method stub
-		return false;
+		if(crit_chance > 0)
+		{
+			int crit_roll = r.nextInt(100) + 1;
+			
+			if(crit_chance <= crit_roll)
+				return true;
+			else
+				return false;
+		}
+		else
+			return false;
 	}
+
+	public void applyManaBurn(Character c)
+	{
+		if(mana_burn > 0)
+		{
+			int mana_to_burn, damage_to_deal;
+			if(mana_burn <= c.getMana())
+				mana_to_burn = mana_burn;
+			else
+				mana_to_burn = c.getMana();
+			
+			damage_to_deal = (int) Math.round(mana_burn_multiplier) * mana_to_burn;
+			
+			c.changeMana(-mana_to_burn);
+			c.damage(c, damage_to_deal);
+			
+			System.out.println(this.CHARACTER + " burned " + mana_to_burn + " of " 
+							   + c + "'s mana and dealt " + damage_to_deal + " damage.");
+		}
+	}
+
+	//public void applyStunEffect(Character c)
+	//{
+		// TODO
+	//}
 
 }
