@@ -11,7 +11,8 @@ public class StatBuff extends Buff
 		stat = s;
 		modifier_amount = a;
 		int_modifier = (int)modifier_amount;
-		switch(stat)
+		
+		switch(stat)//TODO remove dodge and crit bonuses (they are attack/ed bonuses)
 		{
 			case 1:
 			{
