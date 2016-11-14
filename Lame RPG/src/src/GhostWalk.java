@@ -1,6 +1,6 @@
 package src;
 
-public class GhostWalk extends Spell
+public class GhostWalk extends ActiveSpell
 {
 
 	public GhostWalk(Character c)

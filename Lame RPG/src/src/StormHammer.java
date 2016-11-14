@@ -1,5 +1,5 @@
 package src;
-public class StormHammer extends Spell
+public class StormHammer extends ActiveSpell
 {
 
 	public StormHammer(Character c)

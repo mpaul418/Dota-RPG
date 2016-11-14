@@ -1,6 +1,6 @@
 package src;
 
-public class Warcry extends Spell
+public class Warcry extends ActiveSpell
 {
 
 	public Warcry(Character c)

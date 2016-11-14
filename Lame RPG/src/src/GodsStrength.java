@@ -1,6 +1,6 @@
 package src;
 
-public class GodsStrength extends Spell
+public class GodsStrength extends ActiveSpell
 {
 
 	public GodsStrength(Character c)

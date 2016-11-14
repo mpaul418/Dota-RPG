@@ -1,6 +1,6 @@
 package src;
 
-public class DeafeningBlast extends Spell
+public class DeafeningBlast extends ActiveSpell
 {
 
 	public DeafeningBlast(Character c)
@@ -20,10 +20,12 @@ public class DeafeningBlast extends Spell
 			if(attack_reduction > m.getAttack())
 				attack_reduction = m.getAttack();
 			
-			m.changeAttack(-attack_reduction);
+			m.buffs.add(new StatBuff(this.NAME, this.NAME + " attack debuff.", m, 2, 2, -attack_reduction));
 			
 			System.out.println(m + "'s attack was reduced by " + attack_reduction + ".");
-		}//FIXME TODO once buff system implemented
+		}
+		
+		this.afterSpellCast();
 	}
 
 	@Override

@@ -1,6 +1,6 @@
 package src;
 
-public class PhantomStrike extends Spell
+public class PhantomStrike extends ActiveSpell
 {
 
 	public PhantomStrike(Character c)

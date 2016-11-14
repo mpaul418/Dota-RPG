@@ -1,6 +1,6 @@
 package src;
 
-public class EMP extends Spell
+public class EMP extends ActiveSpell
 {
 
 	public EMP(Character c)

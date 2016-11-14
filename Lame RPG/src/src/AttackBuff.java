@@ -18,21 +18,6 @@ public class AttackBuff extends Buff
 		crit_modifier = critmodifier;
 	}
 
-	/*@Override
-	public void applyAttackEffect(Character target, boolean already_critted)
-	{
-		int crit_roll;
-		if(!already_critted)
-		{
-			crit_roll = r.nextInt(100) + 1;
-			if(crit_chance <= crit_roll)
-				critical_hit = true;
-			else
-				critical_hit = false;
-		}
-		
-	}*/
-
 	public boolean criticalHit()
 	{
 		if(crit_chance > 0)
@@ -73,4 +58,18 @@ public class AttackBuff extends Buff
 		// TODO
 	//}
 
+	/*@Override
+	public void applyAttackEffect(Character target, boolean already_critted)
+	{
+		int crit_roll;
+		if(!already_critted)
+		{
+			crit_roll = r.nextInt(100) + 1;
+			if(crit_chance <= crit_roll)
+				critical_hit = true;
+			else
+				critical_hit = false;
+		}
+		
+	}*/
 }

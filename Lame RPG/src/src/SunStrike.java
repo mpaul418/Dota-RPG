@@ -1,6 +1,6 @@
 package src;
 
-public class SunStrike extends Spell
+public class SunStrike extends ActiveSpell
 {
 	public SunStrike(Character c)
 	{

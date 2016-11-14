@@ -1,6 +1,6 @@
 package src;
 
-public class Blink extends Spell
+public class Blink extends ActiveSpell
 {
 	public Blink(Character c)
 	{
@@ -16,8 +16,9 @@ public class Blink extends Spell
 			m.changeDefense(40);
 			System.out.println(m.getName() + "'s defense was reduced by 40!");
 		}
-		CHARACTER.changeMana(-MANA_COST);
-		current_cooldown = max_cooldown;
+		
+		this.afterSpellCast();
+		
 		System.out.println();
 	}
 	

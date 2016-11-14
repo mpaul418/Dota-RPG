@@ -9,7 +9,7 @@ public abstract class Spell
 	final Character CHARACTER;
 	final boolean TARGETED;
 	int max_cooldown;
-	int current_cooldown = 0;
+	public int current_cooldown = 0;
 	
 	public Spell(String tempname, String dsc, int manacost, int level_rq, int cd, Character c, boolean targetable)
 	{
@@ -56,26 +56,12 @@ public abstract class Spell
 		else
 			return false;
 	}
-	public void incorrectCastWithoutTarget()
+	public boolean onCooldown()//only use this if spell is in the spellbook
 	{
-		System.out.println("You need a target for this spell! "
-				+ "\nSpell Name: " + this.NAME 
-				+ "\nSpell Owner: " + this.CHARACTER + ".");
-		//THIS SPELL SHOULD HAVE A TARGET
-	}
-	public void incorrectCastWithTarget()
-	{
-		System.out.println("This spell should not have a target!");
-		//THIS SPELL SHOULD NOT HAVE A TARGET
-		cast();	
-	}
-	public void castWithTargetMessage(Character c)
-	{
-		System.out.println(this.CHARACTER + " cast " + this + " on " + c + ".");
-	}
-	public void castWithoutTargetMessage()
-	{
-		System.out.println(this.CHARACTER + " cast " + this + ".");
+		if(current_cooldown == 0)
+			return false;
+		else
+			return true;
 	}
 	public void addToSpellbook(Player p)
 	{
@@ -83,7 +69,10 @@ public abstract class Spell
 		p.unlearned_spells.remove(this);
 		System.out.println(p + " just learned " + this + ".");
 	}
-	public abstract void cast();
-	public abstract void cast(Character target);
-	//TODO
+	
+	public void afterSpellCast()
+	{
+		CHARACTER.changeMana(-MANA_COST);
+		current_cooldown = max_cooldown;
+	}
 }

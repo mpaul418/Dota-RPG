@@ -1,6 +1,6 @@
 package src;
 
-public class GreatCleave extends Spell
+public class GreatCleave extends ActiveSpell
 {
 
 	public GreatCleave(String tempname, String dsc, int manacost, int level_rq, int cd, Character c, boolean targetable)

@@ -53,14 +53,17 @@ public class Game
 			case 2:
 			{
 				player = new Sven(temp_name);
+				break;
 			}
 			case 3:
 			{
 				player = new PhantomAssassin(temp_name);
+				break;
 			}
 			case 4: 
 			{
 				player = new Invoker(temp_name);
+				break;
 			}
 		}
 	}
@@ -295,7 +298,7 @@ public class Game
 			System.out.println("1: Attack"
 						   + "\n2: Abilities"
 						   + "\n3: Use an Item"
-						   + "\n4: Hunker Down");
+						   + "\n4: Hunker Down");//TODO add an option to view buffs and debuffs on all characters.
 			choice = getNumberFrom(1, 4);
 			
 			switch(choice)
@@ -319,20 +322,37 @@ public class Game
 					spells = 0;
 					temp_spells = 0;
 					choice_index = -1;
-					//TODO rework this interface - instead, display all spells with cooldowns, & if spell on cd is selected, repeat this choice
+					//TODO TODO TODO rework this interface - instead, display all spells with cooldowns, & if spell on cd is selected, repeat this choice
 					if(!player.allSpellsUncastable())
 					{
 						System.out.println("Which spell would you like to cast?");
 						System.out.println("0: Go back.");
 						for(Spell s : player.spellbook)
 						{
-							if(s.isCastable())
-							{
 								spells++;
-								System.out.println(spells + ": " + s.NAME + "- " + s.DESCRIPTION);
-							}
+								
+								System.out.print(spells + ": " + s.NAME + "- " + s.DESCRIPTION + ".");
+								
+								if(s instanceof ActiveSpell)
+								{
+									if(s.isCastable())
+										System.out.print(" Mana Cost: " + s.MANA_COST + ". Cooldown: " + s.max_cooldown + " turns.");
+								
+									else
+									{
+										if(s.onCooldown())
+											System.out.print(" On cooldown for " + s.getCurrentCooldown() + " more turns. (Costs " + s.MANA_COST + " mana.");
+										else
+											System.out.print(" Requires " + (s.MANA_COST - player.getMana()) + " more mana.");
+									}
+								}
+								else if (s instanceof PassiveSpell)
+								{
+									System.out.print(" Passive effect.");
+								}
+								System.out.println();
 						}
-					
+						
 						choice2 = getNumberFrom(0, spells);
 					
 						for(int i = 0; i < player.spellbook.size(); i++)
@@ -348,7 +368,7 @@ public class Game
 							}
 						}
 					
-						if(choice_index >= 0)
+						if(choice_index >= 0)//TODO must display passive spells, but they cannot be allowed to cast(they cannot). 
 						{
 							if(player.spellbook.get(choice_index).isTargeted())
 							{
@@ -359,11 +379,11 @@ public class Game
 											+"(" + monsters.get(i).getHP() + "/" + monsters.get(i).getDefaultHP() + ")");
 								}
 								target = getNumberFrom(1, monsters.size()) - 1;
-								player.spellbook.get(choice_index).cast(monsters.get(target));
+								((ActiveSpell) player.spellbook.get(choice_index)).cast(monsters.get(target));
 								//TODO show monsters/targets and input choice to cast on + go back ability
 							}
 							else
-								player.spellbook.get(choice_index).cast();
+								((ActiveSpell) player.spellbook.get(choice_index)).cast();
 							turn_taken = true;
 						}
 						else

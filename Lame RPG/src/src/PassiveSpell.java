@@ -7,19 +7,4 @@ public class PassiveSpell extends Spell
 	{
 		super(tempname, dsc, manacost, level_rq, cd, c, false);
 	}
-
-	@Override
-	public void cast()
-	{
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void cast(Character target)
-	{
-		// TODO Auto-generated method stub
-
-	}
-
 }

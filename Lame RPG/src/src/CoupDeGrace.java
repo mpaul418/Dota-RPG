@@ -9,18 +9,6 @@ public class CoupDeGrace extends PassiveSpell
 	}
 
 	@Override
-	public void cast()
-	{
-		// uncastable
-	}
-
-	@Override
-	public void cast(Character target)
-	{
-		// uncastable
-	}
-	
-	@Override
 	public void addToSpellbook(Player p)
 	{
 		super.addToSpellbook(p);

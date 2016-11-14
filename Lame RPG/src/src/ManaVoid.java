@@ -1,6 +1,6 @@
 package src;
 
-public class ManaVoid extends Spell
+public class ManaVoid extends ActiveSpell
 {
 
 	public ManaVoid(Character c)

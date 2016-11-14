@@ -1,6 +1,6 @@
 package src;
 
-public class StiflingDagger extends Spell
+public class StiflingDagger extends ActiveSpell
 {
 
 	public StiflingDagger(Character c)
