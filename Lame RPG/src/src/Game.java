@@ -2,6 +2,17 @@ package src;
 
 import java.util.ArrayList;
 import java.util.Random;
+
+import classes.AntiMage;
+import classes.Invoker;
+import classes.Monster;
+import classes.PhantomAssassin;
+import classes.Player;
+import classes.Sven;
+import spells.ActiveSpell;
+import spells.PassiveSpell;
+import spells.Spell;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -14,7 +25,7 @@ public class Game
 	static int map[][] = new int[5][5];
 	static int current_row = 0;
 	static int current_column = 0;
-	static Random rand = new Random();
+	public static Random rand = new Random();
 	static ArrayList<Integer> options = new ArrayList<Integer>();
 	public static ArrayList<Monster> monsters = new ArrayList<Monster>();
 	static boolean game_over = false;
@@ -210,7 +221,7 @@ public class Game
 		{
 			monsters.add(new Monster((rand.nextInt(player.getDefaultHP() + 1) + 50), (rand.nextInt(71) + 40), (rand.nextInt(31) + 5), 
 									 (rand.nextInt(101) + 10), (rand.nextInt(21) + 5), 1, (double) (rand.nextInt(26)) / 100.0, "Monster " + (i+1)));
-			System.out.println("What de heck! It's a(n) " + monsters.get(i).name + "!!");
+			System.out.println("What de heck! It's a(n) " + monsters.get(i) + "!!");
 		}
 		do
 		{
@@ -318,79 +329,69 @@ public class Game
 				}
 				case 2:
 				{
-					int choice2, spells, choice_index, temp_spells;
+					int spell_choice_index, spells;
 					spells = 0;
-					temp_spells = 0;
-					choice_index = -1;
 					//TODO TODO TODO rework this interface - instead, display all spells with cooldowns, & if spell on cd is selected, repeat this choice
 					if(!player.allSpellsUncastable())
 					{
 						System.out.println("Which spell would you like to cast?");
 						System.out.println("0: Go back.");
-						for(Spell s : player.spellbook)
-						{
-								spells++;
-								
-								System.out.print(spells + ": " + s.NAME + "- " + s.DESCRIPTION + ".");
-								
-								if(s instanceof ActiveSpell)
-								{
-									if(s.isCastable())
-										System.out.print(" Mana Cost: " + s.MANA_COST + ". Cooldown: " + s.max_cooldown + " turns.");
-								
-									else
-									{
-										if(s.onCooldown())
-											System.out.print(" On cooldown for " + s.getCurrentCooldown() + " more turns. (Costs " + s.MANA_COST + " mana.");
-										else
-											System.out.print(" Requires " + (s.MANA_COST - player.getMana()) + " more mana.");
-									}
-								}
-								else if (s instanceof PassiveSpell)
-								{
-									System.out.print(" Passive effect.");
-								}
-								System.out.println();
-						}
 						
-						choice2 = getNumberFrom(0, spells);
-					
-						for(int i = 0; i < player.spellbook.size(); i++)
+						listSpells(player);
+						
+						spell_choice_index = getNumberFrom(0, spells) - 1;
+						while(spell_choice_index >= 0 && (player.spellbook.get(spell_choice_index) instanceof PassiveSpell || 
+							 (player.spellbook.get(spell_choice_index) instanceof ActiveSpell && player.spellbook.get(spell_choice_index).isCastable())))
+							 {
+								if(player.spellbook.get(spell_choice_index) instanceof PassiveSpell)
+									System.out.println("You cannot cast a passive spell.");
+								else
+									System.out.println("That spell is not castable right now.");
+								
+								System.out.println("Which spell would you like to cast?");
+								System.out.println("0: Go back.");
+								
+								listSpells(player);
+								
+								spell_choice_index = getNumberFrom(0, spells) - 1;
+							 }
+						
+						//TODO show monsters/targets and input choice to cast on + go back ability
+						
+						if(spell_choice_index >= 0) 
 						{
-					 		if(player.spellbook.get(i).isCastable())
+							if(player.spellbook.get(spell_choice_index).isTargeted())
 							{
-								temp_spells++;
-								if(temp_spells == choice2)
-								{
-									choice_index = i;
-									i = player.spellbook.size();
-								}
-							}
-						}
-					
-						if(choice_index >= 0)//TODO must display passive spells, but they cannot be allowed to cast(they cannot). 
-						{
-							if(player.spellbook.get(choice_index).isTargeted())
-							{
-								System.out.println("Cast " + player.spellbook.get(choice_index).NAME + " on what?");
+								System.out.println("Cast " + player.spellbook.get(spell_choice_index).NAME + " on what?");
+								System.out.println("0: Cancel spell cast.");
+								
 								for(int i = 0; i < monsters.size(); i++)
 								{
 									System.out.println((i + 1) + ": " + monsters.get(i)
 											+"(" + monsters.get(i).getHP() + "/" + monsters.get(i).getDefaultHP() + ")");
 								}
-								target = getNumberFrom(1, monsters.size()) - 1;
-								((ActiveSpell) player.spellbook.get(choice_index)).cast(monsters.get(target));
-								//TODO show monsters/targets and input choice to cast on + go back ability
+								target = getNumberFrom(0, monsters.size()) - 1;
+								if(target >= 0)//if the spell cast is not cancelled
+									((ActiveSpell) player.spellbook.get(spell_choice_index)).cast(monsters.get(target));
+								else
+									turn_taken = false;
+								
 							}
 							else
-								((ActiveSpell) player.spellbook.get(choice_index)).cast();
-							turn_taken = true;
+							{
+								((ActiveSpell) player.spellbook.get(spell_choice_index)).cast();
+								turn_taken = true;
+							}
 						}
 						else
 							turn_taken = false;
 					}
 					else
+					{
 						System.out.println("You can't cast any spells!\n");
+						turn_taken = false;
+					}
+					
 					break;
 				}
 				case 3:
@@ -407,6 +408,36 @@ public class Game
 		}
 	}
 	
+	private static void listSpells(Player p) //TODO change to character
+	{
+		int spells = 0;
+		
+		for(Spell s : p.spellbook)
+		{
+				spells++;
+				
+				System.out.print(spells + ": " + s.NAME + "- " + s.DESCRIPTION + ".");
+				
+				if(s instanceof ActiveSpell)
+				{
+					if(s.isCastable())
+						System.out.print(" Mana Cost: " + s.MANA_COST + ". Cooldown: " + s.max_cooldown + " turns.");
+				
+					else
+					{
+						if(s.onCooldown())
+							System.out.print(" On cooldown for " + s.getCurrentCooldown() + " more turns. (Costs " + s.MANA_COST + " mana.");
+						else
+							System.out.print(" Requires " + (s.MANA_COST - player.getMana()) + " more mana.");
+					}
+				}
+				else if (s instanceof PassiveSpell)
+				{
+					System.out.print(" Passive effect.");
+				}
+				System.out.println();
+		}
+	}
 	private static void displayHPandMana()
 	{
 		System.out.println(player + "'s HP: " + player.getHP() + "/" + player.getDefaultHP()
