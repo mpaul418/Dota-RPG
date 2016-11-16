@@ -375,7 +375,6 @@ public class Game
 									((ActiveSpell) player.spellbook.get(spell_choice_index)).cast(monsters.get(target));
 								else
 									turn_taken = false;
-								
 							}
 							else
 							{
