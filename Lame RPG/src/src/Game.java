@@ -215,6 +215,7 @@ public class Game
 		if(options.contains(4))
 			System.out.println("4: Go up.");		
 	}
+	
 	private static void battle()
 	{
 		for(int i = 0; i < map[current_row][current_column]; i++)
@@ -332,65 +333,61 @@ public class Game
 					int spell_choice_index, spells;
 					spells = 0;
 					//TODO TODO TODO rework this interface - instead, display all spells with cooldowns, & if spell on cd is selected, repeat this choice
-					if(!player.allSpellsUncastable())
-					{
+					if(player.allSpellsUncastable())
+						System.out.println("You cannot cast any spells. Go back.");
+					else
 						System.out.println("Which spell would you like to cast?");
-						System.out.println("0: Go back.");
-						
-						listSpells(player);
-						
-						spell_choice_index = getNumberFrom(0, spells) - 1;
-						while(spell_choice_index >= 0 && (player.spellbook.get(spell_choice_index) instanceof PassiveSpell || 
-							 (player.spellbook.get(spell_choice_index) instanceof ActiveSpell && player.spellbook.get(spell_choice_index).isCastable())))
-							 {
-								if(player.spellbook.get(spell_choice_index) instanceof PassiveSpell)
-									System.out.println("You cannot cast a passive spell.");
-								else
-									System.out.println("That spell is not castable right now.");
-								
-								System.out.println("Which spell would you like to cast?");
-								System.out.println("0: Go back.");
-								
-								listSpells(player);
-								
-								spell_choice_index = getNumberFrom(0, spells) - 1;
-							 }
-						
-						//TODO show monsters/targets and input choice to cast on + go back ability
-						
-						if(spell_choice_index >= 0) 
-						{
-							if(player.spellbook.get(spell_choice_index).isTargeted())
-							{
-								System.out.println("Cast " + player.spellbook.get(spell_choice_index).NAME + " on what?");
-								System.out.println("0: Cancel spell cast.");
-								
-								for(int i = 0; i < monsters.size(); i++)
-								{
-									System.out.println((i + 1) + ": " + monsters.get(i)
-											+"(" + monsters.get(i).getHP() + "/" + monsters.get(i).getDefaultHP() + ")");
-								}
-								target = getNumberFrom(0, monsters.size()) - 1;
-								if(target >= 0)//if the spell cast is not cancelled
-									((ActiveSpell) player.spellbook.get(spell_choice_index)).cast(monsters.get(target));
-								else
-									turn_taken = false;
-							}
+					
+					System.out.println("0: Go back.");
+					
+					listSpells(player);
+					
+					spell_choice_index = getNumberFrom(0, spells) - 1;
+					while(spell_choice_index >= 0 && (player.spellbook.get(spell_choice_index) instanceof PassiveSpell || 
+						 (player.spellbook.get(spell_choice_index) instanceof ActiveSpell && player.spellbook.get(spell_choice_index).isCastable())))
+					 {
+							if(player.spellbook.get(spell_choice_index) instanceof PassiveSpell)
+								System.out.println("You cannot cast a passive spell.");
 							else
+								System.out.println("That spell is not castable right now.");
+							
+							System.out.println("Which spell would you like to cast?");
+							System.out.println("0: Go back.");
+							
+							listSpells(player);
+							
+							spell_choice_index = getNumberFrom(0, spells) - 1;
+					 }
+				
+					//TODO show monsters/targets and input choice to cast on + go back ability
+						
+					if(spell_choice_index >= 0) 
+					{
+						if(player.spellbook.get(spell_choice_index).isTargeted())
+						{
+							System.out.println("Cast " + player.spellbook.get(spell_choice_index).NAME + " on what?");
+							System.out.println("0: Cancel spell cast.");
+								
+							for(int i = 0; i < monsters.size(); i++)
 							{
-								((ActiveSpell) player.spellbook.get(spell_choice_index)).cast();
-								turn_taken = true;
+								System.out.println((i + 1) + ": " + monsters.get(i)
+										+"(" + monsters.get(i).getHP() + "/" + monsters.get(i).getDefaultHP() + ")");
 							}
+							target = getNumberFrom(0, monsters.size()) - 1;
+							if(target >= 0)//if the spell cast is not cancelled
+								((ActiveSpell) player.spellbook.get(spell_choice_index)).cast(monsters.get(target));
+							else
+								turn_taken = false;
 						}
 						else
-							turn_taken = false;
+						{
+							((ActiveSpell) player.spellbook.get(spell_choice_index)).cast();
+							turn_taken = true;
+						}
 					}
 					else
-					{
-						System.out.println("You can't cast any spells!\n");
 						turn_taken = false;
-					}
-					
+										
 					break;
 				}
 				case 3:
