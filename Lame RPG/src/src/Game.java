@@ -21,7 +21,7 @@ public class Game
 {
 	static String temp_name = "";
 	static int player_hero;
-	static Player player;
+	public static Player player;
 	static int map[][] = new int[5][5];
 	static int current_row = 0;
 	static int current_column = 0;
@@ -220,8 +220,7 @@ public class Game
 	{
 		for(int i = 0; i < map[current_row][current_column]; i++)
 		{
-			monsters.add(new Monster((rand.nextInt(player.getDefaultHP() + 1) + 50), (rand.nextInt(71) + 40), (rand.nextInt(31) + 5), 
-									 (rand.nextInt(101) + 10), (rand.nextInt(21) + 5), 1, (double) (rand.nextInt(26)) / 100.0, "Monster " + (i+1)));
+			monsters.add(new Monster("Monster " + (i+1)));
 			System.out.println("What de heck! It's a(n) " + monsters.get(i) + "!!");
 		}
 		do
