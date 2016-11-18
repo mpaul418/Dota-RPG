@@ -64,17 +64,6 @@ public class StatBuff extends Buff
 				CHARACTER.changeCritModifier(modifier_amount);
 				break;
 			}
-			case 10:
-			{
-				CHARACTER.changeDefaultDodgeChance(int_modifier);		
-				CHARACTER.changeDodgeChance(int_modifier);
-				break;
-			}
-			case 11:
-			{
-				CHARACTER.changeDodgeChance(int_modifier);
-				break;
-			}
 		}
 	}
 	
@@ -131,17 +120,6 @@ public class StatBuff extends Buff
 				case 9:
 				{
 					CHARACTER.changeCritModifier(-modifier_amount);
-					break;
-				}
-				case 10:
-				{
-					CHARACTER.changeDefaultDodgeChance(-int_modifier);		
-					CHARACTER.changeDodgeChance(-int_modifier);
-					break;
-				}
-				case 11:
-				{
-					CHARACTER.changeDodgeChance(-int_modifier);
 					break;
 				}
 			}

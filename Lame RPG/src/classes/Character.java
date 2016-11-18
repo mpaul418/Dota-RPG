@@ -5,6 +5,7 @@ import java.util.Random;
 import buffs.AttackBuff;
 import buffs.AttackedBuff;
 import buffs.Buff;
+import buffs.StatBuff;
 import buffs.StunBuff;
 
 public class Character 
@@ -23,6 +24,7 @@ public class Character
 	protected int dodgeChance, defaultDodgeChance; 
 	protected boolean alive;
 	protected int damage_dealt = 0;
+	public int hunker_downs_used = 0;
 	public ArrayList<Buff> buffs = new ArrayList<Buff>();
 	
 	public Character(int initHP, int initMana, int initDmg, int initAtk, int initDef, double initMagDef, String initName)
@@ -45,8 +47,6 @@ public class Character
 		critChance = 5; //buff- 5
 		defaultCritModifier = 2.00;//buff- 6
 		critModifier = 2.00; //buff- 7
-		defaultDodgeChance = 0;//buff- 8
-		dodgeChance = 0;//buff- 9
 		name = initName;
 	}
 	public int getHP()
@@ -342,11 +342,23 @@ public class Character
 		this.damage(c, damage_done);
 		System.out.println(this + "dealt " + damage_done + " magic damage to " + c + ".");
 	}
-	//TODO make hunker down less effective the more times you use it in a battle
+	
+	public void printAllBuffs()
+	{
+		System.out.println(this + "'s buffs:");
+		if(buffs.size() == 0)
+			System.out.println("\t" + this + " has no buffs.");
+		else
+			for(Buff b : buffs)
+				System.out.println("\t" + b);
+	}
 	public void hunkerDown()
 	{
-		int amount = r.nextInt(31) + 30;
-		this.changeDefense(amount);
+		int amount = 15;
+		hunker_downs_used++;
+		if(hunker_downs_used <= 3)
+			amount = r.nextInt(31 - (10 * hunker_downs_used)) + 30;
+		this.buffs.add(new StatBuff("Hunker Down", "Defense Buff", this, 2, 3, amount));
 		System.out.println(this.getName() + " hunkered down, increasing its defense by " + amount + "!!\n");
 	}
 }

@@ -17,7 +17,7 @@ public class Player extends Character
 	public ArrayList<Spell> unlearned_spells = new ArrayList<Spell>();
 	public int character_class;
 	public int gold;
-	public Player(int initHP, int initMana, int initDmg, int initAtk, int initDef, int playerClass, int initMagDef, int initDodge, String initName) 
+	public Player(int initHP, int initMana, int initDmg, int initAtk, int initDef, int playerClass, double initMagDef, String initName) 
 	{
 		super(initHP, initMana, initDmg, initAtk, initDef, initMagDef, initName);
 		character_class = playerClass;

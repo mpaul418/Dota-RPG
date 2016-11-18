@@ -308,8 +308,8 @@ public class Game
 			System.out.println("What would you like to do?");
 			System.out.println("1: Attack"
 						   + "\n2: Abilities"
-						   + "\n3: Use an Item"
-						   + "\n4: Hunker Down");//TODO add an option to view buffs and debuffs on all characters.
+						   + "\n3: View Buffs and Debuffs"
+						   + "\n4: Hunker Down"); //TODO add an option to view buffs and debuffs on all characters.
 			choice = getNumberFrom(1, 4);
 			
 			switch(choice)
@@ -357,8 +357,6 @@ public class Game
 							
 							spell_choice_index = getNumberFrom(0, spells) - 1;
 					 }
-				
-					//TODO show monsters/targets and input choice to cast on + go back ability
 						
 					if(spell_choice_index >= 0) 
 					{
@@ -391,7 +389,28 @@ public class Game
 				}
 				case 3:
 				{
-					//TODO- select what item to use, the target it if possible
+					int buffs_to_view;
+					
+					System.out.println("Whose buffs would you like to view?");
+					System.out.println("0: Go back.");
+					System.out.println("1: View all buffs.");
+					System.out.println("2: " + player + "'s buffs.");
+					
+					for(int i = 0; i < monsters.size(); i++)
+						System.out.println((i + 3) + ": " + monsters.get(i) + "'s buffs.");
+					
+					buffs_to_view = getNumberFrom(0, monsters.size() + 2);
+					if(buffs_to_view == 1)
+					{
+						player.printAllBuffs();
+						for(Monster m : monsters)
+							m.printAllBuffs();
+					}
+					else if(buffs_to_view == 2)
+						player.printAllBuffs();
+					else if(buffs_to_view > 2)
+						monsters.get(buffs_to_view - 2).printAllBuffs();
+					
 					break;
 				}
 				case 4:
