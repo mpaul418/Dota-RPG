@@ -3,6 +3,7 @@ package src;
 import java.util.ArrayList;
 import java.util.Random;
 
+import buffs.Buff;
 import classes.AntiMage;
 import classes.Invoker;
 import classes.Monster;
@@ -28,6 +29,8 @@ public class Game
 	public static Random rand = new Random();
 	static ArrayList<Integer> options = new ArrayList<Integer>();
 	public static ArrayList<Monster> monsters = new ArrayList<Monster>();
+	public static ArrayList<classes.Character> characters;
+
 	static boolean game_over = false;
 	static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 	
@@ -223,6 +226,11 @@ public class Game
 			monsters.add(new Monster("Monster " + (i+1)));
 			System.out.println("What de heck! It's a(n) " + monsters.get(i) + "!!");
 		}
+		
+		characters.add(player);
+		for(Monster m : monsters)
+			characters.add(m);
+		
 		do
 		{
 			refreshDebuffsAndReduceCooldowns();
@@ -235,6 +243,9 @@ public class Game
 						takeMonsterTurn(m);
 				}
 		}while(!battleOver());
+		
+		while(characters.size() > 0)// removes all characters from this array at the end of the battle
+			characters.remove(0);
 	}
 	private static boolean battleOver()
 	{
@@ -260,36 +271,21 @@ public class Game
 
 	private static void refreshDebuffsAndReduceCooldowns()
 	{
-		// TODO Add a Debuff/Buff class to contain all buffs with durations, effects, etc.
-		// FIXME placeholder until buff class
 		
-		// Reduce the effects of defense buffs/debuffs each turn until equal to max defense
-		if(player.getDefense() < player.getDefaultDefense())
-				player.changeDefense(15);
-		else if(player.getDefense() > player.getDefaultDefense())
+		for(classes.Character c : characters)
 		{
-			if((player.getDefense() - 10) < player.getDefaultDefense())
-				player.changeDefense(-(player.getDefaultDefense() - player.getDefense()));
-			else
-				player.changeDefense(-15);
+			for(Spell s : c.spellbook)
+				if(s.getCurrentCooldown() > 0)
+					s.changeCurrentCooldown(-1);
+		
+			for(Buff b : c.buffs)
+				b.decreaseDuration();
 		}
+		
+		
 		for(Monster m : monsters)
-		{
-			if(m.getDefense() < m.getDefaultDefense())
-				m.changeDefense(10);
-			else if(m.getDefense() > m.getDefaultDefense())
-			{
-				if((m.getDefense() - 15) < m.getDefaultDefense())
-					m.changeDefense(-(m.getDefaultDefense() - m.getDefense()));
-				else
-					m.changeDefense(-15);
-			}
-		}
-		
-		// Reduce each spell's cooldown that is on cooldown
-		for(Spell s : player.spellbook)
-			if(s.getCurrentCooldown() > 0)
-				s.changeCurrentCooldown(-1);
+			for(Buff b : m.buffs)
+				b.decreaseDuration();
 	}
 
 	private static void takePlayerTurn()
@@ -309,7 +305,7 @@ public class Game
 			System.out.println("1: Attack"
 						   + "\n2: Abilities"
 						   + "\n3: View Buffs and Debuffs"
-						   + "\n4: Hunker Down"); //TODO add an option to view buffs and debuffs on all characters.
+						   + "\n4: Hunker Down");
 			choice = getNumberFrom(1, 4);
 			
 			switch(choice)
@@ -331,7 +327,7 @@ public class Game
 				{
 					int spell_choice_index, spells;
 					spells = 0;
-					//TODO TODO TODO rework this interface - instead, display all spells with cooldowns, & if spell on cd is selected, repeat this choice
+			
 					if(player.allSpellsUncastable())
 						System.out.println("You cannot cast any spells. Go back.");
 					else
@@ -342,7 +338,7 @@ public class Game
 					listSpells(player);
 					
 					spell_choice_index = getNumberFrom(0, spells) - 1;
-					while(spell_choice_index >= 0 && (player.spellbook.get(spell_choice_index) instanceof PassiveSpell || 
+					while(spell_choice_index >= -1 && (player.spellbook.get(spell_choice_index) instanceof PassiveSpell || 
 						 (player.spellbook.get(spell_choice_index) instanceof ActiveSpell && player.spellbook.get(spell_choice_index).isCastable())))
 					 {
 							if(player.spellbook.get(spell_choice_index) instanceof PassiveSpell)

@@ -7,6 +7,7 @@ import buffs.AttackedBuff;
 import buffs.Buff;
 import buffs.StatBuff;
 import buffs.StunBuff;
+import spells.Spell;
 
 public class Character 
 {	
@@ -25,6 +26,8 @@ public class Character
 	protected boolean alive;
 	protected int damage_dealt = 0;
 	public int hunker_downs_used = 0;
+	public ArrayList<Spell> spellbook = new ArrayList<Spell>();
+	public ArrayList<Spell> unlearned_spells = new ArrayList<Spell>();
 	public ArrayList<Buff> buffs = new ArrayList<Buff>();
 	
 	public Character(int initHP, int initMana, int initDmg, int initAtk, int initDef, double initMagDef, String initName)
@@ -351,6 +354,46 @@ public class Character
 		else
 			for(Buff b : buffs)
 				System.out.println("\t" + b);
+	}
+	
+	public void levelUp()
+	{
+		this.level++;
+		
+		System.out.println(this + " just leveled up!!"
+				+ "/nHP increased by " + (int)Math.round(0.25 * defaultHP)
+				+ "/nMana increased by " + (int)Math.round(0.25 * defaultMana) + ".");
+
+		defaultHP = (int)Math.round(1.25 * defaultHP);
+		HP = defaultHP;
+		defaultMana = (int)Math.round(1.25 * defaultMana);
+		mana = defaultMana;
+		defaultDamage = (int)Math.round(1.25 * defaultDamage);
+		damage = defaultDamage;
+		
+		for(Spell s : unlearned_spells)
+		{
+			if(this.level >= s.getLevelRequirement())
+			{
+				spellbook.add(s);
+				unlearned_spells.remove(s);
+				System.out.println(this + " just learned " + s + ".");
+			}
+		}
+	}
+	
+	public boolean allSpellsUncastable()
+	{
+		int uncastable_spells = 0;
+		for(Spell s : spellbook)
+		{
+			if(!s.isCastable())
+				uncastable_spells++;
+		}
+		if(uncastable_spells == spellbook.size())
+			return true;
+		else
+			return false;
 	}
 	public void hunkerDown()
 	{
