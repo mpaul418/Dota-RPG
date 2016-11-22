@@ -20,19 +20,19 @@ import java.io.InputStreamReader;
 
 public class Game
 {
-	static String temp_name = "";
-	static int player_hero;
+	private static String temp_name = "";
+	private static int player_hero;
 	public static Player player;
-	static int map[][] = new int[5][5];
-	static int current_row = 0;
-	static int current_column = 0;
+	private static int map[][] = new int[5][5];
+	private static int current_row = 0;
+	private static int current_column = 0;
 	public static Random rand = new Random();
-	static ArrayList<Integer> options = new ArrayList<Integer>();
+	private static ArrayList<Integer> options = new ArrayList<Integer>();
 	public static ArrayList<Monster> monsters = new ArrayList<Monster>();
-	public static ArrayList<classes.Character> characters;
+	private static ArrayList<classes.Character> characters;
 
-	static boolean game_over = false;
-	static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+	private static boolean game_over = false;
+	private static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
 	public static void main(String[] args)
 	{
@@ -99,7 +99,7 @@ public class Game
 				if(temp_name.replaceAll("\\s", "").length() == 0)
 					System.out.println("Length of zero. Please input correctly.");
 				else
-					length_okay = true
+					length_okay = true;
 				}
 				catch(IOException e)
 				{
@@ -472,7 +472,7 @@ public class Game
 			System.out.println(m + " is stunned.");
 	}
 
-	static int getNumberFrom(int start, int end)
+	private static int getNumberFrom(int start, int end)
 	{
 		boolean working = true;
 		int tempint = -1;
