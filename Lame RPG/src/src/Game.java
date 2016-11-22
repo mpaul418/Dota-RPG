@@ -33,7 +33,7 @@ public class Game
 
 	static boolean game_over = false;
 	static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-	
+
 	public static void main(String[] args)
 	{
 		setHero();
@@ -48,18 +48,18 @@ public class Game
 		}
 	}
 	private static void setHero()
-	{		
+	{
 		System.out.println("What hero do you want to be?");
 		System.out.println("1- Anti-Mage: A balanced melee fighter who specializes against spellcasters."
 						+"\n2- Sven: A melee fighter who has high physical defense and attack."
 						+"\n3- Phantom Assassin: A glass cannon whose attack is very high, but at the expense of poor health."
 						+"\n4- Invoker: A mage who has both damaging and utility spells.");
-		
-		player_hero = getNumberFrom(1, 4); 
+
+		player_hero = getNumberFrom(1, 4);
 		//TODO add levels for each skill/ability
 		switch(player_hero)
 		{
-			case 1: 
+			case 1:
 			{
 				player = new AntiMage(temp_name);
 				break;
@@ -74,7 +74,7 @@ public class Game
 				player = new PhantomAssassin(temp_name);
 				break;
 			}
-			case 4: 
+			case 4:
 			{
 				player = new Invoker(temp_name);
 				break;
@@ -95,11 +95,11 @@ public class Game
 				try
 				{
 				System.out.println("What is your name?");
-				temp_name = br.readLine();				
+				temp_name = br.readLine();
 				if(temp_name.replaceAll("\\s", "").length() == 0)
 					System.out.println("Length of zero. Please input correctly.");
 				else
-					length_okay = true;
+					length_okay = true
 				}
 				catch(IOException e)
 				{
@@ -114,7 +114,7 @@ public class Game
 			if(name_repick == 1)
 				name_confirmed = true;
 		}while(!name_confirmed);
-		
+
 		player.setName(temp_name);
 	}
 	private static void makeDungeon()
@@ -135,7 +135,7 @@ public class Game
 		boolean working = true;
 		int tempint = -1;
 		int choice = -1;
-		
+
 		System.out.println("Which direction would you like to go?");
 		do
 		{
@@ -162,7 +162,7 @@ public class Game
 			}
 		}while(!options.contains(tempint));
 		choice = tempint;
-		
+
 		if(choice == 1)
 			current_column += 1;
 		else if(choice == 2)
@@ -170,7 +170,7 @@ public class Game
 		else if(choice == 3)
 			current_column -= 1;
 		else if(choice == 4)
-			current_row -= 1;		
+			current_row -= 1;
 	}
 	private static void showRoomChoices()
 	{
@@ -216,9 +216,9 @@ public class Game
 		if(options.contains(3))
 			System.out.println("3: Go left.");
 		if(options.contains(4))
-			System.out.println("4: Go up.");		
+			System.out.println("4: Go up.");
 	}
-	
+
 	private static void battle()
 	{
 		for(int i = 0; i < map[current_row][current_column]; i++)
@@ -226,11 +226,11 @@ public class Game
 			monsters.add(new Monster("Monster " + (i+1)));
 			System.out.println("What de heck! It's a(n) " + monsters.get(i) + "!!");
 		}
-		
+
 		characters.add(player);
 		for(Monster m : monsters)
 			characters.add(m);
-		
+
 		do
 		{
 			refreshDebuffsAndReduceCooldowns();
@@ -243,7 +243,7 @@ public class Game
 						takeMonsterTurn(m);
 				}
 		}while(!battleOver());
-		
+
 		while(characters.size() > 0)// removes all characters from this array at the end of the battle
 			characters.remove(0);
 	}
@@ -271,18 +271,18 @@ public class Game
 
 	private static void refreshDebuffsAndReduceCooldowns()
 	{
-		
+
 		for(classes.Character c : characters)
 		{
 			for(Spell s : c.spellbook)
 				if(s.getCurrentCooldown() > 0)
 					s.changeCurrentCooldown(-1);
-		
+
 			for(Buff b : c.buffs)
 				b.decreaseDuration();
 		}
-		
-		
+
+
 		for(Monster m : monsters)
 			for(Buff b : m.buffs)
 				b.decreaseDuration();
@@ -294,23 +294,23 @@ public class Game
 		boolean turn_taken = player.isStunned();
 		if(turn_taken)
 			System.out.println(player + " is stunned.");
-		
+
 		while(!turn_taken)
 		{
 			turn_taken = false;
-			
+
 			displayHPandMana();
-			
+
 			System.out.println("What would you like to do?");
 			System.out.println("1: Attack"
 						   + "\n2: Abilities"
 						   + "\n3: View Buffs and Debuffs"
 						   + "\n4: Hunker Down");
 			choice = getNumberFrom(1, 4);
-			
+
 			switch(choice)
 			{
-				case 1: 
+				case 1:
 				{
 					System.out.println("\nWhat would you like to attack?");
 					for(int i = 0; i < monsters.size(); i++)
@@ -327,40 +327,40 @@ public class Game
 				{
 					int spell_choice_index, spells;
 					spells = 0;
-			
+
 					if(player.allSpellsUncastable())
 						System.out.println("You cannot cast any spells. Go back.");
 					else
 						System.out.println("Which spell would you like to cast?");
-					
+
 					System.out.println("0: Go back.");
-					
+
 					listSpells(player);
-					
+
 					spell_choice_index = getNumberFrom(0, spells) - 1;
-					while(spell_choice_index >= -1 && (player.spellbook.get(spell_choice_index) instanceof PassiveSpell || 
+					while(spell_choice_index >= -1 && (player.spellbook.get(spell_choice_index) instanceof PassiveSpell ||
 						 (player.spellbook.get(spell_choice_index) instanceof ActiveSpell && player.spellbook.get(spell_choice_index).isCastable())))
 					 {
 							if(player.spellbook.get(spell_choice_index) instanceof PassiveSpell)
 								System.out.println("You cannot cast a passive spell.");
 							else
 								System.out.println("That spell is not castable right now.");
-							
+
 							System.out.println("Which spell would you like to cast?");
 							System.out.println("0: Go back.");
-							
+
 							listSpells(player);
-							
+
 							spell_choice_index = getNumberFrom(0, spells) - 1;
 					 }
-						
-					if(spell_choice_index >= 0) 
+
+					if(spell_choice_index >= 0)
 					{
 						if(player.spellbook.get(spell_choice_index).isTargeted())
 						{
 							System.out.println("Cast " + player.spellbook.get(spell_choice_index).NAME + " on what?");
 							System.out.println("0: Cancel spell cast.");
-								
+
 							for(int i = 0; i < monsters.size(); i++)
 							{
 								System.out.println((i + 1) + ": " + monsters.get(i)
@@ -380,21 +380,21 @@ public class Game
 					}
 					else
 						turn_taken = false;
-										
+
 					break;
 				}
 				case 3:
 				{
 					int buffs_to_view;
-					
+
 					System.out.println("Whose buffs would you like to view?");
 					System.out.println("0: Go back.");
 					System.out.println("1: View all buffs.");
 					System.out.println("2: " + player + "'s buffs.");
-					
+
 					for(int i = 0; i < monsters.size(); i++)
 						System.out.println((i + 3) + ": " + monsters.get(i) + "'s buffs.");
-					
+
 					buffs_to_view = getNumberFrom(0, monsters.size() + 2);
 					if(buffs_to_view == 1)
 					{
@@ -406,7 +406,7 @@ public class Game
 						player.printAllBuffs();
 					else if(buffs_to_view > 2)
 						monsters.get(buffs_to_view - 2).printAllBuffs();
-					
+
 					break;
 				}
 				case 4:
@@ -417,22 +417,22 @@ public class Game
 			}
 		}
 	}
-	
+
 	private static void listSpells(Player p) //TODO change to character
 	{
 		int spells = 0;
-		
+
 		for(Spell s : p.spellbook)
 		{
 				spells++;
-				
+
 				System.out.print(spells + ": " + s.NAME + "- " + s.DESCRIPTION + ".");
-				
+
 				if(s instanceof ActiveSpell)
 				{
 					if(s.isCastable())
 						System.out.print(" Mana Cost: " + s.MANA_COST + ". Cooldown: " + s.max_cooldown + " turns.");
-				
+
 					else
 					{
 						if(s.onCooldown())
@@ -471,7 +471,7 @@ public class Game
 		else
 			System.out.println(m + " is stunned.");
 	}
-	
+
 	static int getNumberFrom(int start, int end)
 	{
 		boolean working = true;
@@ -495,7 +495,7 @@ public class Game
 		do
 		{
 			working = true;
-			
+
 			try
 			{
 				do
@@ -511,7 +511,7 @@ public class Game
 				System.out.println("Exception caught! Please input correctly.");
 			}
 		}while(!working);
-		
+
 		return tempint;
-	}	
+	}
 }
