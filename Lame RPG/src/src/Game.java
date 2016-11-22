@@ -81,6 +81,7 @@ public class Game
 			}
 		}
 	}
+	
 	private static void setName()
 	{
 		String temp_name = "Player";
