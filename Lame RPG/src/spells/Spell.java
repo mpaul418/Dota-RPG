@@ -62,11 +62,11 @@ public abstract class Spell
 		else
 			return true;
 	}
-	public void addToSpellbook(Player p)
+	public void addToSpellbook(Character c)
 	{
-		p.spellbook.add(this);
-		p.unlearned_spells.remove(this);
-		System.out.println(p + " just learned " + this + ".");
+		c.spellbook.add(this);
+		c.unlearned_spells.remove(this);
+		System.out.println(c + " just learned " + this + ".");
 	}
 	
 	public void afterSpellCast()

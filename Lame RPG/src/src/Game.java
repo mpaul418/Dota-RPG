@@ -22,13 +22,13 @@ public class Game
 {
 	private static String temp_name = "";
 	private static int player_hero;
-	public static Player player;
+	public  static Player player;
 	private static int map[][] = new int[5][5];
 	private static int current_row = 0;
 	private static int current_column = 0;
-	public static Random rand = new Random();
+	public  static Random rand = new Random();
 	private static ArrayList<Integer> options = new ArrayList<Integer>();
-	public static ArrayList<Monster> monsters = new ArrayList<Monster>();
+	public  static ArrayList<Monster> monsters = new ArrayList<Monster>();
 	private static ArrayList<classes.Character> characters;
 
 	private static boolean game_over = false;
@@ -95,12 +95,12 @@ public class Game
 				length_okay = false;
 				try
 				{
-				System.out.println("What is your name?");
-				temp_name = br.readLine();
-				if(temp_name.replaceAll("\\s", "").length() == 0)
-					System.out.println("Length of zero. Please input correctly.");
-				else
-					length_okay = true;
+					System.out.println("What is your name?");
+					temp_name = br.readLine();
+					if(temp_name.replaceAll("\\s", "").length() == 0)
+						System.out.println("Length of zero. Please input correctly.");
+					else
+						length_okay = true;
 				}
 				catch(IOException e)
 				{
@@ -108,6 +108,7 @@ public class Game
 					length_okay = false;
 				}
 			}while(!length_okay);
+			
 			System.out.println("\nYour name is " + temp_name + ". Is that okay?");
 			System.out.println("1: Finalize name."
 						+ "   \n2: Re-enter name.");
@@ -118,6 +119,7 @@ public class Game
 
 		player.setName(temp_name);
 	}
+	
 	private static void makeDungeon()
 	{
 		for(int r = 0; r < map.length; r++)
@@ -131,6 +133,7 @@ public class Game
 			}
 		}
 	}
+	
 	private static void chooseRoom()
 	{
 		boolean working = true;
@@ -419,11 +422,11 @@ public class Game
 		}
 	}
 
-	private static void listSpells(Player p) //TODO change to character
+	private static void listSpells(classes.Character c) //TODO change to character
 	{
 		int spells = 0;
 
-		for(Spell s : p.spellbook)
+		for(Spell s : c.spellbook)
 		{
 				spells++;
 

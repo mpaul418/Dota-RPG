@@ -2,7 +2,6 @@ package spells;
 
 import buffs.AttackedBuff;
 import classes.Character;
-import classes.Player;
 
 public class Blur extends PassiveSpell
 {
@@ -13,9 +12,9 @@ public class Blur extends PassiveSpell
 	}
 	
 	@Override
-	public void addToSpellbook(Player p)
+	public void addToSpellbook(Character c)
 	{
-		super.addToSpellbook(p);
+		super.addToSpellbook(c);
 		this.CHARACTER.buffs.add(new AttackedBuff(this.NAME, this.NAME + " evasion bonus.",
 				this.CHARACTER, -1, 50));
 	}

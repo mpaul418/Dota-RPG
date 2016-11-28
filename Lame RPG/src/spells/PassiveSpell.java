@@ -2,7 +2,7 @@ package spells;
 
 import classes.Character;
 
-public class PassiveSpell extends Spell
+public abstract class PassiveSpell extends Spell
 {
 
 	public PassiveSpell(String tempname, String dsc, int manacost, int level_rq, int cd, Character c)

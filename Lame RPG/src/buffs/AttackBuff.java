@@ -3,14 +3,16 @@ package buffs;
 import java.util.Random;
 
 import classes.Character;
+import src.Game;
 
 public class AttackBuff extends Buff
 {
-	int mana_burn, crit_chance;
-	double mana_burn_multiplier, crit_modifier;
+	int mana_burn, crit_chance, cleave_enemies_hit;
+	double mana_burn_multiplier, crit_modifier, cleave_percentage;
 	Random r = new Random();
 	
-	public AttackBuff(String n, String dsc, Character c, int d, int manaburn, double burnmultiplier, int critchance, double critmodifier)
+	public AttackBuff(String n, String dsc, Character c, int d, int manaburn, double burnmultiplier, 
+			int critchance, double critmodifier, int cleaveenemieshit, double cleavepercentage)
 	{
 		super(n, dsc, c, d);
 		
@@ -18,6 +20,8 @@ public class AttackBuff extends Buff
 		mana_burn_multiplier = burnmultiplier;
 		crit_chance = critchance;
 		crit_modifier = critmodifier;
+		cleave_enemies_hit = cleaveenemieshit;
+		cleave_percentage = cleavepercentage;
 	}
 
 	public int getManaBurn()
@@ -73,24 +77,23 @@ public class AttackBuff extends Buff
 							   + c + "'s mana and dealt " + damage_to_deal + " damage.");
 		}
 	}
-
-	//public void applyStunEffect(Character c)
-	//{
-		// TODO
-	//}
-
-	/*@Override
-	public void applyAttackEffect(Character target, boolean already_critted)
+	
+	public void applyCleave(Character c, int damage)
 	{
-		int crit_roll;
-		if(!already_critted)
+		if(cleave_enemies_hit > 0)
 		{
-			crit_roll = r.nextInt(100) + 1;
-			if(crit_chance <= crit_roll)
-				critical_hit = true;
-			else
-				critical_hit = false;
+			int enemies_to_cleave = cleave_enemies_hit;
+			int i = 0;
+			while(enemies_to_cleave > 0)
+			{
+				if(Game.monsters.get(i) != c && Game.monsters.get(i).isAlive())
+				{
+					this.CHARACTER.damage(Game.monsters.get(i), (int) Math.round(cleave_percentage * damage));
+					System.out.println(this.CHARACTER + " cleaved " + Game.monsters.get(i) + " for " + ((int) Math.round(cleave_percentage * damage)) + " damage.");
+				}
+				
+				i++;
+			}
 		}
-		
-	}*/
+	}
 }

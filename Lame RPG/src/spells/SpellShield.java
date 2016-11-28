@@ -2,7 +2,6 @@ package spells;
 
 import buffs.StatBuff;
 import classes.Character;
-import classes.Player;
 
 public class SpellShield extends PassiveSpell
 {
@@ -13,9 +12,9 @@ public class SpellShield extends PassiveSpell
 	}
 	
 	@Override
-	public void addToSpellbook(Player p)
+	public void addToSpellbook(Character c)
 	{
-		super.addToSpellbook(p);
+		super.addToSpellbook(c);
 		this.CHARACTER.buffs.add(new StatBuff(this.NAME, this.NAME + " magic resist.",
 				this.CHARACTER, -1, 5, 66.0));
 	}

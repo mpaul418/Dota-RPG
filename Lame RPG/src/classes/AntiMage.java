@@ -13,11 +13,9 @@ public class AntiMage extends Player
 	Spell spell_shield = new SpellShield(this);
 	Spell mana_void = new ManaVoid(this);
 	
-	//TODO add a passive ability class, as well as Mana Break passive
-	
 	public AntiMage(String initName)
 	{
-		super(150, 60, 30, 75, 15, 1, .1, initName);//FIXME reduce magic resist once spell shield buff is complete
+		super(150, 60, 30, 75, 15, 1, 0.0, initName);
 		//HP = 150;
 		//mana = 60;
 		//damage = 30;
@@ -41,7 +39,7 @@ public class AntiMage extends Player
 		//defense = 15;
 		//character_class = 1;
 		//magicDefense = 10;
-		mana_break.addToSpellbook(this);//TODO
+		mana_break.addToSpellbook(this);
 		blink.addToSpellbook(this);
 		spell_shield.addToSpellbook(this);
 		unlearned_spells.add(mana_void);

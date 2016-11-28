@@ -326,6 +326,7 @@ public class Character
 					if(b instanceof AttackBuff)
 					{
 						((AttackBuff) b).applyManaBurn(c);
+						((AttackBuff) b).applyCleave(c, damage_done);
 						//((AttackBuff) b).applyStunEffect(c);
 						//this is where any post-attack triggers are checked
 					}

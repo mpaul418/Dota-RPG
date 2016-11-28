@@ -1,29 +1,21 @@
 package spells;
 
+import buffs.AttackBuff;
 import classes.Character;
 
-public class GreatCleave extends ActiveSpell
+public class GreatCleave extends PassiveSpell
 {
 
-	public GreatCleave(String tempname, String dsc, int manacost, int level_rq, int cd, Character c, boolean targetable)
+	public GreatCleave(Character c)
 	{
-		super(tempname, dsc, manacost, level_rq, cd, c, targetable);
-		// TODO Auto-generated constructor stub
+		super("Great Cleave", "Passively deal 50% of your damage to two random enemies other than the targeted one when you attack.", 0, 1, -1, c);
 	}
 //TODO
-	//TODO once buff system implemented
 	@Override
-	public void cast()
+	public void addToSpellbook(Character c)
 	{
-		// TODO Auto-generated method stub
-
+		super.addToSpellbook(c);
+		this.CHARACTER.buffs.add(new AttackBuff(this.NAME, this.NAME + " cleave.",
+				this.CHARACTER, -1, 0, 0, 0, 0, 2, 0.5));
 	}
-
-	@Override
-	public void cast(Character target)
-	{
-		// TODO Auto-generated method stub
-
-	}
-
 }
