@@ -8,10 +8,7 @@ import spells.SpellShield;
 
 public class AntiMage extends Player
 {
-	Spell mana_break = new ManaBreak(this);
-	Spell blink = new Blink(this);
-	Spell spell_shield = new SpellShield(this);
-	Spell mana_void = new ManaVoid(this);
+	Spell mana_break, blink, spell_shield, mana_void; 
 	
 	public AntiMage(String initName)
 	{
@@ -23,10 +20,14 @@ public class AntiMage extends Player
 		//defense = 15;
 		//character_class = 1;
 		//magicDefense = 10;
-		mana_break.addToSpellbook(this);//TODO
-		blink.addToSpellbook(this);
-		spell_shield.addToSpellbook(this);
-		unlearned_spells.add(mana_void);
+		mana_break = new ManaBreak(this);
+		blink = new Blink(this);
+		spell_shield = new SpellShield(this);
+		mana_void = new ManaVoid(this);
+		//mana_break.addToSpellbook(this);//TODO
+		//blink.addToSpellbook(this);
+		//spell_shield.addToSpellbook(this);
+		//unlearned_spells.add(mana_void);
 	}
 	
 	public AntiMage(int nHP, int nMana, int nDmg, int nAtk, int nDfs, double nMgDef, String initName)
@@ -39,9 +40,13 @@ public class AntiMage extends Player
 		//defense = 15;
 		//character_class = 1;
 		//magicDefense = 10;
-		mana_break.addToSpellbook(this);
-		blink.addToSpellbook(this);
-		spell_shield.addToSpellbook(this);
-		unlearned_spells.add(mana_void);
+		mana_break = new ManaBreak(this);
+		blink = new Blink(this);
+		spell_shield = new SpellShield(this);
+		mana_void = new ManaVoid(this);
+		//mana_break.addToSpellbook(this);
+		//blink.addToSpellbook(this);
+		//spell_shield.addToSpellbook(this);
+		//unlearned_spells.add(mana_void);
 	}
 }

@@ -1,7 +1,6 @@
 package spells;
 
 import classes.Character;
-import classes.Player;
 
 public abstract class Spell
 {
@@ -25,7 +24,9 @@ public abstract class Spell
 		TARGETED = targetable;
 		
 		if(CHARACTER.getLevel() >= LEVEL_REQUIREMENT)
-			this.addToSpellbook((Player) CHARACTER);
+			this.addToSpellbook(CHARACTER);
+		else
+			CHARACTER.unlearned_spells.add(this);//TODO should spells go into the spellbook no matter what and then show on casting screen they are not high enough level?
 	}
 	public boolean isTargeted()
 	{

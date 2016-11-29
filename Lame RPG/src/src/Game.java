@@ -20,7 +20,7 @@ import java.io.InputStreamReader;
 
 public class Game
 {
-	private static String temp_name = "";
+	private static String temp_name = "Player";
 	private static int player_hero;
 	public  static Player player;
 	private static int map[][] = new int[5][5];
@@ -47,6 +47,7 @@ public class Game
 				battle();
 		}
 	}
+	
 	private static void setHero()
 	{
 		System.out.println("What hero do you want to be?");
@@ -84,7 +85,6 @@ public class Game
 	
 	private static void setName()
 	{
-		String temp_name = "Player";
 		boolean length_okay;
 		boolean name_confirmed = false;
 		int name_repick = -1;
@@ -116,7 +116,7 @@ public class Game
 			if(name_repick == 1)
 				name_confirmed = true;
 		}while(!name_confirmed);
-
+		
 		player.setName(temp_name);
 	}
 	
