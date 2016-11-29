@@ -9,7 +9,7 @@ import buffs.StatBuff;
 import buffs.StunBuff;
 import spells.Spell;
 
-public class Character 
+public class Characters 
 {	
 	private Random r = new Random();
 	protected String name;
@@ -30,7 +30,7 @@ public class Character
 	public ArrayList<Spell> unlearned_spells = new ArrayList<Spell>();
 	public ArrayList<Buff> buffs = new ArrayList<Buff>();
 	
-	public Character(int initHP, int initMana, int initDmg, int initAtk, int initDef, double initMagDef, String initName)
+	public Characters(int initHP, int initMana, int initDmg, int initAtk, int initDef, double initMagDef, String initName)
 	{
 		defaultHP = initHP;
 		HP = initHP; 
@@ -253,16 +253,16 @@ public class Character
 		return false;
 	}
 	//TODO replace method with system for magic/phys damage that calculates it in the method instead of before calling method
-	public void damage(Character c, int incoming_damage)
+	public void damage(Characters c, int incoming_damage)
 	{
 		c.HP -= incoming_damage;
 		damage_dealt += incoming_damage;
 	}
-	public void heal(Character c, int heal)
+	public void heal(Characters c, int heal)
 	{
 		c.HP += heal;
 	}
-	public void attack(Character c)
+	public void attack(Characters c)
 	{
 		int temp, damage_done;
 		int crit_buff_index = -1;
@@ -340,7 +340,7 @@ public class Character
 			System.out.println(this + "'s attack missed! (Attack roll: " + temp + ")\n");
 		}
 	}
-	public void dealMagicDamage(int incoming_damage, Character c)
+	public void dealMagicDamage(int incoming_damage, Characters c)
 	{
 		int damage_done = (int)(Math.round(c.getMagicDefense() * incoming_damage));
 		this.damage(c, damage_done);

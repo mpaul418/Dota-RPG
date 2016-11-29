@@ -1,13 +1,13 @@
 package spells;
 
-import classes.Character;
+import classes.Characters;
 import classes.Monster;
 import src.Game;
 
 public class EMP extends ActiveSpell
 {
 
-	public EMP(Character c)
+	public EMP(Characters c)
 	{
 		super("EMP", "Drain the mana of your enemies and deal magic damage to each enemy equal to 50% of its mana lost.", 50, 1, 5, c, false);
 		// TODO Auto-generated constructor stub
@@ -31,7 +31,7 @@ public class EMP extends ActiveSpell
 	}
 
 	@Override
-	public void cast(Character target)
+	public void cast(Characters target)
 	{
 		this.incorrectCastWithTarget();
 	}

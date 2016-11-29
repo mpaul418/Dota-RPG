@@ -2,7 +2,7 @@ package buffs;
 
 import java.util.Random;
 
-import classes.Character;
+import classes.Characters;
 import src.Game;
 
 public class AttackBuff extends Buff
@@ -11,7 +11,7 @@ public class AttackBuff extends Buff
 	double mana_burn_multiplier, crit_modifier, cleave_percentage;
 	Random r = new Random();
 	
-	public AttackBuff(String n, String dsc, Character c, int d, int manaburn, double burnmultiplier, 
+	public AttackBuff(String n, String dsc, Characters c, int d, int manaburn, double burnmultiplier, 
 			int critchance, double critmodifier, int cleaveenemieshit, double cleavepercentage)
 	{
 		super(n, dsc, c, d);
@@ -58,7 +58,7 @@ public class AttackBuff extends Buff
 			return false;
 	}
 
-	public void applyManaBurn(Character c)
+	public void applyManaBurn(Characters c)
 	{
 		if(mana_burn > 0)
 		{
@@ -78,7 +78,7 @@ public class AttackBuff extends Buff
 		}
 	}
 	
-	public void applyCleave(Character c, int damage)
+	public void applyCleave(Characters c, int damage)
 	{
 		if(cleave_enemies_hit > 0)
 		{

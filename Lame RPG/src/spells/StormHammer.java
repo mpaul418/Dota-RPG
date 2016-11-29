@@ -1,14 +1,14 @@
 package spells;
 
 import buffs.StunBuff;
-import classes.Character;
+import classes.Characters;
 import classes.Monster;
 import src.Game;
 
 public class StormHammer extends ActiveSpell
 {
 
-	public StormHammer(Character c)
+	public StormHammer(Characters c)
 	{
 		super("Storm Hammer", "unleash a magical gauntlet that deals magic damage and stuns all enemy units for 2 turns.", 20, 1, 5, c, true);
 	}
@@ -20,7 +20,7 @@ public class StormHammer extends ActiveSpell
 	}
 
 	@Override
-	public void cast(Character target)
+	public void cast(Characters target)
 	{
 		this.castWithTargetMessage(target);
 		for(Monster m : Game.monsters)

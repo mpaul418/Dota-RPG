@@ -1,13 +1,13 @@
 package spells;
 
-import classes.Character;
+import classes.Characters;
 import classes.Monster;
 import src.Game;
 
 public class Warcry extends ActiveSpell
 {
 
-	public Warcry(Character c)
+	public Warcry(Characters c)
 	{
 		super("Warcry", "Inspire yourself and intimidate enemies with a fearsome cry. Increases your defense and lowers enemies' defense."
 				, 10, 1, 4, c, false);
@@ -28,7 +28,7 @@ public class Warcry extends ActiveSpell
 	}
 
 	@Override
-	public void cast(Character target)
+	public void cast(Characters target)
 	{
 		this.incorrectCastWithTarget();
 	}

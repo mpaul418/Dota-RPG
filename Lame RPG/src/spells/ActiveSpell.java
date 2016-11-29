@@ -1,11 +1,11 @@
 package spells;
 
-import classes.Character;
+import classes.Characters;
 
 public abstract class ActiveSpell extends Spell
 {
 
-	public ActiveSpell(String tempname, String dsc, int manacost, int level_rq, int cd, Character c, boolean targetable)
+	public ActiveSpell(String tempname, String dsc, int manacost, int level_rq, int cd, Characters c, boolean targetable)
 	{
 		super(tempname, dsc, manacost, level_rq, cd, c, targetable);
 		// TODO Auto-generated constructor stub
@@ -26,7 +26,7 @@ public abstract class ActiveSpell extends Spell
 		cast();
 	}
 
-	public void castWithTargetMessage(Character c)
+	public void castWithTargetMessage(Characters c)
 	{
 		System.out.println(this.CHARACTER + " cast " + this + " on " + c + ".");
 	}
@@ -45,5 +45,5 @@ public abstract class ActiveSpell extends Spell
 	}
 
 	public abstract void cast();
-	public abstract void cast(Character target);
+	public abstract void cast(Characters target);
 }

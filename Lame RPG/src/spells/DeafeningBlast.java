@@ -1,14 +1,14 @@
 package spells;
 
 import buffs.StatBuff;
-import classes.Character;
+import classes.Characters;
 import classes.Monster;
 import src.Game;
 
 public class DeafeningBlast extends ActiveSpell
 {
 
-	public DeafeningBlast(Character c)
+	public DeafeningBlast(Characters c)
 	{
 		super("Deafening Blast", "Send a wave of energy into your enemies, heavily reducing their attack.", 50, 6, 7, c, false);
 		
@@ -34,7 +34,7 @@ public class DeafeningBlast extends ActiveSpell
 	}
 
 	@Override
-	public void cast(Character target)
+	public void cast(Characters target)
 	{
 		this.incorrectCastWithTarget();
 	}

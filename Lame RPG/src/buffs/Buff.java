@@ -1,14 +1,14 @@
 package buffs;
 
-import classes.Character;
+import classes.Characters;
 
 public abstract class Buff
 {
 	String name, desc;
-	final Character CHARACTER;
+	final Characters CHARACTER;
 	int duration;
 	
-	public Buff(String n, String dsc, Character c, int d)
+	public Buff(String n, String dsc, Characters c, int d)
 	{
 		name = n;
 		desc = dsc;

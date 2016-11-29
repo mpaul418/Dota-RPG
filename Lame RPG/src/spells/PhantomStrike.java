@@ -1,11 +1,11 @@
 package spells;
 
-import classes.Character;
+import classes.Characters;
 
 public class PhantomStrike extends ActiveSpell
 {
 
-	public PhantomStrike(Character c)
+	public PhantomStrike(Characters c)
 	{
 		super("Phantom Strike", "Jump towards an enemy, attacking them and gaining bonus defense.", 30, 1, 5, c, true);
 	}
@@ -17,7 +17,7 @@ public class PhantomStrike extends ActiveSpell
 	}
 
 	@Override
-	public void cast(Character target)
+	public void cast(Characters target)
 	{
 		this.castWithTargetMessage(target);
 		this.CHARACTER.changeDefense(15);

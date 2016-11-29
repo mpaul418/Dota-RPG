@@ -1,6 +1,6 @@
 package classes;
 
-public class Player extends Character 
+public class Player extends Characters 
 {
 	/*Character Classes:
 	 * 1- AntiMage

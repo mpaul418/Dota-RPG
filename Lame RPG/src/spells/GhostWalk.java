@@ -1,11 +1,11 @@
 package spells;
 
-import classes.Character;
+import classes.Characters;
 
 public class GhostWalk extends ActiveSpell
 {
 
-	public GhostWalk(Character c)
+	public GhostWalk(Characters c)
 	{
 		super("Ghost Walk", "Manipulate the elements around you and become invisible. Increase defense by 70.", 45, 1, 9, c, false);
 	}
@@ -18,7 +18,7 @@ public class GhostWalk extends ActiveSpell
 	}
 
 	@Override
-	public void cast(Character target)
+	public void cast(Characters target)
 	{
 		this.incorrectCastWithTarget();
 

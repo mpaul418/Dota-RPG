@@ -3,7 +3,7 @@ package classes;
 import java.util.Random;
 import src.Game;
 
-public class Monster extends Character 
+public class Monster extends Characters 
 {
 	static Random rand = new Random(); 
 	protected int monster_type;

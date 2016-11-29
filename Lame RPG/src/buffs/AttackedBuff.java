@@ -2,14 +2,14 @@ package buffs;
 
 import java.util.Random;
 
-import classes.Character;
+import classes.Characters;
 
 public class AttackedBuff extends Buff
 {
 	int dodge_chance;
 	Random r = new Random();
 	
-	public AttackedBuff(String n, String dsc, Character c, int d, int dodge_c)
+	public AttackedBuff(String n, String dsc, Characters c, int d, int dodge_c)
 	{
 		super(n, dsc, c, d);
 		dodge_chance = dodge_c;

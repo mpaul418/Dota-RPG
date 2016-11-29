@@ -1,11 +1,11 @@
 package spells;
 
-import classes.Character;
+import classes.Characters;
 
 public class StiflingDagger extends ActiveSpell
 {
 
-	public StiflingDagger(Character c)
+	public StiflingDagger(Characters c)
 	{
 		super("Stifling Dagger", "Launch a dagger at an enemy, dealing a percentage of your damage as pure damage.", 10, 1, 2, c, true);
 	}
@@ -17,7 +17,7 @@ public class StiflingDagger extends ActiveSpell
 	}
 
 	@Override
-	public void cast(Character target)
+	public void cast(Characters target)
 	{
 		int pure_damage;
 		pure_damage = (int)Math.round((double)this.CHARACTER.getDamage() / 2.0);

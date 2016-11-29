@@ -1,6 +1,6 @@
 package spells;
 
-import classes.Character;
+import classes.Characters;
 
 public abstract class Spell
 {
@@ -8,12 +8,12 @@ public abstract class Spell
 	public final String DESCRIPTION;
 	public final int MANA_COST;
 	public final int LEVEL_REQUIREMENT;
-	public final Character CHARACTER;
+	public final Characters CHARACTER;
 	public final boolean TARGETED;
 	public int max_cooldown;
 	public int current_cooldown = 0;
 	
-	public Spell(String tempname, String dsc, int manacost, int level_rq, int cd, Character c, boolean targetable)
+	public Spell(String tempname, String dsc, int manacost, int level_rq, int cd, Characters c, boolean targetable)
 	{
 		NAME = tempname;
 		DESCRIPTION = dsc;
@@ -63,7 +63,7 @@ public abstract class Spell
 		else
 			return true;
 	}
-	public void addToSpellbook(Character c)
+	public void addToSpellbook(Characters c)
 	{
 		c.spellbook.add(this);
 		c.unlearned_spells.remove(this);

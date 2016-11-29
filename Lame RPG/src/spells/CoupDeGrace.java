@@ -1,18 +1,18 @@
 package spells;
 
 import buffs.AttackBuff;
-import classes.Character;
+import classes.Characters;
 
 public class CoupDeGrace extends PassiveSpell
 {
 
-	public CoupDeGrace(Character c)
+	public CoupDeGrace(Characters c)
 	{
 		super("Coup de Grâce", "Passively gain a 15% chance to land a critical hit, dealing 275% damage.", 0, 6, -1, c);
 	}
 
 	@Override
-	public void addToSpellbook(Character c)
+	public void addToSpellbook(Characters c)
 	{
 		super.addToSpellbook(c);
 		this.CHARACTER.buffs.add(new AttackBuff(this.NAME, this.NAME + " crit chance bonus.",

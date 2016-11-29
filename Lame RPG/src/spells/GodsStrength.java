@@ -1,12 +1,12 @@
 package spells;
 
 import buffs.StatBuff;
-import classes.Character;
+import classes.Characters;
 
 public class GodsStrength extends ActiveSpell
 {
 
-	public GodsStrength(Character c)
+	public GodsStrength(Characters c)
 	{
 		super("God's Strength", "Channel your rogue strength, gaining bonus damage for 3 turns.", 20, 6, 8, c, false);
 	}
@@ -20,7 +20,7 @@ public class GodsStrength extends ActiveSpell
 	}
 
 	@Override
-	public void cast(Character target)
+	public void cast(Characters target)
 	{
 		this.incorrectCastWithTarget();
 	}

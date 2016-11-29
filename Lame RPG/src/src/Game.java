@@ -5,6 +5,7 @@ import java.util.Random;
 
 import buffs.Buff;
 import classes.AntiMage;
+import classes.Characters;
 import classes.Invoker;
 import classes.Monster;
 import classes.PhantomAssassin;
@@ -29,15 +30,15 @@ public class Game
 	public  static Random rand = new Random();
 	private static ArrayList<Integer> options = new ArrayList<Integer>();
 	public  static ArrayList<Monster> monsters = new ArrayList<Monster>();
-	private static ArrayList<classes.Character> characters;
+	private static ArrayList<Characters> characters = new ArrayList<Characters>();
 
 	private static boolean game_over = false;
 	private static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
 	public static void main(String[] args)
 	{
-		setHero();
 		setName();
+		setHero();
 		makeDungeon();
 		while(!game_over)
 		{
@@ -117,7 +118,8 @@ public class Game
 				name_confirmed = true;
 		}while(!name_confirmed);
 		
-		player.setName(temp_name);
+		if(player != null)
+			player.setName(temp_name);
 	}
 	
 	private static void makeDungeon()
@@ -222,16 +224,17 @@ public class Game
 		if(options.contains(4))
 			System.out.println("4: Go up.");
 	}
-
+	//TODO does going back and forth into rooms recreate monsters?
 	private static void battle()
 	{
+		characters.add(player);
+		
 		for(int i = 0; i < map[current_row][current_column]; i++)
 		{
 			monsters.add(new Monster("Monster " + (i+1)));
 			System.out.println("What de heck! It's a(n) " + monsters.get(i) + "!!");
 		}
 
-		characters.add(player);
 		for(Monster m : monsters)
 			characters.add(m);
 
@@ -276,7 +279,7 @@ public class Game
 	private static void refreshDebuffsAndReduceCooldowns()
 	{
 
-		for(classes.Character c : characters)
+		for(classes.Characters c : characters)
 		{
 			for(Spell s : c.spellbook)
 				if(s.getCurrentCooldown() > 0)
@@ -330,8 +333,8 @@ public class Game
 				case 2:
 				{
 					int spell_choice_index, spells;
-					spells = 0;
-
+					spells = player.spellbook.size();
+							
 					if(player.allSpellsUncastable())
 						System.out.println("You cannot cast any spells. Go back.");
 					else
@@ -340,10 +343,10 @@ public class Game
 					System.out.println("0: Go back.");
 
 					listSpells(player);
-
+					
 					spell_choice_index = getNumberFrom(0, spells) - 1;
-					while(spell_choice_index >= -1 && (player.spellbook.get(spell_choice_index) instanceof PassiveSpell ||
-						 (player.spellbook.get(spell_choice_index) instanceof ActiveSpell && player.spellbook.get(spell_choice_index).isCastable())))
+					while(spell_choice_index > -1 && (player.spellbook.get(spell_choice_index) instanceof PassiveSpell ||
+						 (player.spellbook.get(spell_choice_index) instanceof ActiveSpell && !player.spellbook.get(spell_choice_index).isCastable())))
 					 {
 							if(player.spellbook.get(spell_choice_index) instanceof PassiveSpell)
 								System.out.println("You cannot cast a passive spell.");
@@ -422,7 +425,7 @@ public class Game
 		}
 	}
 
-	private static void listSpells(classes.Character c) //TODO change to character
+	private static void listSpells(classes.Characters c) //TODO change to character
 	{
 		int spells = 0;
 
@@ -510,6 +513,11 @@ public class Game
 				}while(tempint < lesser || tempint > greater);
 			}
 			catch(IOException e)
+			{
+				working = false;
+				System.out.println("Exception caught! Please input correctly.");
+			}
+			catch(NumberFormatException e)
 			{
 				working = false;
 				System.out.println("Exception caught! Please input correctly.");
