@@ -246,9 +246,7 @@ public class Characters
 		for(Buff b : this.buffs)
 		{
 			if(b instanceof StunBuff)
-			{
 				return true;
-			}
 		}
 		return false;
 	}

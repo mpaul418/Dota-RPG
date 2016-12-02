@@ -68,7 +68,7 @@ public class AttackBuff extends Buff
 			else
 				mana_to_burn = c.getMana();
 			
-			damage_to_deal = (int) Math.round(mana_burn_multiplier) * mana_to_burn;
+			damage_to_deal = (int) Math.round((mana_burn_multiplier) * mana_to_burn);
 			
 			c.changeMana(-mana_to_burn);
 			c.damage(c, damage_to_deal);

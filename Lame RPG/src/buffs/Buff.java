@@ -22,7 +22,7 @@ public abstract class Buff
 	{
 		if(duration >= 1)
 			duration--;
-		else if(duration == 0)
+		if(duration == 0)
 			deletThis();		//when buffs are infinite (duration == -1), they are never deleted or altered
 	}
 
@@ -30,7 +30,7 @@ public abstract class Buff
 	{
 		if(duration >= 1)
 			duration--;
-		else if(duration == 0)
+		if(duration == 0)
 			deleted_buffs.add(this);		//when buffs are infinite (duration == -1), they are never deleted or altered
 	}
 	

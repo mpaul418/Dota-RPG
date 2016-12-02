@@ -1,5 +1,6 @@
 package spells;
 
+import buffs.StatBuff;
 import classes.Characters;
 import classes.Monster;
 import src.Game;
@@ -17,7 +18,7 @@ public class Blink extends ActiveSpell
 		this.castWithoutTargetMessage();
 		for(Monster m : Game.monsters)
 		{
-			m.changeDefense(40);
+			m.buffs.add(new StatBuff(NAME, DESCRIPTION, CHARACTER, 3, 3, -40));
 			System.out.println(m.getName() + "'s defense was reduced by 40!");
 		}
 		

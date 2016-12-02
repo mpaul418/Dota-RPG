@@ -262,16 +262,22 @@ public class Game
 		while(characters.size() > 0)// removes all characters from this array at the end of the battle
 			characters.remove(0);
 	}
+	
 	private static void checkForDeaths()
 	{
+		ArrayList<Characters> removed_characters = new ArrayList<Characters>();
+		
 		for(Characters c : characters)
 			if(!c.isAlive())
-			{
-				characters.remove(c);
-				if(c instanceof Monster)
-					monsters.remove((Monster) c);
-			}
-		
+				removed_characters.add(c);
+		for(Characters c : removed_characters)
+		{
+			characters.remove(c);
+			if(c instanceof Monster)
+				monsters.remove((Monster) c);
+			
+			System.out.println(c + " died.\n");
+		}
 	}
 
 	private static boolean battleOver()
@@ -282,7 +288,7 @@ public class Game
 			return false;
 	}
 
-	private static boolean allMonstersDead()
+	private static boolean allMonstersDead()//FIXME this must be recoded because of checkForDeaths() removing monsters from the array
 	{
 		int enemies_dead = 0;
 		for(Monster m: monsters)
@@ -311,7 +317,11 @@ public class Game
 		}
 		
 		for(Buff b : deleted_buffs)
+		{
 			b.deletThis();
+		}
+		while(deleted_buffs.size() > 0)
+			deleted_buffs.remove(0);
 	}
 
 	private static void takePlayerTurn()
@@ -394,7 +404,10 @@ public class Game
 							}
 							target = getNumberFrom(0, monsters.size()) - 1;
 							if(target >= 0)//if the spell cast is not cancelled
+							{
 								((ActiveSpell) player.spellbook.get(spell_choice_index)).cast(monsters.get(target));
+								turn_taken = true;
+							}
 							else
 								turn_taken = false;
 						}
