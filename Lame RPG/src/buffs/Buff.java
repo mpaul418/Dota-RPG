@@ -1,5 +1,7 @@
 package buffs;
 
+import java.util.ArrayList;
+
 import classes.Characters;
 
 public abstract class Buff
@@ -15,13 +17,21 @@ public abstract class Buff
 		CHARACTER = c;
 		duration = d;
 	}
-
+	
 	public void decreaseDuration()
 	{
 		if(duration >= 1)
 			duration--;
 		else if(duration == 0)
-			this.deletThis();		//when buffs are infinite (duration == -1), they are never deleted or altered
+			deletThis();		//when buffs are infinite (duration == -1), they are never deleted or altered
+	}
+
+	public void decreaseDuration(ArrayList<Buff> deleted_buffs)
+	{
+		if(duration >= 1)
+			duration--;
+		else if(duration == 0)
+			deleted_buffs.add(this);		//when buffs are infinite (duration == -1), they are never deleted or altered
 	}
 	
 	public void deletThis()
@@ -32,7 +42,10 @@ public abstract class Buff
 	
 	public String toString()
 	{
-		return name + "-" + desc + "(Lasting " + duration + " more turns.)";
+		if(duration > 0) //if the buff is not passive(infinite)
+			return name + "-" + desc + "(Lasting " + duration + " more turns.)";
+		else
+			return name + "-" + desc + "(Passive effect.)";
 	}
 
 	//public abstract void applyAttackEffect(Character target, boolean already_critted);// ex. Mana Break

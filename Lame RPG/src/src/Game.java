@@ -234,26 +234,46 @@ public class Game
 			monsters.add(new Monster("Monster " + (i+1)));
 			System.out.println("What de heck! It's a(n) " + monsters.get(i) + "!!");
 		}
+		System.out.println();
 
 		for(Monster m : monsters)
 			characters.add(m);
 
 		do
 		{
+			checkForDeaths();
 			refreshDebuffsAndReduceCooldowns();
+			
 			if(!battleOver())
 				takePlayerTurn();
+			
+			checkForDeaths();
+			
 			if(!battleOver())
 				for(Monster m: monsters)
 				{
 					if(m.isAlive())
 						takeMonsterTurn(m);
+					else
+						System.out.println(m + " is dead. you coded something wrong."); //this should never actually print
 				}
 		}while(!battleOver());
 
 		while(characters.size() > 0)// removes all characters from this array at the end of the battle
 			characters.remove(0);
 	}
+	private static void checkForDeaths()
+	{
+		for(Characters c : characters)
+			if(!c.isAlive())
+			{
+				characters.remove(c);
+				if(c instanceof Monster)
+					monsters.remove((Monster) c);
+			}
+		
+	}
+
 	private static boolean battleOver()
 	{
 		if(!player.isAlive() || allMonstersDead())
@@ -278,21 +298,20 @@ public class Game
 
 	private static void refreshDebuffsAndReduceCooldowns()
 	{
-
-		for(classes.Characters c : characters)
+		ArrayList<Buff> deleted_buffs = new ArrayList<Buff>();
+		
+		for(Characters c : characters)
 		{
 			for(Spell s : c.spellbook)
 				if(s.getCurrentCooldown() > 0)
 					s.changeCurrentCooldown(-1);
 
 			for(Buff b : c.buffs)
-				b.decreaseDuration();
+				b.decreaseDuration(deleted_buffs);				//TODO FIXME buffs not refreshing in the correct amount of time now
 		}
-
-
-		for(Monster m : monsters)
-			for(Buff b : m.buffs)
-				b.decreaseDuration();
+		
+		for(Buff b : deleted_buffs)
+			b.deletThis();
 	}
 
 	private static void takePlayerTurn()
@@ -412,7 +431,7 @@ public class Game
 					else if(buffs_to_view == 2)
 						player.printAllBuffs();
 					else if(buffs_to_view > 2)
-						monsters.get(buffs_to_view - 2).printAllBuffs();
+						monsters.get(buffs_to_view - 3).printAllBuffs();
 
 					break;
 				}

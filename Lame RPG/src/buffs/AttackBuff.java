@@ -84,7 +84,7 @@ public class AttackBuff extends Buff
 		{
 			int enemies_to_cleave = cleave_enemies_hit;
 			int i = 0;
-			while(enemies_to_cleave > 0)
+			while(enemies_to_cleave > 0 && i < Game.monsters.size())
 			{
 				if(Game.monsters.get(i) != c && Game.monsters.get(i).isAlive())
 				{

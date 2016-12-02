@@ -46,7 +46,7 @@ public abstract class Spell
 	}
 	public void changeCurrentCooldown(int i)
 	{
-		current_cooldown += i;
+		current_cooldown = current_cooldown + i;
 	}
 	public String toString()
 	{
