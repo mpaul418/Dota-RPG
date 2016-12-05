@@ -6,7 +6,7 @@ public class SunStrike extends ActiveSpell
 {
 	public SunStrike(Characters c)
 	{
-		super("Sun Strike", "Call down a solar flare on an enemy, dealing large magical damage.", 25, 1, 3, c, true);
+		super("Sun Strike", "Call down a solar flare on an enemy, dealing large magical damage", 25, 1, 3, c, true);
 	}
 
 	@Override

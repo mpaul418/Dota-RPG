@@ -7,7 +7,7 @@ public class GhostWalk extends ActiveSpell
 
 	public GhostWalk(Characters c)
 	{
-		super("Ghost Walk", "Manipulate the elements around you and become invisible. Increase defense by 70.", 45, 1, 9, c, false);
+		super("Ghost Walk", "Manipulate the elements around you and become invisible. Increase defense by 70", 45, 1, 9, c, false);
 	}
 
 	@Override

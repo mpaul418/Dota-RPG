@@ -312,14 +312,13 @@ public class Characters
 					
 					damage(c, damage_done);
 					System.out.println(this + " attacked " + c + " and dealt " + damage_done + " damage."
-								     + " (Defense roll: " + currentDefense + "/" + c.getDefaultDefense() + ")\n");
+								     + " (Defense roll: " + currentDefense + "/" + c.getDefaultDefense() + ")");
 				}
 				else
 				{
 					damage_done = 1;
 					damage(c, damage_done);
-					System.out.println(this.getName() + " grazed " + c.getName() + " and dealt " + damage_done + " damage.\n"
-									 + " (Defense roll: " + currentDefense + "/" + c.getDefaultDefense() + ")\n");
+					System.out.println(this.getName() + " grazed " + c.getName() + " and dealt " + damage_done + " damage.");
 				}
 				
 				for(Buff b : buffs)
@@ -332,6 +331,8 @@ public class Characters
 						//this is where any post-attack triggers are checked
 					}
 				}
+				
+				System.out.println();
 			}
 			else
 				System.out.println(this + "'s attack was evaded!");

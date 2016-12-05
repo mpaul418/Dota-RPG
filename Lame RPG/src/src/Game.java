@@ -241,7 +241,6 @@ public class Game
 
 		do
 		{
-			checkForDeaths();
 			refreshDebuffsAndReduceCooldowns();
 			
 			if(!battleOver())
@@ -257,6 +256,8 @@ public class Game
 					else
 						System.out.println(m + " is dead. you coded something wrong."); //this should never actually print
 				}
+			
+			checkForDeaths();
 		}while(!battleOver());
 
 		while(characters.size() > 0)// removes all characters from this array at the end of the battle
@@ -282,13 +283,13 @@ public class Game
 
 	private static boolean battleOver()
 	{
-		if(!player.isAlive() || allMonstersDead())
+		if(!player.isAlive() || monsters.size() == 0) //this used to call allMonstersDead(), i changed it
 			return true;
 		else
 			return false;
 	}
 
-	private static boolean allMonstersDead()//FIXME this must be recoded because of checkForDeaths() removing monsters from the array
+	/*private static boolean allMonstersDead()//FIXME this must be recoded because of checkForDeaths() removing monsters from the array
 	{
 		int enemies_dead = 0;
 		for(Monster m: monsters)
@@ -300,7 +301,7 @@ public class Game
 			return true;
 		else
 			return false;
-	}
+	}*/
 
 	private static void refreshDebuffsAndReduceCooldowns()
 	{
@@ -457,7 +458,7 @@ public class Game
 		}
 	}
 
-	private static void listSpells(classes.Characters c) //TODO change to character
+	private static void listSpells(Characters c) //TODO change to character
 	{
 		int spells = 0;
 
@@ -475,7 +476,7 @@ public class Game
 					else
 					{
 						if(s.onCooldown())
-							System.out.print(" On cooldown for " + s.getCurrentCooldown() + " more turns. (Costs " + s.MANA_COST + " mana.");
+							System.out.print(" On cooldown for " + s.getCurrentCooldown() + " more turns. (Costs " + s.MANA_COST + " mana.)");
 						else
 							System.out.print(" Requires " + (s.MANA_COST - player.getMana()) + " more mana.");
 					}

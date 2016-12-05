@@ -8,7 +8,7 @@ public class SpellShield extends PassiveSpell
 
 	public SpellShield(Characters c)
 	{
-		super("Spell Shield", "Passively gain a 66% magic resist.", 0, 1, -1, c);
+		super("Spell Shield", "Gain a 66% magic resistance bonus", 0, 1, -1, c);
 	}
 	
 	@Override

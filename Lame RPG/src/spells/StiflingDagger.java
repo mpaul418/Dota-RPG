@@ -7,7 +7,7 @@ public class StiflingDagger extends ActiveSpell
 
 	public StiflingDagger(Characters c)
 	{
-		super("Stifling Dagger", "Launch a dagger at an enemy, dealing a percentage of your damage as pure damage.", 10, 1, 2, c, true);
+		super("Stifling Dagger", "Launch a dagger at an enemy, dealing half of your damage as pure damage", 10, 1, 2, c, true);
 	}
 
 	@Override

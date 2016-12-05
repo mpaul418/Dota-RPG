@@ -10,7 +10,7 @@ public class DeafeningBlast extends ActiveSpell
 
 	public DeafeningBlast(Characters c)
 	{
-		super("Deafening Blast", "Send a wave of energy into your enemies, heavily reducing their attack.", 50, 6, 7, c, false);
+		super("Deafening Blast", "Send a wave of energy into your enemies, heavily reducing their attack", 50, 6, 7, c, false);
 		
 	}
 

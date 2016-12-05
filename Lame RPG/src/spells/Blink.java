@@ -9,11 +9,11 @@ public class Blink extends ActiveSpell
 {
 	public Blink(Characters c)
 	{
-		super("Blink", "Teleport and disorient your enemies, reducing your enemies' defence by 40.", 10, 1, 2, c, false);
+		super("Blink", "Teleport and disorient your enemies, reducing your enemies' defence by 40", 10, 1, 2, c, false);
 	}
 
 	@Override
-	public void cast()
+	public void cast() //FIXME somehow, casting blink when there is a buff already on enemies creates a passive buff for them and says "[player]'s buff wore off"
 	{
 		this.castWithoutTargetMessage();
 		for(Monster m : Game.monsters)
