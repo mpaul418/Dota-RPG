@@ -8,7 +8,6 @@ public abstract class ActiveSpell extends Spell
 	public ActiveSpell(String tempname, String dsc, int manacost, int level_rq, int cd, Characters c, boolean targetable)
 	{
 		super(tempname, dsc, manacost, level_rq, cd, c, targetable);
-		// TODO Auto-generated constructor stub
 	}
 
 	public void incorrectCastWithoutTarget()

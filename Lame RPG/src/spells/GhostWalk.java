@@ -1,5 +1,6 @@
 package spells;
 
+import buffs.StatBuff;
 import classes.Characters;
 
 public class GhostWalk extends ActiveSpell
@@ -13,7 +14,7 @@ public class GhostWalk extends ActiveSpell
 	@Override
 	public void cast()
 	{
-		this.CHARACTER.changeDefense(70);
+		this.CHARACTER.buffs.add(new StatBuff(NAME, "Defense increased by 70", CHARACTER, 2, 3, 70));
 		System.out.println(this.CHARACTER + "'s defense increased by 70.");
 	}
 

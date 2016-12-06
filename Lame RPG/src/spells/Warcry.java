@@ -18,11 +18,11 @@ public class Warcry extends ActiveSpell
 	public void cast()
 	{
 		this.castWithoutTargetMessage();
-		this.CHARACTER.buffs.add(new StatBuff(NAME, "Warcry defense gain", CHARACTER, 2, 3, 45));
+		this.CHARACTER.buffs.add(new StatBuff(NAME, "Defense increased by 45", CHARACTER, 2, 3, 45));
 		System.out.println(this.CHARACTER + "'s defense increased by 45.");
 		for(Monster m : Game.monsters)
 		{
-			m.buffs.add(new StatBuff(NAME, "Warcry defense loss", m, 2, 3, -25));
+			m.buffs.add(new StatBuff(NAME, "Defense decreased by 25", m, 2, 3, -25));
 			System.out.println(m + "'s defense was decreased by 25.");
 		}
 	}

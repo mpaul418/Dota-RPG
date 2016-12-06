@@ -26,7 +26,7 @@ public abstract class Spell
 		if(CHARACTER.getLevel() >= LEVEL_REQUIREMENT)
 			this.addToSpellbook(CHARACTER);
 		else
-			CHARACTER.unlearned_spells.add(this);//TODO should spells go into the spellbook no matter what and then show on casting screen they are not high enough level?
+			CHARACTER.unlearned_spells.add(this);
 	}
 	public boolean isTargeted()
 	{

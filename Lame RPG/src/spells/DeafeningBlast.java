@@ -25,7 +25,7 @@ public class DeafeningBlast extends ActiveSpell
 			if(attack_reduction > m.getAttack())
 				attack_reduction = m.getAttack();
 			
-			m.buffs.add(new StatBuff(this.NAME, this.NAME + " attack debuff.", m, 2, 2, -attack_reduction));
+			m.buffs.add(new StatBuff(this.NAME, "Attack reduced by " + attack_reduction, m, 2, 2, -attack_reduction));
 			
 			System.out.println(m + "'s attack was reduced by " + attack_reduction + ".");
 		}

@@ -13,12 +13,12 @@ public class Blink extends ActiveSpell
 	}
 
 	@Override
-	public void cast() //FIXME somehow, casting blink when there is a buff already on enemies creates a passive buff for them and says "[player]'s buff wore off"
+	public void cast()
 	{
 		this.castWithoutTargetMessage();
 		for(Monster m : Game.monsters)
 		{
-			m.buffs.add(new StatBuff(NAME, DESCRIPTION, CHARACTER, 3, 3, -40));
+			m.buffs.add(new StatBuff(NAME, "Defence reduced by 40", m, 3, 3, -40));
 			System.out.println(m.getName() + "'s defense was reduced by 40!");
 		}
 		

@@ -15,7 +15,10 @@ public abstract class Buff
 		name = n;
 		desc = dsc;
 		CHARACTER = c;
-		duration = d + 1;
+		//if(d != -1) // If the buff is not passive, its duration is increased because buffs tick at the start of each turn
+			//duration = d + 1;
+		//else
+			duration = d;
 	}
 	
 	public void decreaseDuration()
@@ -47,8 +50,4 @@ public abstract class Buff
 		else
 			return name + "-" + desc + "(Passive effect.)";
 	}
-
-	//public abstract void applyAttackEffect(Character target, boolean already_critted);// ex. Mana Break
-	//public abstract void applyAttackedEffect(Character c);// ex. Blur
-	//public abstract void applyEffectOnTurnStart();// ex. stuns(Storm Hammer)
 }

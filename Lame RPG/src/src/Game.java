@@ -27,6 +27,7 @@ public class Game
 	private static int map[][] = new int[5][5];
 	private static int current_row = 0;
 	private static int current_column = 0;
+	private static int turn_number = 0;
 	public  static Random rand = new Random();
 	private static ArrayList<Integer> options = new ArrayList<Integer>();
 	public  static ArrayList<Monster> monsters = new ArrayList<Monster>();
@@ -187,32 +188,48 @@ public class Game
 		options.add(4);
 		if(current_row == 0)
 		{
-			for(int i = 0; i < options.size(); i++)
-				if(options.get(i) == 3 && options.contains(3))
-					options.remove(i);
+			if(options.contains(3))
+				for(int i = 0; i < options.size(); i++)
+					if(options.get(i) == 3)
+					{
+						options.remove(i);
+						break;
+					}
 		}
 		else
 		{
 			if(current_row == 4)
 			{
-				for(int i = 0; i < options.size(); i++)
-					if(options.get(i) == 1 && options.contains(1))
-						options.remove(i);
+				if(options.contains(1))
+					for(int i = 0; i < options.size(); i++)
+						if(options.get(i) == 1)
+						{
+							options.remove(i);
+							break;
+						}
 			}
 		}
 		if(current_column == 0)
 		{
-			for(int i = 0; i < options.size(); i++)
-				if(options.get(i) == 4 && options.contains(4))
-					options.remove(i);
+			if(options.contains(4))
+				for(int i = 0; i < options.size(); i++)
+					if(options.get(i) == 4)
+					{
+						options.remove(i);
+						break;
+					}
 		}
 		else
 		{
 			if(current_column == 4)
 			{
-				for(int i = 0; i < options.size(); i++)
-					if(options.get(i) == 2 && options.contains(2))
-						options.remove(i);
+				if(options.contains(2))
+					for(int i = 0; i < options.size(); i++)
+						if(options.get(i) == 2)
+						{
+							options.remove(i);
+							break;
+						}
 			}
 		}
 		if(options.contains(1))
@@ -239,8 +256,13 @@ public class Game
 		for(Monster m : monsters)
 			characters.add(m);
 
+		turn_number = 0;
+		
 		do
 		{
+			turn_number++;
+			System.out.println("------------------- Turn " + turn_number + " -------------------\n");
+			
 			refreshDebuffsAndReduceCooldowns();
 			
 			if(!battleOver())
@@ -303,7 +325,7 @@ public class Game
 			return false;
 	}*/
 
-	private static void refreshDebuffsAndReduceCooldowns()
+	private static void refreshDebuffsAndReduceCooldowns() //FIXME buffs saying they last 1 turn longer than they should
 	{
 		ArrayList<Buff> deleted_buffs = new ArrayList<Buff>();
 		
@@ -314,7 +336,7 @@ public class Game
 					s.changeCurrentCooldown(-1);
 
 			for(Buff b : c.buffs)
-				b.decreaseDuration(deleted_buffs);				//TODO FIXME buffs not refreshing in the correct amount of time now
+				b.decreaseDuration(deleted_buffs);
 		}
 		
 		for(Buff b : deleted_buffs)
