@@ -8,6 +8,7 @@ import buffs.Buff;
 import buffs.StatBuff;
 import buffs.StunBuff;
 import spells.Spell;
+import src.Game;
 
 public class Characters 
 {	
@@ -406,5 +407,10 @@ public class Characters
 			amount = r.nextInt(31 - (10 * hunker_downs_used)) + 30;
 		this.buffs.add(new StatBuff("Hunker Down", "Defense increased  by " + amount, this, 2, 3, amount));
 		System.out.println(this.getName() + " hunkered down, increasing its defense by " + amount + " for 2 turns.\n");
+	}
+	public void die()
+	{
+		Game.characters.remove(this);
+		System.out.println(this + " died.\n");
 	}
 }

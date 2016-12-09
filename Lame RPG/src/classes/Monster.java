@@ -20,5 +20,10 @@ public class Monster extends Characters
 		super(initHP, initMana, initDmg, initAtk, initDef, initMagDef, initName);
 		monster_type = initMonster_type;
 	}
-
+	@Override
+	public void die()
+	{
+		super.die();
+		Game.monsters.remove(this);
+	}
 }

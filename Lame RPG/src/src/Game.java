@@ -31,7 +31,7 @@ public class Game
 	public  static Random rand = new Random();
 	private static ArrayList<Integer> options = new ArrayList<Integer>();
 	public  static ArrayList<Monster> monsters = new ArrayList<Monster>();
-	private static ArrayList<Characters> characters = new ArrayList<Characters>();
+	public  static ArrayList<Characters> characters = new ArrayList<Characters>();
 
 	private static boolean game_over = false;
 	private static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -294,13 +294,7 @@ public class Game
 			if(!c.isAlive())
 				removed_characters.add(c);
 		for(Characters c : removed_characters)
-		{
-			characters.remove(c);
-			if(c instanceof Monster)
-				monsters.remove((Monster) c);
-			
-			System.out.println(c + " died.\n");
-		}
+			c.die();
 	}
 
 	private static boolean battleOver()
