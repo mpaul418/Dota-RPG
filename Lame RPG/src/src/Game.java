@@ -48,6 +48,8 @@ public class Game
 			if(player.isAlive())
 				battle();
 		}
+		
+		System.out.println("Game over! Maybe next time :(");
 	}
 	
 	private static void setHero()
@@ -163,75 +165,40 @@ public class Game
 				}
 			}while(!working);
 			if(!options.contains(tempint))
-			{
 				System.out.println("You can't go that way!");
-				showRoomChoices();
-			}
 		}while(!options.contains(tempint));
 		choice = tempint;
 
 		if(choice == 1)
-			current_column += 1;
+			current_row += 1;			// go right
 		else if(choice == 2)
-			current_row += 1;
+			current_column += 1;		// go down
 		else if(choice == 3)
-			current_column -= 1;
+			current_row -= 1;			// go left
 		else if(choice == 4)
-			current_row -= 1;
+			current_column -= 1;		// go up
 	}
 	private static void showRoomChoices()
 	{
 		options = new ArrayList<Integer>();
+		
+		for(@SuppressWarnings("unused") int integer : options) //are these two lines unnecessary??
+			options.remove(0);
+		
 		options.add(1);
 		options.add(2);
 		options.add(3);
 		options.add(4);
-		if(current_row == 0)
-		{
-			if(options.contains(3))
-				for(int i = 0; i < options.size(); i++)
-					if(options.get(i) == 3)
-					{
-						options.remove(i);
-						break;
-					}
-		}
-		else
-		{
-			if(current_row == 4)
-			{
-				if(options.contains(1))
-					for(int i = 0; i < options.size(); i++)
-						if(options.get(i) == 1)
-						{
-							options.remove(i);
-							break;
-						}
-			}
-		}
-		if(current_column == 0)
-		{
-			if(options.contains(4))
-				for(int i = 0; i < options.size(); i++)
-					if(options.get(i) == 4)
-					{
-						options.remove(i);
-						break;
-					}
-		}
-		else
-		{
-			if(current_column == 4)
-			{
-				if(options.contains(2))
-					for(int i = 0; i < options.size(); i++)
-						if(options.get(i) == 2)
-						{
-							options.remove(i);
-							break;
-						}
-			}
-		}
+		
+		if(current_row == 0)					// when you cannot go left
+			options.remove((Integer) 3);
+		else if(current_row == 4) 				// when you cannot go right
+			options.remove((Integer) 1);
+		if(current_column == 0) 				// when you cannot go up
+			options.remove((Integer) 4);
+		else if(current_column == 4) 			// when you cannot go down
+				options.remove((Integer) 2);
+		
 		if(options.contains(1))
 			System.out.println("1: Go right.");
 		if(options.contains(2))
@@ -258,7 +225,7 @@ public class Game
 
 		turn_number = 0;
 		
-		do
+		while(!battleOver())
 		{
 			turn_number++;
 			System.out.println("------------------- Turn " + turn_number + " -------------------\n");
@@ -280,7 +247,9 @@ public class Game
 				}
 			
 			checkForDeaths();
-		}while(!battleOver());
+		}
+		
+		System.out.println("------------------- Battle Over -------------------\n");
 
 		while(characters.size() > 0)// removes all characters from this array at the end of the battle
 			characters.remove(0);

@@ -345,9 +345,9 @@ public class Characters
 	}
 	public void dealMagicDamage(int incoming_damage, Characters c)
 	{
-		int damage_done = (int)(Math.round(c.getMagicDefense() * incoming_damage));
+		int damage_done = (int)(Math.round((1 - c.getMagicDefense()) * incoming_damage));
 		this.damage(c, damage_done);
-		System.out.println(this + "dealt " + damage_done + " magic damage to " + c + ".");
+		System.out.println(this + " dealt " + damage_done + " magic damage to " + c + ".");
 	}
 	
 	public void printAllBuffs()
