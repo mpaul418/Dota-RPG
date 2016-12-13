@@ -35,4 +35,10 @@ public class Sven extends Player
 		//warcry.addToSpellbook(this);
 		//unlearned_spells.add(gods_strength);
 	}
+	
+	@Override
+	public String getCharClass()
+	{
+			return "Sven";
+	}
 }

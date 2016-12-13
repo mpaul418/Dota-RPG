@@ -336,7 +336,7 @@ public class Characters
 				System.out.println();
 			}
 			else
-				System.out.println(this + "'s attack was evaded!");
+				System.out.println(this + "'s attack was evaded by " + c + "!");
 		}
 		else
 		{
@@ -358,32 +358,6 @@ public class Characters
 		else
 			for(Buff b : buffs)
 				System.out.println("\t" + b);
-	}
-	
-	public void levelUp()
-	{
-		this.level++;
-		
-		System.out.println(this + " just leveled up!!"
-				+ "/nHP increased by " + (int)Math.round(0.25 * defaultHP)
-				+ "/nMana increased by " + (int)Math.round(0.25 * defaultMana) + ".");
-
-		defaultHP = (int)Math.round(1.25 * defaultHP);
-		HP = defaultHP;
-		defaultMana = (int)Math.round(1.25 * defaultMana);
-		mana = defaultMana;
-		defaultDamage = (int)Math.round(1.25 * defaultDamage);
-		damage = defaultDamage;
-		
-		for(Spell s : unlearned_spells)
-		{
-			if(this.level >= s.getLevelRequirement())
-			{
-				spellbook.add(s);
-				unlearned_spells.remove(s);
-				System.out.println(this + " just learned " + s + ".");
-			}
-		}
 	}
 	
 	public boolean allSpellsUncastable()

@@ -36,4 +36,10 @@ public class PhantomAssassin extends Player
 		//blur.addToSpellbook(this);
 		//unlearned_spells.add(coup_de_grace);
 	}
+	
+	@Override
+	public String getCharClass()
+	{
+			return "Phantom Assassin";
+	}
 }

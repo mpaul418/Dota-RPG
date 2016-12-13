@@ -43,4 +43,10 @@ public class Invoker extends Player
 		//ghost_walk.addToSpellbook(this);
 		//unlearned_spells.add(deafening_blast);
 	}
+	
+	@Override
+	public String getCharClass()
+	{
+			return "Invoker";
+	}
 }

@@ -49,4 +49,10 @@ public class AntiMage extends Player
 		//spell_shield.addToSpellbook(this);
 		//unlearned_spells.add(mana_void);
 	}
+	
+	@Override
+	public String getCharClass()
+	{
+			return "Anti-Mage";
+	}
 }
