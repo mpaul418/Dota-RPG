@@ -10,7 +10,7 @@ public class GreatCleave extends PassiveSpell
 	{
 		super("Great Cleave", "Deal 50% of your damage to two random enemies other than your attack target", 0, 1, -1, c);
 	}
-//TODO
+
 	@Override
 	public void addToSpellbook(Characters c)
 	{

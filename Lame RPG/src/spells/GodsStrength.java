@@ -8,7 +8,7 @@ public class GodsStrength extends ActiveSpell
 
 	public GodsStrength(Characters c)
 	{
-		super("God's Strength", "Channel your rogue strength, gaining bonus damage for 3 turns", 20, 6, 8, c, false);
+		super("God's Strength", "Channel your rogue strength, gaining bonus damage for 3 turns", 20, 4, 8, c, false);
 	}
 
 	@Override

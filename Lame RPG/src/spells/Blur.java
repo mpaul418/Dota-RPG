@@ -8,7 +8,7 @@ public class Blur extends PassiveSpell
 
 	public Blur(Characters c)
 	{
-		super("Blur", "Gain a 50% chance to evade physical attacks", 0, 1, -1, c);
+		super("Blur", "Gain a 50% chance to evade physical attacks", 0, 2, -1, c);
 	}
 	
 	@Override

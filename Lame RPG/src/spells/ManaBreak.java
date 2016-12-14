@@ -8,7 +8,7 @@ public class ManaBreak extends PassiveSpell
 
 	public ManaBreak(Characters c)
 	{
-		super("Mana Break", "Burn 25 mana with each attack, dealing 60% of mana burned as damage", 0, 1, -1, c);
+		super("Mana Break", "Burn 25 mana with each attack, dealing 60% of mana burned as damage", 0, 2, -1, c);
 	}
 
 	@Override

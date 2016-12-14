@@ -8,7 +8,7 @@ public class PhantomStrike extends ActiveSpell
 
 	public PhantomStrike(Characters c)
 	{
-		super("Phantom Strike", "Jump towards an enemy, attacking them and gaining bonus defense for two turns", 30, 1, 5, c, true);
+		super("Phantom Strike", "Jump towards an enemy, attacking them and gaining bonus defense for two turns", 30, 3, 5, c, true);
 	}
 
 	@Override
