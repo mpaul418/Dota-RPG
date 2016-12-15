@@ -32,7 +32,17 @@ public class StormHammer extends ActiveSpell
 		}
 		else if(CHARACTER.getLevel() == 3)
 		{
-			if(Game.monsters.get(0) == target) //TODO make the storm hammer hit the target and the monster directly to the left(right if it is at index 0)
+			int index = -1;
+			for(int i = 0; i < Game.monsters.size(); i++)
+			{
+				if(Game.monsters.get(i) == target)
+				{
+					index = i;
+					break;
+				}
+			}
+			
+			if(index == 0) // the storm hammer should hit the target and the monster directly to the left(right if it is at index 0)
 			{
 				CHARACTER.dealMagicDamage(25, target);
 				target.buffs.add(new StunBuff(this.NAME, "Storm Hammer Stun", target, 2));
@@ -43,10 +53,10 @@ public class StormHammer extends ActiveSpell
 					Game.monsters.get(1).buffs.add(new StunBuff(this.NAME, "Storm Hammer Stun", Game.monsters.get(1), 2));
 				}
 			}
-			else
+			else if(index > 0)
 			{
-				CHARACTER.dealMagicDamage(25, Game.monsters.get(0));
-				Game.monsters.get(0).buffs.add(new StunBuff(this.NAME, "Storm Hammer Stun", Game.monsters.get(0), 2));
+				CHARACTER.dealMagicDamage(25, Game.monsters.get(index - 1));
+				Game.monsters.get(index - 1).buffs.add(new StunBuff(this.NAME, "Storm Hammer Stun", Game.monsters.get(0), 2));
 				
 				CHARACTER.dealMagicDamage(25, target);
 				target.buffs.add(new StunBuff(this.NAME, "Storm Hammer Stun", target, 2));
