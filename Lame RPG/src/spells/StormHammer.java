@@ -70,5 +70,4 @@ public class StormHammer extends ActiveSpell
 				m.buffs.add(new StunBuff(this.NAME, "Storm Hammer Stun", m, 2));
 			}
 	}
-
 }
