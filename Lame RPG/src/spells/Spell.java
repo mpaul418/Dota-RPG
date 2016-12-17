@@ -12,6 +12,8 @@ public abstract class Spell
 	public final boolean TARGETED;
 	public int max_cooldown;
 	public int current_cooldown = 0;
+	public int spell_level = 0; //TODO implement spell leveling for all spells
+	public int max_spell_level = 3; // this can be overridden
 	
 	public Spell(String tempname, String dsc, int manacost, int level_rq, int cd, Characters c, boolean targetable)
 	{
@@ -22,6 +24,7 @@ public abstract class Spell
 		max_cooldown = cd;
 		CHARACTER = c;
 		TARGETED = targetable;
+		spell_level = 1;
 		
 		if(CHARACTER.getLevel() >= LEVEL_REQUIREMENT)
 			this.addToSpellbook(CHARACTER);
@@ -74,5 +77,14 @@ public abstract class Spell
 	{
 		CHARACTER.changeMana(-MANA_COST);
 		current_cooldown = max_cooldown;
+	}
+	
+	public void levelUp()
+	{
+		if(spell_level < max_spell_level)
+		{
+			spell_level++;
+			System.out.println(this + " is now level " + spell_level + ".");
+		}
 	}
 }

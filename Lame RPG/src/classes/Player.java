@@ -35,6 +35,7 @@ public abstract class Player extends Characters
 	private void levelUp()
 	{
 		this.level++;
+		xp_level_rq += 25 * level + 5 * (level - 1)^2; //xp increases by 5(x - 1)^2 + 25x every level. 1:100, 2: 155, 3: 250, 4: 395, etc
 		
 		System.out.println(this + " just leveled up!!"
 				+ "/nHP increased by " + (int)Math.round(0.25 * defaultHP)
@@ -58,6 +59,16 @@ public abstract class Player extends Characters
 			}
 		}
 		
-		xp_level_rq += 25 * level + 5 * (level - 1)^2; //xp increases by 5(x - 1)^2 + 25x every level. 1:100, 2: 155, 3: 250, 4: 395, etc
+		for(Spell s : this.spellbook)
+			s.levelUp();
+		/*if(this instanceof AntiMage) // levels up skills TODO
+		{
+			if(this.level == 2 || this.level == 3)
+			{
+				((Blink) ((AntiMage) this).blink).defense_reduction += 10; // defense reduction is 30/40/50/50/50/etc
+				System.out.println("\n Blink defense reduction increased by 10!");
+			}
+			//TODO finish implementing spell upgrades for all classes
+		}*/
 	}
 }
