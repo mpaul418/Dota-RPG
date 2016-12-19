@@ -24,13 +24,12 @@ public class StormHammer extends ActiveSpell
 	{
 		this.castWithTargetMessage(target);
 		
-		if(CHARACTER.getLevel() == 2)
+		if(spell_level == 1)
 		{
-			
 			CHARACTER.dealMagicDamage(25, target);
 			target.buffs.add(new StunBuff(this.NAME, "Storm Hammer Stun", target, 2));
 		}
-		else if(CHARACTER.getLevel() == 3)
+		else if(spell_level == 2)
 		{
 			int index = -1;
 			for(int i = 0; i < Game.monsters.size(); i++)
@@ -63,7 +62,7 @@ public class StormHammer extends ActiveSpell
 
 			}
 		}
-		else if(CHARACTER.getLevel() >= 4)
+		else if(spell_level >= 3)
 			for(Monster m : Game.monsters)
 			{
 				CHARACTER.dealMagicDamage(25, m);

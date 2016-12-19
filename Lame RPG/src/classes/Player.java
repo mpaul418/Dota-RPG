@@ -49,6 +49,9 @@ public abstract class Player extends Characters
 		defaultDamage = (int)Math.round(1.25 * defaultDamage);
 		damage += (int)Math.round(0.25 * defaultDamage); //FIXME potential bugs with damage increase bugs?
 		
+		for(Spell s : this.spellbook)
+			s.levelUp();
+		
 		for(Spell s : unlearned_spells)
 		{
 			if(this.level >= s.getLevelRequirement())
@@ -58,17 +61,5 @@ public abstract class Player extends Characters
 				System.out.println(this + " just learned " + s + ".");
 			}
 		}
-		
-		for(Spell s : this.spellbook)
-			s.levelUp();
-		/*if(this instanceof AntiMage) // levels up skills TODO
-		{
-			if(this.level == 2 || this.level == 3)
-			{
-				((Blink) ((AntiMage) this).blink).defense_reduction += 10; // defense reduction is 30/40/50/50/50/etc
-				System.out.println("\n Blink defense reduction increased by 10!");
-			}
-			//TODO finish implementing spell upgrades for all classes
-		}*/
 	}
 }

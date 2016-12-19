@@ -21,6 +21,16 @@ public abstract class Buff
 			duration = d;
 	}
 	
+	public String getName()
+	{
+		return name;
+	}
+	
+	public String getDescription()
+	{
+		return desc;
+	}
+	
 	public void decreaseDuration()
 	{
 		if(duration >= 1)

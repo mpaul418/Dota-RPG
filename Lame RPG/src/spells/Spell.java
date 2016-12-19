@@ -79,12 +79,15 @@ public abstract class Spell
 		current_cooldown = max_cooldown;
 	}
 	
-	public void levelUp()
+	public boolean levelUp()
 	{
 		if(spell_level < max_spell_level)
 		{
 			spell_level++;
 			System.out.println(this + " is now level " + spell_level + ".");
+			return true;
 		}
+		else
+			return false;
 	}
 }

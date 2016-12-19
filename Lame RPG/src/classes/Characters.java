@@ -287,8 +287,8 @@ public class Characters
 					currentDefense = r.nextInt(c.getDefense() + 1);
 				
 				
-				for(int i = 0; i < buffs.size(); i++) //checks for a crit with every attack buff, 
-					//can probably be optimized for only attack buffs that CAN crit
+				for(int i = 0; i < buffs.size(); i++) 	//checks for a crit with every attack buff, 
+														//can probably be optimized for only attack buffs that CAN crit
 				{
 					if(buffs.get(i) instanceof AttackBuff && !attack_evaded)
 					{

@@ -20,24 +20,31 @@ public class ManaBreak extends PassiveSpell
 	}
 	
 	@Override
-	public void levelUp()
+	public boolean levelUp()
 	{
-		for(int i = 0; i < this.CHARACTER.buffs.size(); i++)
+		boolean level_up = super.levelUp();
+		
+		if(level_up)
 		{
-			if(CHARACTER.buffs.get(i).toString() == this.NAME)
+			for(int i = 0; i < this.CHARACTER.buffs.size(); i++)
 			{
-				CHARACTER.buffs.get(i).deletThis();
-				
-				if(spell_level == 2)
-					this.CHARACTER.buffs.add(new AttackBuff(this.NAME, this.NAME + " mana burn.",
-							this.CHARACTER, -1, 20, 0.6, 0, 0, 0, 0));
-				else if(spell_level >= 3)
-					this.CHARACTER.buffs.add(new AttackBuff(this.NAME, this.NAME + " mana burn.",
-						this.CHARACTER, -1, 25, 0.6, 0, 0, 0, 0));
-				
-				System.out.println("This is working!!! (delete this)");
-				break;
+				if(CHARACTER.buffs.get(i).getName() == this.NAME)
+				{
+					CHARACTER.buffs.get(i).deletThis();
+					
+					if(spell_level == 2)
+						this.CHARACTER.buffs.add(new AttackBuff(this.NAME, this.NAME + " mana burn.",
+								this.CHARACTER, -1, 20, 0.6, 0, 0, 0, 0));
+					else if(spell_level >= 3)
+						this.CHARACTER.buffs.add(new AttackBuff(this.NAME, this.NAME + " mana burn.",
+							this.CHARACTER, -1, 25, 0.6, 0, 0, 0, 0));
+					
+					System.out.println("This is working!!! (delete this)");
+					break;
+				}
 			}
+			return true;
 		}
+		else return false;
 	}
 }
