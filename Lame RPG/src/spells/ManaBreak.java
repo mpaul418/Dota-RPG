@@ -35,16 +35,16 @@ public class ManaBreak extends PassiveSpell
 					if(spell_level == 2)
 						this.CHARACTER.buffs.add(new AttackBuff(this.NAME, this.NAME + " mana burn.",
 								this.CHARACTER, -1, 20, 0.6, 0, 0, 0, 0));
-					else if(spell_level >= 3)
+					else if(spell_level == 3)
 						this.CHARACTER.buffs.add(new AttackBuff(this.NAME, this.NAME + " mana burn.",
 							this.CHARACTER, -1, 25, 0.6, 0, 0, 0, 0));
 					
-					System.out.println("This is working!!! (delete this)");
+					System.out.println("This(mana break) is working!!! (delete this)");
 					break;
 				}
 			}
-			return true;
 		}
-		else return false;
+		
+		return level_up;
 	}
 }

@@ -35,7 +35,7 @@ public class SpellShield extends PassiveSpell
 					if(spell_level == 2)
 						this.CHARACTER.buffs.add(new StatBuff(this.NAME, this.NAME + " magic resist.",
 								this.CHARACTER, -1, 5, 44.0));
-					else if(spell_level >= 3)
+					else if(spell_level == 3)
 						this.CHARACTER.buffs.add(new StatBuff(this.NAME, this.NAME + " magic resist.",
 								this.CHARACTER, -1, 5, 66.0));
 					
@@ -43,8 +43,8 @@ public class SpellShield extends PassiveSpell
 					break;
 				}
 			}
-			return true;
 		}
-		else return false;
+		
+		return level_up;
 	}
 }

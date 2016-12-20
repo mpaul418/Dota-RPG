@@ -13,7 +13,6 @@ public class AttackedBuff extends Buff
 	{
 		super(n, dsc, c, d);
 		dodge_chance = dodge_c;
-		// TODO Auto-generated constructor stub
 	}
 
 	public boolean attackEvaded()
@@ -24,5 +23,4 @@ public class AttackedBuff extends Buff
 		else
 			return false;
 	}
-
 }

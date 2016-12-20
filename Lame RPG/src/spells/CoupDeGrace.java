@@ -15,7 +15,36 @@ public class CoupDeGrace extends PassiveSpell
 	public void addToSpellbook(Characters c)
 	{
 		super.addToSpellbook(c);
-		this.CHARACTER.buffs.add(new AttackBuff(this.NAME, this.NAME + " crit chance bonus.",
-				this.CHARACTER, -1, 0, 0, 15, 0.75, 0, 0.0));//TODO remove crit and dodge bonuses from stat buffs- they are attack/attacked buffs
+		this.CHARACTER.buffs.add(new AttackBuff(this.NAME, this.NAME + " crit chance.",
+				this.CHARACTER, -1, 0, 0, 15, 1.75, 0, 0.0));//TODO remove crit and dodge bonuses from stat buffs- they are attack/attacked buffs
+	}
+	
+	@Override
+	public boolean levelUp()
+	{
+		boolean level_up = super.levelUp();
+		
+		if(level_up)
+		{
+			for(int i = 0; i < this.CHARACTER.buffs.size(); i++)
+			{
+				if(CHARACTER.buffs.get(i).getName() == this.NAME)
+				{
+					CHARACTER.buffs.get(i).deletThis();
+					
+					if(spell_level == 2)
+						this.CHARACTER.buffs.add(new AttackBuff(this.NAME, this.NAME + " crit chance.",
+								this.CHARACTER, -1, 0, 0, 15, 2.25, 0, 0.0));
+					else if(spell_level == 3)
+						this.CHARACTER.buffs.add(new AttackBuff(this.NAME, this.NAME + " crit chance.",
+								this.CHARACTER, -1, 0, 0, 15, 2.75, 0, 0.0));
+					
+					System.out.println("This(mana break) is working!!! (delete this)");
+					break;
+				}
+			}
+		}
+		
+		return level_up;
 	}
 }

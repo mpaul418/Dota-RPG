@@ -62,7 +62,7 @@ public class StormHammer extends ActiveSpell
 
 			}
 		}
-		else if(spell_level >= 3)
+		else if(spell_level == 3)
 			for(Monster m : Game.monsters)
 			{
 				CHARACTER.dealMagicDamage(25, m);

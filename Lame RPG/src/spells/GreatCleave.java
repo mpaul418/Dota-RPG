@@ -33,18 +33,18 @@ public class GreatCleave extends PassiveSpell
 					CHARACTER.buffs.get(i).deletThis();
 					
 					if(spell_level == 2)
-						this.CHARACTER.buffs.add(new AttackBuff(this.NAME, this.NAME + " mana burn.",
-								this.CHARACTER, -1, 0, 0, 0, 0, 0, 0.45));
-					else if(spell_level >= 3)
-						this.CHARACTER.buffs.add(new AttackBuff(this.NAME, this.NAME + " mana burn.",
-							this.CHARACTER, -1, 0, 0, 0, 0, 0, 0.60));
+						this.CHARACTER.buffs.add(new AttackBuff(this.NAME, this.NAME + " cleave.",
+								this.CHARACTER, -1, 0, 0, 0, 0, 2, 0.45));
+					else if(spell_level == 3)
+						this.CHARACTER.buffs.add(new AttackBuff(this.NAME, this.NAME + " cleave.",
+							this.CHARACTER, -1, 0, 0, 0, 0, 2, 0.60));
 					
 					System.out.println("This is working!!! (delete this)");
 					break;
 				}
 			}
-			return true;
 		}
-		else return false;
+		
+		return level_up;
 	}
 }

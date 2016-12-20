@@ -31,7 +31,7 @@ public class ManaVoid extends ActiveSpell
 				CHARACTER.dealMagicDamage((int) Math.round(0.6 * mana_missing), m);
 			else if(spell_level == 2)
 				CHARACTER.dealMagicDamage((int) Math.round(0.8 * mana_missing), m);
-			else if(spell_level >= 3)
+			else if(spell_level == 3)
 				CHARACTER.dealMagicDamage(mana_missing, m);
 		}
 	}

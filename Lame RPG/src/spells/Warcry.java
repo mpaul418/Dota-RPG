@@ -45,8 +45,8 @@ public class Warcry extends ActiveSpell
 		{
 			defense_increase += 5;
 			defense_decrease += 5;
-			return true;
 		}
-		else return false;
+		
+		return level_up;
 	}
 }

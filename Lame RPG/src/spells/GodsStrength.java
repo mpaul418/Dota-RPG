@@ -32,10 +32,8 @@ public class GodsStrength extends ActiveSpell
 		boolean level_up = super.levelUp();
 		
 		if(level_up)
-		{
 			damage_multiplier += 0.50;
-			return true;
-		}
-		else return false;
+		
+		return level_up;
 	}
 }

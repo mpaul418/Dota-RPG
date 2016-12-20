@@ -286,9 +286,8 @@ public class Characters
 				if(c.getDefense() > 0)
 					currentDefense = r.nextInt(c.getDefense() + 1);
 				
-				
-				for(int i = 0; i < buffs.size(); i++) 	//checks for a crit with every attack buff, 
-														//can probably be optimized for only attack buffs that CAN crit
+				 											//checks for a crit with every attack buff, 
+				for(int i = 0; i < buffs.size(); i++)		//can probably be optimized for only attack buffs that CAN crit
 				{
 					if(buffs.get(i) instanceof AttackBuff && !attack_evaded)
 					{
@@ -306,7 +305,13 @@ public class Characters
 					if(critical_hit)
 					{
 						damage_done = (int)Math.round(((AttackBuff) buffs.get(crit_buff_index)).getCritModifier() * damage) - currentDefense;
-						System.out.print("Critical hit!! ");
+						if(damage_done > 0)
+							System.out.print("Critical hit!! ");
+						else
+						{
+							damage_done = 5;
+							System.out.println("Critical graze!");
+						}
 					}
 					else
 						damage_done = damage - currentDefense;
