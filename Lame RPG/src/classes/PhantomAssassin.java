@@ -24,9 +24,9 @@ public class PhantomAssassin extends Player
 		//unlearned_spells.add(coup_de_grace);
 	}
 	
-	public PhantomAssassin(int nHP, int nMana, int nDmg, int nAtk, int nDfs, double nMgDef, String initName)
+	public PhantomAssassin(int nHP, int nMana, int nDmg, int nAcc, int nDfs, double nMgDef, String initName)
 	{
-		super(nHP, nMana, nDmg, nAtk, nDfs, 1, nMgDef, initName);
+		super(nHP, nMana, nDmg, nAcc, nDfs, 1, nMgDef, initName);
 		stifling_dagger = new StiflingDagger(this);
 		phantom_strike = new PhantomStrike(this);
 		blur = new Blur(this);

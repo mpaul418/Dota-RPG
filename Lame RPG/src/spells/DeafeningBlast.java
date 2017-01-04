@@ -22,8 +22,8 @@ public class DeafeningBlast extends ActiveSpell
 		for(Monster m : Game.monsters)
 		{
 			attack_reduction = Game.rand.nextInt(31) + 40;
-			if(attack_reduction > m.getAttack())
-				attack_reduction = m.getAttack();
+			if(attack_reduction > m.getAccuracy())
+				attack_reduction = m.getAccuracy();
 			
 			m.buffs.add(new StatBuff(this.NAME, "Attack reduced by " + attack_reduction, m, 2, 2, -attack_reduction));
 			

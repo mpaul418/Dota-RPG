@@ -23,9 +23,9 @@ public class Sven extends Player
 		//unlearned_spells.add(gods_strength);
 	}
 	
-	public Sven(int nHP, int nMana, int nDmg, int nAtk, int nDfs, double nMgDef, String initName)
+	public Sven(int nHP, int nMana, int nDmg, int nAcc, int nDfs, double nMgDef, String initName)
 	{
-		super(nHP, nMana, nDmg, nAtk, nDfs, 1, nMgDef, initName);
+		super(nHP, nMana, nDmg, nAcc, nDfs, 1, nMgDef, initName);
 		storm_hammer = new StormHammer(this);
 		great_cleave = new GreatCleave(this);
 		warcry = new Warcry(this);

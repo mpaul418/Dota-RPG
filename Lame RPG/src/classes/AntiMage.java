@@ -30,9 +30,9 @@ public class AntiMage extends Player
 		//unlearned_spells.add(mana_void);
 	}
 	
-	public AntiMage(int nHP, int nMana, int nDmg, int nAtk, int nDfs, double nMgDef, String initName)
+	public AntiMage(int nHP, int nMana, int nDmg, int nAcc, int nDfs, double nMgDef, String initName)
 	{
-		super(nHP, nMana, nDmg, nAtk, nDfs, 1, nMgDef, initName);
+		super(nHP, nMana, nDmg, nAcc, nDfs, 1, nMgDef, initName);
 		//HP = nHP;
 		//mana = nMana;
 		//damage = 30;

@@ -12,9 +12,9 @@ public abstract class Player extends Characters
 	
 	public int character_class, gold, xp, xp_level_rq;
 	
-	public Player(int initHP, int initMana, int initDmg, int initAtk, int initDef, int playerClass, double initMagDef, String initName) 
+	public Player(int initHP, int initMana, int initDmg, int initAcc, int initDef, int playerClass, double initMagDef, String initName) 
 	{
-		super(initHP, initMana, initDmg, initAtk, initDef, initMagDef, initName);
+		super(initHP, initMana, initDmg, initAcc, initDef, initMagDef, initName);
 		character_class = playerClass;
 		gold = 0;
 		xp = 0;

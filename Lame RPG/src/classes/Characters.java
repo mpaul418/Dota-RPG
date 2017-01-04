@@ -18,12 +18,11 @@ public class Characters
 	protected int mana, defaultMana;
 	protected int level;
 	protected int damage, defaultDamage;
-	protected int attack, defaultAttack;
+	protected int accuracy, defaultAccuracy;
 	protected int defense, defaultDefense;
 	protected double magicDefense, defaultMagicDefense;
 	protected int critChance, defaultCritChance;
-	protected double critModifier, defaultCritModifier;
-	protected int dodgeChance, defaultDodgeChance; 
+	protected double critModifier, defaultCritModifier; // TODO is this used? 
 	protected boolean alive;
 	protected int damage_dealt = 0;
 	public int hunker_downs_used = 0;
@@ -31,7 +30,7 @@ public class Characters
 	public ArrayList<Spell> unlearned_spells = new ArrayList<Spell>();
 	public ArrayList<Buff> buffs = new ArrayList<Buff>();
 	
-	public Characters(int initHP, int initMana, int initDmg, int initAtk, int initDef, double initMagDef, String initName)
+	public Characters(int initHP, int initMana, int initDmg, int initAcc, int initDef, double initMagDef, String initName)
 	{
 		defaultHP = initHP;
 		HP = initHP; 
@@ -41,8 +40,8 @@ public class Characters
 		defaultDamage = initDmg;//note- if more default stats 
 		//should be able to be changed, add numbers for all + change in buff class
 		damage = initDmg;//buff- 1
-		defaultAttack = initAtk;
-		attack = initAtk;//buff- 2
+		defaultAccuracy = initAcc;
+		accuracy = initAcc;//buff- 2
 		defaultDefense = initDef;	
 		defense = initDef;//buff- 3
 		defaultMagicDefense = initMagDef;
@@ -81,13 +80,13 @@ public class Characters
 	{
 		return defaultDamage;
 	}
-	public int getAttack()
+	public int getAccuracy()
 	{
-		return attack;
+		return accuracy;
 	}
-	public int getDefaultAttack()
+	public int getDefaultAccuracy()
 	{
-		return defaultAttack;
+		return defaultAccuracy;
 	}
 	public int getDefense()
 	{
@@ -120,14 +119,6 @@ public class Characters
 	public double getDefaultCritModifier()
 	{
 		return defaultCritModifier;
-	}
-	public int getDodgeChance()
-	{
-		return dodgeChance;
-	}
-	public int getDefaultDodgeChance()
-	{
-		return defaultDodgeChance;
 	}
 	public String getName()
 	{
@@ -196,16 +187,16 @@ public class Characters
 		defaultMagicDefense += amount;
 		magicDefense += amount;
 	}
-	public void changeAttack(int amount)
+	public void changeAccuracy(int amount)
 	{
-		attack += amount;
-		if(attack > defaultAttack)
-			attack = defaultAttack;
+		accuracy += amount;
+		if(accuracy > defaultAccuracy)
+			accuracy = defaultAccuracy;
 	}
-	public void changeDefaultAttack(int amount)
+	public void changeDefaultAccuracy(int amount)
 	{
-		defaultAttack += amount;
-		attack += amount;
+		defaultAccuracy += amount;
+		accuracy += amount;
 	}
 	public void changeCritChance(int amount)
 	{
@@ -224,15 +215,6 @@ public class Characters
 	{
 		defaultCritModifier += amount;
 		critModifier += amount;
-	}
-	public void changeDodgeChance(int amount)
-	{
-		dodgeChance += amount;
-	}
-	public void changeDefaultDodgeChance(int amount)
-	{
-		defaultDodgeChance += amount;
-		dodgeChance += amount;
 	}
 	public boolean isAlive()
 	{
@@ -268,7 +250,7 @@ public class Characters
 		boolean critical_hit, attack_evaded;
 		attack_evaded = critical_hit = false;
 		
-		temp = r.nextInt(attack + 1);
+		temp = r.nextInt(accuracy + 1);
 		if(temp >= 10) // checks if attack hits
 		{
 			for(Buff b : c.buffs)
@@ -350,7 +332,7 @@ public class Characters
 	}
 	public void dealMagicDamage(int incoming_damage, Characters c)
 	{
-		int damage_done = (int)(Math.round((1 - c.getMagicDefense()) * incoming_damage));
+		int damage_done = (int)(Math.round((1.0 - c.getMagicDefense()) * incoming_damage));
 		this.damage(c, damage_done);
 		System.out.println(this + " dealt " + damage_done + " magic damage to " + c + ".");
 	}
@@ -380,10 +362,12 @@ public class Characters
 	}
 	public void hunkerDown()
 	{
-		int amount = 15;
+		int amount;
 		hunker_downs_used++;
 		if(hunker_downs_used <= 3)
 			amount = r.nextInt(31 - (10 * hunker_downs_used)) + 30;
+		else
+			amount = 15;
 		this.buffs.add(new StatBuff("Hunker Down", "Defense increased  by " + amount, this, 2, 3, amount));
 		System.out.println(this.getName() + " hunkered down, increasing its defense by " + amount + " for 2 turns.\n");
 	}

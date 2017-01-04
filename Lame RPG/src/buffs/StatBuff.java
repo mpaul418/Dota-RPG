@@ -23,7 +23,7 @@ public class StatBuff extends Buff
 			}
 			case 2:
 			{
-				CHARACTER.changeAttack(int_modifier);
+				CHARACTER.changeAccuracy(int_modifier);
 				break;
 			}
 			case 3:
@@ -81,7 +81,7 @@ public class StatBuff extends Buff
 				}
 				case 2:
 				{
-					CHARACTER.changeAttack(-int_modifier);
+					CHARACTER.changeAccuracy(-int_modifier);
 					break;
 				}
 				case 3:

@@ -21,7 +21,7 @@ public class Blink extends ActiveSpell
 		
 		for(Monster m : Game.monsters)
 		{
-			m.buffs.add(new StatBuff(NAME, "Defence reduced by " + defense_reduction, m, 3, 3, -defense_reduction));
+			m.buffs.add(new StatBuff(NAME, "Defense reduced by " + defense_reduction, m, 3, 3, -defense_reduction));
 			System.out.println(m.getName() + "'s defense was reduced by " + defense_reduction + "!");
 		}
 		

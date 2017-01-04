@@ -31,9 +31,9 @@ public class Invoker extends Player
 		//unlearned_spells.add(deafening_blast);
 	}
 
-	public Invoker(int nHP, int nMana, int nDmg, int nAtk, int nDfs, double nMgDef, String initName)
+	public Invoker(int nHP, int nMana, int nDmg, int nAcc, int nDfs, double nMgDef, String initName)
 	{
-		super(nHP, nMana, nDmg, nAtk, nDfs, 1, nMgDef, initName);
+		super(nHP, nMana, nDmg, nAcc, nDfs, 1, nMgDef, initName);
 		sun_strike = new SunStrike(this);
 		emp = new EMP(this);
 		ghost_walk = new GhostWalk(this);
