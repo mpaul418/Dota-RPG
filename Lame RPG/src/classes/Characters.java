@@ -266,7 +266,7 @@ public class Characters
 			{
 				int currentDefense = 0;
 				if(c.getDefense() > 0)
-					currentDefense = r.nextInt(c.getDefense() + 1);
+					currentDefense = r.nextInt(c.getDefense()) + 1;
 				
 				 											//checks for a crit with every attack buff, 
 				for(int i = 0; i < buffs.size(); i++)		//can probably be optimized for only attack buffs that CAN crit
