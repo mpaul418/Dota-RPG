@@ -355,6 +355,7 @@ public class Characters
 			if(!s.isCastable())
 				uncastable_spells++;
 		}
+		
 		if(uncastable_spells == spellbook.size())
 			return true;
 		else
