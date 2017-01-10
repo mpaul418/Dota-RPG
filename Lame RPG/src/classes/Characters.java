@@ -372,6 +372,26 @@ public class Characters
 		this.buffs.add(new StatBuff("Hunker Down", "Defense increased  by " + amount, this, 2, 3, amount));
 		System.out.println(this.getName() + " hunkered down, increasing its defense by " + amount + " for 2 turns.\n");
 	}
+	
+	public void refreshDebuffsAndReduceCooldowns() //FIXME buffs saying they last 1 turn longer than they should?? i moved this from Game so maybe it works now
+	{
+		ArrayList<Buff> deleted_buffs = new ArrayList<Buff>();
+		
+			for(Spell s : this.spellbook)
+				if(s.getCurrentCooldown() > 0)
+					s.changeCurrentCooldown(-1);
+
+			for(Buff b : this.buffs)
+				b.decreaseDuration(deleted_buffs);
+		
+		for(Buff b : deleted_buffs)
+		{
+			b.deletThis();
+		}
+		while(deleted_buffs.size() > 0)
+			deleted_buffs.remove(0);
+	}
+	
 	public void die()
 	{
 		Game.characters.remove(this);

@@ -3,7 +3,6 @@ package src;
 import java.util.ArrayList;
 import java.util.Random;
 
-import buffs.Buff;
 import classes.AntiMage;
 import classes.Characters;
 import classes.Invoker;
@@ -230,8 +229,6 @@ public class Game
 			turn_number++;
 			System.out.println("------------------- Turn " + turn_number + " -------------------\n");
 			
-			refreshDebuffsAndReduceCooldowns();
-			
 			if(!battleOver())
 				takePlayerTurn();
 			
@@ -288,32 +285,13 @@ public class Game
 			return false;
 	}*/
 
-	private static void refreshDebuffsAndReduceCooldowns() //FIXME buffs saying they last 1 turn longer than they should
-	{
-		ArrayList<Buff> deleted_buffs = new ArrayList<Buff>();
-		
-		for(Characters c : characters)
-		{
-			for(Spell s : c.spellbook)
-				if(s.getCurrentCooldown() > 0)
-					s.changeCurrentCooldown(-1);
-
-			for(Buff b : c.buffs)
-				b.decreaseDuration(deleted_buffs);
-		}
-		
-		for(Buff b : deleted_buffs)
-		{
-			b.deletThis();
-		}
-		while(deleted_buffs.size() > 0)
-			deleted_buffs.remove(0);
-	}
-
 	private static void takePlayerTurn()
 	{
 		int choice, target;
 		boolean turn_taken = player.isStunned();
+		
+		player.refreshDebuffsAndReduceCooldowns();
+		
 		if(turn_taken)
 			System.out.println(player + " is stunned.");
 
@@ -443,6 +421,26 @@ public class Game
 		}
 	}
 
+	private static void takeMonsterTurn(Monster m)
+	{
+		m.refreshDebuffsAndReduceCooldowns();
+		
+		if(!m.isStunned())
+		{
+			int temp = rand.nextInt(100) + 1;
+			if(temp <= 70)
+				m.attack(player);
+			else if(temp <= 85 && !m.allSpellsUncastable())
+			{
+				//make an arraylist for castable spells, then randomly pick one to cast. if targeted, select a random target
+			}
+			else
+				m.hunkerDown();
+		}
+		else
+			System.out.println(m + " is stunned.");
+	}
+
 	private static void listSpells(Characters c) //TODO change to character
 	{
 		int spells = 0;
@@ -481,20 +479,6 @@ public class Game
 			System.out.println(m + "'s HP: " + m.getHP() + "/" + m.getDefaultHP()
 			+  "   Mana: " + m.getMana() + "/" + m.getDefaultMana());
 		System.out.println();
-	}
-
-	private static void takeMonsterTurn(Monster m)
-	{
-		if(!m.isStunned())
-		{
-			int temp = rand.nextInt(100) + 1;
-			if(temp >= 30)
-				m.attack(player);
-			else
-				m.hunkerDown();
-		}
-		else
-			System.out.println(m + " is stunned.");
 	}
 
 	private static int getNumberFrom(int start, int end)

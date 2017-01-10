@@ -53,6 +53,6 @@ public class AntiMage extends Player
 	@Override
 	public String getCharClass()
 	{
-			return "Anti-Mage";
+		return "Anti-Mage";
 	}
 }
