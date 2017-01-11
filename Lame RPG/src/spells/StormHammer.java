@@ -22,6 +22,7 @@ public class StormHammer extends ActiveSpell
 	@Override
 	public void cast(Characters target)
 	{
+		this.beforeSpellCast();
 		this.castWithTargetMessage(target);
 		
 		if(spell_level == 1)

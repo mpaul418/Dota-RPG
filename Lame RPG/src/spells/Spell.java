@@ -73,7 +73,7 @@ public abstract class Spell
 		System.out.println(c + " just learned " + this + ".");
 	}
 	
-	public void afterSpellCast()
+	public void beforeSpellCast()
 	{
 		CHARACTER.changeMana(-MANA_COST);
 		current_cooldown = max_cooldown;

@@ -20,8 +20,9 @@ public class SunStrike extends ActiveSpell
 	{
 		int magic_damage;
 		magic_damage = (CHARACTER.getLevel() * CHARACTER.getLevel()) + 3 * CHARACTER.getLevel() + 35;
+		this.beforeSpellCast();
 		this.castWithTargetMessage(target);
+		
 		CHARACTER.dealMagicDamage(magic_damage, target);
 	}
-
 }

@@ -21,7 +21,9 @@ public class PhantomStrike extends ActiveSpell
 	@Override
 	public void cast(Characters target)
 	{
+		this.beforeSpellCast();
 		this.castWithTargetMessage(target);
+		
 		this.CHARACTER.buffs.add(new StatBuff(NAME, DESCRIPTION, CHARACTER, 2, 3, defense_increase));
 		System.out.println(this.CHARACTER + "'s defense increased by " + defense_increase + ".");
 		this.CHARACTER.attack(target);

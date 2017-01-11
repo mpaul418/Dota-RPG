@@ -14,6 +14,9 @@ public class GhostWalk extends ActiveSpell
 	@Override
 	public void cast()
 	{
+		this.beforeSpellCast();
+		this.castWithoutTargetMessage();
+		
 		this.CHARACTER.buffs.add(new StatBuff(NAME, "Defense increased by 70", CHARACTER, 2, 3, 70));
 		System.out.println(this.CHARACTER + "'s defense increased by 70.");
 	}

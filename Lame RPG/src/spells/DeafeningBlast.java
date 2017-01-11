@@ -18,7 +18,10 @@ public class DeafeningBlast extends ActiveSpell
 	public void cast()
 	{
 		int attack_reduction;
+		
+		this.beforeSpellCast();
 		this.castWithoutTargetMessage();
+		
 		for(Monster m : Game.monsters)
 		{
 			attack_reduction = Game.rand.nextInt(31) + 40;
@@ -30,7 +33,7 @@ public class DeafeningBlast extends ActiveSpell
 			System.out.println(m + "'s attack was reduced by " + attack_reduction + ".");
 		}
 		
-		this.afterSpellCast();
+		this.beforeSpellCast();
 	}
 
 	@Override

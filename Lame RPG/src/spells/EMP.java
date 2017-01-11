@@ -17,6 +17,7 @@ public class EMP extends ActiveSpell
 	{
 		int mana_burned;
 		
+		this.beforeSpellCast();
 		this.castWithoutTargetMessage();
 		
 		for(Monster m : Game.monsters)

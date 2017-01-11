@@ -17,6 +17,7 @@ public class Blink extends ActiveSpell
 	@Override
 	public void cast()
 	{
+		this.beforeSpellCast();
 		this.castWithoutTargetMessage();
 		
 		for(Monster m : Game.monsters)
@@ -24,8 +25,6 @@ public class Blink extends ActiveSpell
 			m.buffs.add(new StatBuff(NAME, "Defense reduced by " + defense_reduction, m, 3, 3, -defense_reduction));
 			System.out.println(m.getName() + "'s defense was reduced by " + defense_reduction + "!");
 		}
-		
-		this.afterSpellCast();
 		
 		System.out.println();
 	}

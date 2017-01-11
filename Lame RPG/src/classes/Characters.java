@@ -20,12 +20,11 @@ public class Characters
 	protected int damage, defaultDamage;
 	protected int accuracy, defaultAccuracy;
 	protected int defense, defaultDefense;
-	protected double magicDefense, defaultMagicDefense;
-	protected int critChance, defaultCritChance;
-	protected double critModifier, defaultCritModifier; // TODO is this used? 
+	protected double magicDefense, defaultMagicDefense; 
 	protected boolean alive;
 	protected int damage_dealt = 0;
 	public int hunker_downs_used = 0;
+	private final int MAX_ACCURACY = 44;
 	public ArrayList<Spell> spellbook = new ArrayList<Spell>();
 	public ArrayList<Spell> unlearned_spells = new ArrayList<Spell>();
 	public ArrayList<Buff> buffs = new ArrayList<Buff>();
@@ -46,10 +45,6 @@ public class Characters
 		defense = initDef;//buff- 3
 		defaultMagicDefense = initMagDef;
 		magicDefense = initMagDef;//buff- 4
-		defaultCritChance = 5;
-		critChance = 5; //buff- 5
-		defaultCritModifier = 2.00;//buff- 6
-		critModifier = 2.00; //buff- 7
 		name = initName;
 	}
 	public int getHP()
@@ -103,22 +98,6 @@ public class Characters
 	public double getDefaultMagicDefense()
 	{
 		return defaultMagicDefense;
-	}
-	public int getCritChance()
-	{
-		return critChance;
-	}
-	public int getDefaultCritChance()
-	{
-		return defaultCritChance;
-	}
-	public double getCritModifier()
-	{
-		return critModifier;
-	}
-	public double getDefaultCritModifier()
-	{
-		return defaultCritModifier;
 	}
 	public String getName()
 	{
@@ -197,24 +176,28 @@ public class Characters
 	{
 		defaultAccuracy += amount;
 		accuracy += amount;
+		
+		if(defaultAccuracy > MAX_ACCURACY) // accuracy can never go above 44 (99% chance to hit) without buffs
+			defaultAccuracy = MAX_ACCURACY;
 	}
-	public void changeCritChance(int amount)
+	public void resetStatsAndBuffs()
 	{
-		critChance += amount;
-	}
-	public void changeDefaultCritChance(int amount)
-	{
-		defaultCritChance += amount;
-		critChance += amount;
-	}
-	public void changeCritModifier(double amount)
-	{
-		critModifier += amount;
-	}
-	public void changeDefaultCritModifier(double amount)
-	{
-		defaultCritModifier += amount;
-		critModifier += amount;
+		ArrayList<Buff> buffs_being_removed = new ArrayList<Buff>();
+		for(Buff b : buffs)
+			buffs_being_removed.add(b);
+		
+		for(int i = buffs_being_removed.size(); i > 0; i--)
+		{
+			buffs_being_removed.get(0).deletThis();
+			buffs_being_removed.remove(0);
+		}
+		
+		HP = defaultHP;
+		mana = defaultMana;
+		damage = defaultDamage;
+		accuracy = defaultAccuracy;
+		defense = defaultDefense;
+		magicDefense = defaultMagicDefense;
 	}
 	public boolean isAlive()
 	{
@@ -250,8 +233,8 @@ public class Characters
 		boolean critical_hit, attack_evaded;
 		attack_evaded = critical_hit = false;
 		
-		temp = r.nextInt(accuracy + 1);
-		if(temp >= 10) // checks if attack hits
+		temp = r.nextInt(101) + accuracy;
+		if(temp >= 55) // checks if attack hits- a 55% chance to hit with 0 accuracy
 		{
 			for(Buff b : c.buffs)
 			{

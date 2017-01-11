@@ -22,7 +22,10 @@ public class StiflingDagger extends ActiveSpell
 	{
 		int pure_damage;
 		pure_damage = (int)Math.round(damage_multiplier * (double)this.CHARACTER.getDamage());
+		
+		this.beforeSpellCast();
 		this.castWithTargetMessage(target);
+		
 		target.changeHP(-pure_damage);
 		System.out.println(target + " took " + pure_damage + " pure damage.\n");
 	}

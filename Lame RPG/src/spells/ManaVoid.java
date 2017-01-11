@@ -23,6 +23,8 @@ public class ManaVoid extends ActiveSpell
 	public void cast(Characters target)
 	{
 		int mana_missing = target.getDefaultMana() - target.getMana();
+		
+		this.beforeSpellCast();
 		this.castWithTargetMessage(target);
 	
 		for(Monster m : Game.monsters)

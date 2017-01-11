@@ -15,7 +15,9 @@ public class GodsStrength extends ActiveSpell
 	@Override
 	public void cast()
 	{
+		this.beforeSpellCast();
 		this.castWithoutTargetMessage();
+		
 		this.CHARACTER.buffs.add(new StatBuff(this.NAME, "Dealing extra damage.",
 				this.CHARACTER, 3, 1, (int) Math.round(damage_multiplier * this.CHARACTER.getDefaultDamage())));
 	}

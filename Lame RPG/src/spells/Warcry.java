@@ -19,6 +19,7 @@ public class Warcry extends ActiveSpell
 	@Override
 	public void cast()
 	{
+		this.beforeSpellCast();
 		this.castWithoutTargetMessage();
 		
 		this.CHARACTER.buffs.add(new StatBuff(NAME, "Defense increased by " + defense_increase, CHARACTER, 2, 3, 45));

@@ -237,7 +237,7 @@ public class Game
 			if(!battleOver())
 				for(Monster m: monsters)
 				{
-					if(m.isAlive())
+					if(m.isAlive()) //FIXME is this redundant?? i think monsters get removed from this array when they die
 						takeMonsterTurn(m);
 					else
 						System.out.println(m + " is dead. you coded something wrong."); //this should never actually print
@@ -428,20 +428,37 @@ public class Game
 		if(!m.isStunned())
 		{
 			int temp = rand.nextInt(100) + 1;
-			if(temp <= 70)
+			if(temp <= 70) // 70% chance
 				m.attack(player);
-			else if(temp <= 85 && !m.allSpellsUncastable())
+			else if(temp <= 85 && !m.allSpellsUncastable()) // 15% chance
 			{
 				//make an arraylist for castable spells, then randomly pick one to cast. if targeted, select a random target
+				ArrayList<ActiveSpell> castable_spells = new ArrayList<ActiveSpell>();
+				int spell_index;
+				for(Spell s : m.spellbook) //get the castable spells
+				{
+					if(s.isCastable())
+						castable_spells.add((ActiveSpell) s);
+				}
+				
+				spell_index = rand.nextInt(castable_spells.size() + 1); // picks a random castable spell
+				
+				if(castable_spells.get(spell_index).isTargeted()) //casts the spell
+					castable_spells.get(spell_index).cast(player);
+				else
+					castable_spells.get(spell_index).cast();
+				
+				for(@SuppressWarnings("unused") ActiveSpell s : castable_spells) //clear the arraylist
+					castable_spells.remove(0);
 			}
-			else
+			else // also 15% chance
 				m.hunkerDown();
 		}
 		else
 			System.out.println(m + " is stunned.");
 	}
 
-	private static void listSpells(Characters c) //TODO change to character
+	private static void listSpells(Characters c)
 	{
 		int spells = 0;
 

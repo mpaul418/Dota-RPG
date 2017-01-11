@@ -14,7 +14,7 @@ public class StatBuff extends Buff
 		modifier_amount = a;
 		int_modifier = (int)modifier_amount;
 		
-		switch(stat)//TODO remove dodge and crit bonuses (they are attack/ed bonuses)
+		switch(stat)
 		{
 			case 1:
 			{
@@ -40,28 +40,6 @@ public class StatBuff extends Buff
 			{
 				CHARACTER.changeDefaultMagicDefense(int_modifier);
 				CHARACTER.changeMagicDefense(int_modifier);
-				break;
-			}
-			case 6:
-			{
-				CHARACTER.changeCritChance(int_modifier);
-				break;
-			}
-			case 7:
-			{
-				CHARACTER.changeDefaultCritChance(int_modifier);
-				CHARACTER.changeCritChance(int_modifier);
-				break;
-			}
-			case 8:
-			{
-				CHARACTER.changeDefaultCritModifier(modifier_amount);
-				CHARACTER.changeCritModifier(modifier_amount);
-				break;
-			}
-			case 9:
-			{
-				CHARACTER.changeCritModifier(modifier_amount);
 				break;
 			}
 		}
@@ -98,28 +76,6 @@ public class StatBuff extends Buff
 				{
 					CHARACTER.changeDefaultMagicDefense(-int_modifier);
 					CHARACTER.changeMagicDefense(-int_modifier);
-					break;
-				}
-				case 6:
-				{
-					CHARACTER.changeCritChance(-int_modifier);
-					break;
-				}
-				case 7:
-				{
-					CHARACTER.changeDefaultCritChance(-int_modifier);
-					CHARACTER.changeCritChance(-int_modifier);
-					break;
-				}
-				case 8:
-				{
-					CHARACTER.changeDefaultCritModifier(-modifier_amount);
-					CHARACTER.changeCritModifier(-modifier_amount);
-					break;
-				}
-				case 9:
-				{
-					CHARACTER.changeCritModifier(-modifier_amount);
 					break;
 				}
 			}
