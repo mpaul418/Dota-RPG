@@ -432,10 +432,10 @@ public class Game
 				m.attack(player);
 			else if(temp <= 85 && !m.allSpellsUncastable()) // 15% chance
 			{
-				//make an arraylist for castable spells, then randomly pick one to cast. if targeted, select a random target
+				// make an arraylist for castable spells, then randomly pick one to cast. if targeted, select a random target
 				ArrayList<ActiveSpell> castable_spells = new ArrayList<ActiveSpell>();
 				int spell_index;
-				for(Spell s : m.spellbook) //get the castable spells
+				for(Spell s : m.spellbook) // get the castable spells
 				{
 					if(s.isCastable())
 						castable_spells.add((ActiveSpell) s);

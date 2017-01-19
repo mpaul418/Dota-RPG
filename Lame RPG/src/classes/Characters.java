@@ -177,7 +177,7 @@ public class Characters
 		defaultAccuracy += amount;
 		accuracy += amount;
 		
-		if(defaultAccuracy > MAX_ACCURACY) // accuracy can never go above 44 (99% chance to hit) without buffs
+		if(defaultAccuracy > MAX_ACCURACY) // TODO TODO TODO accuracy can never go above 44 (99% chance to hit) without buffs- make balance changes in all characters!!!
 			defaultAccuracy = MAX_ACCURACY;
 	}
 	public void resetStatsAndBuffs()
