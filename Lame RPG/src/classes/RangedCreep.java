@@ -3,7 +3,7 @@ package classes;
 public class RangedCreep extends Monster
 {
 
-	public RangedCreep(String name)
+	public RangedCreep()
 	{
 		super(100, 100, 50, 90, 10, 0.25, "Ranged Creep", 1, 50);
 	}

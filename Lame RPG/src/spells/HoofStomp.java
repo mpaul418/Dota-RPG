@@ -25,6 +25,5 @@ public class HoofStomp extends ActiveSpell
 		
 		CHARACTER.dealMagicDamage(15, target);
 		target.buffs.add(new StunBuff(this.NAME, this.NAME + " stun", target, 1));
-		System.out.print(target + " was stunned for one turn.");
 	}
 }

@@ -3,7 +3,7 @@ package classes;
 public class Kobold extends Monster
 {
 
-	public Kobold(String name)
+	public Kobold()
 	{
 		super(80, 0, 20, 150, 5, 0.05, "Kobold", 1, 15);
 	}

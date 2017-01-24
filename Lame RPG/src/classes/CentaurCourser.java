@@ -3,7 +3,7 @@ package classes;
 public class CentaurCourser extends Monster
 {
 
-	public CentaurCourser(String name)
+	public CentaurCourser()
 	{
 		super(400, 15, 20, 80, 25, 0.30, "Centaur Courser", 2, 65);
 	}

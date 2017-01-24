@@ -3,7 +3,7 @@ package classes;
 public class VhoulAssassin extends Monster
 {
 
-	public VhoulAssassin(String name)
+	public VhoulAssassin()
 	{
 		super(200, 25, 40, 125, 7, 0.12, "Vhoul Assassin", 1, 30);
 	}

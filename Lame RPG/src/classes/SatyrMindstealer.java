@@ -3,7 +3,7 @@ package classes;
 public class SatyrMindstealer extends Monster
 {
 
-	public SatyrMindstealer(String name)
+	public SatyrMindstealer()
 	{
 		super(180, 95, 50, 95, 21, 0.15, "Satyr Mindstealer", 2, 100);
 	}

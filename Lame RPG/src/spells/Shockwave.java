@@ -23,6 +23,5 @@ public class Shockwave extends ActiveSpell
 		this.castWithTargetMessage(target);
 		
 		CHARACTER.dealMagicDamage(60, target);
-		System.out.print(target + " was stunned for one turn.");
 	}
 }

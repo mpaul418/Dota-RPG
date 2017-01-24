@@ -3,7 +3,7 @@ package classes;
 public class Hellbear extends Monster
 {
 
-	public Hellbear(String name)
+	public Hellbear()
 	{
 		super(250, 25, 32, 100, 17, 0.1, "Hellbear", 2, 75);
 	}

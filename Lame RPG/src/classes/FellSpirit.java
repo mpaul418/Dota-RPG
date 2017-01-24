@@ -3,7 +3,7 @@ package classes;
 public class FellSpirit extends Monster
 {
 
-	public FellSpirit(String name)
+	public FellSpirit()
 	{
 		super(150, 15, 32, 65, 10, 0.1, "Fell Spirit", 1, 25);
 	}

@@ -3,7 +3,7 @@ package classes;
 public class Treant extends Monster
 {
 	
-	public Treant(String name)
+	public Treant()
 	{
 		super(200, 0, 20, 75, 10, 0.15, "Treant", 1, 20);
 	}

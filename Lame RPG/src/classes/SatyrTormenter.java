@@ -8,7 +8,7 @@ public class SatyrTormenter extends Monster
 
 	Spell shockwave;
 	
-	public SatyrTormenter(String name)
+	public SatyrTormenter()
 	{
 		super(350, 150, 80, 120, 34, 0.25, "Satyr Tormenter", 3, 200);
 		shockwave = new Shockwave(this);

@@ -7,7 +7,7 @@ public class CentaurConqueror extends Monster
 {
 	Spell hoof_stomp;
 	
-	public CentaurConqueror(String name)
+	public CentaurConqueror()
 	{
 		super(550, 100, 30, 95, 40, 0.50, "Centaur Conqueror", 3, 250);
 		hoof_stomp = new HoofStomp(this);
