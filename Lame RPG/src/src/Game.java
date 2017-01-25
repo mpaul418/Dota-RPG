@@ -5,11 +5,18 @@ import java.util.Random;
 
 import classes.AntiMage;
 import classes.Characters;
+import classes.FellSpirit;
 import classes.Invoker;
+import classes.Kobold;
+import classes.MeleeCreep;
 import classes.Monster;
 import classes.PhantomAssassin;
 import classes.Player;
+import classes.RangedCreep;
+import classes.SatyrBanisher;
 import classes.Sven;
+import classes.Treant;
+import classes.VhoulAssassin;
 import spells.ActiveSpell;
 import spells.PassiveSpell;
 import spells.Spell;
@@ -23,9 +30,9 @@ public class Game
 	private static String temp_name = "Player";
 	private static int player_hero;
 	public  static Player player;
-	private static int map[][] = new int[5][5];
-	private static int current_row = 0;
-	private static int current_column = 0;
+	public  static int map[][] = new int[5][5];
+	public  static int current_row = 0;
+	public  static int current_column = 0;
 	private static int turn_number = 0;
 	public  static Random rand = new Random();
 	private static ArrayList<Integer> options = new ArrayList<Integer>();
@@ -40,12 +47,20 @@ public class Game
 		setName();
 		setHero();
 		makeDungeon();
+		
 		while(!game_over)
 		{
 			if(player.isAlive())
 				chooseRoom();
 			if(player.isAlive())
-				battle();
+			{
+				if(map[current_row][current_column] > 0)
+					battle();
+				else
+					System.out.println("This room is empty.");
+				
+				System.out.println(map[current_row][current_column] + " monsters in room. (should be 0)"); //FIXME a placeholder to check Monster die() method
+			}
 		}
 		
 		System.out.println("Game over! Maybe next time :(");
@@ -60,7 +75,7 @@ public class Game
 						+"\n4- Invoker: A mage who has both damaging and utility spells.");
 
 		player_hero = getNumberFrom(1, 4);
-		//TODO add levels for each skill/ability
+		
 		switch(player_hero)
 		{
 			case 1:
@@ -131,7 +146,7 @@ public class Game
 			for(int c = 0; c < map[0].length; c++)
 			{
 				if(r != 0 || c !=0)
-					map[r][c] = rand.nextInt(3) + 1;
+					map[r][c] = rand.nextInt(3) + 1;  // each room has 1 to 3 monsters in it
 				else
 					map[r][c] = 0;
 			}
@@ -181,8 +196,8 @@ public class Game
 	{
 		options = new ArrayList<Integer>();
 		
-		for(@SuppressWarnings("unused") int integer : options) //are these two lines unnecessary??
-			options.remove(0);
+		//for(@SuppressWarnings("unused") int integer : options) //are these two lines unnecessary??
+		//	options.remove(0);
 		
 		options.add(1);
 		options.add(2);
@@ -207,16 +222,20 @@ public class Game
 		if(options.contains(4))
 			System.out.println("4: Go up.");
 	}
-	//TODO does going back and forth into rooms recreate monsters?
+	
 	private static void battle()
 	{
 		characters.add(player);
 		
-		for(int i = 0; i < map[current_row][current_column]; i++)
-		{
-			monsters.add(new Monster("Monster " + (i+1)));
-			System.out.println("What de heck! It's a(n) " + monsters.get(i) + "!!");
-		}
+		//for(int i = 0; i < map[current_row][current_column]; i++)
+		//{
+		//	monsters.add(new Monster("Monster " + (i+1)));
+		//	System.out.println("What de heck! It's a(n) " + monsters.get(i) + "!!");
+		//}
+		
+		//TODO spawn monsters- if level > 1, spawn one monster of player's level and the rest are random monsters from lower levels
+		addMonsters();
+		
 		System.out.println();
 
 		for(Monster m : monsters)
@@ -252,6 +271,71 @@ public class Game
 			characters.remove(0);
 	}
 	
+	private static void addMonsters()
+	{
+		if(player.getLevel() == 0)
+		{
+			for(int i = 0; i < map[current_row][current_column]; i++)
+			{
+				int temp = 0;
+				if(player.getLevel() == 1)
+					temp = rand.nextInt(7) + 1; // there are 7 level one creeps, picks a random one to create
+				else if(player.getLevel() == 2)
+					temp = rand.nextInt(4) + 8; //picks a random level 2 creep
+				else // level is > 2
+					temp = rand.nextInt(3) + 12; //picks a random level 3 creep
+					
+				
+				
+				switch(temp) // creates a random level one creep
+				{
+					case 1:
+					{
+						monsters.add(new Kobold());
+						break;
+					}
+					case 2:
+					{
+						monsters.add(new Treant());
+						break;
+					}
+					case 3:
+					{
+						monsters.add(new FellSpirit());
+						break;
+					}
+					case 4:
+					{
+						monsters.add(new VhoulAssassin());
+						break;
+					}
+					case 5:
+					{
+						monsters.add(new SatyrBanisher());
+						break;
+					}
+					case 6:
+					{
+						monsters.add(new MeleeCreep());
+						break;
+					}
+					case 7:
+					{
+						monsters.add(new RangedCreep());
+						break;
+					}
+				}
+				
+				System.out.print(monsters.get(monsters.size() - 1) + " entered the fray.");
+			}
+		}
+		else //TODO TODO TODO finish algorithm to spawn in monsters
+		{
+			
+		}
+		
+	}
+
 	private static void checkForDeaths()
 	{
 		ArrayList<Characters> removed_characters = new ArrayList<Characters>();
@@ -270,20 +354,6 @@ public class Game
 		else
 			return false;
 	}
-
-	/*private static boolean allMonstersDead()//FIXME this must be recoded because of checkForDeaths() removing monsters from the array
-	{
-		int enemies_dead = 0;
-		for(Monster m: monsters)
-		{
-			if(!m.isAlive())
-				enemies_dead++;
-		}
-		if(enemies_dead == monsters.size())
-			return true;
-		else
-			return false;
-	}*/
 
 	private static void takePlayerTurn()
 	{
@@ -432,23 +502,23 @@ public class Game
 				m.attack(player);
 			else if(temp <= 85 && !m.allSpellsUncastable()) // 15% chance
 			{
-				// make an arraylist for castable spells, then randomly pick one to cast. if targeted, select a random target
+				// makes an arraylist for castable spells, then randomly pick one to cast. if targeted, selects a random target
 				ArrayList<ActiveSpell> castable_spells = new ArrayList<ActiveSpell>();
 				int spell_index;
-				for(Spell s : m.spellbook) // get the castable spells
+				for(Spell s : m.spellbook) // gets the castable spells
 				{
 					if(s.isCastable())
 						castable_spells.add((ActiveSpell) s);
 				}
 				
-				spell_index = rand.nextInt(castable_spells.size() + 1); // picks a random castable spell
+				spell_index = rand.nextInt(castable_spells.size()); // picks a random castable spell
 				
 				if(castable_spells.get(spell_index).isTargeted()) //casts the spell
 					castable_spells.get(spell_index).cast(player);
 				else
 					castable_spells.get(spell_index).cast();
 				
-				for(@SuppressWarnings("unused") ActiveSpell s : castable_spells) //clear the arraylist
+				for(@SuppressWarnings("unused") ActiveSpell s : castable_spells) //clears the arraylist
 					castable_spells.remove(0);
 			}
 			else // also 15% chance
