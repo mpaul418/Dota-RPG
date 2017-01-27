@@ -111,74 +111,102 @@ public class Characters
 	{
 		name = s;
 	}
-	public void changeMana(int amount)
+	public int changeMana(int amount)
 	{
+		int amount_changed = amount;
 		mana += amount;
 		if(mana > defaultMana)
+		{
+			amount_changed = defaultMana - mana;
 			mana = defaultMana;
+		}
+		
+		return amount_changed;
 	}
-	public void changeDefaultMana(int amount)
+	public int changeDefaultMana(int amount)
 	{
 		defaultMana += amount;
 		mana += amount;
+		
+		return amount;
 	}
-	public void changeHP(int amount)
+	public int changeHP(int amount)
 	{
+		int amount_changed = amount;
 		HP += amount;
-		if(HP > defaultHP)
+		if(HP > defaultMana)
+		{
+			amount_changed = defaultHP - HP;
 			HP = defaultHP;
+		}
+		
+		return amount_changed;
 	}
-	public void changeDefaultHP(int amount)
+	public int changeDefaultHP(int amount)
 	{
 		defaultHP += amount;
 		HP += amount;
+		
+		return amount;
 	}
-	public void changeDamage(int amount)
+	public int changeDamage(int amount)
 	{
 		damage += amount;
-		if(damage > defaultDamage)
-			damage = defaultDamage;
+		
+		return amount;
 	}
-	public void changeDefaultDamage(int amount)
+	public int changeDefaultDamage(int amount)
 	{
 		defaultDamage += amount;
 		damage += amount;
+		
+		return amount;
 	}
-	public void changeDefense(int amount)
+	public int changeDefense(int amount)
 	{
 		defense += amount;
-		if(defense > defaultDefense)
-			defense = defaultDefense;
+		
+		return amount;
 	}
-	public void changeDefaultDefense(int amount)
+	public int changeDefaultDefense(int amount)
 	{
 		defaultDefense += amount;
 		defense += amount;
+		
+		return amount;
 	}
-	public void changeMagicDefense(int amount)
+	public double changeMagicDefense(double amount)
 	{
 		magicDefense += amount;
-		if(magicDefense > defaultMagicDefense)
-			magicDefense = defaultMagicDefense;
+		
+		return amount;
 	}
-	public void changeDefaultMagicDefense(int amount)
+	public double changeDefaultMagicDefense(double amount)
 	{
 		defaultMagicDefense += amount;
 		magicDefense += amount;
+		
+		return amount;
 	}
-	public void changeAccuracy(int amount)
+	public int changeAccuracy(int amount)
 	{
 		accuracy += amount;
-		if(accuracy > defaultAccuracy)
-			accuracy = defaultAccuracy;
+		
+		return amount;
 	}
-	public void changeDefaultAccuracy(int amount)
+	public int changeDefaultAccuracy(int amount)
 	{
+		int amount_changed = amount;
 		defaultAccuracy += amount;
 		accuracy += amount;
 		
 		if(defaultAccuracy > MAX_ACCURACY) // TODO TODO TODO accuracy can never go above 44 (99% chance to hit) without buffs- make balance changes in all characters!!!
+		{
+			amount_changed = MAX_ACCURACY - defaultAccuracy;
 			defaultAccuracy = MAX_ACCURACY;
+		}
+		
+		return amount_changed;
 	}
 	public void resetStatsAndBuffs()
 	{
@@ -283,7 +311,7 @@ public class Characters
 					
 					damage(c, damage_done);
 					System.out.println(this + " attacked " + c + " and dealt " + damage_done + " damage."
-								     + " (Defense roll: " + currentDefense + "/" + c.getDefaultDefense() + ")");
+								     + " (Defense roll: " + currentDefense + "/" + c.getDefense() + ")");
 				}
 				else
 				{
@@ -349,9 +377,9 @@ public class Characters
 		int amount;
 		hunker_downs_used++;
 		if(hunker_downs_used <= 3)
-			amount = r.nextInt(31 - (10 * hunker_downs_used)) + 30;
+			amount = r.nextInt(16 - (5 * hunker_downs_used)) + 2;
 		else
-			amount = 15;
+			amount = 2;
 		this.buffs.add(new StatBuff("Hunker Down", "Defense increased  by " + amount, this, 2, 3, amount));
 		System.out.println(this.getName() + " hunkered down, increasing its defense by " + amount + " for 2 turns.\n");
 	}

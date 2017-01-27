@@ -4,8 +4,13 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import classes.AntiMage;
+import classes.CentaurConqueror;
+import classes.CentaurCourser;
 import classes.Characters;
 import classes.FellSpirit;
+import classes.Hellbear;
+import classes.HellbearSmasher;
+import classes.HillTrollPriest;
 import classes.Invoker;
 import classes.Kobold;
 import classes.MeleeCreep;
@@ -14,6 +19,8 @@ import classes.PhantomAssassin;
 import classes.Player;
 import classes.RangedCreep;
 import classes.SatyrBanisher;
+import classes.SatyrMindstealer;
+import classes.SatyrTormenter;
 import classes.Sven;
 import classes.Treant;
 import classes.VhoulAssassin;
@@ -39,7 +46,7 @@ public class Game
 	public  static ArrayList<Monster> monsters = new ArrayList<Monster>();
 	public  static ArrayList<Characters> characters = new ArrayList<Characters>();
 
-	private static boolean game_over = false;
+	public  static boolean game_over = false;
 	private static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
 	public static void main(String[] args)
@@ -59,7 +66,7 @@ public class Game
 				else
 					System.out.println("This room is empty.");
 				
-				System.out.println(map[current_row][current_column] + " monsters in room. (should be 0)"); //FIXME a placeholder to check Monster die() method
+				System.out.println(map[current_row][current_column] + " monsters in room. (should be 0)"); //FIXME a placeholder to double check Monster die() method
 			}
 		}
 		
@@ -233,13 +240,12 @@ public class Game
 		//	System.out.println("What de heck! It's a(n) " + monsters.get(i) + "!!");
 		//}
 		
-		//TODO spawn monsters- if level > 1, spawn one monster of player's level and the rest are random monsters from lower levels
-		addMonsters();
+		addMonsters();	// spawns monsters- if level > 1, spawns one monster of player's level and the rest are random monsters from lower levels
 		
-		System.out.println();
-
 		for(Monster m : monsters)
 			characters.add(m);
+
+		System.out.println();
 
 		turn_number = 0;
 		
@@ -273,67 +279,145 @@ public class Game
 	
 	private static void addMonsters()
 	{
-		if(player.getLevel() == 0)
+		for(int i = 0; i < map[current_row][current_column]; i++)
 		{
-			for(int i = 0; i < map[current_row][current_column]; i++)
+			int temp = 0;
+			
+			if(i == 0)
+				temp = pickMonsterSpawnedOfLevel(player.getLevel()); //spawns monster of current level
+			else
 			{
-				int temp = 0;
-				if(player.getLevel() == 1)
-					temp = rand.nextInt(7) + 1; // there are 7 level one creeps, picks a random one to create
-				else if(player.getLevel() == 2)
-					temp = rand.nextInt(4) + 8; //picks a random level 2 creep
-				else // level is > 2
-					temp = rand.nextInt(3) + 12; //picks a random level 3 creep
-					
+				temp = pickMonsterSpawnedUpTo(player.getLevel());
+			}
+							
+			createMonster(temp);
 				
-				
-				switch(temp) // creates a random level one creep
-				{
-					case 1:
-					{
-						monsters.add(new Kobold());
-						break;
-					}
-					case 2:
-					{
-						monsters.add(new Treant());
-						break;
-					}
-					case 3:
-					{
-						monsters.add(new FellSpirit());
-						break;
-					}
-					case 4:
-					{
-						monsters.add(new VhoulAssassin());
-						break;
-					}
-					case 5:
-					{
-						monsters.add(new SatyrBanisher());
-						break;
-					}
-					case 6:
-					{
-						monsters.add(new MeleeCreep());
-						break;
-					}
-					case 7:
-					{
-						monsters.add(new RangedCreep());
-						break;
-					}
-				}
-				
-				System.out.print(monsters.get(monsters.size() - 1) + " entered the fray.");
+			System.out.println(monsters.get(monsters.size() - 1) + " entered the fray.");
+		}
+	}
+	
+	private static int pickMonsterSpawnedOfLevel(int lvl)
+	{
+		switch(lvl)
+		{
+			case 1:
+			{
+				return rand.nextInt(7) + 1;	 	// TODO make sure a break is not required here there are 7 level one creeps, picks a random one to create
+			}
+			case 2:
+			{
+				return rand.nextInt(4) + 8;		// picks a random level 2 creep
+			}
+			case 3:
+			{
+				return rand.nextInt(3) + 12;	// picks a random level 3 creep
+			}
+			default:
+			{
+				return rand.nextInt(14) + 1;	// picks any random level monster
 			}
 		}
-		else //TODO TODO TODO finish algorithm to spawn in monsters
+	}
+	
+	private static int pickMonsterSpawnedUpTo(int lvl)
+	{
+		switch(lvl)
 		{
-			
+			case 1:
+			{
+				return rand.nextInt(7) + 1;	 	// still makes a level one creep
+			}
+			case 2:
+			{
+				return rand.nextInt(7) + 1;		// picks a random level 1 creep
+			}
+			case 3:
+			{
+				return rand.nextInt(11) + 1;	// picks up to a random level 2 creep
+			}
+			default:
+			{
+				return rand.nextInt(14) + 1; 	// picks any random level monster
+			}
 		}
-		
+	
+	}
+	
+	private static void createMonster(int monster)
+	{
+		switch(monster) // creates a monster depending on the random int
+		{
+			case 1:
+			{
+				monsters.add(new Kobold());
+				break;
+			}
+			case 2:
+			{
+				monsters.add(new Treant());
+				break;
+			}
+			case 3:
+			{
+				monsters.add(new FellSpirit());
+				break;
+			}
+			case 4:
+			{
+				monsters.add(new VhoulAssassin());
+				break;
+			}
+			case 5:
+			{
+				monsters.add(new SatyrBanisher());
+				break;
+			}
+			case 6:
+			{
+				monsters.add(new MeleeCreep());
+				break;
+			}
+			case 7:
+			{
+				monsters.add(new RangedCreep());
+				break;
+			}
+			case 8:
+			{
+				monsters.add(new HillTrollPriest());
+				break;
+			}
+			case 9:
+			{
+				monsters.add(new CentaurCourser());
+				break;
+			}
+			case 10:
+			{
+				monsters.add(new Hellbear());
+				break;
+			}
+			case 11:
+			{
+				monsters.add(new SatyrMindstealer());
+				break;
+			}
+			case 12:
+			{
+				monsters.add(new HellbearSmasher());
+				break;
+			}
+			case 13:
+			{
+				monsters.add(new SatyrTormenter());
+				break;
+			}
+			case 14:
+			{
+				monsters.add(new CentaurConqueror());
+				break;
+			}
+		}
 	}
 
 	private static void checkForDeaths()
@@ -536,7 +620,7 @@ public class Game
 		{
 				spells++;
 
-				System.out.print(spells + ": " + s.NAME + "- " + s.DESCRIPTION + ".");
+				System.out.print(spells + ": " + s.NAME + "(Level " + s.spell_level + ")- " + s.DESCRIPTION + ".");
 
 				if(s instanceof ActiveSpell)
 				{

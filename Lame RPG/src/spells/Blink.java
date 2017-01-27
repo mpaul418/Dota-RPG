@@ -7,11 +7,11 @@ import src.Game;
 
 public class Blink extends ActiveSpell
 {
-	int defense_reduction = 30;
+	int defense_reduction = 12;
 	
 	public Blink(Characters c)
 	{
-		super("Blink", "Teleport and disorient your enemies, reducing your enemies' defence by 30/40/50", 10, 1, 2, c, false);
+		super("Blink", "Teleport and disorient your enemies, reducing your enemies' defence by 12/20/28", 10, 1, 2, c, false);
 	}
 
 	@Override
@@ -41,7 +41,7 @@ public class Blink extends ActiveSpell
 		boolean level_up = super.levelUp();
 		
 		if(level_up)
-			defense_reduction += 10;
+			defense_reduction += 8;
 		
 		return level_up;
 	}

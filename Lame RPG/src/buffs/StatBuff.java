@@ -5,43 +5,43 @@ import classes.Characters;
 public class StatBuff extends Buff
 {
 	int stat, int_modifier;
-	double modifier_amount;
+	double modifier_amount, modified_amount;
 	
 	public StatBuff(String n, String dsc, Characters c, int d, int s, double a)
 	{
 		super(n, dsc, c, d); 
 		stat = s;
 		modifier_amount = a;
+		modified_amount = modifier_amount;
 		int_modifier = (int)modifier_amount;
 		
 		switch(stat)
 		{
 			case 1:
 			{
-				CHARACTER.changeDamage(int_modifier);
+				modified_amount = CHARACTER.changeDamage(int_modifier);
 				break;
 			}
 			case 2:
 			{
-				CHARACTER.changeAccuracy(int_modifier);
+				modified_amount = CHARACTER.changeAccuracy(int_modifier);
 				break;
 			}
 			case 3:
 			{
-				CHARACTER.changeDefense(int_modifier);
+				modified_amount = CHARACTER.changeDefense(int_modifier);
 				break;
 			}
 			case 4:
 			{
-				CHARACTER.changeMagicDefense(int_modifier);
+				modified_amount = CHARACTER.changeMagicDefense(int_modifier);
 				break;
 			}
-			case 5:
-			{
-				CHARACTER.changeDefaultMagicDefense(int_modifier);
-				CHARACTER.changeMagicDefense(int_modifier);
-				break;
-			}
+			//case 5:
+			//{
+			//	modified_amount = CHARACTER.changeDefaultMagicDefense(int_modifier);
+			//	break;
+			//}
 		}
 	}
 	
@@ -54,30 +54,29 @@ public class StatBuff extends Buff
 			{
 				case 1:
 				{
-					CHARACTER.changeDamage(-int_modifier);
+					CHARACTER.changeDamage((int) -modified_amount);
 					break;
 				}
 				case 2:
 				{
-					CHARACTER.changeAccuracy(-int_modifier);
+					CHARACTER.changeAccuracy((int) -modified_amount);
 					break;
 				}
 				case 3:
 				{
-					CHARACTER.changeDefense(-int_modifier);
+					CHARACTER.changeDefense((int) -modified_amount);
 					break;
 				}
 				case 4:
 				{
-					CHARACTER.changeMagicDefense(-int_modifier);
+					CHARACTER.changeMagicDefense((int) -modified_amount);
 					break;
 				}
-				case 5:
-				{
-					CHARACTER.changeDefaultMagicDefense(-int_modifier);
-					CHARACTER.changeMagicDefense(-int_modifier);
-					break;
-				}
+				//case 5:
+				//{
+				//	CHARACTER.changeDefaultMagicDefense((int) -modified_amount);
+				//	break;
+				//}
 			}
 		}	
 		super.deletThis();	

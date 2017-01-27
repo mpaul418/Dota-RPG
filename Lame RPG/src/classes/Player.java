@@ -1,6 +1,7 @@
 package classes;
 
 import spells.Spell;
+import src.Game;
 
 public abstract class Player extends Characters 
 {
@@ -61,5 +62,12 @@ public abstract class Player extends Characters
 				System.out.println(this + " just learned " + s + ".");
 			}
 		}
+	}
+	
+	@Override
+	public void die()
+	{
+		super.die();
+		Game.game_over = true;
 	}
 }

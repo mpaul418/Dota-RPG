@@ -15,8 +15,8 @@ public class SpellShield extends PassiveSpell
 	public void addToSpellbook(Characters c)
 	{
 		super.addToSpellbook(c);
-		this.CHARACTER.buffs.add(new StatBuff(this.NAME, this.NAME + " magic resist.",
-				this.CHARACTER, -1, 5, 22.0));
+		this.CHARACTER.buffs.add(new StatBuff(this.NAME, this.NAME + " extra 22% magic resist.",
+				this.CHARACTER, -1, 4, 0.22));
 	}
 
 	@Override
@@ -33,11 +33,11 @@ public class SpellShield extends PassiveSpell
 					CHARACTER.buffs.get(i).deletThis();
 					
 					if(spell_level == 2)
-						this.CHARACTER.buffs.add(new StatBuff(this.NAME, this.NAME + " magic resist.",
-								this.CHARACTER, -1, 5, 44.0));
+						this.CHARACTER.buffs.add(new StatBuff(this.NAME, this.NAME + " extra 44% magic resist.",
+								this.CHARACTER, -1, 4, 0.44));
 					else if(spell_level == 3)
-						this.CHARACTER.buffs.add(new StatBuff(this.NAME, this.NAME + " magic resist.",
-								this.CHARACTER, -1, 5, 66.0));
+						this.CHARACTER.buffs.add(new StatBuff(this.NAME, this.NAME + " extra 66% magic resist.",
+								this.CHARACTER, -1, 4, 0.66));
 					
 					System.out.println("This is working!!! (delete this)");
 					break;
