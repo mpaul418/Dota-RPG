@@ -12,9 +12,9 @@ public class GreatCleave extends PassiveSpell
 	}
 
 	@Override
-	public void addToSpellbook(Characters c)
+	public void addToSpellbook()
 	{
-		super.addToSpellbook(c);
+		super.addToSpellbook();
 		this.CHARACTER.buffs.add(new AttackBuff(this.NAME, this.NAME + " cleave.",
 				this.CHARACTER, -1, 0, 0, 0, 0, 2, 0.30));
 	}

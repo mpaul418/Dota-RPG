@@ -12,9 +12,9 @@ public class SpellShield extends PassiveSpell
 	}
 	
 	@Override
-	public void addToSpellbook(Characters c)
+	public void addToSpellbook()
 	{
-		super.addToSpellbook(c);
+		super.addToSpellbook();
 		this.CHARACTER.buffs.add(new StatBuff(this.NAME, this.NAME + " extra 22% magic resist.",
 				this.CHARACTER, -1, 4, 0.22));
 	}

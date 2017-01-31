@@ -12,9 +12,9 @@ public class ManaBreak extends PassiveSpell
 	}
 
 	@Override
-	public void addToSpellbook(classes.Characters c)
+	public void addToSpellbook()
 	{
-		super.addToSpellbook(c);
+		super.addToSpellbook();
 		this.CHARACTER.buffs.add(new AttackBuff(this.NAME, this.NAME + " mana burn.",
 			this.CHARACTER, -1, 15, 0.6, 0, 0, 0, 0));
 	}

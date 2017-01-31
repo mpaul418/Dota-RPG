@@ -152,8 +152,8 @@ public class Game
 		{
 			for(int c = 0; c < map[0].length; c++)
 			{
-				if(r != 0 || c !=0)
-					map[r][c] = rand.nextInt(3) + 1;  // each room has 1 to 3 monsters in it
+				if(r != 0 || c !=0) // if the room is not the starting room
+					map[r][c] = rand.nextInt(2) + 2;  // each room has 2 to 3 monsters in it
 				else
 					map[r][c] = 0;
 			}
@@ -233,13 +233,7 @@ public class Game
 	private static void battle()
 	{
 		characters.add(player);
-		
-		//for(int i = 0; i < map[current_row][current_column]; i++)
-		//{
-		//	monsters.add(new Monster("Monster " + (i+1)));
-		//	System.out.println("What de heck! It's a(n) " + monsters.get(i) + "!!");
-		//}
-		
+	
 		addMonsters();	// spawns monsters- if level > 1, spawns one monster of player's level and the rest are random monsters from lower levels
 		
 		for(Monster m : monsters)
@@ -467,14 +461,20 @@ public class Game
 				case 1:
 				{
 					System.out.println("\nWhat would you like to attack?");
+					System.out.println("0: Go back.");
 					for(int i = 0; i < monsters.size(); i++)
 					{
 						System.out.println((i + 1) + ": " + monsters.get(i)
 								+"(" + monsters.get(i).getHP() + "/" + monsters.get(i).getDefaultHP() + ")");
 					}
-					target = getNumberFrom(1, monsters.size()) - 1;
-					player.attack(monsters.get(target));
-					turn_taken = true;
+					
+					target = getNumberFrom(0, monsters.size());
+					if(target > 0)
+					{
+						player.attack(monsters.get(target - 1));
+						turn_taken = true;
+					}
+					
 					break;
 				}
 				case 2:
@@ -535,8 +535,6 @@ public class Game
 							turn_taken = true;
 						}
 					}
-					else
-						turn_taken = false;
 
 					break;
 				}
@@ -569,6 +567,8 @@ public class Game
 				case 4:
 				{
 					player.hunkerDown();
+					turn_taken = true;
+					
 					break;
 				}
 			}

@@ -257,6 +257,7 @@ public class Characters
 	public void attack(Characters c)
 	{
 		int temp, damage_done;
+		int damage_roll = (damage - 5) + r.nextInt(11); // each damage roll has a variance of 10 (ex. damage = 40, then damage could be 35 to 45)
 		int crit_buff_index = -1;
 		boolean critical_hit, attack_evaded;
 		attack_evaded = critical_hit = false;
@@ -278,6 +279,8 @@ public class Characters
 				int currentDefense = 0;
 				if(c.getDefense() > 0)
 					currentDefense = r.nextInt(c.getDefense()) + 1;
+				else if(c.getDefense() < 0)
+					currentDefense = -(r.nextInt(-c.getDefense()) + 1); // if defense is less than 0, then damage is amplified
 				
 				 											//checks for a crit with every attack buff, 
 				for(int i = 0; i < buffs.size(); i++)		//can probably be optimized for only attack buffs that CAN crit
@@ -293,7 +296,7 @@ public class Characters
 					}
 				}
 				
-				if(damage > currentDefense || critical_hit)
+				if(damage_roll > currentDefense || critical_hit)
 				{
 					if(critical_hit)
 					{
@@ -307,7 +310,7 @@ public class Characters
 						}
 					}
 					else
-						damage_done = damage - currentDefense;
+						damage_done = damage_roll - currentDefense;
 					
 					damage(c, damage_done);
 					System.out.println(this + " attacked " + c + " and dealt " + damage_done + " damage."
@@ -377,7 +380,7 @@ public class Characters
 		int amount;
 		hunker_downs_used++;
 		if(hunker_downs_used <= 3)
-			amount = r.nextInt(16 - (5 * hunker_downs_used)) + 2;
+			amount = r.nextInt(16 - (5 * hunker_downs_used)) + 3;
 		else
 			amount = 2;
 		this.buffs.add(new StatBuff("Hunker Down", "Defense increased  by " + amount, this, 2, 3, amount));

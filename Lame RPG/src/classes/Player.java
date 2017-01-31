@@ -19,7 +19,7 @@ public abstract class Player extends Characters
 		character_class = playerClass;
 		gold = 0;
 		xp = 0;
-		xp_level_rq = 100;
+		xp_level_rq = 15; //TODO change back to 100
 	}
 	
 	public abstract String getCharClass();
@@ -39,9 +39,9 @@ public abstract class Player extends Characters
 		xp_level_rq += 25 * level + 5 * (level - 1)^2; //xp increases by 5(x - 1)^2 + 25x every level. 1:100, 2: 155, 3: 250, 4: 395, etc
 		
 		System.out.println(this + " just leveled up!!"
-				+ "/nHP increased by " + (int)Math.round(0.25 * defaultHP)
-				+ "/nMana increased by " + (int)Math.round(0.25 * defaultMana)
-				+ "\nDamage increased by " + (int)Math.round(0.25 * defaultDamage));
+				+  "\nHP increased by " + (int)Math.round(0.25 * defaultHP)
+				+ ".\nMana increased by " + (int)Math.round(0.25 * defaultMana)
+				+ ".\nDamage increased by " + (int)Math.round(0.25 * defaultDamage) + ".");
 
 		defaultHP = (int)Math.round(1.25 * defaultHP);
 		HP = defaultHP;
@@ -52,15 +52,16 @@ public abstract class Player extends Characters
 		
 		for(Spell s : this.spellbook)
 			s.levelUp();
-		
-		for(Spell s : unlearned_spells)
+
+		int temp = 0;
+		while(temp < unlearned_spells.size())
 		{
-			if(this.level >= s.getLevelRequirement())
+			if(this.level >= unlearned_spells.get(temp).getLevelRequirement())
 			{
-				spellbook.add(s);
-				unlearned_spells.remove(s);
-				System.out.println(this + " just learned " + s + ".");
+				unlearned_spells.get(temp).addToSpellbook();
 			}
+			else
+				temp += 1;
 		}
 	}
 	

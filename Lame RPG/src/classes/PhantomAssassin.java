@@ -13,15 +13,11 @@ public class PhantomAssassin extends Player
 	
 	public PhantomAssassin(String initName)
 	{
-		super(100, 75, 45, 80, 10, 3, .15, initName);
+		super(1200, 75, 45, 80, 10, 3, .15, initName);
 		stifling_dagger = new StiflingDagger(this);
 		phantom_strike = new PhantomStrike(this);
 		blur = new Blur(this);
 		coup_de_grace = new CoupDeGrace(this);
-		//stifling_dagger.addToSpellbook(this);
-		//phantom_strike.addToSpellbook(this);
-		//blur.addToSpellbook(this);
-		//unlearned_spells.add(coup_de_grace);
 	}
 	
 	public PhantomAssassin(int nHP, int nMana, int nDmg, int nAcc, int nDfs, double nMgDef, String initName)
@@ -31,10 +27,6 @@ public class PhantomAssassin extends Player
 		phantom_strike = new PhantomStrike(this);
 		blur = new Blur(this);
 		coup_de_grace = new CoupDeGrace(this);
-		//stifling_dagger.addToSpellbook(this);
-		//phantom_strike.addToSpellbook(this);
-		//blur.addToSpellbook(this);
-		//unlearned_spells.add(coup_de_grace);
 	}
 	
 	@Override

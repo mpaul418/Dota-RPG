@@ -13,22 +13,11 @@ public class Invoker extends Player
 
 	public Invoker(String initName)
 	{
-		super(95, 120, 10, 65, 20, 4, .25, initName);
-		//HP = 95;
-		//mana = 120;
-		//damage = 10;
-		//attack = 65;
-		//defense = 20;
-		//character_class = 4;
-		//magicDefense = .25;		
+		super(975, 120, 10, 65, 20, 4, .25, initName);	
 		sun_strike = new SunStrike(this);
 		emp = new EMP(this);
 		ghost_walk = new GhostWalk(this);
 		deafening_blast = new DeafeningBlast(this);
-		//sun_strike.addToSpellbook(this);
-		//emp.addToSpellbook(this);
-		//ghost_walk.addToSpellbook(this);
-		//unlearned_spells.add(deafening_blast);
 	}
 
 	public Invoker(int nHP, int nMana, int nDmg, int nAcc, int nDfs, double nMgDef, String initName)
@@ -38,10 +27,6 @@ public class Invoker extends Player
 		emp = new EMP(this);
 		ghost_walk = new GhostWalk(this);
 		deafening_blast = new DeafeningBlast(this);
-		//sun_strike.addToSpellbook(this);
-		//emp.addToSpellbook(this);
-		//ghost_walk.addToSpellbook(this);
-		//unlearned_spells.add(deafening_blast);
 	}
 	
 	@Override

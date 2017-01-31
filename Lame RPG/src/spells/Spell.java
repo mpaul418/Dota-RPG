@@ -12,7 +12,7 @@ public abstract class Spell
 	public final boolean TARGETED;
 	public int max_cooldown;
 	public int current_cooldown = 0;
-	public int spell_level = 0; //TODO implement spell leveling for all spells
+	public int spell_level; //TODO implement spell leveling for all spells
 	public int max_spell_level = 3; // this can be overridden
 	
 	public Spell(String tempname, String dsc, int manacost, int level_rq, int cd, Characters c, boolean targetable)
@@ -27,7 +27,7 @@ public abstract class Spell
 		spell_level = 1;
 		
 		if(CHARACTER.getLevel() >= LEVEL_REQUIREMENT)
-			this.addToSpellbook(CHARACTER);
+			this.addToSpellbook();
 		else
 			CHARACTER.unlearned_spells.add(this);
 	}
@@ -66,11 +66,11 @@ public abstract class Spell
 		else
 			return true;
 	}
-	public void addToSpellbook(Characters c)
+	public void addToSpellbook()
 	{
-		c.spellbook.add(this);
-		c.unlearned_spells.remove(this);
-		System.out.println(c + " just learned " + this + ".");
+		CHARACTER.spellbook.add(this);
+		CHARACTER.unlearned_spells.remove(this);
+		System.out.println(CHARACTER + " just learned " + this + ".");
 	}
 	
 	public void beforeSpellCast()

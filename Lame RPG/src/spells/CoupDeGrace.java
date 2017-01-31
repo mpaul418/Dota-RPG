@@ -12,9 +12,9 @@ public class CoupDeGrace extends PassiveSpell
 	}
 
 	@Override
-	public void addToSpellbook(Characters c)
+	public void addToSpellbook()
 	{
-		super.addToSpellbook(c);
+		super.addToSpellbook();
 		this.CHARACTER.buffs.add(new AttackBuff(this.NAME, this.NAME + " crit chance.",
 				this.CHARACTER, -1, 0, 0, 15, 1.75, 0, 0.0));//TODO remove crit and dodge bonuses from stat buffs- they are attack/attacked buffs
 	}

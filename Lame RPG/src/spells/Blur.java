@@ -12,9 +12,9 @@ public class Blur extends PassiveSpell
 	}
 	
 	@Override
-	public void addToSpellbook(Characters c)
+	public void addToSpellbook()
 	{
-		super.addToSpellbook(c);
+		super.addToSpellbook();
 		this.CHARACTER.buffs.add(new AttackedBuff(this.NAME, this.NAME + " evasion bonus.",
 				this.CHARACTER, -1, 20));
 	}
