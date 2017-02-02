@@ -250,6 +250,14 @@ public class Characters
 		c.HP -= incoming_damage;
 		damage_dealt += incoming_damage;
 	}
+	public void dealPhysicalDamage(Characters c, int incoming_damage) //TODO complete this method
+	{
+		int currentDefense = 0;
+		if(c.getDefense() > 0)
+			currentDefense = r.nextInt(c.getDefense()) + 1;
+		else if(c.getDefense() < 0)
+			currentDefense = -(r.nextInt(-c.getDefense()) + 1); // if defense is less than 0, then damage is amplified
+	}
 	public void heal(Characters c, int heal)
 	{
 		c.HP += heal;
@@ -312,7 +320,7 @@ public class Characters
 					else
 						damage_done = damage_roll - currentDefense;
 					
-					damage(c, damage_done);
+					damage(c, damage_done); // TODO eventually replace this with dealPhysicalDamage()
 					System.out.println(this + " attacked " + c + " and dealt " + damage_done + " damage."
 								     + " (Defense roll: " + currentDefense + "/" + c.getDefense() + ")");
 				}
@@ -387,7 +395,7 @@ public class Characters
 		System.out.println(this.getName() + " hunkered down, increasing its defense by " + amount + " for 2 turns.\n");
 	}
 	
-	public void refreshDebuffsAndReduceCooldowns() //FIXME buffs saying they last 1 turn longer than they should?? i moved this from Game so maybe it works now
+	public void refreshDebuffsAndReduceCooldowns()
 	{
 		ArrayList<Buff> deleted_buffs = new ArrayList<Buff>();
 		

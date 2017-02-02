@@ -19,7 +19,7 @@ public abstract class Player extends Characters
 		character_class = playerClass;
 		gold = 0;
 		xp = 0;
-		xp_level_rq = 15; //TODO change back to 100
+		xp_level_rq = 100;
 	}
 	
 	public abstract String getCharClass();
@@ -36,7 +36,7 @@ public abstract class Player extends Characters
 	private void levelUp()
 	{
 		this.level++;
-		xp_level_rq += 25 * level + 5 * (level - 1)^2; //xp increases by 5(x - 1)^2 + 25x every level. 1:100, 2: 155, 3: 250, 4: 395, etc
+		xp_level_rq += 25 * level + 5 * (level - 1)^2; // xp increases by 5(x - 1)^2 + 25x every level. 1:100, 2: 155, 3: 250, 4: 395, etc
 		
 		System.out.println(this + " just leveled up!!"
 				+  "\nHP increased by " + (int)Math.round(0.25 * defaultHP)

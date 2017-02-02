@@ -39,7 +39,7 @@ public abstract class Buff
 			deletThis();		//when buffs are infinite (duration == -1), they are never deleted or altered
 	}
 
-	public void decreaseDuration(ArrayList<Buff> deleted_buffs) // TODO FIXME not properly deleting buffs
+	public void decreaseDuration(ArrayList<Buff> deleted_buffs) 
 	{
 		if(duration >= 1)
 			duration--;

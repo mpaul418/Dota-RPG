@@ -65,8 +65,6 @@ public class Game
 					battle();
 				else
 					System.out.println("This room is empty.");
-				
-				System.out.println(map[current_row][current_column] + " monsters in room. (should be 0)"); //FIXME a placeholder to double check Monster die() method
 			}
 		}
 		
@@ -256,10 +254,10 @@ public class Game
 			if(!battleOver())
 				for(Monster m: monsters)
 				{
-					if(m.isAlive()) //FIXME is this redundant?? i think monsters get removed from this array when they die
+					//if(m.isAlive()) //FIXME is this redundant?? i think monsters get removed from this array when they die
 						takeMonsterTurn(m);
-					else
-						System.out.println(m + " is dead. you coded something wrong."); //this should never actually print
+					//else
+					//	System.out.println(m + " is dead. you coded something wrong."); //this should never actually print
 				}
 			
 			checkForDeaths();
@@ -296,7 +294,7 @@ public class Game
 		{
 			case 1:
 			{
-				return rand.nextInt(7) + 1;	 	// TODO make sure a break is not required here there are 7 level one creeps, picks a random one to create
+				return rand.nextInt(7) + 1;	 	// there are 7 level one creeps, picks a random one to create
 			}
 			case 2:
 			{
