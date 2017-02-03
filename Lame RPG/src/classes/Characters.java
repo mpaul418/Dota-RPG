@@ -245,18 +245,33 @@ public class Characters
 		return false;
 	}
 	//TODO replace method with system for magic/phys damage that calculates it in the method instead of before calling method
-	public void damage(Characters c, int incoming_damage)
+	public int damage(Characters c, int incoming_damage)
 	{
 		c.HP -= incoming_damage;
 		damage_dealt += incoming_damage;
+		
+		return incoming_damage;
 	}
-	public void dealPhysicalDamage(Characters c, int incoming_damage) //TODO complete this method
+	public int dealPhysicalDamage(Characters c, int incoming_damage) //TODO complete this method
 	{
-		int currentDefense = 0;
+		int damage_done = 0;
+		int current_defense = 0;
 		if(c.getDefense() > 0)
-			currentDefense = r.nextInt(c.getDefense()) + 1;
+			current_defense = r.nextInt(c.getDefense()) + 1;
 		else if(c.getDefense() < 0)
-			currentDefense = -(r.nextInt(-c.getDefense()) + 1); // if defense is less than 0, then damage is amplified
+			current_defense = -(r.nextInt(-c.getDefense()) + 1); // if defense is less than 0, then damage is amplified
+		
+		damage_done = incoming_damage - current_defense;
+		if(damage_done <= 0)
+			damage_done = 1;
+		
+		damage(c, damage_done);
+		if(damage_done == 1)
+			System.out.print("Graze! ");
+		System.out.println(this + " dealt " + damage_done + " physical damage to " + c + "."
+					  + " (Defense roll: " + current_defense + "/" + c.getDefense() + ")"); //FIXME in final version of game, is this necessary to display?
+		
+		return damage_done;
 	}
 	public void heal(Characters c, int heal)
 	{
@@ -271,7 +286,7 @@ public class Characters
 		attack_evaded = critical_hit = false;
 		
 		temp = r.nextInt(101) + accuracy;
-		if(temp >= 55) // checks if attack hits- a 55% chance to hit with 0 accuracy
+		if(temp >= 35) // checks if attack hits- a 35% chance to hit with 0 accuracy
 		{
 			for(Buff b : c.buffs)
 			{
@@ -284,13 +299,7 @@ public class Characters
 			}
 			if(!attack_evaded)
 			{
-				int currentDefense = 0;
-				if(c.getDefense() > 0)
-					currentDefense = r.nextInt(c.getDefense()) + 1;
-				else if(c.getDefense() < 0)
-					currentDefense = -(r.nextInt(-c.getDefense()) + 1); // if defense is less than 0, then damage is amplified
-				
-				 											//checks for a crit with every attack buff, 
+				 											//TODO checks for a crit with every attack buff, 
 				for(int i = 0; i < buffs.size(); i++)		//can probably be optimized for only attack buffs that CAN crit
 				{
 					if(buffs.get(i) instanceof AttackBuff && !attack_evaded)
@@ -304,32 +313,17 @@ public class Characters
 					}
 				}
 				
-				if(damage_roll > currentDefense || critical_hit)
+				if(critical_hit)
 				{
-					if(critical_hit)
-					{
-						damage_done = (int)Math.round(((AttackBuff) buffs.get(crit_buff_index)).getCritModifier() * damage) - currentDefense;
-						if(damage_done > 0)
-							System.out.print("Critical hit!! ");
-						else
-						{
-							damage_done = 5;
-							System.out.println("Critical graze!");
-						}
-					}
-					else
-						damage_done = damage_roll - currentDefense;
-					
-					damage(c, damage_done); // TODO eventually replace this with dealPhysicalDamage()
-					System.out.println(this + " attacked " + c + " and dealt " + damage_done + " damage."
-								     + " (Defense roll: " + currentDefense + "/" + c.getDefense() + ")");
+					damage_done = (int)Math.round(((AttackBuff) buffs.get(crit_buff_index)).getCritModifier() * damage_roll);
+					if(damage_done > 0)
+						System.out.print("Critical hit!! ");
 				}
 				else
-				{
-					damage_done = 1;
-					damage(c, damage_done);
-					System.out.println(this.getName() + " grazed " + c.getName() + " and dealt " + damage_done + " damage.");
-				}
+					damage_done = damage_roll;
+				
+				System.out.println(this + " attacked " + c + "!");
+				dealPhysicalDamage(c, damage_done);
 				
 				for(Buff b : buffs)
 				{
@@ -337,7 +331,6 @@ public class Characters
 					{
 						((AttackBuff) b).applyManaBurn(c);
 						((AttackBuff) b).applyCleave(c, damage_done);
-						//((AttackBuff) b).applyStunEffect(c);
 						//this is where any post-attack triggers are checked
 					}
 				}
@@ -349,7 +342,7 @@ public class Characters
 		}
 		else
 		{
-			System.out.println(this + "'s attack missed! (Attack roll: " + temp + ")\n");
+			System.out.println(this + "'s attack missed! (Attack roll: " + temp + "; 35 or higher needed to hit)\n");
 		}
 	}
 	public void dealMagicDamage(int incoming_damage, Characters c)
