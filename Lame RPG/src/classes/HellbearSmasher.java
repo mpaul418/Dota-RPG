@@ -9,7 +9,7 @@ public class HellbearSmasher extends Monster
 	
 	public HellbearSmasher()
 	{
-		super(400, 75, 50, 105, 30, 0.15, "Hellbear Smasher", 3, 150);
+		super(400, 75, 50, 60, 30, 0.15, "Hellbear Smasher", 3, 150);
 		thunder_clap = new ThunderClap(this);
 	}
 

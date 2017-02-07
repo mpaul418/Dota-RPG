@@ -24,7 +24,7 @@ public class Characters
 	protected boolean alive;
 	protected int damage_dealt = 0;
 	public int hunker_downs_used = 0;
-	private final int MAX_ACCURACY = 44;
+	private final int MAX_ACCURACY = 74;
 	public ArrayList<Spell> spellbook = new ArrayList<Spell>();
 	public ArrayList<Spell> unlearned_spells = new ArrayList<Spell>();
 	public ArrayList<Buff> buffs = new ArrayList<Buff>();
@@ -190,9 +190,16 @@ public class Characters
 	}
 	public int changeAccuracy(int amount)
 	{
+		int amount_changed = amount;
 		accuracy += amount;
 		
-		return amount;
+		if(accuracy > MAX_ACCURACY) // TODO TODO TODO accuracy can never go above 74 (99% chance to hit) without buffs- make balance changes in all characters!!!
+		{
+			amount_changed = MAX_ACCURACY - accuracy;
+			accuracy = MAX_ACCURACY;
+		}
+		
+		return amount_changed;
 	}
 	public int changeDefaultAccuracy(int amount)
 	{
@@ -200,7 +207,7 @@ public class Characters
 		defaultAccuracy += amount;
 		accuracy += amount;
 		
-		if(defaultAccuracy > MAX_ACCURACY) // TODO TODO TODO accuracy can never go above 44 (99% chance to hit) without buffs- make balance changes in all characters!!!
+		if(defaultAccuracy > MAX_ACCURACY) // TODO TODO TODO accuracy can never go above 74 (99% chance to hit) without buffs- make balance changes in all characters!!!
 		{
 			amount_changed = MAX_ACCURACY - defaultAccuracy;
 			defaultAccuracy = MAX_ACCURACY;
@@ -266,8 +273,12 @@ public class Characters
 			damage_done = 1;
 		
 		damage(c, damage_done);
+		
 		if(damage_done == 1)
-			System.out.print("Graze! ");
+			System.out.print("Graze. ");
+		else
+			System.out.print("Hit! ");
+		
 		System.out.println(this + " dealt " + damage_done + " physical damage to " + c + "."
 					  + " (Defense roll: " + current_defense + "/" + c.getDefense() + ")"); //FIXME in final version of game, is this necessary to display?
 		
@@ -285,8 +296,10 @@ public class Characters
 		boolean critical_hit, attack_evaded;
 		attack_evaded = critical_hit = false;
 		
-		temp = r.nextInt(101) + accuracy;
-		if(temp >= 35) // checks if attack hits- a 35% chance to hit with 0 accuracy
+		System.out.println(this + " attacked " + c + "!");
+		
+		temp = r.nextInt(101);
+		if(temp >= 75 - accuracy) // checks if attack hits- a 25% chance to hit with 0 accuracy
 		{
 			for(Buff b : c.buffs)
 			{
@@ -317,12 +330,11 @@ public class Characters
 				{
 					damage_done = (int)Math.round(((AttackBuff) buffs.get(crit_buff_index)).getCritModifier() * damage_roll);
 					if(damage_done > 0)
-						System.out.print("Critical hit!! ");
+						System.out.print("Critical "); // is either a hit or graze depending on dealPhysicalDamage()
 				}
 				else
 					damage_done = damage_roll;
 				
-				System.out.println(this + " attacked " + c + "!");
 				dealPhysicalDamage(c, damage_done);
 				
 				for(Buff b : buffs)

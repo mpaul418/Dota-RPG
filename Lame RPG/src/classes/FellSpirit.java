@@ -5,7 +5,7 @@ public class FellSpirit extends Monster
 
 	public FellSpirit()
 	{
-		super(150, 15, 32, 65, 10, 0.1, "Fell Spirit", 1, 25);
+		super(150, 15, 32, 25, 10, 0.1, "Fell Spirit", 1, 25);
 	}
 
 	public FellSpirit(int initHP, int initMana, int initDmg, int initAcc, int initDef, double initMagDef,

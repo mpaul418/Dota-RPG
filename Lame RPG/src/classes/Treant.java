@@ -5,7 +5,7 @@ public class Treant extends Monster
 	
 	public Treant()
 	{
-		super(200, 0, 20, 75, 10, 0.15, "Treant", 1, 20);
+		super(200, 0, 20, 35, 10, 0.15, "Treant", 1, 20);
 	}
 
 	public Treant(int initHP, int initMana, int initDmg, int initAcc, int initDef,

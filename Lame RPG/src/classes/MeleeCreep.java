@@ -5,7 +5,7 @@ public class MeleeCreep extends Monster
 	
 	public MeleeCreep()
 	{
-		super(215, 0, 28, 85, 15, 0.0, "Melee Creep", 1, 35);
+		super(215, 0, 28, 37, 15, 0.0, "Melee Creep", 1, 35);
 	}
 
 	public MeleeCreep(int initHP, int initMana, int initDmg, int initAcc, int initDef, double initMagDef,

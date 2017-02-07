@@ -5,7 +5,7 @@ public class VhoulAssassin extends Monster
 
 	public VhoulAssassin()
 	{
-		super(75, 25, 40, 125, 7, 0.12, "Vhoul Assassin", 1, 30);
+		super(75, 25, 40, 45, 7, 0.12, "Vhoul Assassin", 1, 30);
 	}
 
 	public VhoulAssassin(int initHP, int initMana, int initDmg, int initAcc, int initDef, double initMagDef,

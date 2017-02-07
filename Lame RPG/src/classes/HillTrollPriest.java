@@ -9,7 +9,7 @@ public class HillTrollPriest extends Monster
 	
 	public HillTrollPriest()
 	{
-		super(130, 125, 25, 85, 5, 0.20, "Hill Troll Priest", 2, 60);
+		super(130, 125, 25, 40, 5, 0.20, "Hill Troll Priest", 2, 60);
 		heal = new Heal(this);
 	}
 

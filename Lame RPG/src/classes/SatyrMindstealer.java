@@ -5,7 +5,7 @@ public class SatyrMindstealer extends Monster
 
 	public SatyrMindstealer()
 	{
-		super(180, 95, 50, 95, 21, 0.15, "Satyr Mindstealer", 2, 100);
+		super(180, 95, 50, 55, 21, 0.15, "Satyr Mindstealer", 2, 100);
 	}
 
 	public SatyrMindstealer(int initHP, int initMana, int initDmg, int initAcc, int initDef, double initMagDef,
