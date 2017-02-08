@@ -30,7 +30,7 @@ public class GreatCleave extends PassiveSpell
 			{
 				if(CHARACTER.buffs.get(i).getName() == this.NAME)
 				{
-					CHARACTER.buffs.get(i).deletThis();
+					CHARACTER.buffs.remove(i);
 					
 					if(spell_level == 2)
 						this.CHARACTER.buffs.add(new AttackBuff(this.NAME, this.NAME + " cleave.",
@@ -39,7 +39,6 @@ public class GreatCleave extends PassiveSpell
 						this.CHARACTER.buffs.add(new AttackBuff(this.NAME, this.NAME + " cleave.",
 							this.CHARACTER, -1, 0, 0, 0, 0, 2, 0.60));
 					
-					System.out.println("This is working!!! (delete this)");
 					break;
 				}
 			}

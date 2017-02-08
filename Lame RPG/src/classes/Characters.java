@@ -36,15 +36,15 @@ public class Characters
 		defaultMana = initMana;
 		mana = initMana;
 		level = 1;
-		defaultDamage = initDmg;//note- if more default stats 
-		//should be able to be changed, add numbers for all + change in buff class
-		damage = initDmg;//buff- 1
+		defaultDamage = initDmg;			//note- if more default stats 
+											//should be able to be changed, add numbers for all + change in buff class
+		damage = initDmg;					//buff- 1
 		defaultAccuracy = initAcc;
-		accuracy = initAcc;//buff- 2
+		accuracy = initAcc;					//buff- 2
 		defaultDefense = initDef;	
-		defense = initDef;//buff- 3
+		defense = initDef;					//buff- 3
 		defaultMagicDefense = initMagDef;
-		magicDefense = initMagDef;//buff- 4
+		magicDefense = initMagDef;			//buff- 4
 		name = initName;
 	}
 	public int getHP()
@@ -193,7 +193,7 @@ public class Characters
 		int amount_changed = amount;
 		accuracy += amount;
 		
-		if(accuracy > MAX_ACCURACY) // TODO TODO TODO accuracy can never go above 74 (99% chance to hit) without buffs- make balance changes in all characters!!!
+		if(accuracy > MAX_ACCURACY) // accuracy can never go above 74 (99% chance to hit)
 		{
 			amount_changed = MAX_ACCURACY - accuracy;
 			accuracy = MAX_ACCURACY;
@@ -207,7 +207,7 @@ public class Characters
 		defaultAccuracy += amount;
 		accuracy += amount;
 		
-		if(defaultAccuracy > MAX_ACCURACY) // TODO TODO TODO accuracy can never go above 74 (99% chance to hit) without buffs- make balance changes in all characters!!!
+		if(defaultAccuracy > MAX_ACCURACY) // accuracy can never go above 74 (99% chance to hit)
 		{
 			amount_changed = MAX_ACCURACY - defaultAccuracy;
 			defaultAccuracy = MAX_ACCURACY;
@@ -251,7 +251,6 @@ public class Characters
 		}
 		return false;
 	}
-	//TODO replace method with system for magic/phys damage that calculates it in the method instead of before calling method
 	public int damage(Characters c, int incoming_damage)
 	{
 		c.HP -= incoming_damage;
@@ -259,7 +258,7 @@ public class Characters
 		
 		return incoming_damage;
 	}
-	public int dealPhysicalDamage(Characters c, int incoming_damage) //TODO complete this method
+	public int dealPhysicalDamage(Characters c, int incoming_damage)
 	{
 		int damage_done = 0;
 		int current_defense = 0;
@@ -312,10 +311,9 @@ public class Characters
 			}
 			if(!attack_evaded)
 			{
-				 											//TODO checks for a crit with every attack buff, 
-				for(int i = 0; i < buffs.size(); i++)		//can probably be optimized for only attack buffs that CAN crit
+				for(int i = 0; i < buffs.size(); i++)		// checks for a crit with every attack buff that can crit
 				{
-					if(buffs.get(i) instanceof AttackBuff && !attack_evaded)
+					if(buffs.get(i) instanceof AttackBuff && ((AttackBuff) (buffs.get(i))).getCritChance() > 0 && !attack_evaded)
 					{
 						critical_hit = ((AttackBuff) buffs.get(i)).criticalHit();
 						if(critical_hit)
@@ -330,7 +328,7 @@ public class Characters
 				{
 					damage_done = (int)Math.round(((AttackBuff) buffs.get(crit_buff_index)).getCritModifier() * damage_roll);
 					if(damage_done > 0)
-						System.out.print("Critical "); // is either a hit or graze depending on dealPhysicalDamage()
+						System.out.print("Critical "); 	// is either a hit or graze depending on dealPhysicalDamage()
 				}
 				else
 					damage_done = damage_roll;
@@ -339,11 +337,10 @@ public class Characters
 				
 				for(Buff b : buffs)
 				{
-					if(b instanceof AttackBuff)
+					if(b instanceof AttackBuff)			//this is where any post-attack triggers are checked
 					{
 						((AttackBuff) b).applyManaBurn(c);
 						((AttackBuff) b).applyCleave(c, damage_done);
-						//this is where any post-attack triggers are checked
 					}
 				}
 				
@@ -354,7 +351,7 @@ public class Characters
 		}
 		else
 		{
-			System.out.println(this + "'s attack missed! (Attack roll: " + temp + "; 35 or higher needed to hit)\n");
+			System.out.println(this + "'s attack missed! (Attack roll: " + temp + "; " + (75 - accuracy) + " or higher needed to hit)\n");
 		}
 	}
 	public void dealMagicDamage(int incoming_damage, Characters c)

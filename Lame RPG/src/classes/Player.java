@@ -33,7 +33,7 @@ public abstract class Player extends Characters
 		else
 			System.out.println(this + " needs " + (xp_level_rq - xp) + " more experience points to level up.");
 	}
-	private void levelUp()
+	private void levelUp() // TODO ask the player what skill(s) to level up
 	{
 		this.level++;
 		xp_level_rq += 25 * level + 5 * (level - 1)^2; // xp increases by 5(x - 1)^2 + 25x every level. 1:100, 2: 155, 3: 250, 4: 395, etc
@@ -48,7 +48,7 @@ public abstract class Player extends Characters
 		defaultMana = (int)Math.round(1.25 * defaultMana);
 		mana = defaultMana;
 		defaultDamage = (int)Math.round(1.25 * defaultDamage);
-		damage += (int)Math.round(0.25 * defaultDamage); //FIXME potential bugs with damage increase bugs?
+		damage += (int)Math.round(0.25 * defaultDamage);
 		
 		for(Spell s : this.spellbook)
 			s.levelUp();

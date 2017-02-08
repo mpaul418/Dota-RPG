@@ -12,7 +12,7 @@ public abstract class Spell
 	public final boolean TARGETED;
 	public int max_cooldown;
 	public int current_cooldown = 0;
-	public int spell_level; //TODO implement spell leveling for all spells
+	public int spell_level;
 	public int max_spell_level = 3; // this can be overridden
 	
 	public Spell(String tempname, String dsc, int manacost, int level_rq, int cd, Characters c, boolean targetable)
@@ -55,11 +55,10 @@ public abstract class Spell
 	{
 		return NAME;
 	}
+	
 	public abstract boolean isCastable();
-	//{
-		//TODO placeholder- need to show in takePlayerTurn() if a spell is correct level but not enough mana
-	//}
-	public boolean onCooldown()//only use this if spell is in the spellbook
+	
+	public boolean onCooldown() // only use this if spell is in the spellbook
 	{
 		if(current_cooldown == 0)
 			return false;
@@ -79,7 +78,7 @@ public abstract class Spell
 		current_cooldown = max_cooldown;
 	}
 	
-	public boolean levelUp()
+	public boolean levelUp() //TODO change buffs that remove themselves and add a new one on level up- make them just remove the buff from buffs instead of deletThis()
 	{
 		if(spell_level < max_spell_level)
 		{

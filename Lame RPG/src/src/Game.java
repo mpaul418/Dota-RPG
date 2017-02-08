@@ -267,6 +267,16 @@ public class Game
 
 		while(characters.size() > 0)// removes all characters from this array at the end of the battle
 			characters.remove(0);
+		
+		
+		int temp = 0;
+		while(temp < player.buffs.size())	//clears all non-passive buffs after a battle
+		{
+			if(player.buffs.get(temp).getDuration() != -1) //if the buff is not passive
+				player.buffs.get(temp).decreaseDuration();
+			else
+				temp++;
+		}
 	}
 	
 	private static void addMonsters()
