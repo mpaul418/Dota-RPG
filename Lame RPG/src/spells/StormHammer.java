@@ -10,7 +10,7 @@ public class StormHammer extends ActiveSpell
 
 	public StormHammer(Characters c)
 	{
-		super("Storm Hammer", "Unleash a magical gauntlet that deals magic damage and stuns 1/2/all enemy units for 2 turns", 20, 2, 5, c, true);
+		super("Storm Hammer", "Unleash a magical gauntlet that deals magic damage and stuns 1/2/all enemy units for 2 turns", 20, 1, 5, c, true);
 	}
 
 	@Override

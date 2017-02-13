@@ -47,6 +47,14 @@ public abstract class Spell
 	{
 		return current_cooldown;
 	}
+	public int getLevel()
+	{
+		return spell_level;
+	}
+	public int getMaxLevel()
+	{
+		return max_spell_level;
+	}
 	public void changeCurrentCooldown(int i)
 	{
 		current_cooldown = current_cooldown + i;

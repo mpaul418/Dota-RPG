@@ -8,7 +8,7 @@ public class CoupDeGrace extends PassiveSpell
 
 	public CoupDeGrace(Characters c)
 	{
-		super("Coup de Grâce", "Gain a 15% chance to land a critical hit, dealing 175/225/275% damage", 0, 4, -1, c);
+		super("Coup de Grâce", "Gain a 15% chance to land a critical hit, dealing 175/225/275% damage", 0, 2, -1, c);
 	}
 
 	@Override

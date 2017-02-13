@@ -8,9 +8,9 @@ import src.Game;
 public class DeafeningBlast extends ActiveSpell
 {
 
-	public DeafeningBlast(Characters c)
+	public DeafeningBlast(Characters c) //TODO rework this spell w/scaling, etc
 	{
-		super("Deafening Blast", "Send a wave of energy into your enemies, heavily reducing their attack", 50, 4, 7, c, false);
+		super("Deafening Blast", "Send a wave of energy into your enemies, heavily reducing their attack", 50, 2, 7, c, false);
 		
 	}
 

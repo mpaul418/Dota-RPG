@@ -10,7 +10,7 @@ public class ManaVoid extends ActiveSpell
 	public ManaVoid(Characters c)
 	{
 		super("Mana Void", "After bringing enemies to their knees, Anti-Mage punishes them for their use of the arcane arts. "
-			+ "Deal 0.6/0.8/1.0 magic damage to all enemies for each of an enemy's missing mana", 40, 4, 10, c, true);
+			+ "Deal 0.6/0.8/1.0 magic damage to all enemies for each of an enemy's missing mana", 40, 2, 10, c, true);
 	}
 
 	@Override

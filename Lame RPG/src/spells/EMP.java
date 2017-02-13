@@ -7,9 +7,9 @@ import src.Game;
 public class EMP extends ActiveSpell
 {
 
-	public EMP(Characters c)
+	public EMP(Characters c) //TODO rework this spell w/scaling, etc
 	{
-		super("EMP", "Drain the mana of your enemies and deal magic damage to each enemy equal to 50% of its mana lost.", 50, 3, 5, c, false);
+		super("EMP", "Drain the mana of your enemies and deal magic damage to each enemy equal to 50% of its mana lost.", 50, 1, 5, c, false);
 	}
 
 	@Override

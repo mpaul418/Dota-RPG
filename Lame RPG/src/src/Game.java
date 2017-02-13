@@ -75,8 +75,8 @@ public class Game
 	{
 		System.out.println("What hero do you want to be?");
 		System.out.println("1- Anti-Mage: A balanced melee fighter who specializes against spellcasters."
-						+"\n2- Sven: A melee fighter who has high physical defense and attack."
-						+"\n3- Phantom Assassin: A glass cannon whose attack is very high, but at the expense of poor health."
+						+"\n2- Sven: A durable melee fighter who has solid physical defense and attack."
+						+"\n3- Phantom Assassin: A glass cannon whose physical attack is very high, but at the expense of poor health."
 						+"\n4- Invoker: A mage who has both damaging and utility spells.");
 
 		player_hero = getNumberFrom(1, 4);
