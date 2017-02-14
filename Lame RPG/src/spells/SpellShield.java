@@ -30,7 +30,7 @@ public class SpellShield extends PassiveSpell
 			{
 				if(CHARACTER.buffs.get(i).getName() == this.NAME)
 				{
-					CHARACTER.buffs.get(i).deletThis();
+					((StatBuff) CHARACTER.buffs.get(i)).deletThisNoNotifier();
 					
 					if(spell_level == 2)
 						this.CHARACTER.buffs.add(new StatBuff(this.NAME, this.NAME + " extra 44% magic resist.",
@@ -39,7 +39,7 @@ public class SpellShield extends PassiveSpell
 						this.CHARACTER.buffs.add(new StatBuff(this.NAME, this.NAME + " extra 66% magic resist.",
 								this.CHARACTER, -1, 4, 0.66));
 					
-					System.out.println("This is working!!! (delete this)");
+					System.out.println("This is working!!! (delete this in SpellShield)");
 					break;
 				}
 			}

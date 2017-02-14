@@ -35,10 +35,9 @@ public abstract class Player extends Characters
 		else
 			System.out.println(this + " needs " + (xp_level_rq - xp) + " more experience points to level up.");
 	}
-	private void levelUp() // TODO ask the player what skill(s) to level up
+	private void levelUp()
 	{
 		int levelup_points = 3;
-		boolean can_level_spells = false;
 		
 		this.level++;
 		xp_level_rq += 25 * level + 5 * (level - 1)^2; // xp increases by 5(x - 1)^2 + 25x every level. 1:100, 2: 155, 3: 250, 4: 395, etc
@@ -55,15 +54,29 @@ public abstract class Player extends Characters
 		defaultDamage = (int)Math.round(1.25 * defaultDamage);
 		damage += (int)Math.round(0.25 * defaultDamage);
 		
-		while(checkForSpellsToLevel() && levelup_points > 0) //TODO implement system where you can choose to level spells
+		while(checkForSpellsToLevel() && levelup_points > 0)
 		{
 			System.out.println(levelup_points + " levelup points to spend. Which spell would you like to level?");
-			 //TODO print spells that can be levelled, then choose one and level it
+			
+			int temp = 0;
+			ArrayList<Spell> levelable_spells = new ArrayList<Spell>();
+			
+			for(Spell s : spellbook) // lists each spell that can be leveled
+			{
+				if(s.getLevel() < s.getMaxLevel())
+				{
+					levelable_spells.add(s);
+					temp++;
+					System.out.println(temp + "(currently level " + s.getLevel() + "): " + s + "- " + s.DESCRIPTION + ".");
+				}
+			}
+			
+			int level_choice = Game.getNumberFrom(1, levelable_spells.size());
+			levelable_spells.get(level_choice - 1).levelUp();
+			
 			levelup_points--;
 		}
-		//for(Spell s : this.spellbook)
-		//	s.levelUp();
-
+		
 		int temp = 0;
 		while(temp < unlearned_spells.size())
 		{
@@ -72,7 +85,7 @@ public abstract class Player extends Characters
 				unlearned_spells.get(temp).addToSpellbook();
 			}
 			else
-				temp += 1;
+				temp++;
 		}
 	}
 	

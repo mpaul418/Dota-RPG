@@ -81,4 +81,35 @@ public class StatBuff extends Buff
 		}	
 		super.deletThis();	
 	}
+	
+	public void deletThisNoNotifier() // for when spells level up and you don't want it to say it has worn off
+	{
+		if(CHARACTER.buffs.contains(this))
+		{
+			switch(stat)
+			{
+				case 1:
+				{
+					CHARACTER.changeDamage((int) -modified_amount);
+					break;
+				}
+				case 2:
+				{
+					CHARACTER.changeAccuracy((int) -modified_amount);
+					break;
+				}
+				case 3:
+				{
+					CHARACTER.changeDefense((int) -modified_amount);
+					break;
+				}
+				case 4:
+				{
+					CHARACTER.changeMagicDefense((int) -modified_amount);
+					break;
+				}
+			}
+		}
+		CHARACTER.buffs.remove(this);
+	}
 }

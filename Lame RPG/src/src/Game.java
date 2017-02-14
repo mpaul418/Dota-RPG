@@ -660,11 +660,12 @@ public class Game
 		System.out.println();
 	}
 
-	private static int getNumberFrom(int start, int end)
+	public static int getNumberFrom(int start, int end)
 	{
 		boolean working = true;
 		int tempint = -1;
 		int greater, lesser;
+		
 		if(start > end)
 		{
 			greater = start;
