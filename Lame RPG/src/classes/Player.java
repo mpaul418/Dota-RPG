@@ -54,7 +54,7 @@ public abstract class Player extends Characters
 		defaultDamage = (int)Math.round(1.25 * defaultDamage);
 		damage += (int)Math.round(0.25 * defaultDamage);
 		
-		while(checkForSpellsToLevel() && levelup_points > 0)
+		while(checkForSpellsToLevel() && levelup_points > 0) //TODO make ultimate spells only levelable once per level
 		{
 			System.out.println(levelup_points + " levelup points to spend. Which spell would you like to level?");
 			

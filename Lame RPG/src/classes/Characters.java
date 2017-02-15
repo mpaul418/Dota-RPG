@@ -120,6 +120,11 @@ public class Characters
 			amount_changed = defaultMana - mana;
 			mana = defaultMana;
 		}
+		else if(mana + amount < 0)
+		{
+			amount_changed = mana;
+			mana = 0;
+		}
 		
 		return amount_changed;
 	}
@@ -134,7 +139,7 @@ public class Characters
 	{
 		int amount_changed = amount;
 		HP += amount;
-		if(HP > defaultMana)
+		if(HP > defaultHP)
 		{
 			amount_changed = defaultHP - HP;
 			HP = defaultHP;
@@ -151,9 +156,17 @@ public class Characters
 	}
 	public int changeDamage(int amount)
 	{
-		damage += amount;
+		int amount_changed = amount;
 		
-		return amount;
+		if(damage + amount < 6)
+		{
+			amount_changed = damage - 6;
+			damage = 6;
+		}
+		else
+			damage += amount;
+		
+		return amount_changed;
 	}
 	public int changeDefaultDamage(int amount)
 	{
