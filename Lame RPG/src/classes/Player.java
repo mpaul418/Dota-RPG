@@ -103,8 +103,12 @@ public abstract class Player extends Characters
 				{
 					if(this.getLevel() % 2 == 1) // if player's level is odd
 					{
-						if(s.getLevel() != (this.getLevel() - 1)) // ultimates can only be leveled every other level
+						if(s.getLevel() < (this.getLevel() - 1)) // ultimates can only be leveled every other level
 							return true;
+					}
+					else
+					{
+						//TODO for when level is even
 					}
 				}  //FIXME double check this
 				else
