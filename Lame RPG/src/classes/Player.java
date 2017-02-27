@@ -2,6 +2,10 @@ package classes;
 
 import java.util.ArrayList;
 
+import spells.CoupDeGrace;
+import spells.DeafeningBlast;
+import spells.GodsStrength;
+import spells.ManaVoid;
 import spells.Spell;
 import src.Game;
 
@@ -94,7 +98,18 @@ public abstract class Player extends Characters
 		for(Spell s : spellbook)
 		{
 			if(s.getLevel() < s.getMaxLevel())
-				return true;
+			{
+				if(s instanceof CoupDeGrace || s instanceof DeafeningBlast || s instanceof ManaVoid || s instanceof GodsStrength) // if the ability is an ultimate
+				{
+					if(this.getLevel() % 2 == 1) // if player's level is odd
+					{
+						if(s.getLevel() != (this.getLevel() - 1)) // ultimates can only be leveled every other level
+							return true;
+					}
+				}  //FIXME double check this
+				else
+					return true;
+			}
 		}
 		return false;
 	}

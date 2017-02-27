@@ -254,10 +254,7 @@ public class Game
 			if(!battleOver())
 				for(Monster m: monsters)
 				{
-					//if(m.isAlive()) //FIXME is this redundant?? i think monsters get removed from this array when they die
 						takeMonsterTurn(m);
-					//else
-					//	System.out.println(m + " is dead. you coded something wrong."); //this should never actually print
 				}
 			
 			checkForDeaths();
