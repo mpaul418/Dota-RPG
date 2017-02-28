@@ -23,7 +23,7 @@ public abstract class Player extends Characters
 	{
 		super(initHP, initMana, initDmg, initAcc, initDef, initMagDef, initName);
 		character_class = playerClass;
-		gold = 0;
+		gold = 0; //TODO add this
 		xp = 0;
 		xp_level_rq = 100;
 	}
@@ -69,9 +69,19 @@ public abstract class Player extends Characters
 			{
 				if(s.getLevel() < s.getMaxLevel())
 				{
-					levelable_spells.add(s);
-					temp++;
-					System.out.println(temp + "(currently level " + s.getLevel() + "): " + s + "- " + s.DESCRIPTION + ".");
+					if(!(s instanceof CoupDeGrace || s instanceof DeafeningBlast || s instanceof ManaVoid || s instanceof GodsStrength)) // if not an ultimate
+					{
+						levelable_spells.add(s);
+						temp++;
+						System.out.println(temp + "(currently level " + s.getLevel() + "): " + s + "- " + s.DESCRIPTION + ".");
+					}
+					else if(s.getLevel() < ((this.getLevel() / 2) - 2)) // can only be leveled every other level starting at level 4
+					{
+						levelable_spells.add(s);
+						temp++;
+						System.out.println(temp + "(currently level " + s.getLevel() + "): " + s + "- " + s.DESCRIPTION + ".");
+					}
+						
 				}
 			}
 			
@@ -101,17 +111,10 @@ public abstract class Player extends Characters
 			{
 				if(s instanceof CoupDeGrace || s instanceof DeafeningBlast || s instanceof ManaVoid || s instanceof GodsStrength) // if the ability is an ultimate
 				{
-					if(this.getLevel() % 2 == 1) // if player's level is odd
-					{
-						if(s.getLevel() < (this.getLevel() - 1)) // ultimates can only be leveled every other level
-							return true;
-					}
-					else
-					{
-						//TODO for when level is even
-					}
-				}  //FIXME double check this
-				else
+					if(s.getLevel() < ((this.getLevel() / 2) - 2)) // can only be leveled every other level starting at level 4
+						return true;
+				}
+				else // if it is not an ultimate ability
 					return true;
 			}
 		}
