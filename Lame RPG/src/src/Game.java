@@ -164,6 +164,8 @@ public class Game
 		int tempint = -1;
 		int choice = -1;
 
+		displayMap();
+		
 		System.out.println("Which direction would you like to go?");
 		do
 		{
@@ -197,13 +199,27 @@ public class Game
 		else if(choice == 4)
 			current_column -= 1;		// go up
 	}
+	private static void displayMap() // creates a picture of the map
+	{
+		for(int column = 0; column < 5; column++)
+		{
+			for(int row = 0; row < 5; row++)
+			{
+				if(current_row == row && current_column == column)
+					System.out.print("[X]\t");
+				else
+					System.out.print("[ ]\t");
+			}
+			
+			System.out.println();
+		}
+		
+	}
+
 	private static void showRoomChoices()
 	{
 		options = new ArrayList<Integer>();
-		
-		//for(@SuppressWarnings("unused") int integer : options) //are these two lines unnecessary??
-		//	options.remove(0);
-		
+
 		options.add(1);
 		options.add(2);
 		options.add(3);

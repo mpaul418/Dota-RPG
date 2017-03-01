@@ -62,19 +62,22 @@ public class AttackBuff extends Buff
 	{
 		if(mana_burn > 0)
 		{
-			int mana_to_burn, damage_to_deal;
-			if(mana_burn <= c.getMana())
-				mana_to_burn = mana_burn;
-			else
-				mana_to_burn = c.getMana();
-			
-			damage_to_deal = (int) Math.round((mana_burn_multiplier) * mana_to_burn);
-			
-			c.changeMana(-mana_to_burn);
-			c.damage(c, damage_to_deal);
-			
-			System.out.println(this.CHARACTER + " burned " + mana_to_burn + " of " 
-							   + c + "'s mana and dealt " + damage_to_deal + " damage.");
+			if(c.getMana() > 0)
+			{
+				int mana_to_burn, damage_to_deal;
+				if(c.getMana() - mana_burn < 0)
+					mana_to_burn = mana_burn;
+				else
+					mana_to_burn = c.getMana();
+				
+				damage_to_deal = (int) Math.round((mana_burn_multiplier) * mana_to_burn);
+				
+				c.changeMana(-mana_to_burn);
+				c.damage(c, damage_to_deal);
+				
+				System.out.println(this.CHARACTER + " burned " + mana_to_burn + " of " 
+								   + c + "'s mana and dealt " + damage_to_deal + " damage.");
+			}
 		}
 	}
 	

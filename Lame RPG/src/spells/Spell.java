@@ -86,7 +86,7 @@ public abstract class Spell
 		current_cooldown = max_cooldown;
 	}
 	
-	public boolean levelUp() //TODO change buffs that remove themselves and add a new one on level up- make them just remove the buff from buffs instead of deletThis()
+	public boolean levelUp()
 	{
 		if(spell_level < max_spell_level)
 		{

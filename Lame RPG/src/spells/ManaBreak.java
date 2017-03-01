@@ -20,7 +20,7 @@ public class ManaBreak extends PassiveSpell
 	}
 	
 	@Override
-	public boolean levelUp()
+	public boolean levelUp() 
 	{
 		boolean level_up = super.levelUp();
 		
@@ -30,7 +30,7 @@ public class ManaBreak extends PassiveSpell
 			{
 				if(CHARACTER.buffs.get(i).getName() == this.NAME)
 				{
-					CHARACTER.buffs.get(i).deletThis();
+					CHARACTER.buffs.get(i).deletThis();//TODO create a deletThisNoNotifier for AttackBuff
 					
 					if(spell_level == 2)
 						this.CHARACTER.buffs.add(new AttackBuff(this.NAME, this.NAME + " mana burn.",

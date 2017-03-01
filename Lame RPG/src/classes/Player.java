@@ -58,7 +58,7 @@ public abstract class Player extends Characters
 		defaultDamage = (int)Math.round(1.25 * defaultDamage);
 		damage += (int)Math.round(0.25 * defaultDamage);
 		
-		while(checkForSpellsToLevel() && levelup_points > 0) //TODO make ultimate spells only levelable once per level
+		while(checkForSpellsToLevel() && levelup_points > 0)
 		{
 			System.out.println(levelup_points + " levelup points to spend. Which spell would you like to level?");
 			
@@ -75,13 +75,12 @@ public abstract class Player extends Characters
 						temp++;
 						System.out.println(temp + "(currently level " + s.getLevel() + "): " + s + "- " + s.DESCRIPTION + ".");
 					}
-					else if(s.getLevel() < ((this.getLevel() / 2) - 2)) // can only be leveled every other level starting at level 4
+					else if(s.getLevel() < ((this.getLevel() - 1))) // ultimates can only be leveled once per level starting at level 3
 					{
 						levelable_spells.add(s);
 						temp++;
 						System.out.println(temp + "(currently level " + s.getLevel() + "): " + s + "- " + s.DESCRIPTION + ".");
 					}
-						
 				}
 			}
 			
@@ -111,7 +110,7 @@ public abstract class Player extends Characters
 			{
 				if(s instanceof CoupDeGrace || s instanceof DeafeningBlast || s instanceof ManaVoid || s instanceof GodsStrength) // if the ability is an ultimate
 				{
-					if(s.getLevel() < ((this.getLevel() / 2) - 2)) // can only be leveled every other level starting at level 4
+					if(s.getLevel() < ((this.getLevel() - 1)))// can only be leveled once per level starting at level 3
 						return true;
 				}
 				else // if it is not an ultimate ability
