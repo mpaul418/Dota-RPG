@@ -65,7 +65,7 @@ public class AttackBuff extends Buff
 			if(c.getMana() > 0)
 			{
 				int mana_to_burn, damage_to_deal;
-				if(c.getMana() - mana_burn < 0)
+				if(c.getMana() - mana_burn > 0)
 					mana_to_burn = mana_burn;
 				else
 					mana_to_burn = c.getMana();

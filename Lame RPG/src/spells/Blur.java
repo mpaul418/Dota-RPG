@@ -30,7 +30,7 @@ public class Blur extends PassiveSpell
 			{
 				if(CHARACTER.buffs.get(i).getName() == this.NAME)
 				{
-					CHARACTER.buffs.get(i).deletThis();
+					CHARACTER.buffs.get(i).deletThisNoNotifier();
 					
 					if(spell_level == 2)
 						this.CHARACTER.buffs.add(new AttackedBuff(this.NAME, this.NAME + " evasion bonus.",

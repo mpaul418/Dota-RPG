@@ -44,9 +44,9 @@ public abstract class Player extends Characters
 		int levelup_points = 3;
 		
 		this.level++;
-		xp_level_rq += 25 * level + 5 * (level - 1)^2; // xp increases by 5(x - 1)^2 + 25x every level. 1:100, 2: 155, 3: 250, 4: 395, etc
+		xp_level_rq += ((25 * level) + (5 * (level - 1) * (level - 1))); // xp increases by 5(x - 1)^2 + 25x every level. 1:100, 2: 155, 3: 250, 4: 395, etc TODO i think this is not scaling correctly
 		
-		System.out.println(this + " just leveled up!!"
+		System.out.println("--------------------------------------\n\n" + this + " just leveled up!!"
 				+  "\nHP increased by " + (int)Math.round(0.25 * defaultHP)
 				+ ".\nMana increased by " + (int)Math.round(0.25 * defaultMana)
 				+ ".\nDamage increased by " + (int)Math.round(0.25 * defaultDamage) + ".");
@@ -73,7 +73,7 @@ public abstract class Player extends Characters
 					{
 						levelable_spells.add(s);
 						temp++;
-						System.out.println(temp + "(currently level " + s.getLevel() + "): " + s + "- " + s.DESCRIPTION + ".");
+						System.out.println(temp + ": " + s + "(currently level " + s.getLevel() + ")- " + s.DESCRIPTION + ".");
 					}
 					else if(s.getLevel() < ((this.getLevel() - 1))) // ultimates can only be leveled once per level starting at level 3
 					{
@@ -100,6 +100,8 @@ public abstract class Player extends Characters
 			else
 				temp++;
 		}
+		
+		System.out.println("--------------------------------------");
 	}
 	
 	private boolean checkForSpellsToLevel()

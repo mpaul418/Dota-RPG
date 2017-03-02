@@ -37,11 +37,6 @@ public class StatBuff extends Buff
 				modified_amount = CHARACTER.changeMagicDefense(int_modifier);
 				break;
 			}
-			//case 5:
-			//{
-			//	modified_amount = CHARACTER.changeDefaultMagicDefense(int_modifier);
-			//	break;
-			//}
 		}
 	}
 	
@@ -72,11 +67,6 @@ public class StatBuff extends Buff
 					CHARACTER.changeMagicDefense((int) -modified_amount);
 					break;
 				}
-				//case 5:
-				//{
-				//	CHARACTER.changeDefaultMagicDefense((int) -modified_amount);
-				//	break;
-				//}
 			}
 		}	
 		super.deletThis();	
@@ -110,6 +100,6 @@ public class StatBuff extends Buff
 				}
 			}
 		}
-		CHARACTER.buffs.remove(this);
+		super.deletThisNoNotifier();
 	}
 }

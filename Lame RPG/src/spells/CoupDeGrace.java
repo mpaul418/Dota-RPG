@@ -30,7 +30,7 @@ public class CoupDeGrace extends PassiveSpell
 			{
 				if(CHARACTER.buffs.get(i).getName() == this.NAME)
 				{
-					CHARACTER.buffs.get(i).deletThis();
+					CHARACTER.buffs.get(i).deletThisNoNotifier();
 					
 					if(spell_level == 2)
 						this.CHARACTER.buffs.add(new AttackBuff(this.NAME, this.NAME + " crit chance.",

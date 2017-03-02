@@ -58,6 +58,11 @@ public abstract class Buff
 		System.out.println(CHARACTER + "'s " + name + " buff wore off.");
 	}
 	
+	public void deletThisNoNotifier()
+	{
+		CHARACTER.buffs.remove(this);
+	}
+	
 	public String toString()
 	{
 		if(duration > 0) //if the buff is not passive(infinite)

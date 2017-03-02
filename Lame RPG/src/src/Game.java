@@ -199,21 +199,23 @@ public class Game
 		else if(choice == 4)
 			current_column -= 1;		// go up
 	}
+	
 	private static void displayMap() // creates a picture of the map
 	{
-		for(int column = 0; column < 5; column++)
+		for(int row = 0; row < 5; row++)
 		{
-			for(int row = 0; row < 5; row++)
+			for(int column = 0; column < 5; column++)
 			{
 				if(current_row == row && current_column == column)
 					System.out.print("[X]\t");
+				else if(map[row][column] == 0)
+					System.out.print("[C]\t");
 				else
 					System.out.print("[ ]\t");
 			}
-			
 			System.out.println();
 		}
-		
+		System.out.println("\nKey:\tX: Your Position\tC: Cleared Room");
 	}
 
 	private static void showRoomChoices()

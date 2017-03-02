@@ -30,7 +30,7 @@ public class ManaBreak extends PassiveSpell
 			{
 				if(CHARACTER.buffs.get(i).getName() == this.NAME)
 				{
-					CHARACTER.buffs.get(i).deletThis();//TODO create a deletThisNoNotifier for AttackBuff
+					CHARACTER.buffs.get(i).deletThisNoNotifier(); //TODO create a deletThisNoNotifier for AttackBuff
 					
 					if(spell_level == 2)
 						this.CHARACTER.buffs.add(new AttackBuff(this.NAME, this.NAME + " mana burn.",
@@ -39,7 +39,6 @@ public class ManaBreak extends PassiveSpell
 						this.CHARACTER.buffs.add(new AttackBuff(this.NAME, this.NAME + " mana burn.",
 							this.CHARACTER, -1, 25, 0.6, 0, 0, 0, 0));
 					
-					System.out.println("This(mana break) is working!!! (delete this)");
 					break;
 				}
 			}

@@ -39,7 +39,6 @@ public class SpellShield extends PassiveSpell
 						this.CHARACTER.buffs.add(new StatBuff(this.NAME, this.NAME + " extra 66% magic resist.",
 								this.CHARACTER, -1, 4, 0.66));
 					
-					System.out.println("This is working!!! (delete this in SpellShield)");
 					break;
 				}
 			}
