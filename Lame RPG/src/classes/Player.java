@@ -39,6 +39,7 @@ public abstract class Player extends Characters
 		else
 			System.out.println(this + " needs " + (xp_level_rq - xp) + " more experience points to level up.");
 	}
+	
 	private void levelUp()
 	{
 		int levelup_points = 3;

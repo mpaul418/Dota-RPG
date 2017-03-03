@@ -120,9 +120,9 @@ public class Characters
 			amount_changed = defaultMana - mana;
 			mana = defaultMana;
 		}
-		else if(mana + amount < 0)
+		else if(mana < 0)
 		{
-			amount_changed = mana;
+			amount_changed = mana - amount;
 			mana = 0;
 		}
 		

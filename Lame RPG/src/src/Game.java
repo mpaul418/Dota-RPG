@@ -169,11 +169,11 @@ public class Game
 		System.out.println("Which direction would you like to go?");
 		do
 		{
-			showRoomChoices();
+			showRoomChoices(options);
 			do
 			{
 				if(!working)
-					showRoomChoices();
+					showRoomChoices(options);
 				working = true;
 				try
 				{
@@ -218,31 +218,32 @@ public class Game
 		System.out.println("\nKey:\tX: Your Position\tC: Cleared Room");
 	}
 
-	private static void showRoomChoices()
+	private static void showRoomChoices(ArrayList<Integer> room_options) //FIXME not working properly
 	{
-		options = new ArrayList<Integer>();
-
-		options.add(1);
-		options.add(2);
-		options.add(3);
-		options.add(4);
+		for(int i = room_options.size(); i > 0; i--)
+			room_options.remove(0);
+			
+		room_options.add((Integer) 1);
+		room_options.add((Integer) 2);
+		room_options.add((Integer) 3);
+		room_options.add((Integer) 4);
 		
-		if(current_row == 0)					// when you cannot go left
-			options.remove((Integer) 3);
-		else if(current_row == 4) 				// when you cannot go right
-			options.remove((Integer) 1);
-		if(current_column == 0) 				// when you cannot go up
-			options.remove((Integer) 4);
-		else if(current_column == 4) 			// when you cannot go down
-				options.remove((Integer) 2);
+		if(current_column == 0)					// when you cannot go left
+			room_options.remove((Integer) 3);
+		else if(current_column == 4) 			// when you cannot go right
+			room_options.remove((Integer) 1);
+		if(current_row == 0) 				// when you cannot go up
+			room_options.remove((Integer) 4);
+		else if(current_row == 4) 			// when you cannot go down
+				room_options.remove((Integer) 2);
 		
-		if(options.contains(1))
+		if(room_options.contains(1))
 			System.out.println("1: Go right.");
-		if(options.contains(2))
+		if(room_options.contains(2))
 			System.out.println("2: Go down.");
-		if(options.contains(3))
+		if(room_options.contains(3))
 			System.out.println("3: Go left.");
-		if(options.contains(4))
+		if(room_options.contains(4))
 			System.out.println("4: Go up.");
 	}
 	

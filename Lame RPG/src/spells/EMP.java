@@ -10,7 +10,7 @@ public class EMP extends ActiveSpell
 	
 	public EMP(Characters c)
 	{
-		super("EMP", "Drain 50/80/110 mana of all enemies and deal magic damage to each enemy equal to 50% of its mana lost.", 50, 1, 5, c, false);
+		super("EMP", "Drain 50/80/110 mana of all enemies and deal magic damage to each enemy equal to 50% of its mana lost", 50, 1, 5, c, false);
 	}
 
 	@Override
@@ -23,10 +23,12 @@ public class EMP extends ActiveSpell
 		
 		for(Monster m : Game.monsters)
 		{
-			mana_burned = m.changeMana(-mana_burn);
-			System.out.println(this.CHARACTER + " burned " + mana_burned + " of " + m + "'s mana.");
-			
-			this.CHARACTER.dealMagicDamage(mana_burned, m);
+			mana_burned = Math.abs(m.changeMana(-mana_burn));
+			if(mana_burned > 0)
+			{
+				System.out.println(this.CHARACTER + " burned " + mana_burned + " of " + m + "'s mana.");
+				this.CHARACTER.dealMagicDamage(mana_burned, m);
+			}
 		}
 	}
 
