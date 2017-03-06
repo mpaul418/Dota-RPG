@@ -9,9 +9,11 @@ public class DeafeningBlast extends ActiveSpell
 {
 	int magic_damage = 50;
 	int accuracy_reduction = 25;
+			
 	public DeafeningBlast(Characters c)
 	{
 		super("Deafening Blast", "Send a wave of energy into your enemies, dealing 50/75/100 magic damage and reducing their accuracy by 25/55/85 for 2 turns", 50, 2, 6, c, false);
+		max_spell_level = 3; // ultimate abilities only scale to lvl 3
 	}
 
 	@Override
@@ -27,12 +29,6 @@ public class DeafeningBlast extends ActiveSpell
 			m.buffs.add(new StatBuff(this.NAME, "Accuracy reduced by " + accuracy_reduction, m, 2, 2, -accuracy_reduction));
 			System.out.println(m + "'s accuracy was reduced by " + accuracy_reduction + ".");
 		}
-	}
-
-	@Override
-	public void cast(Characters target)
-	{
-		this.incorrectCastWithTarget();
 	}
 
 	@Override

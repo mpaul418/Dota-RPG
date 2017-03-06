@@ -13,7 +13,7 @@ public abstract class Spell
 	public int max_cooldown;
 	public int current_cooldown = 0;
 	public int spell_level;
-	public int max_spell_level = 3; // this can be overridden
+	public int max_spell_level = 4; // this can be overridden
 	
 	public Spell(String tempname, String dsc, int manacost, int level_rq, int cd, Characters c, boolean targetable)
 	{

@@ -8,7 +8,7 @@ public class GreatCleave extends PassiveSpell
 
 	public GreatCleave(Characters c)
 	{
-		super("Great Cleave", "Deal 30/45/60% of your damage to two random enemies other than your attack target", 0, 1, -1, c);
+		super("Great Cleave", "Deal 30/45/60/75% of your damage to two random enemies other than your attack target", 0, 1, -1, c);
 	}
 
 	@Override
@@ -34,10 +34,13 @@ public class GreatCleave extends PassiveSpell
 					
 					if(spell_level == 2)
 						this.CHARACTER.buffs.add(new AttackBuff(this.NAME, this.NAME + " cleave.",
-								this.CHARACTER, -1, 0, 0, 0, 0, 2, 0.45));
+							this.CHARACTER, -1, 0, 0, 0, 0, 2, 0.45));
 					else if(spell_level == 3)
 						this.CHARACTER.buffs.add(new AttackBuff(this.NAME, this.NAME + " cleave.",
 							this.CHARACTER, -1, 0, 0, 0, 0, 2, 0.60));
+					else if(spell_level == 4)
+						this.CHARACTER.buffs.add(new AttackBuff(this.NAME, this.NAME + " cleave.",
+							this.CHARACTER, -1, 0, 0, 0, 0, 2, 0.75));
 					
 					break;
 				}

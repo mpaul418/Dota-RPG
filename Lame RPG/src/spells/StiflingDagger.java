@@ -4,17 +4,12 @@ import classes.Characters;
 
 public class StiflingDagger extends ActiveSpell
 {
-	double damage_multiplier = 0.55;
+	int base_damage = 4;
+	double damage_multiplier = 0.60;
 	
 	public StiflingDagger(Characters c)
 	{
-		super("Stifling Dagger", "Launch a dagger at an enemy, dealing 55/100/145% of your damage as pure damage", 10, 1, 2, c, true);
-	}
-
-	@Override
-	public void cast()
-	{
-		this.incorrectCastWithoutTarget();
+		super("Stifling Dagger", "Launch a dagger at an enemy, dealing 4/6/8/10 + 60/85/110/135% of your damage as pure damage", 10, 1, 2, c, true);
 	}
 
 	@Override
@@ -36,7 +31,10 @@ public class StiflingDagger extends ActiveSpell
 		boolean level_up = super.levelUp();
 		
 		if(level_up)
-			damage_multiplier += 0.45;
+		{
+			base_damage += 2;
+			damage_multiplier += 0.25;
+		}
 		
 		return level_up;
 	}

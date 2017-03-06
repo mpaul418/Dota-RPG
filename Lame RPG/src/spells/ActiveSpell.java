@@ -43,6 +43,12 @@ public abstract class ActiveSpell extends Spell
 			return false;
 	}
 
-	public abstract void cast();
-	public abstract void cast(Characters target);
+	public void cast()
+	{
+		incorrectCastWithoutTarget();
+	}
+	public void cast(Characters target)
+	{
+		incorrectCastWithTarget();
+	}
 }

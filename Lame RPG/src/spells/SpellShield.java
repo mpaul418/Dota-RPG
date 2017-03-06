@@ -8,7 +8,7 @@ public class SpellShield extends PassiveSpell
 
 	public SpellShield(Characters c)
 	{
-		super("Spell Shield", "Gain a 22/44/66% magic resistance bonus", 0, 1, -1, c);
+		super("Spell Shield", "Gain a 33/44/55/66% magic resistance bonus", 0, 1, -1, c);
 	}
 	
 	@Override
@@ -16,7 +16,7 @@ public class SpellShield extends PassiveSpell
 	{
 		super.addToSpellbook();
 		this.CHARACTER.buffs.add(new StatBuff(this.NAME, this.NAME + " extra 22% magic resist.",
-				this.CHARACTER, -1, 4, 0.22));
+				this.CHARACTER, -1, 4, 0.33));
 	}
 
 	@Override
@@ -36,6 +36,9 @@ public class SpellShield extends PassiveSpell
 						this.CHARACTER.buffs.add(new StatBuff(this.NAME, this.NAME + " extra 44% magic resist.",
 								this.CHARACTER, -1, 4, 0.44));
 					else if(spell_level == 3)
+						this.CHARACTER.buffs.add(new StatBuff(this.NAME, this.NAME + " extra 66% magic resist.",
+								this.CHARACTER, -1, 4, 0.55));
+					else if(spell_level == 4)
 						this.CHARACTER.buffs.add(new StatBuff(this.NAME, this.NAME + " extra 66% magic resist.",
 								this.CHARACTER, -1, 4, 0.66));
 					

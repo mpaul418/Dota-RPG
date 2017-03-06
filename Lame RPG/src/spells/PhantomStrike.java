@@ -5,17 +5,11 @@ import classes.Characters;
 
 public class PhantomStrike extends ActiveSpell
 {
-	int defense_increase = 5;
+	int defense_increase = 4;
 	
 	public PhantomStrike(Characters c)
 	{
-		super("Phantom Strike", "Jump towards an enemy, attacking them and gaining 5/15/25 bonus defense for two turns", 30, 1, 5, c, true);
-	}
-
-	@Override
-	public void cast()
-	{
-		this.incorrectCastWithoutTarget();
+		super("Phantom Strike", "Jump towards an enemy, attacking them and gaining 4/12/20/28 bonus defense for two turns", 30, 1, 5, c, true);
 	}
 
 	@Override
@@ -35,7 +29,7 @@ public class PhantomStrike extends ActiveSpell
 		boolean level_up = super.levelUp();
 		
 		if(level_up)
-			defense_increase += 10;
+			defense_increase += 8;
 		return level_up;
 	}
 }

@@ -10,6 +10,7 @@ public class GodsStrength extends ActiveSpell
 	public GodsStrength(Characters c)
 	{
 		super("God's Strength", "Channel your rogue strength, gaining 50/100/150% bonus damage for 3 turns", 20, 2, 8, c, false);
+		max_spell_level = 3;
 	}
 
 	@Override
@@ -20,12 +21,6 @@ public class GodsStrength extends ActiveSpell
 		
 		this.CHARACTER.buffs.add(new StatBuff(this.NAME, "Dealing extra damage.",
 				this.CHARACTER, 3, 1, (int) Math.round(damage_multiplier * this.CHARACTER.getDefaultDamage())));
-	}
-
-	@Override
-	public void cast(Characters target)
-	{
-		this.incorrectCastWithTarget();
 	}
 
 	@Override

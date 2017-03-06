@@ -11,12 +11,7 @@ public class ManaVoid extends ActiveSpell
 	{
 		super("Mana Void", "After bringing enemies to their knees, Anti-Mage punishes them for their use of the arcane arts. "
 			+ "Deal 0.6/0.8/1.0 magic damage to all enemies for each of an enemy's missing mana", 40, 2, 10, c, true);
-	}
-
-	@Override
-	public void cast()
-	{
-		this.incorrectCastWithoutTarget();
+		max_spell_level = 3;
 	}
 
 	@Override

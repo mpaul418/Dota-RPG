@@ -8,7 +8,7 @@ public class Blur extends PassiveSpell
 
 	public Blur(Characters c)
 	{
-		super("Blur", "Gain a 20/35/50% chance to evade physical attacks", 0, 1, -1, c);
+		super("Blur", "Gain a 20/30/40/50% chance to evade physical attacks", 0, 1, -1, c);
 	}
 	
 	@Override
@@ -34,8 +34,11 @@ public class Blur extends PassiveSpell
 					
 					if(spell_level == 2)
 						this.CHARACTER.buffs.add(new AttackedBuff(this.NAME, this.NAME + " evasion bonus.",
-								this.CHARACTER, -1, 35));
-					else if(spell_level >= 3)
+								this.CHARACTER, -1, 30));
+					else if(spell_level == 3)
+						this.CHARACTER.buffs.add(new AttackedBuff(this.NAME, this.NAME + " evasion bonus.",
+								this.CHARACTER, -1, 40));
+					else if(spell_level == 4)
 						this.CHARACTER.buffs.add(new AttackedBuff(this.NAME, this.NAME + " evasion bonus.",
 								this.CHARACTER, -1, 50));
 					

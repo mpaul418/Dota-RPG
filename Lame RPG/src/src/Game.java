@@ -204,6 +204,8 @@ public class Game
 	{
 		for(int row = 0; row < 5; row++)
 		{
+			System.out.print("\n\t");
+			
 			for(int column = 0; column < 5; column++)
 			{
 				if(current_row == row && current_column == column)

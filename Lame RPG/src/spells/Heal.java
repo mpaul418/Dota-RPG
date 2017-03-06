@@ -12,12 +12,6 @@ public class Heal extends ActiveSpell
 	}
 
 	@Override
-	public void cast()
-	{
-		this.incorrectCastWithoutTarget();
-	}
-
-	@Override
 	public void cast(Characters target)
 	{
 		this.beforeSpellCast();

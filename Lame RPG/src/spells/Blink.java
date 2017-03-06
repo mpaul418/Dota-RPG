@@ -11,7 +11,7 @@ public class Blink extends ActiveSpell
 	
 	public Blink(Characters c)
 	{
-		super("Blink", "Teleport and disorient your enemies, reducing your enemies' defence by 12/20/28", 10, 1, 2, c, false);
+		super("Blink", "Teleport and disorient your enemies, reducing your enemies' defence by 12/20/28/36", 10, 1, 2, c, false);
 	}
 
 	@Override
@@ -27,12 +27,6 @@ public class Blink extends ActiveSpell
 		}
 		
 		System.out.println();
-	}
-	
-	@Override
-	public void cast(Characters target)
-	{
-		this.incorrectCastWithTarget();
 	}
 	
 	@Override

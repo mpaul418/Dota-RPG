@@ -8,7 +8,7 @@ public class GhostWalk extends ActiveSpell
 	int defense_increase = 15;
 	public GhostWalk(Characters c) //TODO rework this spell w/scaling, etc
 	{
-		super("Ghost Walk", "Manipulate the elements around you and become invisible. Increase defense by 15/25/35 for 2 turns", 45, 1, 9, c, false);
+		super("Ghost Walk", "Manipulate the elements around you and become invisible. Increase defense by 15/25/35/45 for 2 turns", 45, 1, 9, c, false);
 	}
 
 	@Override
@@ -21,12 +21,6 @@ public class GhostWalk extends ActiveSpell
 		System.out.println(this.CHARACTER + "'s defense increased by " + defense_increase + ".");
 	}
 
-	@Override
-	public void cast(Characters target)
-	{
-		this.incorrectCastWithTarget();
-	}
-	
 	@Override
 	public boolean levelUp()
 	{
