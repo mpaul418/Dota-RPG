@@ -37,6 +37,7 @@ public class Game
 	private static String temp_name = "Player";
 	private static int player_hero;
 	public  static Player player;
+	public  static int enemies_killed = 0;
 	public  static int map[][] = new int[5][5];
 	public  static int current_row = 0;
 	public  static int current_column = 0;
@@ -68,7 +69,10 @@ public class Game
 			}
 		}
 		
-		System.out.println("Game over! Maybe next time :(");
+		System.out.println("Game over! Maybe next time :("
+					   + "\nPlayer Stats:"
+					   + "\n\tTotal damage dealt: " + player.getDamageDealt()
+					   + "\n\tEnemies killed: " + enemies_killed);
 	}
 	
 	private static void setHero()

@@ -58,7 +58,7 @@ public class AttackBuff extends Buff
 			return false;
 	}
 
-	public void applyManaBurn(Characters c)
+	public int applyManaBurn(Characters c)
 	{
 		if(mana_burn > 0)
 		{
@@ -73,30 +73,40 @@ public class AttackBuff extends Buff
 				damage_to_deal = (int) Math.round((mana_burn_multiplier) * mana_to_burn);
 				
 				c.changeMana(-mana_to_burn);
-				c.damage(c, damage_to_deal);
+				this.CHARACTER.damage(c, damage_to_deal);
 				
 				System.out.println(this.CHARACTER + " burned " + mana_to_burn + " of " 
 								   + c + "'s mana and dealt " + damage_to_deal + " damage.");
+				
+				return damage_to_deal;
 			}
 		}
+		
+		return 0;
 	}
 	
-	public void applyCleave(Characters c, int damage)
+	public int applyCleave(Characters c, int damage) //TODO make this apply to random targets rather than going in a line starting at index 0
 	{
 		if(cleave_enemies_hit > 0)
 		{
 			int enemies_to_cleave = cleave_enemies_hit;
+			int cleave_damage = (int) Math.round(cleave_percentage * damage);
 			int i = 0;
 			while(enemies_to_cleave > 0 && i < Game.monsters.size())
 			{
-				if(Game.monsters.get(i) != c && Game.monsters.get(i).isAlive())
+				if(Game.monsters.get(i) != c)
 				{
-					this.CHARACTER.damage(Game.monsters.get(i), (int) Math.round(cleave_percentage * damage));
+					this.CHARACTER.damage(Game.monsters.get(i), cleave_damage);
 					System.out.println(this.CHARACTER + " cleaved " + Game.monsters.get(i) + " for " + ((int) Math.round(cleave_percentage * damage)) + " damage.");
 				}
 				
 				i++;
+				enemies_to_cleave--;
 			}
+			
+			return cleave_damage * i; // cleave times the amount of enemies it hit
 		}
+		
+		return 0;
 	}
 }

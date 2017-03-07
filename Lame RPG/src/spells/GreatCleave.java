@@ -8,7 +8,7 @@ public class GreatCleave extends PassiveSpell
 
 	public GreatCleave(Characters c)
 	{
-		super("Great Cleave", "Deal 30/45/60/75% of your damage to two random enemies other than your attack target", 0, 1, -1, c);
+		super("Great Cleave", "Deal 30/45/60/75% of your damage to two enemies other than your attack target", 0, 1, -1, c);
 	}
 
 	@Override

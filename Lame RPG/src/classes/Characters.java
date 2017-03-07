@@ -107,6 +107,10 @@ public class Characters
 	{
 		return name;
 	}
+	public int getDamageDealt()
+	{
+		return damage_dealt;
+	}
 	public void setName(String s)
 	{
 		name = s;
@@ -303,6 +307,7 @@ public class Characters
 	public void attack(Characters c)
 	{
 		int temp, damage_done;
+		damage_done = 0;
 		int damage_roll = (damage - 5) + r.nextInt(11); // each damage roll has a variance of 10 (ex. damage = 40, then damage could be 35 to 45)
 		int crit_buff_index = -1;
 		boolean critical_hit, attack_evaded;
@@ -346,14 +351,14 @@ public class Characters
 				else
 					damage_done = damage_roll;
 				
-				dealPhysicalDamage(c, damage_done);
+				int dmg_after_reductions = dealPhysicalDamage(c, damage_done);
 				
 				for(Buff b : buffs)
 				{
-					if(b instanceof AttackBuff)			//this is where any post-attack triggers are checked
+					if(b instanceof AttackBuff)			// this is where any post-attack triggers are checked
 					{
 						((AttackBuff) b).applyManaBurn(c);
-						((AttackBuff) b).applyCleave(c, damage_done);
+						((AttackBuff) b).applyCleave(c, dmg_after_reductions);
 					}
 				}
 				
@@ -367,11 +372,15 @@ public class Characters
 			System.out.println(this + "'s attack missed! (Attack roll: " + temp + "; " + (75 - accuracy) + " or higher needed to hit)\n");
 		}
 	}
-	public void dealMagicDamage(int incoming_damage, Characters c)
+	public int dealMagicDamage(int incoming_damage, Characters c)
 	{
 		int damage_done = (int)(Math.round((1.0 - c.getMagicDefense()) * incoming_damage));
 		this.damage(c, damage_done);
 		System.out.println(this + " dealt " + damage_done + " magic damage to " + c + ".");
+		
+		damage_dealt += damage_done;
+		
+		return damage_done;
 	}
 	
 	public void printAllBuffs()
