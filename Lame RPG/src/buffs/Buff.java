@@ -1,4 +1,4 @@
-package buffs;
+ package buffs;
 
 import java.util.ArrayList;
 
@@ -15,10 +15,7 @@ public abstract class Buff
 		name = n;
 		desc = dsc;
 		CHARACTER = c;
-		//if(d != -1) // If the buff is not passive, its duration is increased because buffs tick at the start of each turn
-			//duration = d + 1;
-		//else
-			duration = d;
+		duration = d;
 	}
 	
 	public String getName()

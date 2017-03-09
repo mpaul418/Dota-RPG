@@ -27,7 +27,7 @@ public class EMP extends ActiveSpell
 			if(mana_burned > 0)
 			{
 				System.out.println(this.CHARACTER + " burned " + mana_burned + " of " + m + "'s mana.");
-				this.CHARACTER.dealMagicDamage(mana_burned, m);
+				this.CHARACTER.dealMagicDamage((int) Math.round(0.5 * mana_burned), m);
 			}
 		}
 	}

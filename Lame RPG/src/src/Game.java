@@ -188,6 +188,11 @@ public class Game
 					working = false;
 					System.out.println("Exeception caught! Please input correctly.");
 				}
+				catch(NumberFormatException e)
+				{
+					working = false;
+					System.out.println("Exeception caught! Please input correctly.");
+				}
 			}while(!working);
 			if(!options.contains(tempint))
 				System.out.println("You can't go that way!");
@@ -287,7 +292,7 @@ public class Game
 		
 		System.out.println("------------------- Battle Over -------------------\n");
 
-		while(characters.size() > 0)// removes all characters from this array at the end of the battle
+		while(characters.size() > 0)	// removes all characters from this array at the end of the battle
 			characters.remove(0);
 		
 		
@@ -457,7 +462,7 @@ public class Game
 
 	private static boolean battleOver()
 	{
-		if(!player.isAlive() || monsters.size() == 0) //this used to call allMonstersDead(), i changed it
+		if(!player.isAlive() || monsters.size() == 0) // this used to call allMonstersDead(), i changed it
 			return true;
 		else
 			return false;
@@ -551,7 +556,7 @@ public class Game
 										+"(" + monsters.get(i).getHP() + "/" + monsters.get(i).getDefaultHP() + ")");
 							}
 							target = getNumberFrom(0, monsters.size()) - 1;
-							if(target >= 0)//if the spell cast is not cancelled
+							if(target >= 0)	// if the spell cast is not cancelled
 							{
 								((ActiveSpell) player.spellbook.get(spell_choice_index)).cast(monsters.get(target));
 								turn_taken = true;

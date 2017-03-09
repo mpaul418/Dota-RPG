@@ -378,8 +378,6 @@ public class Characters
 		this.damage(c, damage_done);
 		System.out.println(this + " dealt " + damage_done + " magic damage to " + c + ".");
 		
-		damage_dealt += damage_done;
-		
 		return damage_done;
 	}
 	
