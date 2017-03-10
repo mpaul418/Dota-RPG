@@ -63,7 +63,11 @@ public class Game
 			if(player.isAlive())
 			{
 				if(map[current_row][current_column] > 0)
+				{
 					battle();
+					
+					player.restoreToFull();
+				}
 				else
 					System.out.println("This room is empty.");
 			}
@@ -194,19 +198,19 @@ public class Game
 					System.out.println("Exeception caught! Please input correctly.");
 				}
 			}while(!working);
-			if(!options.contains(tempint))
+			if(!options.contains((Integer) tempint))
 				System.out.println("You can't go that way!");
-		}while(!options.contains(tempint));
+		}while(!options.contains((Integer) tempint));
 		choice = tempint;
 
 		if(choice == 1)
-			current_row += 1;			// go right
+			current_column += 1;			// go right
 		else if(choice == 2)
-			current_column += 1;		// go down
+			current_row += 1;		// go down
 		else if(choice == 3)
-			current_row -= 1;			// go left
+			current_column -= 1;			// go left
 		else if(choice == 4)
-			current_column -= 1;		// go up
+			current_row -= 1;		// go up
 	}
 	
 	private static void displayMap() // creates a picture of the map

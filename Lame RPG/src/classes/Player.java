@@ -2,6 +2,7 @@ package classes;
 
 import java.util.ArrayList;
 
+import buffs.Buff;
 import spells.CoupDeGrace;
 import spells.DeafeningBlast;
 import spells.GodsStrength;
@@ -128,5 +129,26 @@ public abstract class Player extends Characters
 	{
 		super.die();
 		Game.game_over = true;
+	}
+
+	public void restoreToFull()
+	{
+		HP = getDefaultHP();		// sets player's health back to maximum
+		mana = getDefaultMana();
+		
+		for(int i = 0; i < buffs.size(); i++)	// removes all non-temporary buffs
+		{
+			if(buffs.get(i).getDuration() > 0)
+			{
+				while(buffs.get(i).getDuration() > 0)
+					buffs.get(i).decreaseDuration();
+				
+				i--;							// it stays in the same index unless the buff is permanent
+			}
+		}
+		
+		for(Spell s : spellbook)				// resets all cooldowns of your spells
+			while(s.getCurrentCooldown() > 0)
+				s.changeCurrentCooldown(-1);
 	}
 }
