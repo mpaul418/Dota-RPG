@@ -143,7 +143,6 @@ public abstract class Player extends Characters
 			{
 				while(buffs.get(i).getDuration() > 0)		//FIXME double check this
 					buffs.get(i).decreaseDurationNoNotifier();
-				
 				size--;
 			}
 			else
