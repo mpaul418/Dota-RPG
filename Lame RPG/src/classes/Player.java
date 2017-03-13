@@ -2,7 +2,6 @@ package classes;
 
 import java.util.ArrayList;
 
-import buffs.Buff;
 import spells.CoupDeGrace;
 import spells.DeafeningBlast;
 import spells.GodsStrength;
@@ -114,7 +113,7 @@ public abstract class Player extends Characters
 			{
 				if(s instanceof CoupDeGrace || s instanceof DeafeningBlast || s instanceof ManaVoid || s instanceof GodsStrength) // if the ability is an ultimate
 				{
-					if(s.getLevel() < ((this.getLevel() - 1)))// can only be leveled once per level starting at level 3
+					if(s.getLevel() < ((this.getLevel() - 1)))	// can only be leveled once per level starting at level 3
 						return true;
 				}
 				else // if it is not an ultimate ability
@@ -136,15 +135,19 @@ public abstract class Player extends Characters
 		HP = getDefaultHP();		// sets player's health back to maximum
 		mana = getDefaultMana();
 		
-		for(int i = 0; i < buffs.size(); i++)	// removes all non-temporary buffs
+		int i = 0;
+		int size = buffs.size();
+		while(i < size)		// removes all non-temporary buffs TODO come up with a way to do this that doesnt use buffs.size() twice
 		{
 			if(buffs.get(i).getDuration() > 0)
 			{
-				while(buffs.get(i).getDuration() > 0)
-					buffs.get(i).decreaseDuration();
+				while(buffs.get(i).getDuration() > 0)		//FIXME double check this
+					buffs.get(i).decreaseDurationNoNotifier();
 				
-				i--;							// it stays in the same index unless the buff is permanent
+				size--;
 			}
+			else
+				i++;				// it stays in the same index unless the buff is permanent
 		}
 		
 		for(Spell s : spellbook)				// resets all cooldowns of your spells

@@ -59,15 +59,11 @@ public class Game
 		while(!game_over)
 		{
 			if(player.isAlive())
-				chooseRoom();
-			if(player.isAlive())
 			{
+				chooseRoom();
+			
 				if(map[current_row][current_column] > 0)
-				{
-					battle();
-					
-					player.restoreToFull();
-				}
+					battle();	
 				else
 					System.out.println("This room is empty.");
 			}
@@ -299,15 +295,8 @@ public class Game
 		while(characters.size() > 0)	// removes all characters from this array at the end of the battle
 			characters.remove(0);
 		
-		
-		int temp = 0;
-		while(temp < player.buffs.size())	//clears all non-passive buffs after a battle
-		{
-			if(player.buffs.get(temp).getDuration() != -1) //if the buff is not passive
-				player.buffs.get(temp).decreaseDuration();
-			else
-				temp++;
-		}
+		if(player.isAlive())			// if the player wins the battle, player is restored
+			player.restoreToFull();
 	}
 	
 	private static void addMonsters()

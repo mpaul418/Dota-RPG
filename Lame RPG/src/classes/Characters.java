@@ -389,6 +389,8 @@ public class Characters
 		else
 			for(Buff b : buffs)
 				System.out.println("\t" + b);
+		
+		System.out.println();
 	}
 	
 	public boolean allSpellsUncastable()

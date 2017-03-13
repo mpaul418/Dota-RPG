@@ -98,10 +98,10 @@ public class AttackBuff extends Buff
 				{
 					this.CHARACTER.damage(Game.monsters.get(i), cleave_damage);
 					System.out.println(this.CHARACTER + " cleaved " + Game.monsters.get(i) + " for " + ((int) Math.round(cleave_percentage * damage)) + " damage.");
+					enemies_to_cleave--;
 				}
 				
 				i++;
-				enemies_to_cleave--;
 			}
 			
 			return cleave_damage * i; // cleave times the amount of enemies it hit

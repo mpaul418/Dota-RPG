@@ -40,6 +40,14 @@ public abstract class Buff
 		if(duration == 0)
 			deletThis();					//when buffs are infinite (duration == -1), they are never deleted or altered
 	}
+	
+	public void decreaseDurationNoNotifier()
+	{
+		if(duration >= 1)
+			duration--;
+		if(duration == 0)
+			deletThisNoNotifier();	
+	}
 
 	public void decreaseDuration(ArrayList<Buff> deleted_buffs) 
 	{
