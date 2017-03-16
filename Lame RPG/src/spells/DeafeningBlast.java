@@ -26,9 +26,11 @@ public class DeafeningBlast extends ActiveSpell
 		{
 			this.CHARACTER.dealMagicDamage(magic_damage, m);
 			
-			m.buffs.add(new StatBuff(this.NAME, "Accuracy reduced by " + accuracy_reduction, m, 2, 2, -accuracy_reduction));
+			m.buffs.add(new StatBuff(this.NAME, "Accuracy reduced by " + accuracy_reduction, m, 3, 2, -accuracy_reduction));
 			System.out.println(m + "'s accuracy was reduced by " + accuracy_reduction + ".");
 		}
+		
+		System.out.println();
 	}
 
 	@Override

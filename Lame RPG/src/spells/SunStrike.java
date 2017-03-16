@@ -8,7 +8,7 @@ public class SunStrike extends ActiveSpell
 	int level_multiplier = 3;
 	public SunStrike(Characters c)
 	{
-		super("Sun Strike", "Call down a solar flare on an enemy, dealing 25/40/55/70 + 3/4/5/6 times the square of your level as magical damage", 25, 1, 4, c, true);
+		super("Sun Strike", "Call down a solar flare on an enemy, dealing 25/40/55/70 + 3/4/5/6 times the square of your level as magical damage", 25, 1, 3, c, true);
 	}
 
 	@Override

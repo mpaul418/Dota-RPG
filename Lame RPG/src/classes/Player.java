@@ -25,7 +25,7 @@ public abstract class Player extends Characters
 		character_class = playerClass;
 		gold = 0; //TODO add this
 		xp = 0;
-		xp_level_rq = 100;
+		xp_level_rq = 100; //TODO fix this
 	}
 	
 	public abstract String getCharClass();
@@ -80,7 +80,7 @@ public abstract class Player extends Characters
 					{
 						levelable_spells.add(s);
 						temp++;
-						System.out.println(temp + "(currently level " + s.getLevel() + "): " + s + "- " + s.DESCRIPTION + ".");
+						System.out.println(temp + ": " + s + "(currently level " + s.getLevel() + ")- " + s.DESCRIPTION + ".");
 					}
 				}
 			}
