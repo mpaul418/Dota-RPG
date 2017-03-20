@@ -25,7 +25,7 @@ public abstract class Player extends Characters
 		character_class = playerClass;
 		gold = 0; //TODO add this
 		xp = 0;
-		xp_level_rq = 100; //TODO fix this
+		xp_level_rq = 100;
 	}
 	
 	public abstract String getCharClass();
@@ -45,6 +45,7 @@ public abstract class Player extends Characters
 		int levelup_points = 3;
 		
 		this.level++;
+		xp -= xp_level_rq; // starts your xp from 0 again every time you level up- ex. 105 xp --> 5 xp
 		xp_level_rq += ((25 * level) + (5 * (level - 1) * (level - 1))); // xp increases by 5(x - 1)^2 + 25x every level. 1:100, 2: 155, 3: 250, 4: 395, etc TODO i think this is not scaling correctly
 		
 		System.out.println("--------------------------------------\n\n" + this + " just leveled up!!"

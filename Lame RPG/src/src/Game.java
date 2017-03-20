@@ -160,6 +160,12 @@ public class Game
 					map[r][c] = 0;
 			}
 		}
+		
+		int boss_row = rand.nextInt(5); // a random row
+		int boss_column; // = rand.nextInt(3) + 2; // a random column from 3 to 5
+		boss_column = rand.nextInt(1 + boss_row) + (4 - boss_row); // view paint diagram to see possible rooms
+		
+		map[boss_row][boss_column] = 4; // the 4 signals the boss battle
 	}
 	
 	private static void chooseRoom()
@@ -221,12 +227,14 @@ public class Game
 					System.out.print("[X]\t");
 				else if(map[row][column] == 0)
 					System.out.print("[C]\t");
+				else if(map[row][column] == 4) // the boss room
+					System.out.print("[B]\t");
 				else
 					System.out.print("[ ]\t");
 			}
 			System.out.println();
 		}
-		System.out.println("\nKey:\tX: Your Position\tC: Cleared Room");
+		System.out.println("\nKey:\tX: Your Position\tC: Cleared Room\tB: Boss Room");
 	}
 
 	private static void showRoomChoices(ArrayList<Integer> room_options) //FIXME not working properly
