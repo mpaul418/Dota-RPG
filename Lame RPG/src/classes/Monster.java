@@ -29,7 +29,8 @@ public class Monster extends Characters
 	{
 		super.die();
 		Game.monsters.remove(this);
-		Game.player.changeXP(death_xp);
+		if(death_xp > 0)
+			Game.player.changeXP(death_xp);
 		Game.map[Game.current_row][Game.current_column] -= 1;  // removes the monster from the room so if player reenters this room, more monsters will not spawn.
 		Game.enemies_killed++;
 	}

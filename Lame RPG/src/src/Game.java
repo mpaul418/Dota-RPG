@@ -18,6 +18,7 @@ import classes.Monster;
 import classes.PhantomAssassin;
 import classes.Player;
 import classes.RangedCreep;
+import classes.Roshan;
 import classes.SatyrBanisher;
 import classes.SatyrMindstealer;
 import classes.SatyrTormenter;
@@ -234,7 +235,7 @@ public class Game
 			}
 			System.out.println();
 		}
-		System.out.println("\nKey:\tX: Your Position\tC: Cleared Room\tB: Boss Room");
+		System.out.println("\nKey:\n\tX: Your Position\n\tC: Cleared Room\n\tB: Boss Room\n");
 	}
 
 	private static void showRoomChoices(ArrayList<Integer> room_options) //FIXME not working properly
@@ -309,20 +310,29 @@ public class Game
 	
 	private static void addMonsters()
 	{
-		for(int i = 0; i < map[current_row][current_column]; i++)
+		if(map[current_row][current_column] < 4)
 		{
-			int temp = 0;
-			
-			if(i == 0)
-				temp = pickMonsterSpawnedOfLevel(player.getLevel()); //spawns monster of current level
-			else
+			for(int i = 0; i < map[current_row][current_column]; i++)
 			{
-				temp = pickMonsterSpawnedUpTo(player.getLevel());
-			}
-							
-			createMonster(temp);
+				int temp = 0;
 				
-			System.out.println(monsters.get(monsters.size() - 1) + " entered the fray.");
+				if(i == 0)
+					temp = pickMonsterSpawnedOfLevel(player.getLevel()); //spawns monster of current level
+				else
+				{
+					temp = pickMonsterSpawnedUpTo(player.getLevel());
+				}
+								
+				createMonster(temp);
+					
+				System.out.println(monsters.get(monsters.size() - 1) + " entered the fray.");
+			}
+		}
+		else // if the room number is 4 (if it is the boss battle)
+		{
+			createMonster(15); // adds Roshan
+			
+			System.out.println("Roshan looms over you... Prepare for your final battle!");
 		}
 	}
 	
@@ -445,6 +455,11 @@ public class Game
 			case 14:
 			{
 				monsters.add(new CentaurConqueror());
+				break;
+			}
+			case 15:
+			{
+				monsters.add(new Roshan());
 				break;
 			}
 		}
