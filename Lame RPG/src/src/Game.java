@@ -269,31 +269,27 @@ public class Game
 	
 	private static void battle()
 	{
+		turn_number = 0;
+		
 		characters.add(player);
 	
 		addMonsters();	// spawns monsters- if level > 1, spawns one monster of player's level and the rest are random monsters from lower levels
-		
-		for(Monster m : monsters)
-			characters.add(m);
 
 		System.out.println();
-
-		turn_number = 0;
 		
 		while(!battleOver())
 		{
 			turn_number++;
 			System.out.println("------------------- Turn " + turn_number + " -------------------\n");
 			
-			if(!battleOver())
-				takePlayerTurn();
+			takePlayerTurn();
 			
 			checkForDeaths();
 			
 			if(!battleOver())
 				for(Monster m: monsters)
 				{
-						takeMonsterTurn(m);
+					takeMonsterTurn(m);
 				}
 			
 			checkForDeaths();
@@ -750,5 +746,10 @@ public class Game
 		}while(!working);
 
 		return tempint;
+	}
+
+	public static int getTurnNumber()
+	{
+		return turn_number;
 	}
 }

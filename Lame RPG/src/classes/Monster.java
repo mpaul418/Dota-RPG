@@ -15,6 +15,8 @@ public class Monster extends Characters
 		
 		level = Game.player.getLevel();
 		death_xp = 25 * this.getLevel();
+		
+		Game.characters.add(this);
 	}
 	public Monster(int initHP, int initMana, int initDmg, int initAcc, int initDef, double initMagDef, String initName, int lvl, int dth_xp)
 	{
@@ -22,6 +24,8 @@ public class Monster extends Characters
 
 		level = lvl;
 		death_xp = dth_xp;
+		
+		Game.characters.add(this);
 	}
 	
 	@Override

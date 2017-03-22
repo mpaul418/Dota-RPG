@@ -1,6 +1,7 @@
 package spells;
 
 import classes.Characters;
+import classes.Player;
 
 public abstract class Spell
 {
@@ -27,7 +28,12 @@ public abstract class Spell
 		spell_level = 1;
 		
 		if(CHARACTER.getLevel() >= LEVEL_REQUIREMENT)
-			this.addToSpellbook();
+		{
+			if(CHARACTER instanceof Player)
+				this.addToSpellbook();
+			else
+				this.addToSpellbookNoNotifer();
+		}
 		else
 			CHARACTER.unlearned_spells.add(this);
 	}
@@ -73,11 +79,18 @@ public abstract class Spell
 		else
 			return true;
 	}
+	
 	public void addToSpellbook()
 	{
 		CHARACTER.spellbook.add(this);
 		CHARACTER.unlearned_spells.remove(this);
 		System.out.println(CHARACTER + " just learned " + this + ".");
+	}
+	
+	public void addToSpellbookNoNotifer()
+	{
+		CHARACTER.spellbook.add(this);
+		CHARACTER.unlearned_spells.remove(this);
 	}
 	
 	public void beforeSpellCast()

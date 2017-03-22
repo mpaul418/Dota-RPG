@@ -9,6 +9,7 @@ public class Heal extends ActiveSpell
 	{
 		super("Heal", "Restore the energy of a target and heal it for 50 HP.", 25, 1, 1, c, true);
 
+		max_spell_level = 1;
 	}
 
 	@Override
