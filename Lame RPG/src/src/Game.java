@@ -238,7 +238,7 @@ public class Game
 		System.out.println("\nKey:\n\tX: Your Position\n\tC: Cleared Room\n\tB: Boss Room\n");
 	}
 
-	private static void showRoomChoices(ArrayList<Integer> room_options) //FIXME not working properly
+	private static void showRoomChoices(ArrayList<Integer> room_options)
 	{
 		for(int i = room_options.size(); i > 0; i--)
 			room_options.remove(0);

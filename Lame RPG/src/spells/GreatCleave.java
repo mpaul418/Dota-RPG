@@ -15,7 +15,7 @@ public class GreatCleave extends PassiveSpell
 	public void addToSpellbook()
 	{
 		super.addToSpellbook();
-		this.CHARACTER.buffs.add(new AttackBuff(this.NAME, this.NAME + " cleave.",
+		this.CHARACTER.buffs.add(new AttackBuff(this.NAME, "cleaving for 30% of damage.",
 				this.CHARACTER, -1, 0, 0, 0, 0, 2, 0.30));
 	}
 	
@@ -33,13 +33,13 @@ public class GreatCleave extends PassiveSpell
 					CHARACTER.buffs.get(i).deletThisNoNotifier();
 					
 					if(spell_level == 2)
-						this.CHARACTER.buffs.add(new AttackBuff(this.NAME, this.NAME + " cleave.",
+						this.CHARACTER.buffs.add(new AttackBuff(this.NAME, "cleaving for 45% of damage.",
 							this.CHARACTER, -1, 0, 0, 0, 0, 2, 0.45));
 					else if(spell_level == 3)
-						this.CHARACTER.buffs.add(new AttackBuff(this.NAME, this.NAME + " cleave.",
+						this.CHARACTER.buffs.add(new AttackBuff(this.NAME, "cleaving for 60% of damage.",
 							this.CHARACTER, -1, 0, 0, 0, 0, 2, 0.60));
 					else if(spell_level == 4)
-						this.CHARACTER.buffs.add(new AttackBuff(this.NAME, this.NAME + " cleave.",
+						this.CHARACTER.buffs.add(new AttackBuff(this.NAME, "cleaving for 75% of damage.",
 							this.CHARACTER, -1, 0, 0, 0, 0, 2, 0.75));
 					
 					break;

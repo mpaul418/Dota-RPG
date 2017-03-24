@@ -29,6 +29,7 @@ public class Warcry extends ActiveSpell
 			m.buffs.add(new StatBuff(NAME, "Defense decreased by " + defense_decrease, m, 2, 3, -defense_decrease));
 			System.out.println(m + "'s defense was decreased by " + defense_decrease + ".");
 		}
+		System.out.println();
 	}
 
 	@Override

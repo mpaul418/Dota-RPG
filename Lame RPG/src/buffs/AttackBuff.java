@@ -87,12 +87,13 @@ public class AttackBuff extends Buff
 		return 0;
 	}
 	
-	public int applyCleave(Characters c, int damage) //TODO make this apply to random targets rather than going in a line starting at index 0
+	public int applyCleave(Characters c, int damage)
 	{
-		if(cleave_enemies_hit > 0)
+		int enemies_to_cleave = cleave_enemies_hit;
+		int cleave_damage = (int) Math.round(cleave_percentage * damage);
+		
+		if(cleave_damage > 0 && enemies_to_cleave > 0)
 		{
-			int enemies_to_cleave = cleave_enemies_hit;
-			int cleave_damage = (int) Math.round(cleave_percentage * damage);
 			int i = 0;
 			
 			ArrayList<Monster> cleave_targets = new ArrayList<Monster>();
@@ -102,7 +103,7 @@ public class AttackBuff extends Buff
 				if(m != c)
 					cleave_targets.add(m);
 			}
-			while(enemies_to_cleave > 0)
+			while(enemies_to_cleave > 0 && cleave_targets.size() > 0)
 			{
 				int target = r.nextInt(cleave_targets.size());
 				
@@ -110,18 +111,8 @@ public class AttackBuff extends Buff
 				System.out.println(CHARACTER + " cleaved " + cleave_targets.get(target) + " for " + cleave_damage + " damage.");
 				cleave_targets.remove(target);
 				enemies_to_cleave--;
+				i++;
 			}
-			//while(enemies_to_cleave > 0 && i < Game.monsters.size())
-			//{
-			//	if(Game.monsters.get(i) != c)
-			//	{
-			//		this.CHARACTER.damage(Game.monsters.get(i), cleave_damage);
-			//		System.out.println(this.CHARACTER + " cleaved " + Game.monsters.get(i) + " for " + ((int) Math.round(cleave_percentage * damage)) + " damage.");
-			//		enemies_to_cleave--;
-			//	}
-			//	
-			//	i++;
-			//}
 			
 			return cleave_damage * i; // cleave times the amount of enemies it hit
 		}

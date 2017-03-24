@@ -412,9 +412,9 @@ public class Characters
 		int amount;
 		hunker_downs_used++;
 		if(hunker_downs_used <= 3)
-			amount = r.nextInt(16 - (5 * hunker_downs_used)) + 3;
+			amount = r.nextInt(16 - (5 * hunker_downs_used)) + 4;
 		else
-			amount = 2;
+			amount = 3;
 		this.buffs.add(new StatBuff("Hunker Down", "Defense increased  by " + amount, this, 2, 3, amount));
 		System.out.println(this.getName() + " hunkered down, increasing its defense by " + amount + " for 2 turns.\n");
 	}

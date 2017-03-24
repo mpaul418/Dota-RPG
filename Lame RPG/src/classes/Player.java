@@ -135,6 +135,7 @@ public abstract class Player extends Characters
 	{
 		HP = getDefaultHP();		// sets player's health back to maximum
 		mana = getDefaultMana();
+		hunker_downs_used = 0;
 		
 		int i = 0;
 		int size = buffs.size();
