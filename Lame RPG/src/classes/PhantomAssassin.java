@@ -10,7 +10,6 @@ public class PhantomAssassin extends Player
 {
 	Spell stifling_dagger, phantom_strike, blur, coup_de_grace;
 	
-	
 	public PhantomAssassin(String initName)
 	{
 		super(600, 75, 45, 65, 12, 3, .15, initName);

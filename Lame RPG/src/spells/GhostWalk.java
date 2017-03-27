@@ -5,10 +5,10 @@ import classes.Characters;
 
 public class GhostWalk extends ActiveSpell
 {
-	int defense_increase = 15;
-	public GhostWalk(Characters c) //TODO rework this spell w/scaling, etc
+	int defense_increase = 20;
+	public GhostWalk(Characters c) 
 	{
-		super("Ghost Walk", "Manipulate the elements around you and become invisible. Increase defense by 15/25/35/45 for 2 turns", 25, 1, 5, c, false);
+		super("Ghost Walk", "Manipulate the elements around you and become invisible. Increase defense by 20/30/40/50 for 3 turns", 50, 1, 5, c, false);
 	}
 
 	@Override
@@ -17,7 +17,7 @@ public class GhostWalk extends ActiveSpell
 		this.beforeSpellCast();
 		this.castWithoutTargetMessage();
 		
-		this.CHARACTER.buffs.add(new StatBuff(NAME, "Defense increased by " + defense_increase, CHARACTER, 2, 3, defense_increase));
+		this.CHARACTER.buffs.add(new StatBuff(NAME, "Defense increased by " + defense_increase, CHARACTER, 3, 3, defense_increase));
 		System.out.println(this.CHARACTER + "'s defense increased by " + defense_increase + ".");
 	}
 

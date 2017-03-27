@@ -7,17 +7,18 @@ import src.Game;
 public class EMP extends ActiveSpell
 {
 	int mana_burn = 50;
-	int mana_restored = 0;
+	int mana_drained;
 	
 	public EMP(Characters c)
 	{
-		super("EMP", "Drain 50/80/110/140 mana of all enemies, dealing magic damage to each enemy equal to 50% of mana drained and restoring mana to you equal to the total mana drained.", 50, 1, 5, c, false);
+		super("EMP", "Drain 50/80/110/140 mana of all enemies, dealing magic damage to each enemy equal to 50% of mana drained and restoring mana to you equal to 25% of the total mana drained.", 30, 1, 5, c, false);
 	}
 
 	@Override
 	public void cast()
 	{
 		int mana_burned;
+		mana_drained = 0;
 		
 		this.beforeSpellCast();
 		this.castWithoutTargetMessage();
@@ -25,7 +26,7 @@ public class EMP extends ActiveSpell
 		for(Monster m : Game.monsters)
 		{
 			mana_burned = Math.abs(m.changeMana(-mana_burn));
-			mana_restored += mana_burned;
+			mana_drained += mana_burned;
 			if(mana_burned > 0)
 			{
 				System.out.println(this.CHARACTER + " burned " + mana_burned + " of " + m + "'s mana.");
@@ -33,10 +34,10 @@ public class EMP extends ActiveSpell
 			}
 		}
 		
-		if(mana_restored > 0)
+		if(mana_drained > 0)
 		{
-			CHARACTER.changeMana(mana_restored);
-			System.out.println(CHARACTER + " drained " + mana_restored + " mana.");
+			CHARACTER.changeMana((int) Math.round(0.5 * mana_drained));
+			System.out.println(CHARACTER + " drained " + (int) Math.round(0.5 * mana_drained) + " mana.");
 		}
 	}
 
