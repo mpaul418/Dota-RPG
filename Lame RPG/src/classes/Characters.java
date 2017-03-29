@@ -296,7 +296,7 @@ public class Characters
 			System.out.print("Hit! ");
 		
 		System.out.println(this + " dealt " + damage_done + " physical damage to " + c + "."
-					  + " (Defense roll: " + current_defense + "/" + c.getDefense() + ")"); //FIXME in final version of game, is this necessary to display?
+					  + " (Defense roll: " + current_defense + "/" + c.getDefense() + ")");
 		
 		return damage_done;
 	}

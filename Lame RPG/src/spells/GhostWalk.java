@@ -18,7 +18,7 @@ public class GhostWalk extends ActiveSpell
 		this.castWithoutTargetMessage();
 		
 		this.CHARACTER.buffs.add(new StatBuff(NAME, "Defense increased by " + defense_increase, CHARACTER, 3, 3, defense_increase));
-		System.out.println(this.CHARACTER + "'s defense increased by " + defense_increase + ".");
+		System.out.println(this.CHARACTER + "'s defense increased by " + defense_increase + ".\n");
 	}
 
 	@Override

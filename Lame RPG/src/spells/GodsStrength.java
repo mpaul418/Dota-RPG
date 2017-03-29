@@ -18,6 +18,7 @@ public class GodsStrength extends ActiveSpell
 	{
 		this.beforeSpellCast();
 		this.castWithoutTargetMessage();
+		System.out.println();
 		
 		this.CHARACTER.buffs.add(new StatBuff(this.NAME, "Dealing extra damage.",
 				this.CHARACTER, 3, 1, (int) Math.round(damage_multiplier * this.CHARACTER.getDefaultDamage())));

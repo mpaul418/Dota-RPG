@@ -15,7 +15,7 @@ public abstract class Buff
 		name = n;
 		desc = dsc;
 		CHARACTER = c;
-		duration = d;
+		duration = d + 1; // the 1 is to account for the turn spent casting the buff
 	}
 	
 	public String getName()

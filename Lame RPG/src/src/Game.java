@@ -242,7 +242,7 @@ public class Game
 	{
 		for(int i = room_options.size(); i > 0; i--)
 			room_options.remove(0);
-			
+		
 		room_options.add((Integer) 1);
 		room_options.add((Integer) 2);
 		room_options.add((Integer) 3);
@@ -629,9 +629,9 @@ public class Game
 		if(!m.isStunned())
 		{
 			int temp = rand.nextInt(100) + 1;
-			if(temp <= 70) // 70% chance
+			if(temp > 30) // 70% chance
 				m.attack(player);
-			else if(temp <= 85 && !m.allSpellsUncastable()) // 15% chance
+			else if(temp > 15 && !m.allSpellsUncastable()) // 15% chance
 			{
 				// makes an arraylist for castable spells, then randomly pick one to cast. if targeted, selects a random target
 				ArrayList<ActiveSpell> castable_spells = new ArrayList<ActiveSpell>();

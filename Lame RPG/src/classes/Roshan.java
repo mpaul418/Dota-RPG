@@ -21,5 +21,6 @@ public class Roshan extends Monster
 	{
 		super(initHP, initMana, initDmg, initAcc, initDef, initMagDef, initName, lvl, dth_xp);
 		slam = new Slam(this);
+		summon_zombies = new SummonZombies(this);
 	}
 }
