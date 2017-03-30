@@ -16,7 +16,7 @@ public class CoupDeGrace extends PassiveSpell
 	public void addToSpellbook()
 	{
 		super.addToSpellbook();
-		this.CHARACTER.buffs.add(new AttackBuff(this.NAME, this.NAME + " crit chance.",
+		this.CHARACTER.buffs.add(new AttackBuff(this.NAME, "Gaining a 15% chance to deal 175% damage.",
 				this.CHARACTER, -1, 0, 0, 15, 1.75, 0, 0.0));
 	}
 	
@@ -34,13 +34,12 @@ public class CoupDeGrace extends PassiveSpell
 					CHARACTER.buffs.get(i).deletThisNoNotifier();
 					
 					if(spell_level == 2)
-						this.CHARACTER.buffs.add(new AttackBuff(this.NAME, this.NAME + " crit chance.",
+						this.CHARACTER.buffs.add(new AttackBuff(this.NAME, "Gaining a 15% chance to deal 225% damage.",
 								this.CHARACTER, -1, 0, 0, 15, 2.25, 0, 0.0));
 					else if(spell_level == 3)
-						this.CHARACTER.buffs.add(new AttackBuff(this.NAME, this.NAME + " crit chance.",
+						this.CHARACTER.buffs.add(new AttackBuff(this.NAME, "Gaining a 15% chance to deal 275% damage.",
 								this.CHARACTER, -1, 0, 0, 15, 2.75, 0, 0.0));
-					
-					System.out.println("This(coup de grace) is working!!! (delete this)");
+
 					break;
 				}
 			}

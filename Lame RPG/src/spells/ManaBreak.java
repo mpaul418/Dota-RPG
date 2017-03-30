@@ -15,7 +15,7 @@ public class ManaBreak extends PassiveSpell
 	public void addToSpellbook()
 	{
 		super.addToSpellbook();
-		this.CHARACTER.buffs.add(new AttackBuff(this.NAME, this.NAME + " mana burn.",
+		this.CHARACTER.buffs.add(new AttackBuff(this.NAME, "Burning 15 mana per hit.",
 			this.CHARACTER, -1, 15, 0.6, 0, 0, 0, 0));
 	}
 	
@@ -30,16 +30,16 @@ public class ManaBreak extends PassiveSpell
 			{
 				if(CHARACTER.buffs.get(i).getName() == this.NAME)
 				{
-					CHARACTER.buffs.get(i).deletThisNoNotifier(); //TODO create a deletThisNoNotifier for AttackBuff
+					CHARACTER.buffs.get(i).deletThisNoNotifier();
 					
 					if(spell_level == 2)
-						this.CHARACTER.buffs.add(new AttackBuff(this.NAME, this.NAME + " mana burn.",
+						this.CHARACTER.buffs.add(new AttackBuff(this.NAME, "Burning 20 mana per hit.",
 								this.CHARACTER, -1, 20, 0.6, 0, 0, 0, 0));
 					else if(spell_level == 3)
-						this.CHARACTER.buffs.add(new AttackBuff(this.NAME, this.NAME + " mana burn.",
+						this.CHARACTER.buffs.add(new AttackBuff(this.NAME, "Burning 25 mana per hit.",
 							this.CHARACTER, -1, 25, 0.6, 0, 0, 0, 0));
 					else if(spell_level == 4)
-						this.CHARACTER.buffs.add(new AttackBuff(this.NAME, this.NAME + " mana burn.",
+						this.CHARACTER.buffs.add(new AttackBuff(this.NAME, "Burning 35 mana per hit.",
 							this.CHARACTER, -1, 35, 0.6, 0, 0, 0, 0));
 					
 					break;

@@ -15,7 +15,9 @@ public abstract class Buff
 		name = n;
 		desc = dsc;
 		CHARACTER = c;
-		duration = d + 1; // the 1 is to account for the turn spent casting the buff
+		duration = d;
+		if(d >= 1)			  	// if the buff is not passive
+			duration = d + 1; 	// the 1 is to account for the turn spent casting the buff
 	}
 	
 	public String getName()

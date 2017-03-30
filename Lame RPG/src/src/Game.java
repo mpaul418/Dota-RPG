@@ -167,6 +167,9 @@ public class Game
 		boss_column = rand.nextInt(1 + boss_row) + (4 - boss_row); // view paint diagram to see possible rooms
 		
 		map[boss_row][boss_column] = 4; // the 4 signals the boss battle
+		
+		//TODO remove this below- it is just for testing
+		map[0][1] = 4;
 	}
 	
 	private static void chooseRoom()
