@@ -12,7 +12,7 @@ public class Warcry extends ActiveSpell
 	
 	public Warcry(Characters c)
 	{
-		super("Warcry", "Inspire yourself and intimidate enemies with a fearsome cry. Increases your defense by 10/15/20/25 and lowers enemies' defense by 5/10/15/20 for 2 turns."
+		super("Warcry", "Inspire yourself and intimidate enemies with a fearsome cry. Increases your defense by 10/15/20/25 and lowers enemies' defense by 5/10/15/20 for 2 turns"
 				, 15, 1, 4, c, false);
 	}
 

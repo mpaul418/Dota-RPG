@@ -35,7 +35,7 @@ public class Monster extends Characters
 	@Override
 	public void takeTurn()
 	{
-		reduceCooldowns();
+		// reduceCooldowns();
 		
 		if(!this.isStunned())
 		{
@@ -74,7 +74,7 @@ public class Monster extends Characters
 		else
 			System.out.println(this + " is stunned.");
 		
-		refreshDebuffs();
+		// refreshDebuffs();
 	}
 	
 	@Override

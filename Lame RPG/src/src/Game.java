@@ -285,7 +285,11 @@ public class Game
 			turn_number++;
 			System.out.println("------------------- Turn " + turn_number + " -------------------\n");
 			
-			player.takeTurn();;
+			player.reduceCooldowns();
+			for(Monster m : monsters)
+				m.reduceCooldowns();
+			
+			player.takeTurn();
 			
 			checkForDeaths();
 			
@@ -295,7 +299,11 @@ public class Game
 					monsters.get(i).takeTurn();
 				}
 			
-			checkForDeaths();
+			checkForDeaths();	
+			
+			player.refreshDebuffs();
+			for(Monster m : monsters)
+				m.refreshDebuffs();
 		}
 		
 		System.out.println("------------------- Battle Over -------------------\n");

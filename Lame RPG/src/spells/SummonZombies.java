@@ -20,9 +20,9 @@ public class SummonZombies extends ActiveSpell
 		this.beforeSpellCast();
 		this.castWithoutTargetMessage();
 		
-		Game.monsters.add(new Zombie());
-		Game.monsters.add(new Zombie());
-		
 		System.out.println(CHARACTER + " summoned two zombies!");
+		
+		Game.monsters.add(new Zombie());
+		Game.monsters.add(new Zombie());	
 	}
 }

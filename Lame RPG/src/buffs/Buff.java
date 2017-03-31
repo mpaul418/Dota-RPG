@@ -16,8 +16,8 @@ public abstract class Buff
 		desc = dsc;
 		CHARACTER = c;
 		duration = d;
-		if(d >= 0)			  	// if the buff is not passive
-			duration = d + 1; 	// the 1 is to account for the turn spent casting the buff
+		//if(d >= 0)			  	// if the buff is not passive
+			//duration++;		 	// the 1 is to account for the turn spent casting the buff
 	}
 	
 	public String getName()
@@ -73,7 +73,7 @@ public abstract class Buff
 	public String toString()
 	{
 		if(duration > 0) //if the buff is not passive(infinite)
-			return name + "-" + desc + "(Lasting " + duration + " more turns.)";
+			return name + "-" + desc + "(Lasting " + duration + " more turn(s).)";
 		else
 			return name + "-" + desc + "(Passive effect.)";
 	}

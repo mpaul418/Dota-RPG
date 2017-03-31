@@ -132,7 +132,7 @@ public abstract class Player extends Characters
 		int choice, target;
 		boolean turn_taken = this.isStunned();
 		
-		reduceCooldowns();
+		// reduceCooldowns();
 		
 		if(turn_taken)
 			System.out.println(this + " is stunned.");
@@ -268,7 +268,7 @@ public abstract class Player extends Characters
 			}
 		}
 		
-		refreshDebuffs();
+		// refreshDebuffs();
 	}
 	
 	@Override
