@@ -2,10 +2,12 @@ package classes;
 
 import java.util.ArrayList;
 
+import spells.ActiveSpell;
 import spells.CoupDeGrace;
 import spells.DeafeningBlast;
 import spells.GodsStrength;
 import spells.ManaVoid;
+import spells.PassiveSpell;
 import spells.Spell;
 import src.Game;
 
@@ -122,6 +124,151 @@ public abstract class Player extends Characters
 			}
 		}
 		return false;
+	}
+	
+	@Override
+	public void takeTurn()
+	{
+		int choice, target;
+		boolean turn_taken = this.isStunned();
+		
+		reduceCooldowns();
+		
+		if(turn_taken)
+			System.out.println(this + " is stunned.");
+
+		while(!turn_taken)
+		{
+			turn_taken = false;
+
+			Game.displayHPandMana();
+
+			System.out.println("What would you like to do?");
+			System.out.println("1: Attack"
+						   + "\n2: Abilities"
+						   + "\n3: View Buffs and Debuffs"
+						   + "\n4: Hunker Down");
+			choice = Game.getNumberFrom(1, 4);
+
+			switch(choice)
+			{
+				case 1:
+				{
+					System.out.println("\nWhat would you like to attack?");
+					System.out.println("0: Go back.");
+					for(int i = 0; i < Game.monsters.size(); i++)
+					{
+						System.out.println((i + 1) + ": " + Game.monsters.get(i)
+								+"(" + Game.monsters.get(i).getHP() + "/" + Game.monsters.get(i).getDefaultHP() + ")");
+					}
+					
+					target = Game.getNumberFrom(0, Game.monsters.size());
+					if(target > 0)
+					{
+						attack(Game.monsters.get(target - 1));
+						turn_taken = true;
+					}
+					
+					break;
+				}
+				case 2:
+				{
+					int spell_choice_index, spells;
+					spells = spellbook.size();
+							
+					if(allSpellsUncastable())
+						System.out.println("You cannot cast any spells. Go back.");
+					else
+						System.out.println("Which spell would you like to cast?");
+
+					System.out.println("0: Go back.");
+
+					Game.listSpells(this);
+					
+					spell_choice_index = Game.getNumberFrom(0, spells) - 1;
+					while(spell_choice_index > -1 && (spellbook.get(spell_choice_index) instanceof PassiveSpell ||
+						 (spellbook.get(spell_choice_index) instanceof ActiveSpell && !spellbook.get(spell_choice_index).isCastable())))
+					 {
+							if(spellbook.get(spell_choice_index) instanceof PassiveSpell)
+								System.out.println("You cannot cast a passive spell.");
+							else
+								System.out.println("That spell is not castable right now.");
+
+							System.out.println("Which spell would you like to cast?");
+							System.out.println("0: Go back.");
+
+							Game.listSpells(this);
+
+							spell_choice_index = Game.getNumberFrom(0, spells) - 1;
+					 }
+
+					if(spell_choice_index >= 0)
+					{
+						if(spellbook.get(spell_choice_index).isTargeted())
+						{
+							System.out.println("Cast " + spellbook.get(spell_choice_index).NAME + " on what?");
+							System.out.println("0: Cancel spell cast.");
+
+							for(int i = 0; i < Game.monsters.size(); i++)
+							{
+								System.out.println((i + 1) + ": " + Game.monsters.get(i)
+										+"(" + Game.monsters.get(i).getHP() + "/" + Game.monsters.get(i).getDefaultHP() + ")");
+							}
+							target = Game.getNumberFrom(0, Game.monsters.size()) - 1;
+							if(target >= 0)	// if the spell cast is not cancelled
+							{
+								((ActiveSpell) spellbook.get(spell_choice_index)).cast(Game.monsters.get(target));
+								turn_taken = true;
+							}
+							else
+								turn_taken = false;
+						}
+						else
+						{
+							((ActiveSpell) spellbook.get(spell_choice_index)).cast();
+							turn_taken = true;
+						}
+					}
+
+					break;
+				}
+				case 3:
+				{
+					int buffs_to_view;
+
+					System.out.println("Whose buffs would you like to view?");
+					System.out.println("0: Go back.");
+					System.out.println("1: View all buffs.");
+					System.out.println("2: " + this + "'s buffs.");
+
+					for(int i = 0; i < Game.monsters.size(); i++)
+						System.out.println((i + 3) + ": " + Game.monsters.get(i) + "'s buffs.");
+
+					buffs_to_view = Game.getNumberFrom(0, Game.monsters.size() + 2);
+					if(buffs_to_view == 1)
+					{
+						this.printAllBuffs();
+						for(Monster m : Game.monsters)
+							m.printAllBuffs();
+					}
+					else if(buffs_to_view == 2)
+						this.printAllBuffs();
+					else if(buffs_to_view > 2)
+						Game.monsters.get(buffs_to_view - 3).printAllBuffs();
+
+					break;
+				}
+				case 4:
+				{
+					hunkerDown();
+					turn_taken = true;
+					
+					break;
+				}
+			}
+		}
+		
+		refreshDebuffs();
 	}
 	
 	@Override

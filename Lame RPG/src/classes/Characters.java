@@ -10,7 +10,7 @@ import buffs.StunBuff;
 import spells.Spell;
 import src.Game;
 
-public class Characters 
+public abstract class Characters 
 {	
 	private Random r = new Random();
 	protected String name;
@@ -419,16 +419,19 @@ public class Characters
 		System.out.println(this.getName() + " hunkered down, increasing its defense by " + amount + " for 2 turns.\n");
 	}
 	
-	public void refreshDebuffsAndReduceCooldowns()
+	public void reduceCooldowns()
+	{
+		for(Spell s : this.spellbook)
+			if(s.getCurrentCooldown() > 0)
+				s.changeCurrentCooldown(-1);
+	}
+	
+	public void refreshDebuffs()
 	{
 		ArrayList<Buff> deleted_buffs = new ArrayList<Buff>();
 		
-			for(Spell s : this.spellbook)
-				if(s.getCurrentCooldown() > 0)
-					s.changeCurrentCooldown(-1);
-
-			for(Buff b : this.buffs)
-				b.decreaseDuration(deleted_buffs);
+		for(Buff b : this.buffs)
+			b.decreaseDuration(deleted_buffs);
 		
 		for(Buff b : deleted_buffs)
 		{
@@ -437,10 +440,12 @@ public class Characters
 		while(deleted_buffs.size() > 0)
 			deleted_buffs.remove(0);
 	}
-	
+
 	public void die()
 	{
 		Game.characters.remove(this);
 		System.out.println(this + " died.\n");
 	}
+	
+	public abstract void takeTurn();
 }

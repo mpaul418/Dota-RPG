@@ -285,14 +285,14 @@ public class Game
 			turn_number++;
 			System.out.println("------------------- Turn " + turn_number + " -------------------\n");
 			
-			takePlayerTurn();
+			player.takeTurn();;
 			
 			checkForDeaths();
 			
 			if(!battleOver())
-				for(Monster m: monsters)
+				for(int i = 0; i < monsters.size(); i++)
 				{
-					takeMonsterTurn(m);
+					monsters.get(i).takeTurn();
 				}
 			
 			checkForDeaths();
@@ -483,186 +483,7 @@ public class Game
 			return false;
 	}
 
-	private static void takePlayerTurn()
-	{
-		int choice, target;
-		boolean turn_taken = player.isStunned();
-		
-		player.refreshDebuffsAndReduceCooldowns();
-		
-		if(turn_taken)
-			System.out.println(player + " is stunned.");
-
-		while(!turn_taken)
-		{
-			turn_taken = false;
-
-			displayHPandMana();
-
-			System.out.println("What would you like to do?");
-			System.out.println("1: Attack"
-						   + "\n2: Abilities"
-						   + "\n3: View Buffs and Debuffs"
-						   + "\n4: Hunker Down");
-			choice = getNumberFrom(1, 4);
-
-			switch(choice)
-			{
-				case 1:
-				{
-					System.out.println("\nWhat would you like to attack?");
-					System.out.println("0: Go back.");
-					for(int i = 0; i < monsters.size(); i++)
-					{
-						System.out.println((i + 1) + ": " + monsters.get(i)
-								+"(" + monsters.get(i).getHP() + "/" + monsters.get(i).getDefaultHP() + ")");
-					}
-					
-					target = getNumberFrom(0, monsters.size());
-					if(target > 0)
-					{
-						player.attack(monsters.get(target - 1));
-						turn_taken = true;
-					}
-					
-					break;
-				}
-				case 2:
-				{
-					int spell_choice_index, spells;
-					spells = player.spellbook.size();
-							
-					if(player.allSpellsUncastable())
-						System.out.println("You cannot cast any spells. Go back.");
-					else
-						System.out.println("Which spell would you like to cast?");
-
-					System.out.println("0: Go back.");
-
-					listSpells(player);
-					
-					spell_choice_index = getNumberFrom(0, spells) - 1;
-					while(spell_choice_index > -1 && (player.spellbook.get(spell_choice_index) instanceof PassiveSpell ||
-						 (player.spellbook.get(spell_choice_index) instanceof ActiveSpell && !player.spellbook.get(spell_choice_index).isCastable())))
-					 {
-							if(player.spellbook.get(spell_choice_index) instanceof PassiveSpell)
-								System.out.println("You cannot cast a passive spell.");
-							else
-								System.out.println("That spell is not castable right now.");
-
-							System.out.println("Which spell would you like to cast?");
-							System.out.println("0: Go back.");
-
-							listSpells(player);
-
-							spell_choice_index = getNumberFrom(0, spells) - 1;
-					 }
-
-					if(spell_choice_index >= 0)
-					{
-						if(player.spellbook.get(spell_choice_index).isTargeted())
-						{
-							System.out.println("Cast " + player.spellbook.get(spell_choice_index).NAME + " on what?");
-							System.out.println("0: Cancel spell cast.");
-
-							for(int i = 0; i < monsters.size(); i++)
-							{
-								System.out.println((i + 1) + ": " + monsters.get(i)
-										+"(" + monsters.get(i).getHP() + "/" + monsters.get(i).getDefaultHP() + ")");
-							}
-							target = getNumberFrom(0, monsters.size()) - 1;
-							if(target >= 0)	// if the spell cast is not cancelled
-							{
-								((ActiveSpell) player.spellbook.get(spell_choice_index)).cast(monsters.get(target));
-								turn_taken = true;
-							}
-							else
-								turn_taken = false;
-						}
-						else
-						{
-							((ActiveSpell) player.spellbook.get(spell_choice_index)).cast();
-							turn_taken = true;
-						}
-					}
-
-					break;
-				}
-				case 3:
-				{
-					int buffs_to_view;
-
-					System.out.println("Whose buffs would you like to view?");
-					System.out.println("0: Go back.");
-					System.out.println("1: View all buffs.");
-					System.out.println("2: " + player + "'s buffs.");
-
-					for(int i = 0; i < monsters.size(); i++)
-						System.out.println((i + 3) + ": " + monsters.get(i) + "'s buffs.");
-
-					buffs_to_view = getNumberFrom(0, monsters.size() + 2);
-					if(buffs_to_view == 1)
-					{
-						player.printAllBuffs();
-						for(Monster m : monsters)
-							m.printAllBuffs();
-					}
-					else if(buffs_to_view == 2)
-						player.printAllBuffs();
-					else if(buffs_to_view > 2)
-						monsters.get(buffs_to_view - 3).printAllBuffs();
-
-					break;
-				}
-				case 4:
-				{
-					player.hunkerDown();
-					turn_taken = true;
-					
-					break;
-				}
-			}
-		}
-	}
-
-	private static void takeMonsterTurn(Monster m)
-	{
-		m.refreshDebuffsAndReduceCooldowns();
-		
-		if(!m.isStunned())
-		{
-			int temp = rand.nextInt(100) + 1;
-			if(temp > 30) // 70% chance
-				m.attack(player);
-			else if(temp > 15 && !m.allSpellsUncastable()) // 15% chance
-			{
-				// makes an arraylist for castable spells, then randomly pick one to cast. if targeted, selects a random target
-				ArrayList<ActiveSpell> castable_spells = new ArrayList<ActiveSpell>();
-				int spell_index;
-				for(Spell s : m.spellbook) // gets the castable spells
-				{
-					if(s.isCastable())
-						castable_spells.add((ActiveSpell) s);
-				}
-				
-				spell_index = rand.nextInt(castable_spells.size()); // picks a random castable spell
-				
-				if(castable_spells.get(spell_index).isTargeted()) //casts the spell
-					castable_spells.get(spell_index).cast(player);
-				else
-					castable_spells.get(spell_index).cast();
-				
-				for(@SuppressWarnings("unused") ActiveSpell s : castable_spells) //clears the arraylist
-					castable_spells.remove(0);
-			}
-			else // also 15% chance
-				m.hunkerDown();
-		}
-		else
-			System.out.println(m + " is stunned.");
-	}
-
-	private static void listSpells(Characters c)
+	public static void listSpells(Characters c)
 	{
 		int spells = 0;
 
@@ -692,7 +513,7 @@ public class Game
 				System.out.println();
 		}
 	}
-	private static void displayHPandMana()
+	public static void displayHPandMana()
 	{
 		System.out.println(player + "'s HP: " + player.getHP() + "/" + player.getDefaultHP()
 		+  "   Mana: " + player.getMana() + "/" + player.getDefaultMana());

@@ -1,6 +1,10 @@
 package classes;
 
+import java.util.ArrayList;
 import java.util.Random;
+
+import spells.ActiveSpell;
+import spells.Spell;
 import src.Game;
 
 public class Monster extends Characters 
@@ -26,6 +30,51 @@ public class Monster extends Characters
 		death_xp = dth_xp;
 		
 		Game.characters.add(this);
+	}
+	
+	@Override
+	public void takeTurn()
+	{
+		reduceCooldowns();
+		
+		if(!this.isStunned())
+		{
+			int temp = rand.nextInt(100) + 1;
+			if(temp > 50) // 50% chance
+				attack(Game.player);
+			else if(temp > 15) // 35% chance
+			{
+				if(!allSpellsUncastable())
+				{
+					// makes an arraylist for castable spells, then randomly pick one to cast. if targeted, selects a random target
+					ArrayList<ActiveSpell> castable_spells = new ArrayList<ActiveSpell>();
+					int spell_index;
+					for(Spell s : spellbook) // gets the castable spells
+					{
+						if(s.isCastable())
+							castable_spells.add((ActiveSpell) s);
+					}
+					
+					spell_index = rand.nextInt(castable_spells.size()); // picks a random castable spell
+					
+					if(castable_spells.get(spell_index).isTargeted()) //casts the spell
+						castable_spells.get(spell_index).cast(Game.player);
+					else
+						castable_spells.get(spell_index).cast();
+					
+					while(castable_spells.size() > 0) // clears the arraylist
+						castable_spells.remove(0);
+				}
+				else
+					attack(Game.player);
+			}
+			else // also 15% chance
+				hunkerDown();
+		}
+		else
+			System.out.println(this + " is stunned.");
+		
+		refreshDebuffs();
 	}
 	
 	@Override
