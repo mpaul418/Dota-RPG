@@ -21,7 +21,7 @@ public class GodsStrength extends ActiveSpell
 		System.out.println();
 		
 		this.CHARACTER.buffs.add(new StatBuff(this.NAME, "Dealing" + ((int) (damage_multiplier * 100)) + "% extra damage.",
-				this.CHARACTER, 3, 1, (int) Math.round(damage_multiplier * this.CHARACTER.getDefaultDamage())));
+				this.CHARACTER, 4, 1, (int) Math.round(damage_multiplier * this.CHARACTER.getDefaultDamage())));				// duration is 4 because first turn is casting the spell
 	}
 
 	@Override

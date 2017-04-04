@@ -431,11 +431,29 @@ public abstract class Characters
 		ArrayList<Buff> deleted_buffs = new ArrayList<Buff>();
 		
 		for(Buff b : this.buffs)
-			b.decreaseDuration(deleted_buffs);
+			if(!(b instanceof StunBuff))
+				b.decreaseDuration(deleted_buffs);
 		
 		for(Buff b : deleted_buffs)
 		{
 			b.deletThis();
+		}
+		while(deleted_buffs.size() > 0)
+			deleted_buffs.remove(0);
+	}
+	
+	public void refreshStuns()
+	{
+		ArrayList<Buff> deleted_buffs = new ArrayList<Buff>();
+		
+		for(Buff b : this.buffs)
+			if(b instanceof StunBuff)
+				b.decreaseDuration(deleted_buffs);
+		
+		for(Buff b : deleted_buffs)
+		{
+			if(b instanceof StunBuff)
+				b.deletThis();
 		}
 		while(deleted_buffs.size() > 0)
 			deleted_buffs.remove(0);

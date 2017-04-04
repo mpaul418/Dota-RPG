@@ -289,6 +289,10 @@ public class Game
 			for(Monster m : monsters)
 				m.reduceCooldowns();
 			
+			player.refreshDebuffs();
+			for(Monster m : monsters)
+				m.refreshDebuffs();
+			
 			player.takeTurn();
 			
 			checkForDeaths();
@@ -300,10 +304,6 @@ public class Game
 				}
 			
 			checkForDeaths();	
-			
-			player.refreshDebuffs();
-			for(Monster m : monsters)
-				m.refreshDebuffs();
 		}
 		
 		System.out.println("------------------- Battle Over -------------------\n");

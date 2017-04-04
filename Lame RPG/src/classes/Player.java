@@ -135,7 +135,10 @@ public abstract class Player extends Characters
 		// reduceCooldowns();
 		
 		if(turn_taken)
+		{
 			System.out.println(this + " is stunned.");
+			refreshStuns();
+		}
 
 		while(!turn_taken)
 		{

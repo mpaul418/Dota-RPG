@@ -72,7 +72,10 @@ public class Monster extends Characters
 				hunkerDown();
 		}
 		else
+		{
 			System.out.println(this + " is stunned.");
+			refreshStuns();
+		}
 		
 		// refreshDebuffs();
 	}
