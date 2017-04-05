@@ -42,6 +42,8 @@ public class Game
 	public  static int map[][] = new int[5][5];
 	public  static int current_row = 0;
 	public  static int current_column = 0;
+	public  static int boss_row  = 0;
+	public  static int boss_column = 0;
 	private static int turn_number = 0;
 	public  static Random rand = new Random();
 	private static ArrayList<Integer> options = new ArrayList<Integer>();
@@ -59,7 +61,7 @@ public class Game
 		
 		while(!game_over)
 		{
-			if(player.isAlive())
+			if(player.isAlive() && roshanAlive())
 			{
 				chooseRoom();
 			
@@ -75,7 +77,7 @@ public class Game
 					   + "\n\tTotal damage dealt: " + player.getDamageDealt()
 					   + "\n\tEnemies killed: " + enemies_killed);
 	}
-	
+
 	private static void setHero()
 	{
 		System.out.println("What hero do you want to be?");
@@ -162,8 +164,8 @@ public class Game
 			}
 		}
 		
-		int boss_row = rand.nextInt(5); // a random row
-		int boss_column; // = rand.nextInt(3) + 2; // a random column from 3 to 5
+		boss_row = rand.nextInt(5); // a random row
+		//boss_column; // = rand.nextInt(3) + 2; // a random column from 3 to 5
 		boss_column = rand.nextInt(1 + boss_row) + (4 - boss_row); // view paint diagram to see possible rooms
 		
 		map[boss_row][boss_column] = 4; // the 4 signals the boss battle
@@ -578,6 +580,12 @@ public class Game
 		}while(!working);
 
 		return tempint;
+	}
+	
+	private static boolean roshanAlive() // TODO complete this
+	{
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 	public static int getTurnNumber()
