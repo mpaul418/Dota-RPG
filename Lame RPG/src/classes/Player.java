@@ -25,7 +25,6 @@ public abstract class Player extends Characters
 	{
 		super(initHP, initMana, initDmg, initAcc, initDef, initMagDef, initName);
 		character_class = playerClass;
-		gold = 0; //TODO add this
 		xp = 0;
 		xp_level_rq = 100;
 	}
@@ -158,17 +157,17 @@ public abstract class Player extends Characters
 				case 1:
 				{
 					System.out.println("\nWhat would you like to attack?");
-					System.out.println("0: Go back.");
+					System.out.println("1: Go back.");
 					for(int i = 0; i < Game.monsters.size(); i++)
 					{
-						System.out.println((i + 1) + ": " + Game.monsters.get(i)
+						System.out.println((i + 2) + ": " + Game.monsters.get(i)
 								+"(" + Game.monsters.get(i).getHP() + "/" + Game.monsters.get(i).getDefaultHP() + ")");
 					}
 					
-					target = Game.getNumberFrom(0, Game.monsters.size());
-					if(target > 0)
+					target = Game.getNumberFrom(1, Game.monsters.size() + 1);
+					if(target > 1)
 					{
-						attack(Game.monsters.get(target - 1));
+						attack(Game.monsters.get(target - 2));
 						turn_taken = true;
 					}
 					
@@ -184,11 +183,11 @@ public abstract class Player extends Characters
 					else
 						System.out.println("Which spell would you like to cast?");
 
-					System.out.println("0: Go back.");
+					System.out.println("1: Go back.");
 
 					Game.listSpells(this);
 					
-					spell_choice_index = Game.getNumberFrom(0, spells) - 1;
+					spell_choice_index = Game.getNumberFrom(1, spells + 1) - 2;
 					while(spell_choice_index > -1 && (spellbook.get(spell_choice_index) instanceof PassiveSpell ||
 						 (spellbook.get(spell_choice_index) instanceof ActiveSpell && !spellbook.get(spell_choice_index).isCastable())))
 					 {
@@ -202,7 +201,7 @@ public abstract class Player extends Characters
 
 							Game.listSpells(this);
 
-							spell_choice_index = Game.getNumberFrom(0, spells) - 1;
+							spell_choice_index = Game.getNumberFrom(1, spells + 1) - 2;
 					 }
 
 					if(spell_choice_index >= 0)
@@ -210,14 +209,14 @@ public abstract class Player extends Characters
 						if(spellbook.get(spell_choice_index).isTargeted())
 						{
 							System.out.println("Cast " + spellbook.get(spell_choice_index).NAME + " on what?");
-							System.out.println("0: Cancel spell cast.");
+							System.out.println("1: Cancel spell cast.");
 
 							for(int i = 0; i < Game.monsters.size(); i++)
 							{
-								System.out.println((i + 1) + ": " + Game.monsters.get(i)
+								System.out.println((i + 2) + ": " + Game.monsters.get(i)
 										+"(" + Game.monsters.get(i).getHP() + "/" + Game.monsters.get(i).getDefaultHP() + ")");
 							}
-							target = Game.getNumberFrom(0, Game.monsters.size()) - 1;
+							target = Game.getNumberFrom(1, Game.monsters.size() + 1) - 2;
 							if(target >= 0)	// if the spell cast is not cancelled
 							{
 								((ActiveSpell) spellbook.get(spell_choice_index)).cast(Game.monsters.get(target));
@@ -237,9 +236,9 @@ public abstract class Player extends Characters
 				}
 				case 3:
 				{
-					int buffs_to_view;
+					//int buffs_to_view;
 
-					System.out.println("Whose buffs would you like to view?");
+					/*System.out.println("Whose buffs would you like to view?");
 					System.out.println("0: Go back.");
 					System.out.println("1: View all buffs.");
 					System.out.println("2: " + this + "'s buffs.");
@@ -249,15 +248,15 @@ public abstract class Player extends Characters
 
 					buffs_to_view = Game.getNumberFrom(0, Game.monsters.size() + 2);
 					if(buffs_to_view == 1)
-					{
-						this.printAllBuffs();
-						for(Monster m : Game.monsters)
-							m.printAllBuffs();
-					}
+					{*/
+					this.printAllBuffs();
+					for(Monster m : Game.monsters)
+						m.printAllBuffs();
+					/*}
 					else if(buffs_to_view == 2)
 						this.printAllBuffs();
 					else if(buffs_to_view > 2)
-						Game.monsters.get(buffs_to_view - 3).printAllBuffs();
+						Game.monsters.get(buffs_to_view - 3).printAllBuffs();*/
 
 					break;
 				}
@@ -293,7 +292,7 @@ public abstract class Player extends Characters
 		{
 			if(buffs.get(i).getDuration() > 0)
 			{
-				while(buffs.get(i).getDuration() > 0)		//FIXME double check this
+				while(buffs.size() > 0 && buffs.get(i).getDuration() > 0)		//FIXME double check this
 					buffs.get(i).decreaseDurationNoNotifier();
 				size--;
 			}

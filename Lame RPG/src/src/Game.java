@@ -45,6 +45,7 @@ public class Game
 	public  static int boss_row  = 0;
 	public  static int boss_column = 0;
 	private static int turn_number = 0;
+	private static int continue_game = 2;
 	public  static Random rand = new Random();
 	private static ArrayList<Integer> options = new ArrayList<Integer>();
 	public  static ArrayList<Monster> monsters = new ArrayList<Monster>();
@@ -55,27 +56,42 @@ public class Game
 
 	public static void main(String[] args)
 	{
-		setName();
-		setHero();
-		makeDungeon();
-		
-		while(!game_over)
+		do
 		{
-			if(player.isAlive() && roshanAlive())
-			{
-				chooseRoom();
+			setName();
+			setHero();
+			makeDungeon();
 			
-				if(map[current_row][current_column] > 0)
-					battle();	
-				else
-					System.out.println("This room is empty.");
+			while(!game_over)
+			{
+				if(player.isAlive() && roshanAlive())
+				{
+					chooseRoom();
+				
+					if(map[current_row][current_column] > 0)
+						battle();	
+					else
+						System.out.println("This room is empty.");
+				}
 			}
-		}
-		
-		System.out.println("Game over! Maybe next time :("
-					   + "\nPlayer Stats:"
-					   + "\n\tTotal damage dealt: " + player.getDamageDealt()
-					   + "\n\tEnemies killed: " + enemies_killed);
+			
+			if(!player.isAlive())
+				loseGame();
+			else if(!roshanAlive())
+				winGame();
+			
+			System.out.println("Would you like to embark on your journey again?"
+						   + "\n1: Yes"
+						   + "\n2: No");
+			continue_game = getNumberFrom(1,2);
+			
+			if(continue_game == 1)
+			{
+				game_over = false;
+				current_row = 0;
+				current_column = 0;
+			}
+		}while(!game_over);
 	}
 
 	private static void setHero()
@@ -501,24 +517,24 @@ public class Game
 		{
 				spells++;
 
-				System.out.print(spells + ": " + s.NAME + "(Level " + s.spell_level + ")- " + s.DESCRIPTION + ".");
+				System.out.print((spells + 1) + ": " + s.NAME + "(Level " + s.spell_level + ")\n\t" + s.DESCRIPTION + ".");
 
 				if(s instanceof ActiveSpell)
 				{
 					if(s.isCastable())
-						System.out.print(" Mana Cost: " + s.MANA_COST + ". Cooldown: " + s.max_cooldown + " turns.");
+						System.out.print("\n\tMana Cost: " + s.MANA_COST + ".\n\tCooldown: " + s.max_cooldown + " turns.");
 
 					else
 					{
-						if(s.onCooldown())
-							System.out.print(" On cooldown for " + s.getCurrentCooldown() + " more turns. (Costs " + s.MANA_COST + " mana.)");
+						if(!s.onCooldown())
+							System.out.print("\n\tOn cooldown for " + s.getCurrentCooldown() + " more turns. (Costs " + s.MANA_COST + " mana.)");
 						else
-							System.out.print(" Requires " + (s.MANA_COST - player.getMana()) + " more mana.");
+							System.out.print("\n\tRequires " + (s.MANA_COST - player.getMana()) + " more mana.");
 					}
 				}
 				else if (s instanceof PassiveSpell)
 				{
-					System.out.print(" Passive effect.");
+					System.out.print("\n\tPassive effect.");
 				}
 				System.out.println();
 		}
@@ -582,10 +598,31 @@ public class Game
 		return tempint;
 	}
 	
-	private static boolean roshanAlive() // TODO complete this
+	private static boolean roshanAlive()
 	{
-		// TODO Auto-generated method stub
-		return false;
+		if(map[boss_row][boss_column] == 0)
+		{
+			game_over = true;
+			return false;
+		}
+		else
+			return true;
+	}
+	
+	private static void loseGame()
+	{
+		System.out.println("Game over! Maybe next time :(");
+		System.out.println("Player Stats:"
+						 + "\n\tTotal damage dealt: " + player.getDamageDealt()
+						 + "\n\tEnemies killed: " + enemies_killed);		
+	}
+	
+	private static void winGame()
+	{
+		System.out.println("Congratulations!! You have defeated Roshan and are a true hero.");
+		System.out.println("Player Stats:"
+						 + "\n\tTotal damage dealt: " + player.getDamageDealt()
+						 + "\n\tEnemies killed: " + enemies_killed);
 	}
 
 	public static int getTurnNumber()
