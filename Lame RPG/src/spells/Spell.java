@@ -104,7 +104,7 @@ public abstract class Spell
 		if(spell_level < max_spell_level)
 		{
 			spell_level++;
-			System.out.println(this + " is now level " + spell_level + ".");
+			System.out.println(this + " is now level " + spell_level + ".\n");
 			return true;
 		}
 		else

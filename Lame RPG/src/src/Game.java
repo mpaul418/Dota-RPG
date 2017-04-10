@@ -304,16 +304,16 @@ public class Game
 			System.out.println("------------------- Turn " + turn_number + " -------------------\n");
 			
 			player.reduceCooldowns();
-			for(Monster m : monsters)
-				m.reduceCooldowns();
-			
 			player.refreshDebuffs();
-			for(Monster m : monsters)
-				m.refreshDebuffs();
 			
 			player.takeTurn();
 			
 			checkForDeaths();
+			
+			for(Monster m : monsters)
+				m.reduceCooldowns();
+			for(Monster m : monsters)
+				m.refreshDebuffs();
 			
 			if(!battleOver())
 				for(int i = 0; i < monsters.size(); i++)
@@ -526,10 +526,12 @@ public class Game
 
 					else
 					{
-						if(!s.onCooldown())
-							System.out.print("\n\tOn cooldown for " + s.getCurrentCooldown() + " more turns. (Costs " + s.MANA_COST + " mana.)");
+						if(s.onCooldown() && (s.MANA_COST > player.getMana()))
+							System.out.print("\n\tRequires " + (s.MANA_COST - player.getMana()) + " more mana.\n\tOn cooldown for " + s.getCurrentCooldown() + " more turn(s).");
+						else if(s.onCooldown())
+							System.out.print("\n\tMana Cost: " + s.MANA_COST + ".\n\tOn cooldown for " + s.getCurrentCooldown() + " more turn(s).");
 						else
-							System.out.print("\n\tRequires " + (s.MANA_COST - player.getMana()) + " more mana.");
+							System.out.print("\n\tRequires " + (s.MANA_COST - player.getMana()) + " more mana.\n\tCooldown: " + s.max_cooldown + " turn(s).");
 					}
 				}
 				else if (s instanceof PassiveSpell)

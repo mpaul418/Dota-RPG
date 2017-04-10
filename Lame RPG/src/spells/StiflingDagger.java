@@ -11,7 +11,7 @@ public class StiflingDagger extends ActiveSpell
 	
 	public StiflingDagger(Characters c)
 	{
-		super("Stifling Dagger", "Launch a dagger at an enemy, dealing 4/6/8/10 + 60/85/110/135% of your damage as pure damage. Coup de Grâce can trigger on this spell.", 10, 1, 2, c, true);
+		super("Stifling Dagger", "Launch a dagger at an enemy, dealing 4/6/8/10 + 60/85/110/135% of your damage as pure damage. Coup de Grâce can trigger on this spell", 10, 1, 2, c, true);
 	}
 
 	@Override

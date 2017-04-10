@@ -38,7 +38,7 @@ public abstract class Player extends Characters
 		if(xp >= xp_level_rq)
 			levelUp();
 		else
-			System.out.println(this + " needs " + (xp_level_rq - xp) + " more experience points to level up.");
+			System.out.println(this + " needs " + (xp_level_rq - xp) + " more experience points to level up.\n");
 	}
 	
 	private void levelUp()
@@ -61,11 +61,22 @@ public abstract class Player extends Characters
 		defaultDamage = (int)Math.round(1.25 * defaultDamage);
 		damage += (int)Math.round(0.25 * defaultDamage);
 		
+		int temp1 = 0;
+		while(temp1 < unlearned_spells.size())
+		{
+			if(this.level >= unlearned_spells.get(temp1).getLevelRequirement())
+			{
+				unlearned_spells.get(temp1).addToSpellbook();
+			}
+			else
+				temp1++;
+		}
+		
 		while(checkForSpellsToLevel() && levelup_points > 0)
 		{
 			System.out.println(levelup_points + " levelup points to spend. Which spell would you like to level?");
 			
-			int temp = 0;
+			int temp2 = 0;
 			ArrayList<Spell> levelable_spells = new ArrayList<Spell>();
 			
 			for(Spell s : spellbook) // lists each spell that can be leveled
@@ -75,14 +86,14 @@ public abstract class Player extends Characters
 					if(!(s instanceof CoupDeGrace || s instanceof DeafeningBlast || s instanceof ManaVoid || s instanceof GodsStrength)) // if not an ultimate
 					{
 						levelable_spells.add(s);
-						temp++;
-						System.out.println(temp + ": " + s + "(currently level " + s.getLevel() + ")- " + s.DESCRIPTION + ".");
+						temp2++;
+						System.out.println(temp2 + ": " + s + "(currently level " + s.getLevel() + ")- " + s.DESCRIPTION + ".");
 					}
 					else if(s.getLevel() < ((this.getLevel() - 1))) // ultimates can only be leveled once per level starting at level 3
 					{
 						levelable_spells.add(s);
-						temp++;
-						System.out.println(temp + ": " + s + "(currently level " + s.getLevel() + ")- " + s.DESCRIPTION + ".");
+						temp2++;
+						System.out.println(temp2 + ": " + s + "(currently level " + s.getLevel() + ")- " + s.DESCRIPTION + ".");
 					}
 				}
 			}
@@ -91,17 +102,6 @@ public abstract class Player extends Characters
 			levelable_spells.get(level_choice - 1).levelUp();
 			
 			levelup_points--;
-		}
-		
-		int temp = 0;
-		while(temp < unlearned_spells.size())
-		{
-			if(this.level >= unlearned_spells.get(temp).getLevelRequirement())
-			{
-				unlearned_spells.get(temp).addToSpellbook();
-			}
-			else
-				temp++;
 		}
 		
 		System.out.println("---------------------------------------------------");
