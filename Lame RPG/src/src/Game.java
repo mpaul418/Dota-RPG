@@ -185,9 +185,6 @@ public class Game
 		boss_column = rand.nextInt(1 + boss_row) + (4 - boss_row); // view paint diagram to see possible rooms
 		
 		map[boss_row][boss_column] = 4; // the 4 signals the boss battle
-		
-		//TODO remove this below- it is just for testing
-		map[0][1] = 4;
 	}
 	
 	private static void chooseRoom()
@@ -310,14 +307,11 @@ public class Game
 			
 			checkForDeaths();
 			
-			for(Monster m : monsters)
-				m.reduceCooldowns();
-			for(Monster m : monsters)
-				m.refreshDebuffs();
-			
 			if(!battleOver())
 				for(int i = 0; i < monsters.size(); i++)
 				{
+					monsters.get(i).reduceCooldowns();
+					monsters.get(i).refreshDebuffs();
 					monsters.get(i).takeTurn();
 				}
 			
@@ -588,12 +582,12 @@ public class Game
 			catch(IOException e)
 			{
 				working = false;
-				System.out.println("Exception caught! Please input correctly.");
+				System.out.println("Please input correctly.");
 			}
 			catch(NumberFormatException e)
 			{
 				working = false;
-				System.out.println("Exception caught! Please input correctly.");
+				System.out.println("Please input correctly.");
 			}
 		}while(!working);
 
