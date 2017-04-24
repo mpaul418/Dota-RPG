@@ -12,7 +12,7 @@ public class AntiMage extends Player
 	
 	public AntiMage(String initName)
 	{
-		super(675, 60, 32, 55, 14, 1, 0.0, initName);
+		super(675, 60, 34, 60, 14, 1, 0.0, initName);
 		mana_break = new ManaBreak(this);
 		blink = new Blink(this);
 		spell_shield = new SpellShield(this);

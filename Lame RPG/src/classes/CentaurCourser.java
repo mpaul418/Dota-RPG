@@ -5,7 +5,7 @@ public class CentaurCourser extends Monster
 
 	public CentaurCourser()
 	{
-		super(400, 15, 20, 35, 25, 0.30, "Centaur Courser", 2, 65);
+		super(600, 15, 20, 35, 25, 0.30, "Centaur Courser", 2, 65);
 	}
 
 	public CentaurCourser(int initHP, int initMana, int initDmg, int initAcc, int initDef, double initMagDef,
