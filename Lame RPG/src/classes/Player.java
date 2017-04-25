@@ -27,6 +27,8 @@ public abstract class Player extends Characters
 		character_class = playerClass;
 		xp = 0;
 		xp_level_rq = 100;
+		
+		Game.players.add(this);
 	}
 	
 	public abstract String getCharClass();
@@ -53,13 +55,14 @@ public abstract class Player extends Characters
 				+  "\nHP increased by " + (int)Math.round(0.25 * defaultHP)
 				+ ".\nMana increased by " + (int)Math.round(0.25 * defaultMana)
 				+ ".\nDamage increased by " + (int)Math.round(0.25 * defaultDamage) + ".");
-
-		defaultHP = (int)Math.round(1.25 * defaultHP);
-		HP = defaultHP;
-		defaultMana = (int)Math.round(1.25 * defaultMana);
-		mana = defaultMana;
-		defaultDamage = (int)Math.round(1.25 * defaultDamage);
+		
+		HP += (int)Math.round(0.25 * defaultHP);
+		mana += (int)Math.round(0.25 * defaultMana);
 		damage += (int)Math.round(0.25 * defaultDamage);
+		
+		defaultHP = (int)Math.round(1.25 * defaultHP);
+		defaultMana = (int)Math.round(1.25 * defaultMana);
+		defaultDamage = (int)Math.round(1.25 * defaultDamage);
 		
 		int temp1 = 0;
 		while(temp1 < unlearned_spells.size())
@@ -87,13 +90,13 @@ public abstract class Player extends Characters
 					{
 						levelable_spells.add(s);
 						temp2++;
-						System.out.println(temp2 + ": " + s + "(currently level " + s.getLevel() + ")- " + s.DESCRIPTION + ".");
+						System.out.println(temp2 + ": " + s + " (currently level " + s.getLevel() + ")- " + s.DESCRIPTION + ".");
 					}
 					else if(s.getLevel() < ((this.getLevel() - 1))) // ultimates can only be leveled once per level starting at level 3
 					{
 						levelable_spells.add(s);
 						temp2++;
-						System.out.println(temp2 + ": " + s + "(currently level " + s.getLevel() + ")- " + s.DESCRIPTION + ".");
+						System.out.println(temp2 + ": " + s + " (currently level " + s.getLevel() + ")- " + s.DESCRIPTION + ".");
 					}
 				}
 			}

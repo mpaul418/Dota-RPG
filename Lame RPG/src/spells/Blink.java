@@ -11,7 +11,7 @@ public class Blink extends ActiveSpell
 	
 	public Blink(Characters c)
 	{
-		super("Blink", "Teleport and disorient your enemies, reducing your enemies' defence by 12/23/34/45 for 4 turns", 10, 1, 2, c, false);
+		super("Blink", "Teleport and disorient your enemies, reducing your enemies' defence by 12/16/20/24 for 4 turns", 10, 1, 6, c, false);
 	}
 
 	@Override
@@ -35,7 +35,7 @@ public class Blink extends ActiveSpell
 		boolean level_up = super.levelUp();
 		
 		if(level_up)
-			defense_reduction += 11;
+			defense_reduction += 4;
 		
 		return level_up;
 	}

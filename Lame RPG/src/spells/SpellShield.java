@@ -3,12 +3,12 @@ package spells;
 import buffs.StatBuff;
 import classes.Characters;
 
-public class SpellShield extends PassiveSpell
+public class SpellShield extends PassiveSpell //TODO rework this spell to actually be useful- potentially into Manta Style???
 {
 
 	public SpellShield(Characters c)
 	{
-		super("Spell Shield", "Gain a 33/44/55/66% magic resistance bonus", 0, 1, -1, c);
+		super("Spell Shield", "Gain a 33/44/55/66% magic resistance bonus.", 0, 1, -1, c);
 	}
 	
 	@Override

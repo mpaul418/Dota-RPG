@@ -46,6 +46,8 @@ public abstract class Characters
 		defaultMagicDefense = initMagDef;
 		magicDefense = initMagDef;			//buff- 4
 		name = initName;
+		
+		Game.characters.add(this);
 	}
 	public int getHP()
 	{

@@ -37,7 +37,7 @@ public class Game
 {
 	private static String temp_name = "Player";
 	private static int player_hero;
-	public  static Player player;
+	public  static Player main_player;
 	public  static int enemies_killed = 0;
 	public  static int map[][] = new int[5][5];
 	public  static int current_row = 0;
@@ -48,6 +48,7 @@ public class Game
 	private static int continue_game = 2;
 	public  static Random rand = new Random();
 	private static ArrayList<Integer> options = new ArrayList<Integer>();
+	public  static ArrayList<Player> players = new ArrayList<Player>();
 	public  static ArrayList<Monster> monsters = new ArrayList<Monster>();
 	public  static ArrayList<Characters> characters = new ArrayList<Characters>();
 
@@ -64,7 +65,7 @@ public class Game
 			
 			while(!game_over)
 			{
-				if(player.isAlive() && roshanAlive())
+				if(main_player.isAlive() && roshanAlive())
 				{
 					chooseRoom();
 				
@@ -75,7 +76,7 @@ public class Game
 				}
 			}
 			
-			if(!player.isAlive())
+			if(!main_player.isAlive())
 				loseGame();
 			else if(!roshanAlive())
 				winGame();
@@ -108,22 +109,22 @@ public class Game
 		{
 			case 1:
 			{
-				player = new AntiMage(temp_name);
+				main_player = new AntiMage(temp_name);
 				break;
 			}
 			case 2:
 			{
-				player = new Sven(temp_name);
+				main_player = new Sven(temp_name);
 				break;
 			}
 			case 3:
 			{
-				player = new PhantomAssassin(temp_name);
+				main_player = new PhantomAssassin(temp_name);
 				break;
 			}
 			case 4:
 			{
-				player = new Invoker(temp_name);
+				main_player = new Invoker(temp_name);
 				break;
 			}
 		}
@@ -163,8 +164,8 @@ public class Game
 				name_confirmed = true;
 		}while(!name_confirmed);
 		
-		if(player != null)
-			player.setName(temp_name);
+		if(main_player != null)
+			main_player.setName(temp_name);
 	}
 	
 	private static void makeDungeon()
@@ -289,7 +290,11 @@ public class Game
 	{
 		turn_number = 0;
 		
-		characters.add(player);
+		if(!characters.contains(main_player)) 	//TODO placeholder- i think this is unnecessary because player should always be in array but just in case
+			characters.add(main_player);
+		
+		if(!players.contains(main_player))		//TODO placeholder- i think this is unnecessary because player should always be in array but just in case
+			players.add(main_player);
 	
 		addMonsters();	// spawns monsters- if level > 1, spawns one monster of player's level and the rest are random monsters from lower levels
 
@@ -300,31 +305,43 @@ public class Game
 			turn_number++;
 			System.out.println("------------------- Turn " + turn_number + " -------------------\n");
 			
-			player.reduceCooldowns();
-			player.refreshDebuffs();
-			
-			player.takeTurn();
+			for(int i = 0; i < players.size(); i++)
+			{
+				if(!battleOver())
+				{
+					players.get(i).reduceCooldowns();
+					players.get(i).refreshDebuffs();
+					players.get(i).takeTurn();
+				}
+			}
 			
 			checkForDeaths();
 			
-			if(!battleOver())
-				for(int i = 0; i < monsters.size(); i++)
+			for(int i = 0; i < monsters.size(); i++)
+			{
+				if(!battleOver())
 				{
 					monsters.get(i).reduceCooldowns();
 					monsters.get(i).refreshDebuffs();
 					monsters.get(i).takeTurn();
 				}
+			}
 			
 			checkForDeaths();	
 		}
 		
 		System.out.println("------------------- Battle Over -------------------\n");
 
-		while(characters.size() > 0)	// removes all characters from this array at the end of the battle
-			characters.remove(0);
+		while(players.size() > 0)	// removes all players from this array at the end of the battle
+			if(players.get(0) == main_player)	// main player cannot be removed from array
+				players.remove(0);
 		
-		if(player.isAlive())			// if the player wins the battle, player is restored
-			player.restoreToFull();
+		while(characters.size() > 0)	// removes all characters from this array at the end of the battle
+			if(characters.get(0) == main_player)	// main player cannot be removed from array
+				characters.remove(0);
+		
+		if(main_player.isAlive())			// if the player wins the battle, player is restored
+			main_player.restoreToFull();
 	}
 	
 	private static void addMonsters()
@@ -336,10 +353,10 @@ public class Game
 				int temp = 0;
 				
 				if(i == 0)
-					temp = pickMonsterSpawnedOfLevel(player.getLevel()); //spawns monster of current level
+					temp = pickMonsterSpawnedOfLevel(main_player.getLevel()); //spawns monster of current level
 				else
 				{
-					temp = pickMonsterSpawnedUpTo(player.getLevel());
+					temp = pickMonsterSpawnedUpTo(main_player.getLevel());
 				}
 								
 				createMonster(temp);
@@ -408,77 +425,77 @@ public class Game
 		{
 			case 1:
 			{
-				monsters.add(new Kobold());
+				new Kobold();
 				break;
 			}
 			case 2:
 			{
-				monsters.add(new Treant());
+				new Treant();
 				break;
 			}
 			case 3:
 			{
-				monsters.add(new FellSpirit());
+				new FellSpirit();
 				break;
 			}
 			case 4:
 			{
-				monsters.add(new VhoulAssassin());
+				new VhoulAssassin();
 				break;
 			}
 			case 5:
 			{
-				monsters.add(new SatyrBanisher());
+				new SatyrBanisher();
 				break;
 			}
 			case 6:
 			{
-				monsters.add(new MeleeCreep());
+				new MeleeCreep();
 				break;
 			}
 			case 7:
 			{
-				monsters.add(new RangedCreep());
+				new RangedCreep();
 				break;
 			}
 			case 8:
 			{
-				monsters.add(new HillTrollPriest());
+				new HillTrollPriest();
 				break;
 			}
 			case 9:
 			{
-				monsters.add(new CentaurCourser());
+				new CentaurCourser();
 				break;
 			}
 			case 10:
 			{
-				monsters.add(new Hellbear());
+				new Hellbear();
 				break;
 			}
 			case 11:
 			{
-				monsters.add(new SatyrMindstealer());
+				new SatyrMindstealer();
 				break;
 			}
 			case 12:
 			{
-				monsters.add(new HellbearSmasher());
+				new HellbearSmasher();
 				break;
 			}
 			case 13:
 			{
-				monsters.add(new SatyrTormenter());
+				new SatyrTormenter();
 				break;
 			}
 			case 14:
 			{
-				monsters.add(new CentaurConqueror());
+				new CentaurConqueror();
 				break;
 			}
 			case 15:
 			{
-				monsters.add(new Roshan());
+				new Roshan();
 				break;
 			}
 		}
@@ -493,11 +510,13 @@ public class Game
 				removed_characters.add(c);
 		for(Characters c : removed_characters)
 			c.die();
+		
+		new AntiMage("Me");
 	}
 
 	private static boolean battleOver()
 	{
-		if(!player.isAlive() || monsters.size() == 0) // this used to call allMonstersDead(), i changed it
+		if(!main_player.isAlive() || monsters.size() == 0) // this used to call allMonstersDead(), i changed it
 			return true;
 		else
 			return false;
@@ -511,7 +530,7 @@ public class Game
 		{
 				spells++;
 
-				System.out.print((spells + 1) + ": " + s.NAME + "(Level " + s.spell_level + ")\n\t" + s.DESCRIPTION + ".");
+				System.out.print((spells + 1) + ": " + s.NAME + " (Level " + s.spell_level + ")\n\t" + s.DESCRIPTION + ".");
 
 				if(s instanceof ActiveSpell)
 				{
@@ -520,12 +539,12 @@ public class Game
 
 					else
 					{
-						if(s.onCooldown() && (s.MANA_COST > player.getMana()))
-							System.out.print("\n\tRequires " + (s.MANA_COST - player.getMana()) + " more mana.\n\tOn cooldown for " + s.getCurrentCooldown() + " more turn(s).");
+						if(s.onCooldown() && (s.MANA_COST > main_player.getMana()))
+							System.out.print("\n\tRequires " + (s.MANA_COST - main_player.getMana()) + " more mana.\n\tOn cooldown for " + s.getCurrentCooldown() + " more turn(s).");
 						else if(s.onCooldown())
 							System.out.print("\n\tMana Cost: " + s.MANA_COST + ".\n\tOn cooldown for " + s.getCurrentCooldown() + " more turn(s).");
 						else
-							System.out.print("\n\tRequires " + (s.MANA_COST - player.getMana()) + " more mana.\n\tCooldown: " + s.max_cooldown + " turn(s).");
+							System.out.print("\n\tRequires " + (s.MANA_COST - main_player.getMana()) + " more mana.\n\tCooldown: " + s.max_cooldown + " turn(s).");
 					}
 				}
 				else if (s instanceof PassiveSpell)
@@ -537,8 +556,8 @@ public class Game
 	}
 	public static void displayHPandMana()
 	{
-		System.out.println(player + "'s HP: " + player.getHP() + "/" + player.getDefaultHP()
-		+  "   Mana: " + player.getMana() + "/" + player.getDefaultMana());
+		System.out.println(main_player + "'s HP: " + main_player.getHP() + "/" + main_player.getDefaultHP()
+		+  "   Mana: " + main_player.getMana() + "/" + main_player.getDefaultMana());
 		for(Monster m : monsters)
 			System.out.println(m + "'s HP: " + m.getHP() + "/" + m.getDefaultHP()
 			+  "   Mana: " + m.getMana() + "/" + m.getDefaultMana());
@@ -609,7 +628,7 @@ public class Game
 	{
 		System.out.println("Game over! Maybe next time :(");
 		System.out.println("Player Stats:"
-						 + "\n\tTotal damage dealt: " + player.getDamageDealt()
+						 + "\n\tTotal damage dealt: " + main_player.getDamageDealt()
 						 + "\n\tEnemies killed: " + enemies_killed);		
 	}
 	
@@ -617,7 +636,7 @@ public class Game
 	{
 		System.out.println("Congratulations!! You have defeated Roshan and are a true hero.");
 		System.out.println("Player Stats:"
-						 + "\n\tTotal damage dealt: " + player.getDamageDealt()
+						 + "\n\tTotal damage dealt: " + main_player.getDamageDealt()
 						 + "\n\tEnemies killed: " + enemies_killed);
 	}
 

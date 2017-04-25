@@ -10,7 +10,6 @@ public class Invoker extends Player
 {
 	Spell sun_strike, emp, ghost_walk, deafening_blast;
 	
-
 	public Invoker(String initName)
 	{
 		super(500, 275, 30, 50, 11, 4, .25, initName);
