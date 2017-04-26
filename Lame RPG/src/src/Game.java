@@ -48,8 +48,8 @@ public class Game
 	private static int continue_game = 2;
 	public  static Random rand = new Random();
 	private static ArrayList<Integer> options = new ArrayList<Integer>();
-	public  static ArrayList<Player> players = new ArrayList<Player>();
-	public  static ArrayList<Monster> monsters = new ArrayList<Monster>();
+	public  static ArrayList<Characters> players = new ArrayList<Characters>();
+	public  static ArrayList<Characters> monsters = new ArrayList<Characters>();
 	public  static ArrayList<Characters> characters = new ArrayList<Characters>();
 
 	public  static boolean game_over = false;

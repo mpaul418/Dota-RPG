@@ -239,27 +239,9 @@ public abstract class Player extends Characters
 				}
 				case 3:
 				{
-					//int buffs_to_view;
-
-					/*System.out.println("Whose buffs would you like to view?");
-					System.out.println("0: Go back.");
-					System.out.println("1: View all buffs.");
-					System.out.println("2: " + this + "'s buffs.");
-
-					for(int i = 0; i < Game.monsters.size(); i++)
-						System.out.println((i + 3) + ": " + Game.monsters.get(i) + "'s buffs.");
-
-					buffs_to_view = Game.getNumberFrom(0, Game.monsters.size() + 2);
-					if(buffs_to_view == 1)
-					{*/
 					this.printAllBuffs();
-					for(Monster m : Game.monsters)
+					for(Characters m : Game.monsters)
 						m.printAllBuffs();
-					/*}
-					else if(buffs_to_view == 2)
-						this.printAllBuffs();
-					else if(buffs_to_view > 2)
-						Game.monsters.get(buffs_to_view - 3).printAllBuffs();*/
 
 					break;
 				}

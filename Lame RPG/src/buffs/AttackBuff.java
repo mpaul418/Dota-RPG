@@ -45,6 +45,17 @@ public class AttackBuff extends Buff
 	{
 		return crit_modifier;
 	}
+	
+	public int getEnemiesCleaved()
+	{
+		return cleave_enemies_hit;
+	}
+	
+	public double getCleavePercentage()
+	{
+		return cleave_percentage;
+	}
+	
 	public boolean criticalHit()
 	{
 		if(crit_chance > 0)

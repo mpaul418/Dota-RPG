@@ -84,7 +84,8 @@ public abstract class Spell
 	{
 		CHARACTER.spellbook.add(this);
 		CHARACTER.unlearned_spells.remove(this);
-		System.out.println(CHARACTER + " just learned " + this + ".");
+		if(CHARACTER instanceof Player)
+			System.out.println(CHARACTER + " just learned " + this + ".");
 	}
 	
 	public void addToSpellbookNoNotifer()
@@ -104,7 +105,9 @@ public abstract class Spell
 		if(spell_level < max_spell_level)
 		{
 			spell_level++;
-			System.out.println(this + " is now level " + spell_level + ".\n");
+			if(CHARACTER instanceof Player)
+				System.out.println(this + " is now level " + spell_level + ".\n");
+			
 			return true;
 		}
 		else
