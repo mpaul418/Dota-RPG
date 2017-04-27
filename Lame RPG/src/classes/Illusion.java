@@ -8,7 +8,8 @@ import src.Game;
 
 public class Illusion extends Characters
 {
-
+	Buff life_timer;
+	
 	public Illusion(Characters target)
 	{
 		super(target.getDefaultHP(), target.getDefaultMana(), target.getDefaultDamage(), target.getDefaultAccuracy(), 
@@ -40,8 +41,7 @@ public class Illusion extends Characters
 			}
 		}
 		
-		@SuppressWarnings("unused")
-		Buff life_timer = new StatBuff("Illusion Duration", "Will die after 4 turns", this, 4, 4, 0 );
+		life_timer = new StatBuff("Illusion Duration", "Will die after 4 turns", this, 5, 4, 0 );
 	}
 
 	@Override
@@ -50,61 +50,71 @@ public class Illusion extends Characters
 		int choice, target;
 		boolean turn_taken = this.isStunned();
 		
-		if(turn_taken)
+		reduceCooldowns();
+		refreshDebuffs();
+		
+		if(buffs.contains(life_timer))
 		{
-			System.out.println(this + " is stunned.");
-			refreshStuns();
-		}
-
-		while(!turn_taken)
-		{
-			turn_taken = false;
-
-			Game.displayHPandMana();
-
-			System.out.println("What would you like to do?");
-			System.out.println("1: Attack"
-						   + "\n2: View Buffs and Debuffs"
-						   + "\n3: Hunker Down");
-			choice = Game.getNumberFrom(1, 3);
-
-			switch(choice)
+			if(turn_taken)
 			{
-				case 1:
+				System.out.println(this + " is stunned.");
+				refreshStuns();
+			}
+	
+			while(!turn_taken)
+			{
+				turn_taken = false;
+	
+				Game.displayHPandMana();
+	
+				System.out.println("What would you like to do?");
+				System.out.println("1: Attack"
+							   + "\n2: View Buffs and Debuffs"
+							   + "\n3: Hunker Down");
+				choice = Game.getNumberFrom(1, 3);
+	
+				switch(choice)
 				{
-					System.out.println("\nWhat would you like to attack?");
-					System.out.println("1: Go back.");
-					for(int i = 0; i < Game.monsters.size(); i++)
+					case 1:
 					{
-						System.out.println((i + 2) + ": " + Game.monsters.get(i)
-								+"(" + Game.monsters.get(i).getHP() + "/" + Game.monsters.get(i).getDefaultHP() + ")");
+						System.out.println("\nWhat would you like to attack?");
+						System.out.println("1: Go back.");
+						for(int i = 0; i < Game.monsters.size(); i++)
+						{
+							System.out.println((i + 2) + ": " + Game.monsters.get(i)
+									+"(" + Game.monsters.get(i).getHP() + "/" + Game.monsters.get(i).getDefaultHP() + ")");
+						}
+						
+						target = Game.getNumberFrom(1, Game.monsters.size() + 1);
+						if(target > 1)
+						{
+							attack(Game.monsters.get(target - 2));
+							turn_taken = true;
+						}
+						
+						break;
 					}
-					
-					target = Game.getNumberFrom(1, Game.monsters.size() + 1);
-					if(target > 1)
+					case 2:
 					{
-						attack(Game.monsters.get(target - 2));
+						this.printAllBuffs();
+						for(Characters m : Game.monsters)
+							m.printAllBuffs();
+	
+						break;
+					}
+					case 3:
+					{
+						hunkerDown();
 						turn_taken = true;
+						
+						break;
 					}
-					
-					break;
-				}
-				case 2:
-				{
-					this.printAllBuffs();
-					for(Characters m : Game.monsters)
-						m.printAllBuffs();
-
-					break;
-				}
-				case 3:
-				{
-					hunkerDown();
-					turn_taken = true;
-					
-					break;
 				}
 			}
+		}
+		else
+		{
+			die();
 		}
 	}
 }

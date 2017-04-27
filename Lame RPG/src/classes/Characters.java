@@ -417,7 +417,7 @@ public abstract class Characters
 			amount = r.nextInt(21 - (5 * hunker_downs_used)) + 10;
 		else
 			amount = 10;
-		this.buffs.add(new StatBuff("Hunker Down", "Defense increased by " + amount, this, 2, 3, amount));
+		new StatBuff("Hunker Down", "Defense increased by " + amount, this, 2, 3, amount);
 		System.out.println(this.getName() + " hunkered down, increasing its defense by " + amount + " for 2 turns.\n");
 	}
 	

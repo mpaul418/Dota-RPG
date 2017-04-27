@@ -1,14 +1,40 @@
 package spells;
 
 import classes.Characters;
+import classes.Illusion;
 
 public class MantaStyle extends ActiveSpell
 {
-
-	public MantaStyle(String tempname, String dsc, int manacost, int level_rq, int cd, Characters c, boolean targetable)
+	int illusions_created = 1;
+	
+	public MantaStyle(Characters c)
 	{
-		super(tempname, dsc, manacost, level_rq, cd, c, targetable);
-		// TODO Auto-generated constructor stub
+		super("Manta Style", "Create 1/2/3/4 illusion(s) of yourself that expire in 4 turns", 15, 1, 7, c, false); 
 	}
 
+	@Override
+	public void cast()
+	{
+		this.beforeSpellCast();
+		this.castWithoutTargetMessage();
+		
+		for(int i = 1; i <= illusions_created; i++)
+		{
+			new Illusion(CHARACTER);
+		}
+		System.out.println();
+	}
+	
+	@Override
+	public boolean levelUp()
+	{
+		boolean level_up = super.levelUp();
+		
+		if(level_up)
+		{
+			illusions_created++;
+		}
+		
+		return level_up;
+	}
 }

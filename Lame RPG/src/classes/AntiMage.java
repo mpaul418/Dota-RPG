@@ -4,18 +4,18 @@ import spells.Blink;
 import spells.ManaBreak;
 import spells.ManaVoid;
 import spells.Spell;
-import spells.SpellShield;
+import spells.MantaStyle;
 
 public class AntiMage extends Player
 {
-	Spell mana_break, blink, spell_shield, mana_void; 
+	Spell mana_break, blink, manta_style, mana_void; 
 	
 	public AntiMage(String initName)
 	{
 		super(675, 60, 34, 60, 14, 1, 0.0, initName);
 		mana_break = new ManaBreak(this);
 		blink = new Blink(this);
-		spell_shield = new SpellShield(this);
+		manta_style = new MantaStyle(this);
 		mana_void = new ManaVoid(this);
 	}
 	
@@ -24,7 +24,7 @@ public class AntiMage extends Player
 		super(nHP, nMana, nDmg, nAcc, nDfs, 1, nMgDef, initName);
 		mana_break = new ManaBreak(this);
 		blink = new Blink(this);
-		spell_shield = new SpellShield(this);
+		manta_style = new MantaStyle(this);
 		mana_void = new ManaVoid(this);
 	}
 	

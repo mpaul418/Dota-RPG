@@ -129,7 +129,7 @@ public abstract class Player extends Characters
 	}
 	
 	@Override
-	public void takeTurn() //TODO fix error where game prints learning 3 of AM's spells on first two turns and when spell is cast
+	public void takeTurn()
 	{
 		int choice, target;
 		boolean turn_taken = this.isStunned();
@@ -143,9 +143,14 @@ public abstract class Player extends Characters
 		while(!turn_taken)
 		{
 			turn_taken = false;
+			
+			reduceCooldowns();
+			refreshDebuffs();
 
 			Game.displayHPandMana();
 
+			System.out.println("It is " + this + "'s turn.\n");
+			
 			System.out.println("What would you like to do?");
 			System.out.println("1: Attack"
 						   + "\n2: Abilities"
@@ -258,7 +263,9 @@ public abstract class Player extends Characters
 	public void die()
 	{
 		super.die();
-		Game.game_over = true;
+		Game.players.remove(this);
+		if(this == Game.main_player)
+			Game.game_over = true;
 	}
 
 	public void restoreToFull()

@@ -308,23 +308,15 @@ public class Game
 			for(int i = 0; i < players.size(); i++)
 			{
 				if(!battleOver())
-				{
-					players.get(i).reduceCooldowns();
-					players.get(i).refreshDebuffs();
 					players.get(i).takeTurn();
-				}
 			}
 			
 			checkForDeaths();
-			
+
 			for(int i = 0; i < monsters.size(); i++)
 			{
 				if(!battleOver())
-				{
-					monsters.get(i).reduceCooldowns();
-					monsters.get(i).refreshDebuffs();
 					monsters.get(i).takeTurn();
-				}
 			}
 			
 			checkForDeaths();	
@@ -510,8 +502,6 @@ public class Game
 				removed_characters.add(c);
 		for(Characters c : removed_characters)
 			c.die();
-		
-		new AntiMage("Me");
 	}
 
 	private static boolean battleOver()
@@ -556,11 +546,13 @@ public class Game
 	}
 	public static void displayHPandMana()
 	{
-		System.out.println(main_player + "'s HP: " + main_player.getHP() + "/" + main_player.getDefaultHP()
-		+  "   Mana: " + main_player.getMana() + "/" + main_player.getDefaultMana());
+		for(Characters p : players)
+			System.out.println(p + "'s HP: " + p.getHP() + "/" + p.getDefaultHP()
+			+  "   Mana: " + p.getMana() + "/" + p.getDefaultMana());
 		for(Characters m : monsters)
 			System.out.println(m + "'s HP: " + m.getHP() + "/" + m.getDefaultHP()
 			+  "   Mana: " + m.getMana() + "/" + m.getDefaultMana());
+		
 		System.out.println();
 	}
 

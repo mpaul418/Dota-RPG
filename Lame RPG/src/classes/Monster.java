@@ -35,13 +35,14 @@ public class Monster extends Characters
 	@Override
 	public void takeTurn()
 	{
-		// reduceCooldowns();
+		reduceCooldowns();
+		refreshDebuffs();
 		
 		if(!this.isStunned())
 		{
 			int temp = rand.nextInt(100) + 1;
 			if(temp > 50) // 50% chance
-				attack(Game.main_player);
+				attack(Game.players.get(rand.nextInt(Game.players.size())));		// attacks a random player
 			else if(temp > 15) // 35% chance
 			{
 				if(!allSpellsUncastable())
@@ -66,7 +67,7 @@ public class Monster extends Characters
 						castable_spells.remove(0);
 				}
 				else
-					attack(Game.main_player);
+					attack(Game.players.get(rand.nextInt(Game.players.size())));		// attacks a random player
 			}
 			else // also 15% chance
 				hunkerDown();
@@ -76,8 +77,6 @@ public class Monster extends Characters
 			System.out.println(this + " is stunned.");
 			refreshStuns();
 		}
-		
-		// refreshDebuffs();
 	}
 	
 	@Override
