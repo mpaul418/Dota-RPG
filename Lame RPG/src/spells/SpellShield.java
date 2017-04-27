@@ -15,8 +15,8 @@ public class SpellShield extends PassiveSpell //TODO rework this spell to actual
 	public void addToSpellbook()
 	{
 		super.addToSpellbook();
-		this.CHARACTER.buffs.add(new StatBuff(this.NAME, "Gaining 22% magic resist.",
-				this.CHARACTER, -1, 4, 0.33));
+		new StatBuff(this.NAME, "Gaining 22% magic resist.",
+				this.CHARACTER, -1, 4, 0.33);
 	}
 
 	@Override
@@ -33,14 +33,14 @@ public class SpellShield extends PassiveSpell //TODO rework this spell to actual
 					((StatBuff) CHARACTER.buffs.get(i)).deletThisNoNotifier();
 					
 					if(spell_level == 2)
-						this.CHARACTER.buffs.add(new StatBuff(this.NAME, "Gaining 44% magic resist.",
-								this.CHARACTER, -1, 4, 0.44));
+						new StatBuff(this.NAME, "Gaining 44% magic resist.",
+								this.CHARACTER, -1, 4, 0.44);
 					else if(spell_level == 3)
-						this.CHARACTER.buffs.add(new StatBuff(this.NAME, "Gaining 66% magic resist.",
-								this.CHARACTER, -1, 4, 0.55));
+						new StatBuff(this.NAME, "Gaining 66% magic resist.",
+								this.CHARACTER, -1, 4, 0.55);
 					else if(spell_level == 4)
-						this.CHARACTER.buffs.add(new StatBuff(this.NAME, "Gaining 66% magic resist.",
-								this.CHARACTER, -1, 4, 0.66));
+						new StatBuff(this.NAME, "Gaining 66% magic resist.",
+								this.CHARACTER, -1, 4, 0.66);
 					
 					break;
 				}

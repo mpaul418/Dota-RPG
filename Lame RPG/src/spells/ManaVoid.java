@@ -1,7 +1,6 @@
 package spells;
 
 import classes.Characters;
-import classes.Monster;
 import src.Game;
 
 public class ManaVoid extends ActiveSpell
@@ -22,7 +21,7 @@ public class ManaVoid extends ActiveSpell
 		this.beforeSpellCast();
 		this.castWithTargetMessage(target);
 	
-		for(Monster m : Game.monsters)
+		for(Characters m : Game.monsters)
 		{
 			if(spell_level == 1)
 				CHARACTER.dealMagicDamage((int) Math.round(0.6 * mana_missing), m);

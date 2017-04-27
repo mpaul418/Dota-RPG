@@ -18,7 +18,7 @@ public class PhantomStrike extends ActiveSpell
 		this.beforeSpellCast();
 		this.castWithTargetMessage(target);
 		
-		this.CHARACTER.buffs.add(new StatBuff(NAME, "Gaining " + defense_increase + " bonus defense.", CHARACTER, 2, 3, defense_increase));
+		new StatBuff(NAME, "Gaining " + defense_increase + " bonus defense.", CHARACTER, 2, 3, defense_increase);
 		System.out.println(this.CHARACTER + "'s defense increased by " + defense_increase + ".");
 		this.CHARACTER.attack(target);
 	}

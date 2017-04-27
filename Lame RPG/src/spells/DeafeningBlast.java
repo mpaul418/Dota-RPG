@@ -2,7 +2,6 @@ package spells;
 
 import buffs.StatBuff;
 import classes.Characters;
-import classes.Monster;
 import src.Game;
 
 public class DeafeningBlast extends ActiveSpell
@@ -22,11 +21,11 @@ public class DeafeningBlast extends ActiveSpell
 		this.beforeSpellCast();
 		this.castWithoutTargetMessage();
 		
-		for(Monster m : Game.monsters)
+		for(Characters m : Game.monsters)
 		{
 			this.CHARACTER.dealMagicDamage(magic_damage, m);
 			
-			m.buffs.add(new StatBuff(this.NAME, "Accuracy reduced by " + accuracy_reduction, m, 3, 2, -accuracy_reduction));
+			new StatBuff(this.NAME, "Accuracy reduced by " + accuracy_reduction, m, 3, 2, -accuracy_reduction);
 			System.out.println(m + "'s accuracy was reduced by " + accuracy_reduction + ".");
 		}
 		

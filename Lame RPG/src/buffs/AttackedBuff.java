@@ -14,6 +14,11 @@ public class AttackedBuff extends Buff
 		super(n, dsc, c, d);
 		dodge_chance = dodge_c;
 	}
+	
+	public int getDodgeChance()
+	{
+		return dodge_chance;
+	}
 
 	public boolean attackEvaded()
 	{

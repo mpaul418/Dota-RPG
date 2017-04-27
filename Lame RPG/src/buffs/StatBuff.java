@@ -13,7 +13,7 @@ public class StatBuff extends Buff
 		stat = s;
 		modifier_amount = a;
 		modified_amount = modifier_amount;
-		int_modifier = (int)modifier_amount;
+		int_modifier = (int) Math.round(modifier_amount);
 		
 		switch(stat)
 		{
@@ -38,6 +38,21 @@ public class StatBuff extends Buff
 				break;
 			}
 		}
+	}
+	
+	public int getStat()
+	{
+		return stat;
+	}
+	
+	public int getIntModifier()
+	{
+		return int_modifier;
+	}
+	
+	public double getDoubleModifier()
+	{
+		return modified_amount;
 	}
 	
 	@Override

@@ -1,7 +1,6 @@
 package spells;
 
 import classes.Characters;
-import classes.Monster;
 import src.Game;
 
 public class EMP extends ActiveSpell
@@ -23,7 +22,7 @@ public class EMP extends ActiveSpell
 		this.beforeSpellCast();
 		this.castWithoutTargetMessage();
 		
-		for(Monster m : Game.monsters)
+		for(Characters m : Game.monsters)
 		{
 			mana_burned = Math.abs(m.changeMana(-mana_burn));
 			mana_drained += mana_burned;

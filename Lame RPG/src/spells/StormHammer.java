@@ -2,7 +2,6 @@ package spells;
 
 import buffs.StunBuff;
 import classes.Characters;
-import classes.Monster;
 import src.Game;
 
 public class StormHammer extends ActiveSpell
@@ -23,7 +22,7 @@ public class StormHammer extends ActiveSpell
 		if(spell_level == 1)
 		{
 			CHARACTER.dealMagicDamage(spell_damage, target);
-			target.buffs.add(new StunBuff(this.NAME, "Storm Hammer Stun", target, 2));
+			new StunBuff(this.NAME, "Storm Hammer Stun", target, 2);
 		}
 		else if(spell_level == 2)
 		{
@@ -40,29 +39,29 @@ public class StormHammer extends ActiveSpell
 			if(index == 0) // the storm hammer should hit the target and the monster directly to the left(right if it is at index 0)
 			{
 				CHARACTER.dealMagicDamage(spell_damage, target);
-				target.buffs.add(new StunBuff(this.NAME, "Storm Hammer Stun", target, 2));
+				new StunBuff(this.NAME, "Storm Hammer Stun", target, 2);
 
 				if(Game.monsters.get(1) != null)
 				{
 					CHARACTER.dealMagicDamage(spell_damage, Game.monsters.get(1));
-					Game.monsters.get(1).buffs.add(new StunBuff(this.NAME, "Storm Hammer Stun", Game.monsters.get(1), 2));
+					new StunBuff(this.NAME, "Storm Hammer Stun", Game.monsters.get(1), 2);
 				}
 			}
 			else if(index > 0)
 			{
 				CHARACTER.dealMagicDamage(spell_damage, Game.monsters.get(index - 1));
-				Game.monsters.get(index - 1).buffs.add(new StunBuff(this.NAME, "Storm Hammer Stun", Game.monsters.get(0), 2));
+				new StunBuff(this.NAME, "Storm Hammer Stun", Game.monsters.get(index - 1), 2);
 				
 				CHARACTER.dealMagicDamage(spell_damage, target);
-				target.buffs.add(new StunBuff(this.NAME, "Storm Hammer Stun", target, 2));
+				new StunBuff(this.NAME, "Storm Hammer Stun", target, 2);
 
 			}
 		}
 		else if(spell_level >= 3)
-			for(Monster m : Game.monsters)
+			for(Characters m : Game.monsters)
 			{
 				CHARACTER.dealMagicDamage(spell_damage, m);
-				m.buffs.add(new StunBuff(this.NAME, "Storm Hammer Stun", m, 2));
+				new StunBuff(this.NAME, "Storm Hammer Stun", m, 2);
 			}
 	}
 	

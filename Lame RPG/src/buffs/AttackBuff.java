@@ -2,9 +2,7 @@ package buffs;
 
 import java.util.ArrayList;
 import java.util.Random;
-
 import classes.Characters;
-import classes.Monster;
 import src.Game;
 
 public class AttackBuff extends Buff
@@ -107,9 +105,9 @@ public class AttackBuff extends Buff
 		{
 			int i = 0;
 			
-			ArrayList<Monster> cleave_targets = new ArrayList<Monster>();
+			ArrayList<Characters> cleave_targets = new ArrayList<Characters>();
 			
-			for(Monster m : Game.monsters)
+			for(Characters m : Game.monsters)
 			{
 				if(m != c)
 					cleave_targets.add(m);

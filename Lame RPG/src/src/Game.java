@@ -14,7 +14,6 @@ import classes.HillTrollPriest;
 import classes.Invoker;
 import classes.Kobold;
 import classes.MeleeCreep;
-import classes.Monster;
 import classes.PhantomAssassin;
 import classes.Player;
 import classes.RangedCreep;
@@ -25,6 +24,7 @@ import classes.SatyrTormenter;
 import classes.Sven;
 import classes.Treant;
 import classes.VhoulAssassin;
+
 import spells.ActiveSpell;
 import spells.PassiveSpell;
 import spells.Spell;
@@ -558,7 +558,7 @@ public class Game
 	{
 		System.out.println(main_player + "'s HP: " + main_player.getHP() + "/" + main_player.getDefaultHP()
 		+  "   Mana: " + main_player.getMana() + "/" + main_player.getDefaultMana());
-		for(Monster m : monsters)
+		for(Characters m : monsters)
 			System.out.println(m + "'s HP: " + m.getHP() + "/" + m.getDefaultHP()
 			+  "   Mana: " + m.getMana() + "/" + m.getDefaultMana());
 		System.out.println();

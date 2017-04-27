@@ -25,27 +25,86 @@ public class Illusion extends Characters
 			{
 				if(b instanceof AttackBuff)
 				{
-					this.buffs.add(new AttackBuff(b.getName(), b.getDescription(), this, -1, ((AttackBuff) b).getManaBurn(), 
+					new AttackBuff(b.getName(), b.getDescription(), this, -1, ((AttackBuff) b).getManaBurn(), 
 							((AttackBuff) b).getManaBurnMultiplier(), ((AttackBuff) b).getCritChance(), ((AttackBuff) b).getCritModifier(),
-							((AttackBuff) b).getEnemiesCleaved(), ((AttackBuff) b).getCleavePercentage()));
+							((AttackBuff) b).getEnemiesCleaved(), ((AttackBuff) b).getCleavePercentage());
 				}
-				else if(b instanceof AttackedBuff) 	//TODO
+				else if(b instanceof AttackedBuff)
 				{
-					
+					new AttackedBuff(b.getName(), b.getDescription(), this, -1, ((AttackedBuff) b).getDodgeChance());
 				}
-				else if(b instanceof StatBuff)		//TODO
+				else if(b instanceof StatBuff)
 				{
-					
+					new StatBuff(b.getName(), b.getDescription(), this, -1, ((StatBuff) b).getStat(), ((StatBuff) b).getDoubleModifier());
 				}
 			}
 		}
+		
+		@SuppressWarnings("unused")
+		Buff life_timer = new StatBuff("Illusion Duration", "Will die after 4 turns", this, 4, 4, 0 );
 	}
 
 	@Override
 	public void takeTurn()
 	{
-		// TODO Auto-generated method stub
+		int choice, target;
+		boolean turn_taken = this.isStunned();
+		
+		if(turn_taken)
+		{
+			System.out.println(this + " is stunned.");
+			refreshStuns();
+		}
 
+		while(!turn_taken)
+		{
+			turn_taken = false;
+
+			Game.displayHPandMana();
+
+			System.out.println("What would you like to do?");
+			System.out.println("1: Attack"
+						   + "\n2: View Buffs and Debuffs"
+						   + "\n3: Hunker Down");
+			choice = Game.getNumberFrom(1, 3);
+
+			switch(choice)
+			{
+				case 1:
+				{
+					System.out.println("\nWhat would you like to attack?");
+					System.out.println("1: Go back.");
+					for(int i = 0; i < Game.monsters.size(); i++)
+					{
+						System.out.println((i + 2) + ": " + Game.monsters.get(i)
+								+"(" + Game.monsters.get(i).getHP() + "/" + Game.monsters.get(i).getDefaultHP() + ")");
+					}
+					
+					target = Game.getNumberFrom(1, Game.monsters.size() + 1);
+					if(target > 1)
+					{
+						attack(Game.monsters.get(target - 2));
+						turn_taken = true;
+					}
+					
+					break;
+				}
+				case 2:
+				{
+					this.printAllBuffs();
+					for(Characters m : Game.monsters)
+						m.printAllBuffs();
+
+					break;
+				}
+				case 3:
+				{
+					hunkerDown();
+					turn_taken = true;
+					
+					break;
+				}
+			}
+		}
 	}
-
 }

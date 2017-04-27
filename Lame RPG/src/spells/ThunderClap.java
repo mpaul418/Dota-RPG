@@ -20,6 +20,6 @@ public class ThunderClap extends ActiveSpell
 		this.castWithTargetMessage(target);
 		
 		CHARACTER.dealMagicDamage(25, target);
-		target.buffs.add(new StatBuff(this.NAME, "Accuracy reduced by 20", target, 3, 2, -20));
+		new StatBuff(this.NAME, "Accuracy reduced by 20", target, 3, 2, -20);
 	}
 }

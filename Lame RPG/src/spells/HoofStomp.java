@@ -20,6 +20,6 @@ public class HoofStomp extends ActiveSpell
 		this.castWithTargetMessage(target);
 		
 		CHARACTER.dealMagicDamage(15, target);
-		target.buffs.add(new StunBuff(this.NAME, "Stunned.", target, 2));
+		new StunBuff(this.NAME, "Stunned.", target, 2);
 	}
 }

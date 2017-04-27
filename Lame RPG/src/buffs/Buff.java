@@ -20,6 +20,8 @@ public abstract class Buff
 			//duration++;		 	// the 1 is to account for the turn spent casting the buff
 		
 		//TODO maybe decrease buff durations at start of turn?? or maybe stat buffs should get their durations increased by 1
+		
+		CHARACTER.buffs.add(this);
 	}
 	
 	public String getName()

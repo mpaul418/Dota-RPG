@@ -15,8 +15,8 @@ public class Blur extends PassiveSpell
 	public void addToSpellbook()
 	{
 		super.addToSpellbook();
-		this.CHARACTER.buffs.add(new AttackedBuff(this.NAME, "Gaining 20% evasion.",
-				this.CHARACTER, -1, 20));
+		new AttackedBuff(this.NAME, "Gaining 20% evasion.",
+				this.CHARACTER, -1, 20);
 	}
 
 	@Override
@@ -33,14 +33,14 @@ public class Blur extends PassiveSpell
 					CHARACTER.buffs.get(i).deletThisNoNotifier();
 					
 					if(spell_level == 2)
-						this.CHARACTER.buffs.add(new AttackedBuff(this.NAME, "Gaining 30% evasion.",
-								this.CHARACTER, -1, 30));
+						new AttackedBuff(this.NAME, "Gaining 30% evasion.",
+								this.CHARACTER, -1, 30);
 					else if(spell_level == 3)
-						this.CHARACTER.buffs.add(new AttackedBuff(this.NAME, "Gaining 40% evasion.",
-								this.CHARACTER, -1, 40));
+						new AttackedBuff(this.NAME, "Gaining 40% evasion.",
+								this.CHARACTER, -1, 40);
 					else if(spell_level == 4)
-						this.CHARACTER.buffs.add(new AttackedBuff(this.NAME, "Gaining 50% evasion.",
-								this.CHARACTER, -1, 50));
+						new AttackedBuff(this.NAME, "Gaining 50% evasion.",
+								this.CHARACTER, -1, 50);
 
 					break;
 				}

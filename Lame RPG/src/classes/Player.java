@@ -129,12 +129,10 @@ public abstract class Player extends Characters
 	}
 	
 	@Override
-	public void takeTurn()
+	public void takeTurn() //TODO fix error where game prints learning 3 of AM's spells on first two turns and when spell is cast
 	{
 		int choice, target;
 		boolean turn_taken = this.isStunned();
-		
-		// reduceCooldowns();
 		
 		if(turn_taken)
 		{
@@ -254,8 +252,6 @@ public abstract class Player extends Characters
 				}
 			}
 		}
-		
-		// refreshDebuffs();
 	}
 	
 	@Override

@@ -2,7 +2,6 @@ package spells;
 
 import buffs.StatBuff;
 import classes.Characters;
-import classes.Monster;
 import src.Game;
 
 public class Warcry extends ActiveSpell
@@ -22,11 +21,11 @@ public class Warcry extends ActiveSpell
 		this.beforeSpellCast();
 		this.castWithoutTargetMessage();
 		
-		this.CHARACTER.buffs.add(new StatBuff(NAME, "Defense increased by " + defense_increase, CHARACTER, 3, 3, defense_increase));
+		new StatBuff(NAME, "Defense increased by " + defense_increase, CHARACTER, 3, 3, defense_increase);
 		System.out.println(this.CHARACTER + "'s defense increased by " + defense_increase + ".");
-		for(Monster m : Game.monsters)
+		for(Characters m : Game.monsters)
 		{
-			m.buffs.add(new StatBuff(NAME, "Defense decreased by " + defense_decrease, m, 3, 3, -defense_decrease));
+			new StatBuff(NAME, "Defense decreased by " + defense_decrease, m, 3, 3, -defense_decrease);
 			System.out.println(m + "'s defense was decreased by " + defense_decrease + ".");
 		}
 		System.out.println();
