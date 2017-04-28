@@ -10,7 +10,7 @@ public class Blink extends ActiveSpell
 	
 	public Blink(Characters c)
 	{
-		super("Blink", "Teleport and disorient your enemies, reducing your enemies' defence by 12/16/20/24 for 4 turns", 10, 1, 6, c, false);
+		super("Blink", "Teleport and disorient your enemies, reducing your enemies' defence by 12/16/20/24 for 3 turns", 10, 1, 5, c, false);
 	}
 
 	@Override

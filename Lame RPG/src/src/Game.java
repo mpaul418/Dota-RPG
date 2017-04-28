@@ -290,10 +290,10 @@ public class Game
 	{
 		turn_number = 0;
 		
-		if(!characters.contains(main_player)) 	//TODO placeholder- i think this is unnecessary because player should always be in array but just in case
+		if(!characters.contains(main_player))
 			characters.add(main_player);
 		
-		if(!players.contains(main_player))		//TODO placeholder- i think this is unnecessary because player should always be in array but just in case
+		if(!players.contains(main_player))
 			players.add(main_player);
 	
 		addMonsters();	// spawns monsters- if level > 1, spawns one monster of player's level and the rest are random monsters from lower levels
@@ -307,8 +307,16 @@ public class Game
 			
 			for(int i = 0; i < players.size(); i++)
 			{
+				Characters current_player = players.get(i);
+				
 				if(!battleOver())
 					players.get(i).takeTurn();
+				
+				if(i >= players.size())		// If the character dies on its turn (like an illusion timing out), the array position is not modified
+					i--; //FIXME above line causing out of bounds exception
+				else if(current_player != players.get(i))
+					i--;
+					
 			}
 			
 			checkForDeaths();
@@ -500,6 +508,13 @@ public class Game
 		for(Characters c : characters)
 			if(!c.isAlive())
 				removed_characters.add(c);
+		for(Characters c : players)
+			if(!c.isAlive())
+				removed_characters.add(c);
+		for(Characters c : monsters)
+			if(!c.isAlive())
+				removed_characters.add(c);
+		
 		for(Characters c : removed_characters)
 			c.die();
 	}

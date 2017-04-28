@@ -5,11 +5,11 @@ import classes.Illusion;
 
 public class MantaStyle extends ActiveSpell
 {
-	int illusions_created = 1;
+	int illusion_duration = 2;
 	
 	public MantaStyle(Characters c)
 	{
-		super("Manta Style", "Create 1/2/3/4 illusion(s) of yourself that expire in 4 turns", 15, 1, 7, c, false); 
+		super("Manta Style", "Create 2 illusions of yourself that expire in 2/3/4/5 turns", 20, 1, 7, c, false); 
 	}
 
 	@Override
@@ -18,9 +18,9 @@ public class MantaStyle extends ActiveSpell
 		this.beforeSpellCast();
 		this.castWithoutTargetMessage();
 		
-		for(int i = 1; i <= illusions_created; i++)
+		for(int i = 1; i <= 2; i++)
 		{
-			new Illusion(CHARACTER);
+			new Illusion(CHARACTER, illusion_duration);
 		}
 		System.out.println();
 	}
@@ -32,7 +32,7 @@ public class MantaStyle extends ActiveSpell
 		
 		if(level_up)
 		{
-			illusions_created++;
+			illusion_duration++;
 		}
 		
 		return level_up;

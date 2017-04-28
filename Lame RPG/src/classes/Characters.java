@@ -117,6 +117,14 @@ public abstract class Characters
 	{
 		name = s;
 	}
+	public void setHP(int temp)
+	{
+		HP = temp;
+	}
+	public void setMana(int temp)
+	{
+		mana = temp;
+	}
 	public int changeMana(int amount)
 	{
 		int amount_changed = amount;

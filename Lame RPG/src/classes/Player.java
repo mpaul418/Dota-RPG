@@ -242,7 +242,8 @@ public abstract class Player extends Characters
 				}
 				case 3:
 				{
-					this.printAllBuffs();
+					for(Characters c : Game.players)
+						c.printAllBuffs();
 					for(Characters m : Game.monsters)
 						m.printAllBuffs();
 
