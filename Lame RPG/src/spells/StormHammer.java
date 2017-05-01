@@ -36,7 +36,7 @@ public class StormHammer extends ActiveSpell
 				}
 			}
 			
-			if(index == 0) // the storm hammer should hit the target and the monster directly to the left(right if it is at index 0)
+			if(index == 0) // the storm hammer should hit the target and the monster directly to the left (right if it is at index 0)
 			{
 				CHARACTER.dealMagicDamage(spell_damage, target);
 				new StunBuff(this.NAME, "Storm Hammer Stun", target, 2);

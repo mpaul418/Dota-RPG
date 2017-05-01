@@ -5,12 +5,12 @@ import src.Game;
 
 public class ManaVoid extends ActiveSpell
 {
-	double mana_multiplier = 0.8;
+	double mana_multiplier = 0.9;
 	
 	public ManaVoid(Characters c)
 	{
 		super("Mana Void", "After bringing enemies to their knees, Anti-Mage punishes them for their use of the arcane arts. "
-			+ "Deal 0.8/1.0/1.2 magic damage to all enemies for each of an enemy's missing mana", 40, 2, 10, c, true);
+			+ "Deal 0.9/1.2/1.5 magic damage to all enemies for each of an enemy's missing mana", 40, 2, 10, c, true);
 		max_spell_level = 3;
 	}
 
@@ -35,7 +35,7 @@ public class ManaVoid extends ActiveSpell
 		boolean level_up = super.levelUp();
 		
 		if(level_up)
-			mana_multiplier += 0.2;
+			mana_multiplier += 0.3;
 		
 		return level_up;
 	}

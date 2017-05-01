@@ -10,7 +10,7 @@ public class EMP extends ActiveSpell
 	
 	public EMP(Characters c)
 	{
-		super("EMP", "Drain 50/80/110/140 mana of all enemies, dealing magic damage to each enemy equal to 50% of mana drained and restoring mana to you equal to 25% of the total mana drained.", 30, 1, 5, c, false);
+		super("EMP", "Drain 50/80/110/140 mana from each enemy, dealing magic damage to each enemy equal to 50% of mana drained and restoring mana to you equal to 25% of the total mana drained.", 30, 1, 5, c, false);
 	}
 
 	@Override

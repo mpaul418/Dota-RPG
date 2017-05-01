@@ -12,7 +12,7 @@ public class Invoker extends Player
 	
 	public Invoker(String initName)
 	{
-		super(500, 275, 30, 50, 11, 4, .25, initName);
+		super(575, 275, 30, 50, 11, 4, .25, initName);
 		sun_strike = new SunStrike(this);
 		emp = new EMP(this);
 		ghost_walk = new GhostWalk(this);

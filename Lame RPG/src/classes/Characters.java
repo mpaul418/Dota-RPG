@@ -36,8 +36,8 @@ public abstract class Characters
 		defaultMana = initMana;
 		mana = initMana;
 		level = 1;
-		defaultDamage = initDmg;			//note- if more default stats 
-											//should be able to be changed, add numbers for all + change in buff class
+		defaultDamage = initDmg;			
+		
 		damage = initDmg;					//buff- 1
 		defaultAccuracy = initAcc;
 		accuracy = initAcc;					//buff- 2

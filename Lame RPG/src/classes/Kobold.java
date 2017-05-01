@@ -5,7 +5,7 @@ public class Kobold extends Monster
 
 	public Kobold()
 	{
-		super(120, 0, 20, 70, 5, 0.05, "Kobold", 1, 15);
+		super(120, 20, 20, 70, 5, 0.05, "Kobold", 1, 15);
 	}
 
 	public Kobold(int initHP, int initMana, int initDmg, int initAcc, int initDef, double initMagDef, String initName,

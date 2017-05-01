@@ -12,7 +12,7 @@ public class PhantomAssassin extends Player
 	
 	public PhantomAssassin(String initName)
 	{
-		super(600, 75, 45, 65, 12, 3, .15, initName);
+		super(550, 80, 45, 65, 12, 3, .15, initName);
 		stifling_dagger = new StiflingDagger(this);
 		phantom_strike = new PhantomStrike(this);
 		blur = new Blur(this);

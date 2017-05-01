@@ -20,7 +20,7 @@ public class Illusion extends Characters
 	public Illusion(Characters target)
 	{
 		super(target.getHP(), target.getMana(), (int) Math.round(0.33 * target.getDefaultDamage()), target.getDefaultAccuracy(), 
-				0, 0, target.getName() + " Illusion");
+				100, -0.5, target.getName() + " Illusion");
 		
 		life_duration = 5;		// should be amount of turns + 1 to account for being spawned
 		

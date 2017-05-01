@@ -5,11 +5,11 @@ import classes.Characters;
 
 public class PhantomStrike extends ActiveSpell
 {
-	int defense_increase = 4;
+	int defense_increase = 10;
 	
 	public PhantomStrike(Characters c)
 	{
-		super("Phantom Strike", "Jump towards an enemy, attacking them and gaining 4/12/20/28 bonus defense for two turns", 30, 1, 5, c, true);
+		super("Phantom Strike", "Jump towards an enemy, attacking them and gaining 10/18/26/34 bonus defense for two turns", 20, 1, 5, c, true);
 	}
 
 	@Override

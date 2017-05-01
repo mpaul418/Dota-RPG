@@ -14,6 +14,7 @@ import classes.HillTrollPriest;
 import classes.Invoker;
 import classes.Kobold;
 import classes.MeleeCreep;
+import classes.Monster;
 import classes.PhantomAssassin;
 import classes.Player;
 import classes.RangedCreep;
@@ -59,6 +60,23 @@ public class Game
 	{
 		do
 		{
+			System.out.println("$$$$$$$             $$$$$        $$$$$$$$$$$$$$$       $$$$$$");
+			System.out.println("$$$$$$$$          $$$$$$$$$      $$$$$$$$$$$$$$$      $$$$$$$$");
+			System.out.println("$$$   $$$        $$$     $$$           $$$           $$$    $$$");
+			System.out.println("$$$    $$$      $$$       $$$          $$$          $$$      $$$");
+			System.out.println("$$$     $$$    $$$         $$$         $$$         $$$        $$$");
+			System.out.println("$$$      $$$  $$$           $$$        $$$        $$$          $$$");
+			System.out.println("$$$      $$$  $$$           $$$        $$$        $$$$$$$$$$$$$$$$");
+			System.out.println("$$$      $$$  $$$           $$$        $$$        $$$          $$$");
+			System.out.println("$$$     $$$    $$$         $$$         $$$        $$$          $$$");
+			System.out.println("$$$    $$$      $$$       $$$          $$$        $$$          $$$");
+			System.out.println("$$$   $$$        $$$     $$$           $$$        $$$          $$$");
+			System.out.println("$$$$$$$$          $$$$$$$$$            $$$        $$$          $$$");
+			System.out.println("$$$$$$$             $$$$$              $$$        $$$          $$$"); //TODO add "RPG" to title
+			System.out.println();
+			System.out.println();
+			System.out.println();
+			
 			setName();
 			setHero();
 			makeDungeon();
@@ -313,7 +331,7 @@ public class Game
 					players.get(i).takeTurn();
 				
 				if(i >= players.size())		// If the character dies on its turn (like an illusion timing out), the array position is not modified
-					i--; //FIXME above line causing out of bounds exception
+					i--;
 				else if(current_player != players.get(i))
 					i--;
 					
@@ -508,15 +526,14 @@ public class Game
 		for(Characters c : characters)
 			if(!c.isAlive())
 				removed_characters.add(c);
-		for(Characters c : players)
-			if(!c.isAlive())
-				removed_characters.add(c);
-		for(Characters c : monsters)
-			if(!c.isAlive())
-				removed_characters.add(c);
 		
 		for(Characters c : removed_characters)
-			c.die();
+		{
+			if(c instanceof Monster)
+				((Monster) c).die();
+			else if(c instanceof Player)
+				((Player) c).die();
+		}
 	}
 
 	private static boolean battleOver()

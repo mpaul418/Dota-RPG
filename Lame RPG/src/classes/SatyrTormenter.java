@@ -5,7 +5,6 @@ import spells.Spell;
 
 public class SatyrTormenter extends Monster
 {
-
 	Spell shockwave;
 	
 	public SatyrTormenter()

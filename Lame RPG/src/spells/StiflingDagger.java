@@ -8,6 +8,7 @@ public class StiflingDagger extends ActiveSpell
 {
 	int base_damage = 4;
 	double damage_multiplier = 0.60;
+	Random r = new Random();
 	
 	public StiflingDagger(Characters c)
 	{
@@ -27,8 +28,6 @@ public class StiflingDagger extends ActiveSpell
 		for(Spell s : CHARACTER.spellbook)
 			if(s instanceof CoupDeGrace)
 			{
-				Random r = new Random();
-				
 				int crit_roll = r.nextInt(101);
 				if(crit_roll < 15)
 				{

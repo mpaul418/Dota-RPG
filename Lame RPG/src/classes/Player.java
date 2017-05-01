@@ -49,12 +49,12 @@ public abstract class Player extends Characters
 		
 		this.level++;
 		xp -= xp_level_rq; // starts your xp from 0 again every time you level up- ex. 105 xp --> 5 xp
-		xp_level_rq += ((25 * level) + (5 * (level - 1) * (level - 1))); // xp increases by 5(x - 1)^2 + 25x every level. 1:100, 2: 155, 3: 250, 4: 395, etc TODO i think this is not scaling correctly
+		xp_level_rq += ((25 * level) + (5 * (level - 1) * (level - 1))); // xp increases by 5(x - 1)^2 + 25x every level. 1:100, 2: 155, 3: 250, 4: 395, etc
 		
-		System.out.println("---------------------------------------------------\n\n" + this + " just leveled up!!"
+		System.out.println("---------------------------------------------------\n\n" + this + " just leveled up!!\n"
 				+  "\nHP increased by " + (int)Math.round(0.25 * defaultHP)
 				+ ".\nMana increased by " + (int)Math.round(0.25 * defaultMana)
-				+ ".\nDamage increased by " + (int)Math.round(0.25 * defaultDamage) + ".");
+				+ ".\nDamage increased by " + (int)Math.round(0.25 * defaultDamage) + ".\n");
 		
 		HP += (int)Math.round(0.25 * defaultHP);
 		mana += (int)Math.round(0.25 * defaultMana);
@@ -70,6 +70,7 @@ public abstract class Player extends Characters
 			if(this.level >= unlearned_spells.get(temp1).getLevelRequirement())
 			{
 				unlearned_spells.get(temp1).addToSpellbook();
+				System.out.println();
 			}
 			else
 				temp1++;
@@ -277,11 +278,11 @@ public abstract class Player extends Characters
 		
 		int i = 0;
 		int size = buffs.size();
-		while(i < size)		// removes all non-temporary buffs TODO come up with a way to do this that doesnt use buffs.size() twice
+		while(i < size)		// removes all non-temporary buffs
 		{
 			if(buffs.get(i).getDuration() > 0)
 			{
-				while(buffs.size() > 0 && buffs.get(i).getDuration() > 0)		//FIXME double check this
+				while(buffs.size() > 0 && buffs.get(i).getDuration() > 0)
 					buffs.get(i).decreaseDurationNoNotifier();
 				size--;
 			}
