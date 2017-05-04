@@ -32,7 +32,7 @@ public abstract class Spell
 			if(CHARACTER instanceof Player)
 				this.addToSpellbook();
 			else
-				this.addToSpellbookNoNotifer();
+				this.addToSpellbookNoNotifier();
 		}
 		else
 			CHARACTER.unlearned_spells.add(this);
@@ -84,11 +84,11 @@ public abstract class Spell
 	{
 		CHARACTER.spellbook.add(this);
 		CHARACTER.unlearned_spells.remove(this);
-		if(CHARACTER instanceof Player)
-			System.out.println(CHARACTER + " just learned " + this + ".");
+		
+		System.out.println(CHARACTER + " just learned " + this + ".");
 	}
 	
-	public void addToSpellbookNoNotifer()
+	public void addToSpellbookNoNotifier()
 	{
 		CHARACTER.spellbook.add(this);
 		CHARACTER.unlearned_spells.remove(this);

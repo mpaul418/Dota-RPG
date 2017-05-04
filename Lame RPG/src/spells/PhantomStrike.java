@@ -9,7 +9,7 @@ public class PhantomStrike extends ActiveSpell
 	
 	public PhantomStrike(Characters c)
 	{
-		super("Phantom Strike", "Jump towards an enemy, attacking them and gaining 10/18/26/34 bonus defense for two turns", 20, 1, 5, c, true);
+		super("Phantom Strike", "Jump towards an enemy, attacking them and gaining 10/22/34/46 bonus defense for two turns", 20, 1, 5, c, true);
 	}
 
 	@Override
@@ -29,7 +29,7 @@ public class PhantomStrike extends ActiveSpell
 		boolean level_up = super.levelUp();
 		
 		if(level_up)
-			defense_increase += 8;
+			defense_increase += 12;
 		return level_up;
 	}
 }

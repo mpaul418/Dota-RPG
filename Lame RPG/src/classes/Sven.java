@@ -12,7 +12,7 @@ public class Sven extends Player
 	
 	public Sven(String initName)
 	{
-		super(875, 50, 37, 60, 21, 2, .10, initName); 
+		super(875, 50, 75, 60, 21, 2, .10, initName); 
 		storm_hammer = new StormHammer(this);
 		great_cleave = new GreatCleave(this);
 		warcry = new Warcry(this);

@@ -5,7 +5,7 @@ public class Hellbear extends Monster
 
 	public Hellbear()
 	{
-		super(375, 25, 32, 55, 17, 0.1, "Hellbear", 2, 75);
+		super(375, 25, 60, 55, 17, 0.1, "Hellbear", 2, 75);
 	}
 
 	public Hellbear(int initHP, int initMana, int initDmg, int initAcc, int initDef, double initMagDef, String initName,

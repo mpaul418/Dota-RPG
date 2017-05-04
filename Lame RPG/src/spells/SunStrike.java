@@ -4,12 +4,12 @@ import classes.Characters;
 
 public class SunStrike extends ActiveSpell
 {
-	int base_damage = 30;
-	int level_multiplier = 4;
+	int base_damage = 60;
+	int level_multiplier = 5;
 	
 	public SunStrike(Characters c)
 	{
-		super("Sun Strike", "Call down a solar flare on an enemy, dealing 30/45/60/75 + 4/5/6/7 times the square of your level as magical damage", 25, 1, 3, c, true);
+		super("Sun Strike", "Call down a solar flare on an enemy, dealing 60/75/90/105 + 5/6/7/8 times the square of your level as magical damage", 25, 1, 3, c, true);
 	}
 
 	@Override

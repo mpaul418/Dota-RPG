@@ -204,7 +204,7 @@ public abstract class Player extends Characters
 								System.out.println("That spell is not castable right now.");
 
 							System.out.println("Which spell would you like to cast?");
-							System.out.println("0: Go back.");
+							System.out.println("1: Go back.");
 
 							Game.listSpells(this);
 

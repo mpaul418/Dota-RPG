@@ -10,7 +10,7 @@ public class EMP extends ActiveSpell
 	
 	public EMP(Characters c)
 	{
-		super("EMP", "Drain 50/80/110/140 mana from each enemy, dealing magic damage to each enemy equal to 50% of mana drained and restoring mana to you equal to 25% of the total mana drained.", 30, 1, 5, c, false);
+		super("EMP", "Drain 50/80/110/140 mana from each enemy, dealing magic damage to each enemy equal to 100% of mana drained and restoring mana to you equal to 25% of the total mana drained.", 30, 1, 5, c, false);
 	}
 
 	@Override
@@ -29,7 +29,7 @@ public class EMP extends ActiveSpell
 			if(mana_burned > 0)
 			{
 				System.out.println(this.CHARACTER + " burned " + mana_burned + " of " + m + "'s mana.");
-				this.CHARACTER.dealMagicDamage((int) Math.round(0.5 * mana_burned), m);
+				this.CHARACTER.dealMagicDamage(mana_burned, m);
 			}
 		}
 		

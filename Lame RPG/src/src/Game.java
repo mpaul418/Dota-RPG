@@ -73,8 +73,23 @@ public class Game
 			System.out.println("$$$   $$$        $$$     $$$           $$$        $$$          $$$");
 			System.out.println("$$$$$$$$          $$$$$$$$$            $$$        $$$          $$$");
 			System.out.println("$$$$$$$             $$$$$              $$$        $$$          $$$"); //TODO add "RPG" to title
+			System.out.println("       															  ");
+			System.out.println("                                                                  ");
+			System.out.println("          $$$$$$$$         $$$$$$$$$$$       $$$$$$$$$$$  ");
+			System.out.println("        $$$$$$$$$$$$      $$$$$$$$$$$$$     $$$$$$$$$$$$$ ");
+			System.out.println("        $$$        $$     $$$         $$   $$$           ");
+			System.out.println("        $$$         $$    $$$         $$  $$$            ");
+			System.out.println("        $$$        $$     $$$        $$   $$$            ");
+			System.out.println("        $$$       $$      $$$       $$    $$$            ");
+			System.out.println("        $$$$$$$$$$$       $$$$$$$$$$$     $$$            ");
+			System.out.println("        $$$      $$       $$$             $$$       $$$$ ");
+			System.out.println("        $$$        $$     $$$             $$$         $$$");
+			System.out.println("        $$$         $$    $$$             $$$         $$$");
+			System.out.println("        $$$          $$   $$$              $$$       $$$ ");
+			System.out.println("        $$$          $$   $$$               $$$$$$$$$$$  ");
+			System.out.println("        $$$          $$   $$$                 $$$$$$$$   ");
 			System.out.println();
-			System.out.println();
+			System.out.println("                 A Game by Michael McGillicuddy          ");
 			System.out.println();
 			
 			setName();
@@ -334,30 +349,47 @@ public class Game
 					i--;
 				else if(current_player != players.get(i))
 					i--;
-					
+				
+				checkForDeaths();
 			}
-			
-			checkForDeaths();
 
 			for(int i = 0; i < monsters.size(); i++)
 			{
 				if(!battleOver())
 					monsters.get(i).takeTurn();
+				
+				checkForDeaths();
 			}
-			
-			checkForDeaths();	
 		}
 		
 		System.out.println("------------------- Battle Over -------------------\n");
 
-		while(players.size() > 0)	// removes all players from this array at the end of the battle
-			if(players.get(0) == main_player)	// main player cannot be removed from array
+	/*	while(players.size() > 0)	// removes all players from this array at the end of the battle TODO error somewhere in these loops causing infinite loop
+			if(players.get(0) != main_player)	// main player cannot be removed from array
 				players.remove(0);
 		
-		while(characters.size() > 0)	// removes all characters from this array at the end of the battle
-			if(characters.get(0) == main_player)	// main player cannot be removed from array
-				characters.remove(0);
+		for(int i = 0; i < players.size(); i++)		// removes all players from this array at the end of the battle
+		{
+			if(players.get(i) != main_player)		// main player cannot be removed from array
+			{
+				players.remove(i);
+				i--;
+			}
+		}
 		
+		for(int i = 0; i < characters.size(); i++)		// removes all players from this array at the end of the battle
+		{
+			if(players.get(i) != main_player)		// main player cannot be removed from array
+			{
+				players.remove(i);
+				i--;
+			}
+		}
+		
+		while(characters.size() > 1)	// removes all characters from this array at the end of the battle
+			if(characters.get(0) != main_player)	// main player cannot be removed from array
+				characters.remove(0);
+		*/
 		if(main_player.isAlive())			// if the player wins the battle, player is restored
 			main_player.restoreToFull();
 	}
@@ -366,21 +398,31 @@ public class Game
 	{
 		if(map[current_row][current_column] < 4)
 		{
-			for(int i = 0; i < map[current_row][current_column]; i++)
-			{
-				int temp = 0;
-				
-				if(i == 0)
-					temp = pickMonsterSpawnedOfLevel(main_player.getLevel()); //spawns monster of current level
-				else
+			if(map[current_row][current_column] == 3)
+				for(int i = 0; i < map[current_row][current_column]; i++)
 				{
-					temp = pickMonsterSpawnedUpTo(main_player.getLevel());
-				}
-								
-				createMonster(temp);
+					int temp = 0;
 					
-				System.out.println(monsters.get(monsters.size() - 1) + " entered the fray.");
-			}
+					if(i == 0)
+						temp = pickMonsterSpawnedOfLevel(main_player.getLevel()); 	//spawns monster of current level
+					else
+					{
+						temp = pickMonsterSpawnedUpTo(main_player.getLevel());
+					}
+									
+					createMonster(temp);
+						
+					System.out.println(monsters.get(monsters.size() - 1) + " entered the fray.");
+				}
+			else if(map[current_row][current_column] == 2)							// spawns two monsters of current level
+				for(int i = 0; i < map[current_row][current_column]; i++)
+				{
+					int temp = pickMonsterSpawnedOfLevel(main_player.getLevel()); 	//spawns monster of current level
+									
+					createMonster(temp);
+						
+					System.out.println(monsters.get(monsters.size() - 1) + " entered the fray.");
+				}
 		}
 		else // if the room number is 4 (if it is the boss battle)
 		{
@@ -392,6 +434,9 @@ public class Game
 	
 	private static int pickMonsterSpawnedOfLevel(int lvl)
 	{
+		if(lvl > 3)
+			lvl = 3;
+		
 		switch(lvl)
 		{
 			case 1:
@@ -414,7 +459,7 @@ public class Game
 	}
 	
 	private static int pickMonsterSpawnedUpTo(int lvl)
-	{
+	{	
 		switch(lvl)
 		{
 			case 1:

@@ -59,7 +59,7 @@ public class Monster extends Characters
 					spell_index = rand.nextInt(castable_spells.size()); // picks a random castable spell
 					
 					if(castable_spells.get(spell_index).isTargeted()) //casts the spell
-						castable_spells.get(spell_index).cast(Game.main_player);
+						castable_spells.get(spell_index).cast(Game.players.get(rand.nextInt(Game.players.size())));
 					else
 						castable_spells.get(spell_index).cast();
 					

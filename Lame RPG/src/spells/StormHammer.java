@@ -6,11 +6,11 @@ import src.Game;
 
 public class StormHammer extends ActiveSpell
 {
-	int spell_damage = 15;
+	int spell_damage = 30;
 	
 	public StormHammer(Characters c)
 	{
-		super("Storm Hammer", "Unleash a magical gauntlet that deals 15/20/25/30 magic damage and stuns 1/2/all/all enemy units for 2 turns", 20, 1, 4, c, true);
+		super("Storm Hammer", "Unleash a magical gauntlet that deals 30/50/70/90 magic damage and stuns 1/2/all/all enemy units for 2 turns", 20, 1, 4, c, true);
 	}
 
 	@Override
@@ -72,7 +72,7 @@ public class StormHammer extends ActiveSpell
 		
 		if(level_up)
 		{
-			spell_damage += 5;
+			spell_damage += 20;
 		}
 		
 		return level_up;

@@ -6,12 +6,12 @@ import src.Game;
 
 public class DeafeningBlast extends ActiveSpell
 {
-	int magic_damage = 50;
+	int magic_damage = 100;
 	int accuracy_reduction = 25;
 			
 	public DeafeningBlast(Characters c)
 	{
-		super("Deafening Blast", "Send a wave of energy into your enemies, dealing 50/75/100 magic damage and reducing their accuracy by 25/55/85 for 2 turns", 50, 2, 6, c, false);
+		super("Deafening Blast", "Send a wave of energy into your enemies, dealing 100/150/200 magic damage and reducing their accuracy by 25/55/85 for 2 turns", 50, 2, 6, c, false);
 		max_spell_level = 3; // ultimate abilities only scale to lvl 3
 	}
 
@@ -39,7 +39,7 @@ public class DeafeningBlast extends ActiveSpell
 		
 		if(level_up)
 		{
-			magic_damage += 25;
+			magic_damage += 50;
 			accuracy_reduction += 30;
 		}
 		return level_up;

@@ -7,11 +7,11 @@ import src.Game;
 public class Warcry extends ActiveSpell
 {
 	int defense_increase = 10;
-	int defense_decrease = 5;
+	int defense_decrease = 10;
 	
 	public Warcry(Characters c)
 	{
-		super("Warcry", "Inspire yourself and intimidate enemies with a fearsome cry. Increases your defense by 10/15/20/25 and lowers enemies' defense by 5/10/15/20 for 3 turns"
+		super("Warcry", "Inspire yourself and intimidate enemies with a fearsome cry. Increases your defense by 10/20/30/40 and lowers enemies' defense by 10/20/30/40 for 3 turns"
 				, 15, 1, 4, c, false);
 	}
 
@@ -38,8 +38,8 @@ public class Warcry extends ActiveSpell
 		
 		if(level_up)
 		{
-			defense_increase += 5;
-			defense_decrease += 5;
+			defense_increase += 10;
+			defense_decrease += 10;
 		}
 		
 		return level_up;

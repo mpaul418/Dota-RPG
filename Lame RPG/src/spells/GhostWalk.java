@@ -8,7 +8,7 @@ public class GhostWalk extends ActiveSpell
 	int defense_increase = 20;
 	public GhostWalk(Characters c) 
 	{
-		super("Ghost Walk", "Manipulate the elements around you and become invisible. Increase defense by 20/30/40/50 for 3 turns", 35, 1, 5, c, false);
+		super("Ghost Walk", "Manipulate the elements around you and become invisible. Increase defense by 20/40/60/80 for 3 turns", 35, 1, 5, c, false);
 	}
 
 	@Override
@@ -27,7 +27,7 @@ public class GhostWalk extends ActiveSpell
 		boolean level_up = super.levelUp();
 		
 		if(level_up)
-			defense_increase += 10;
+			defense_increase += 20;
 		return level_up;
 	}
 }
