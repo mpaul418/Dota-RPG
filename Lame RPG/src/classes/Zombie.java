@@ -7,7 +7,7 @@ public class Zombie extends Monster
 
 	public Zombie()
 	{
-		super(100, 100, 50, 45, 15, 0.15, "Zombie", 2, 50);
+		super(100, 100, 50, 50, 15, 0.15, "Zombie", 2, 50);
 		
 		this.buffs.add(new StunBuff("Summoning Sickness", "Cannot attack for the first turn this enters combat.", this, 1));
 	}

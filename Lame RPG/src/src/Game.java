@@ -11,6 +11,7 @@ import classes.FellSpirit;
 import classes.Hellbear;
 import classes.HellbearSmasher;
 import classes.HillTrollPriest;
+import classes.Illusion;
 import classes.Invoker;
 import classes.Kobold;
 import classes.MeleeCreep;
@@ -368,16 +369,16 @@ public class Game
 			if(players.get(0) != main_player)	// main player cannot be removed from array
 				players.remove(0);
 		
-		for(int i = 0; i < players.size(); i++)		// removes all players from this array at the end of the battle
+		*/for(int i = 0; i < players.size(); i++)		// removes all players from this array at the end of the battle that are not the main player (illusions, etc.)
 		{
 			if(players.get(i) != main_player)		// main player cannot be removed from array
 			{
-				players.remove(i);
+				players.get(i).die();;
 				i--;
 			}
 		}
 		
-		for(int i = 0; i < characters.size(); i++)		// removes all players from this array at the end of the battle
+		/*for(int i = 0; i < characters.size(); i++)		// removes all players from this array at the end of the battle
 		{
 			if(players.get(i) != main_player)		// main player cannot be removed from array
 			{
@@ -578,6 +579,8 @@ public class Game
 				((Monster) c).die();
 			else if(c instanceof Player)
 				((Player) c).die();
+			else if(c instanceof Illusion)
+				((Illusion) c).die();
 		}
 	}
 

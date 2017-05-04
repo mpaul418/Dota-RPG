@@ -24,8 +24,7 @@ public class ManaVoid extends ActiveSpell
 	
 		for(Characters m : Game.monsters)
 		{
-			if(spell_level == 1)
-				CHARACTER.dealMagicDamage((int) Math.round(mana_multiplier * mana_missing), m);
+			CHARACTER.dealMagicDamage((int) Math.round(mana_multiplier * mana_missing), m);
 		}
 	}
 	

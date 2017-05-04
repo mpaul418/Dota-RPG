@@ -12,7 +12,7 @@ public class Roshan extends Monster
 	
 	public Roshan()
 	{
-		super(1750, 1000, 135, 69, 50, 0.5, "Roshan", 5, 0);
+		super(2500, 1000, 200, 69, 50, 0.5, "Roshan", 5, 0);
 		slam = new Slam(this);
 		summon_zombies = new SummonZombies(this);
 	}
