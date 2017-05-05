@@ -365,34 +365,28 @@ public class Game
 		
 		System.out.println("------------------- Battle Over -------------------\n");
 
-	/*	while(players.size() > 0)	// removes all players from this array at the end of the battle TODO error somewhere in these loops causing infinite loop
+		/*	while(players.size() > 0)	// removes all players from this array at the end of the battle TODO error somewhere in these loops causing infinite loop
 			if(players.get(0) != main_player)	// main player cannot be removed from array
 				players.remove(0);
-		
-		*/for(int i = 0; i < players.size(); i++)		// removes all players from this array at the end of the battle that are not the main player (illusions, etc.)
-		{
-			if(players.get(i) != main_player)		// main player cannot be removed from array
-			{
-				players.get(i).die();;
-				i--;
-			}
-		}
-		
-		/*for(int i = 0; i < characters.size(); i++)		// removes all players from this array at the end of the battle
-		{
-			if(players.get(i) != main_player)		// main player cannot be removed from array
-			{
-				players.remove(i);
-				i--;
-			}
-		}
-		
-		while(characters.size() > 1)	// removes all characters from this array at the end of the battle
-			if(characters.get(0) != main_player)	// main player cannot be removed from array
-				characters.remove(0);
 		*/
+		for(int i = 0; i < players.size(); i++)		// removes all players from this array at the end of the battle that are not the main player (illusions, etc.)
+		{
+			if(players.get(i) != main_player)		// main player cannot be removed from array
+			{
+				players.get(i).die();
+				i--;
+			}
+		}
+
 		if(main_player.isAlive())			// if the player wins the battle, player is restored
 			main_player.restoreToFull();
+		else
+		{
+			for(int i = 0; i < monsters.size(); i++)		// removes all players from this array at the end of the battle that are not the main player (illusions, etc.)
+			{
+				monsters.get(i).die();
+			}
+		}
 	}
 	
 	private static void addMonsters()

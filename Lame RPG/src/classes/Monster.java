@@ -82,10 +82,15 @@ public class Monster extends Characters
 	@Override
 	public void die()
 	{
-		super.die();
+		Game.characters.remove(this);
+		if(Game.main_player.isAlive())
+			System.out.println(this + " died.\n");
+		
 		Game.monsters.remove(this);
-		if(death_xp > 0)
+		
+		if(death_xp > 0 && Game.main_player.isAlive())
 			Game.main_player.changeXP(death_xp);
+		
 		Game.map[Game.current_row][Game.current_column] -= 1;  // removes the monster from the room so if player reenters this room, more monsters will not spawn.
 		Game.enemies_killed++;
 	}
