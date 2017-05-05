@@ -9,7 +9,7 @@ public class CentaurConqueror extends Monster
 	
 	public CentaurConqueror()
 	{
-		super(825, 100, 60, 55, 40, 0.50, "Centaur Conqueror", 3, 250);
+		super(825, 500, 60, 85, 40, 0.50, "Centaur Conqueror", 3, 250);
 		hoof_stomp = new HoofStomp(this);
 	}
 

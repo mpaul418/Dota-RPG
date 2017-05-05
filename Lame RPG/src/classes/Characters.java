@@ -322,11 +322,11 @@ public abstract class Characters
 		int crit_buff_index = -1;
 		boolean critical_hit, attack_evaded;
 		attack_evaded = critical_hit = false;
-		
+
 		System.out.println(this + " attacked " + c + "!");
 		
-		temp = r.nextInt(101);
-		if(temp >= 75 - accuracy) // checks if attack hits- a 25% chance to hit with 0 accuracy
+		temp = r.nextInt(100) + 1; 	// a number from 1 to 100
+		if(temp <= accuracy) 		// checks if attack hits
 		{
 			for(Buff b : c.buffs)
 			{
@@ -375,11 +375,11 @@ public abstract class Characters
 				System.out.println();
 			}
 			else
-				System.out.println(this + "'s attack was evaded by " + c + "!");
+				System.out.println(this + "'s attack was evaded by " + c + "!\n");
 		}
 		else
 		{
-			System.out.println(this + "'s attack missed! (Attack roll: " + temp + "; " + (75 - accuracy) + " or higher needed to hit)\n");
+			System.out.println(this + "'s attack missed! (Attack roll: " + temp + "; " + (accuracy) + " or lower needed to hit)\n");
 		}
 	}
 	public int dealMagicDamage(int incoming_damage, Characters c)

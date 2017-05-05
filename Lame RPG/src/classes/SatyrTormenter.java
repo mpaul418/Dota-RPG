@@ -9,7 +9,7 @@ public class SatyrTormenter extends Monster
 	
 	public SatyrTormenter()
 	{
-		super(525, 150, 160, 75, 34, 0.25, "Satyr Tormenter", 3, 200);
+		super(525, 650, 160, 99, 34, 0.25, "Satyr Tormenter", 3, 200);
 		shockwave = new Shockwave(this);
 	}
 

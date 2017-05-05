@@ -59,40 +59,40 @@ public class Game
 
 	public static void main(String[] args)
 	{
+		System.out.println("$$$$$$$             $$$$$        $$$$$$$$$$$$$$$       $$$$$$");
+		System.out.println("$$$$$$$$          $$$$$$$$$      $$$$$$$$$$$$$$$      $$$$$$$$");
+		System.out.println("$$$   $$$        $$$     $$$           $$$           $$$    $$$");
+		System.out.println("$$$    $$$      $$$       $$$          $$$          $$$      $$$");
+		System.out.println("$$$     $$$    $$$         $$$         $$$         $$$        $$$");
+		System.out.println("$$$      $$$  $$$           $$$        $$$        $$$          $$$");
+		System.out.println("$$$      $$$  $$$           $$$        $$$        $$$$$$$$$$$$$$$$");
+		System.out.println("$$$      $$$  $$$           $$$        $$$        $$$          $$$");
+		System.out.println("$$$     $$$    $$$         $$$         $$$        $$$          $$$");
+		System.out.println("$$$    $$$      $$$       $$$          $$$        $$$          $$$");
+		System.out.println("$$$   $$$        $$$     $$$           $$$        $$$          $$$");
+		System.out.println("$$$$$$$$          $$$$$$$$$            $$$        $$$          $$$");
+		System.out.println("$$$$$$$             $$$$$              $$$        $$$          $$$"); //TODO add "RPG" to title
+		System.out.println("       															  ");
+		System.out.println("                                                                  ");
+		System.out.println("          $$$$$$$$         $$$$$$$$$$$       $$$$$$$$$$$  ");
+		System.out.println("        $$$$$$$$$$$$      $$$$$$$$$$$$$     $$$$$$$$$$$$$ ");
+		System.out.println("        $$$        $$     $$$         $$   $$$           ");
+		System.out.println("        $$$         $$    $$$         $$  $$$            ");
+		System.out.println("        $$$        $$     $$$        $$   $$$            ");
+		System.out.println("        $$$       $$      $$$       $$    $$$            ");
+		System.out.println("        $$$$$$$$$$$       $$$$$$$$$$$     $$$            ");
+		System.out.println("        $$$      $$       $$$             $$$       $$$$ ");
+		System.out.println("        $$$        $$     $$$             $$$         $$$");
+		System.out.println("        $$$         $$    $$$             $$$         $$$");
+		System.out.println("        $$$          $$   $$$              $$$       $$$ ");
+		System.out.println("        $$$          $$   $$$               $$$$$$$$$$$  ");
+		System.out.println("        $$$          $$   $$$                 $$$$$$$$   ");
+		System.out.println();
+		System.out.println("                 A Game by Michael McGillicuddy          ");
+		System.out.println();
+		
 		do
 		{
-			System.out.println("$$$$$$$             $$$$$        $$$$$$$$$$$$$$$       $$$$$$");
-			System.out.println("$$$$$$$$          $$$$$$$$$      $$$$$$$$$$$$$$$      $$$$$$$$");
-			System.out.println("$$$   $$$        $$$     $$$           $$$           $$$    $$$");
-			System.out.println("$$$    $$$      $$$       $$$          $$$          $$$      $$$");
-			System.out.println("$$$     $$$    $$$         $$$         $$$         $$$        $$$");
-			System.out.println("$$$      $$$  $$$           $$$        $$$        $$$          $$$");
-			System.out.println("$$$      $$$  $$$           $$$        $$$        $$$$$$$$$$$$$$$$");
-			System.out.println("$$$      $$$  $$$           $$$        $$$        $$$          $$$");
-			System.out.println("$$$     $$$    $$$         $$$         $$$        $$$          $$$");
-			System.out.println("$$$    $$$      $$$       $$$          $$$        $$$          $$$");
-			System.out.println("$$$   $$$        $$$     $$$           $$$        $$$          $$$");
-			System.out.println("$$$$$$$$          $$$$$$$$$            $$$        $$$          $$$");
-			System.out.println("$$$$$$$             $$$$$              $$$        $$$          $$$"); //TODO add "RPG" to title
-			System.out.println("       															  ");
-			System.out.println("                                                                  ");
-			System.out.println("          $$$$$$$$         $$$$$$$$$$$       $$$$$$$$$$$  ");
-			System.out.println("        $$$$$$$$$$$$      $$$$$$$$$$$$$     $$$$$$$$$$$$$ ");
-			System.out.println("        $$$        $$     $$$         $$   $$$           ");
-			System.out.println("        $$$         $$    $$$         $$  $$$            ");
-			System.out.println("        $$$        $$     $$$        $$   $$$            ");
-			System.out.println("        $$$       $$      $$$       $$    $$$            ");
-			System.out.println("        $$$$$$$$$$$       $$$$$$$$$$$     $$$            ");
-			System.out.println("        $$$      $$       $$$             $$$       $$$$ ");
-			System.out.println("        $$$        $$     $$$             $$$         $$$");
-			System.out.println("        $$$         $$    $$$             $$$         $$$");
-			System.out.println("        $$$          $$   $$$              $$$       $$$ ");
-			System.out.println("        $$$          $$   $$$               $$$$$$$$$$$  ");
-			System.out.println("        $$$          $$   $$$                 $$$$$$$$   ");
-			System.out.println();
-			System.out.println("                 A Game by Michael McGillicuddy          ");
-			System.out.println();
-			
 			setName();
 			setHero();
 			makeDungeon();

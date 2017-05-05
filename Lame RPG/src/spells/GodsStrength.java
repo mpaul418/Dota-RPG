@@ -5,11 +5,11 @@ import classes.Characters;
 
 public class GodsStrength extends ActiveSpell
 {
-	double damage_multiplier = 0.50;
+	double damage_multiplier = 1.00;
 	
 	public GodsStrength(Characters c)
 	{
-		super("God's Strength", "Channel your rogue strength, gaining 50/100/150% bonus damage but -10 accuracy for 3 turns", 20, 2, 8, c, false);
+		super("God's Strength", "Channel your rogue strength, gaining 100/150/200% bonus damage but -10 accuracy for 3 turns", 20, 2, 8, c, false);
 		max_spell_level = 3;
 	}
 

@@ -5,7 +5,7 @@ public class RangedCreep extends Monster
 
 	public RangedCreep()
 	{
-		super(150, 100, 80, 45, 10, 0.25, "Ranged Creep", 1, 50);
+		super(300, 500, 80, 70, 10, 0.25, "Ranged Creep", 1, 50);
 	}
 
 	public RangedCreep(int initHP, int initMana, int initDmg, int initAcc, int initDef, double initMagDef,

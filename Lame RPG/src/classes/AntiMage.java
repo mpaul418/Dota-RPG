@@ -12,7 +12,7 @@ public class AntiMage extends Player
 	
 	public AntiMage(String initName)
 	{
-		super(675, 60, 70, 60, 14, 1, 0.66, initName);
+		super(675, 60, 45, 85, 14, 1, 0.66, initName);
 		mana_break = new ManaBreak(this);
 		blink = new Blink(this);
 		manta_style = new MantaStyle(this);

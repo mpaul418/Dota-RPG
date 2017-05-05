@@ -8,15 +8,15 @@ public class ManaBreak extends PassiveSpell
 
 	public ManaBreak(Characters c)
 	{
-		super("Mana Break", "Burn 15/20/25/35 mana with each attack, dealing 60% of mana burned as damage", 0, 1, -1, c);
+		super("Mana Break", "Burn 28/40/52/64 mana with each attack, dealing 60% of mana burned as damage", 0, 1, -1, c);
 	}
 
 	@Override
 	public void addToSpellbook()
 	{
 		super.addToSpellbook();
-		new AttackBuff(this.NAME, "Burning 15 mana per hit.",
-			this.CHARACTER, -1, 15, 0.6, 0, 0, 0, 0);
+		new AttackBuff(this.NAME, "Burning 28 mana per hit.",
+			this.CHARACTER, -1, 28, 0.6, 0, 0, 0, 0);
 	}
 	
 	@Override
@@ -33,14 +33,14 @@ public class ManaBreak extends PassiveSpell
 					CHARACTER.buffs.get(i).deletThisNoNotifier();
 					
 					if(spell_level == 2)
-						new AttackBuff(this.NAME, "Burning 20 mana per hit.",
-								this.CHARACTER, -1, 20, 0.6, 0, 0, 0, 0);
+						new AttackBuff(this.NAME, "Burning 40 mana per hit.",
+								this.CHARACTER, -1, 40, 0.6, 0, 0, 0, 0);
 					else if(spell_level == 3)
-						new AttackBuff(this.NAME, "Burning 25 mana per hit.",
-							this.CHARACTER, -1, 25, 0.6, 0, 0, 0, 0);
+						new AttackBuff(this.NAME, "Burning 52 mana per hit.",
+							this.CHARACTER, -1, 52, 0.6, 0, 0, 0, 0);
 					else if(spell_level == 4)
-						new AttackBuff(this.NAME, "Burning 35 mana per hit.",
-							this.CHARACTER, -1, 35, 0.6, 0, 0, 0, 0);
+						new AttackBuff(this.NAME, "Burning 64 mana per hit.",
+							this.CHARACTER, -1, 64, 0.6, 0, 0, 0, 0);
 					
 					break;
 				}
