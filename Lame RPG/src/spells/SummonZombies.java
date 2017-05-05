@@ -2,7 +2,6 @@ package spells;
 
 import classes.Characters;
 import classes.Zombie;
-import src.Game;
 
 public class SummonZombies extends ActiveSpell
 {
