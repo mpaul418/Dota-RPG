@@ -53,7 +53,6 @@ public class Game
 	public  static ArrayList<Characters> players = new ArrayList<Characters>();
 	public  static ArrayList<Characters> monsters = new ArrayList<Characters>();
 	public  static ArrayList<Characters> characters = new ArrayList<Characters>();
-
 	public  static boolean game_over = false;
 	private static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
@@ -90,36 +89,36 @@ public class Game
 		System.out.println();
 		System.out.println("                 A Game by Michael McGillicuddy          ");
 		System.out.println();
-		
+
 		do
 		{
 			setName();
 			setHero();
 			makeDungeon();
-			
+
 			while(!game_over)
 			{
 				if(main_player.isAlive() && roshanAlive())
 				{
 					chooseRoom();
-				
+
 					if(map[current_row][current_column] > 0)
-						battle();	
+						battle();
 					else
 						System.out.println("This room is empty.");
 				}
 			}
-			
+
 			if(!main_player.isAlive())
 				loseGame();
 			else if(!roshanAlive())
 				winGame();
-			
+
 			System.out.println("Would you like to embark on your journey again?"
 						   + "\n1: Yes"
 						   + "\n2: No");
 			continue_game = getNumberFrom(1,2);
-			
+
 			if(continue_game == 1)
 			{
 				game_over = false;
@@ -138,7 +137,7 @@ public class Game
 						+"\n4- Invoker: A mage who has both damaging and utility spells.");
 
 		player_hero = getNumberFrom(1, 4);
-		
+
 		switch(player_hero)
 		{
 			case 1:
@@ -163,7 +162,7 @@ public class Game
 			}
 		}
 	}
-	
+
 	private static void setName()
 	{
 		boolean length_okay;
@@ -189,7 +188,7 @@ public class Game
 					length_okay = false;
 				}
 			}while(!length_okay);
-			
+
 			System.out.println("\nYour name is " + temp_name + ". Is that okay?");
 			System.out.println("1: Finalize name."
 						+ "   \n2: Re-enter name.");
@@ -197,11 +196,11 @@ public class Game
 			if(name_repick == 1)
 				name_confirmed = true;
 		}while(!name_confirmed);
-		
+
 		if(main_player != null)
 			main_player.setName(temp_name);
 	}
-	
+
 	private static void makeDungeon()
 	{
 		for(int r = 0; r < map.length; r++)
@@ -214,14 +213,14 @@ public class Game
 					map[r][c] = 0;
 			}
 		}
-		
+
 		boss_row = rand.nextInt(5); // a random row
 		//boss_column; // = rand.nextInt(3) + 2; // a random column from 3 to 5
 		boss_column = rand.nextInt(1 + boss_row) + (4 - boss_row); // view paint diagram to see possible rooms
-		
+
 		map[boss_row][boss_column] = 4; // the 4 signals the boss battle
 	}
-	
+
 	private static void chooseRoom()
 	{
 		boolean working = true;
@@ -229,7 +228,7 @@ public class Game
 		int choice = -1;
 
 		displayMap();
-		
+
 		System.out.println("Which direction would you like to go?");
 		do
 		{
@@ -268,13 +267,13 @@ public class Game
 		else if(choice == 4)
 			current_row -= 1;		// go up
 	}
-	
+
 	private static void displayMap() // creates a picture of the map
 	{
 		for(int row = 0; row < 5; row++)
 		{
 			System.out.print("\n\t");
-			
+
 			for(int column = 0; column < 5; column++)
 			{
 				if(current_row == row && current_column == column)
@@ -295,12 +294,12 @@ public class Game
 	{
 		for(int i = room_options.size(); i > 0; i--)
 			room_options.remove(0);
-		
+
 		room_options.add((Integer) 1);
 		room_options.add((Integer) 2);
 		room_options.add((Integer) 3);
 		room_options.add((Integer) 4);
-		
+
 		if(current_column == 0)					// when you cannot go left
 			room_options.remove((Integer) 3);
 		else if(current_column == 4) 			// when you cannot go right
@@ -309,7 +308,7 @@ public class Game
 			room_options.remove((Integer) 4);
 		else if(current_row == 4) 			// when you cannot go down
 				room_options.remove((Integer) 2);
-		
+
 		if(room_options.contains(1))
 			System.out.println("1: Go right.");
 		if(room_options.contains(2))
@@ -319,38 +318,38 @@ public class Game
 		if(room_options.contains(4))
 			System.out.println("4: Go up.");
 	}
-	
+
 	private static void battle()
 	{
 		turn_number = 0;
-		
+
 		if(!characters.contains(main_player))
 			characters.add(main_player);
-		
+
 		if(!players.contains(main_player))
 			players.add(main_player);
-	
+
 		addMonsters();	// spawns monsters- if level > 1, spawns one monster of player's level and the rest are random monsters from lower levels
 
 		System.out.println();
-		
+
 		while(!battleOver())
 		{
 			turn_number++;
 			System.out.println("------------------- Turn " + turn_number + " -------------------\n");
-			
+
 			for(int i = 0; i < players.size(); i++)
 			{
 				Characters current_player = players.get(i);
-				
+
 				if(!battleOver())
 					players.get(i).takeTurn();
-				
+
 				if(i >= players.size())		// If the character dies on its turn (like an illusion timing out), the array position is not modified
 					i--;
 				else if(current_player != players.get(i))
 					i--;
-				
+
 				checkForDeaths();
 			}
 
@@ -358,11 +357,11 @@ public class Game
 			{
 				if(!battleOver())
 					monsters.get(i).takeTurn();
-				
+
 				checkForDeaths();
 			}
 		}
-		
+
 		System.out.println("------------------- Battle Over -------------------\n");
 
 		/*	while(players.size() > 0)	// removes all players from this array at the end of the battle TODO error somewhere in these loops causing infinite loop
@@ -388,7 +387,7 @@ public class Game
 			}
 		}
 	}
-	
+
 	private static void addMonsters()
 	{
 		if(map[current_row][current_column] < 4)
@@ -397,41 +396,41 @@ public class Game
 				for(int i = 0; i < map[current_row][current_column]; i++)
 				{
 					int temp = 0;
-					
+
 					if(i == 0)
 						temp = pickMonsterSpawnedOfLevel(main_player.getLevel()); 	//spawns monster of current level
 					else
 					{
 						temp = pickMonsterSpawnedUpTo(main_player.getLevel());
 					}
-									
+
 					createMonster(temp);
-						
+
 					System.out.println(monsters.get(monsters.size() - 1) + " entered the fray.");
 				}
 			else if(map[current_row][current_column] == 2)							// spawns two monsters of current level
 				for(int i = 0; i < map[current_row][current_column]; i++)
 				{
 					int temp = pickMonsterSpawnedOfLevel(main_player.getLevel()); 	//spawns monster of current level
-									
+
 					createMonster(temp);
-						
+
 					System.out.println(monsters.get(monsters.size() - 1) + " entered the fray.");
 				}
 		}
 		else // if the room number is 4 (if it is the boss battle)
 		{
 			createMonster(15); // adds Roshan
-			
+
 			System.out.println("Roshan looms over you... Prepare for your final battle!");
 		}
 	}
-	
+
 	private static int pickMonsterSpawnedOfLevel(int lvl)
 	{
 		if(lvl > 3)
 			lvl = 3;
-		
+
 		switch(lvl)
 		{
 			case 1:
@@ -452,9 +451,9 @@ public class Game
 			}
 		}
 	}
-	
+
 	private static int pickMonsterSpawnedUpTo(int lvl)
-	{	
+	{
 		switch(lvl)
 		{
 			case 1:
@@ -474,9 +473,9 @@ public class Game
 				return rand.nextInt(14) + 1; 	// picks any random level monster
 			}
 		}
-	
+
 	}
-	
+
 	private static void createMonster(int monster)
 	{
 		switch(monster) // creates a monster depending on the random int
@@ -562,11 +561,11 @@ public class Game
 	private static void checkForDeaths()
 	{
 		ArrayList<Characters> removed_characters = new ArrayList<Characters>();
-		
+
 		for(Characters c : characters)
 			if(!c.isAlive())
 				removed_characters.add(c);
-		
+
 		for(Characters c : removed_characters)
 		{
 			if(c instanceof Monster)
@@ -626,7 +625,7 @@ public class Game
 		for(Characters m : monsters)
 			System.out.println(m + "'s HP: " + m.getHP() + "/" + m.getDefaultHP()
 			+  "   Mana: " + m.getMana() + "/" + m.getDefaultMana());
-		
+
 		System.out.println();
 	}
 
@@ -635,7 +634,7 @@ public class Game
 		boolean working = true;
 		int tempint = -1;
 		int greater, lesser;
-		
+
 		if(start > end)
 		{
 			greater = start;
@@ -678,7 +677,7 @@ public class Game
 
 		return tempint;
 	}
-	
+
 	private static boolean roshanAlive()
 	{
 		if(map[boss_row][boss_column] == 0)
@@ -689,15 +688,15 @@ public class Game
 		else
 			return true;
 	}
-	
+
 	private static void loseGame()
 	{
 		System.out.println("Game over! Maybe next time :(");
 		System.out.println("Player Stats:"
 						 + "\n\tTotal damage dealt: " + main_player.getDamageDealt()
-						 + "\n\tEnemies killed: " + enemies_killed);		
+						 + "\n\tEnemies killed: " + enemies_killed);
 	}
-	
+
 	private static void winGame()
 	{
 		System.out.println("Congratulations!! You have defeated Roshan and are a true hero.");
