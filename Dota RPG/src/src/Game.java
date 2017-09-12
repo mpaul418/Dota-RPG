@@ -86,7 +86,7 @@ public class Game
 		System.out.println("        $$$          $$   $$$              $$$       $$$ ");
 		System.out.println("        $$$          $$   $$$               $$$$$$$$$$$  ");
 		System.out.println("        $$$          $$   $$$                 $$$$$$$$   ");
-		System.out.println();
+		System.out.println(																														);
 		System.out.println("                 A Game by Michael McGillicuddy          ");
 		System.out.println();
 
