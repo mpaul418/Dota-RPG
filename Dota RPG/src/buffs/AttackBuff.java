@@ -60,7 +60,7 @@ public class AttackBuff extends Buff
 		{
 			int crit_roll = r.nextInt(100) + 1;
 			
-			if(crit_chance <= crit_roll)
+			if(crit_chance >= crit_roll)
 				return true;
 			else
 				return false;
