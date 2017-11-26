@@ -31,5 +31,6 @@ public class Roshan extends Monster
 		super.die();
 		
 		Game.map[Game.current_row][Game.current_column] -= 3;  // since Roshan's number is 4, this sets it to 0 after his death (if no other monsters are summoned)
+		Game.game_over = true;
 	}
 }

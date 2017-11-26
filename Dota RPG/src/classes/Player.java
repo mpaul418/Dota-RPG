@@ -282,7 +282,7 @@ public abstract class Player extends Characters
 		{
 			if(buffs.get(i).getDuration() > 0)
 			{
-				while(buffs.size() > 0 && buffs.get(i).getDuration() > 0)
+				while(buffs.size() > 0 && buffs.get(i).getDuration() > 0 && i < buffs.size())
 					buffs.get(i).decreaseDurationNoNotifier();
 				size--;
 			}
